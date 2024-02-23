@@ -9,7 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppLayout: typeof import('./src/layouts/AppLayout.vue')['default']
     AppNavbar: typeof import('./src/components/app/AppNavbar.vue')['default']
-    Button: typeof import('./src/components/Button.vue')['default']
     DefaultLayout: typeof import('./src/layouts/DefaultLayout.vue')['default']
     IconChevronRight: typeof import('./src/components/icons/IconChevronRight.vue')['default']
     IconEllipsisCircleOutline: typeof import('./src/components/icons/IconEllipsisCircleOutline.vue')['default']
