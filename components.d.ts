@@ -17,11 +17,7 @@ declare module 'vue' {
     NotFoundLayout: typeof import('./src/layouts/NotFoundLayout.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Tab: (typeof import("./src/components/customComponents/Tab.vue"))["default"]
-    Tabs: (typeof import("./src/components/customComponents/Tabs.vue"))["default"]
     VTab: typeof import('./src/components/base/tabs/VTab.vue')['default']
-    VTabContent: typeof import('./src/components/base/tabs/VTabContent.vue')['default']
     VTabs: typeof import('./src/components/base/tabs/VTabs.vue')['default']
-    VTabsContent: typeof import('./src/components/base/tabs/VTabsContent.vue')['default']
   }
 }
