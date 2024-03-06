@@ -19,8 +19,6 @@
     "*.{ts,vue}": "eslint --fix"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.7.19",
-    "@heroicons/vue": "^2.1.1",
     "bulma": "^0.9.4",
     "pinia": "^2.1.7",
     "sass-loader": "^14.1.1",
