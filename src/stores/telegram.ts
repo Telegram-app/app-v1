@@ -1,26 +1,24 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
 type State = {
-  WebApp: any,
-  user: any
-}
+  WebApp: any;
+  user: any;
+};
 
-export const useTelegramStore = defineStore('telegram', {
+export const useTelegramStore = defineStore("telegram", {
   state: (): State => ({
     WebApp: null,
-    user: null
+    user: null,
   }),
 
-  getters: {
-
-  },
+  getters: {},
 
   actions: {
     initTelegramWebApp(WebApp: any) {
-      WebApp.ready()
+      WebApp.ready();
 
-      this.WebApp = WebApp
-      this.user = WebApp.initDataUnsafe?.user
+      this.WebApp = WebApp;
+      this.user = WebApp.initDataUnsafe?.user;
     },
   },
-})
+});

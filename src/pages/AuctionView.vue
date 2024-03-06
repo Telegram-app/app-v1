@@ -1,24 +1,33 @@
 <template>
   <div class="auction">
-  
+    <VTabs>
+      <VTab title="Usernames">
+        <AuctionUsernames/>
+      </VTab>
+      <VTab title="Numbers">
+        Numbers
+      </VTab>
+      <VTab title="Premium">
+        Premium
+      </VTab>
+    </VTabs>
   </div>
 </template>
 
 <script lang="ts">
-
-import {defineComponent} from 'vue'
+import { defineComponent } from "vue"
 
 export default defineComponent({
-  name: 'AuctionView',
+  name: "AuctionView",
 
-  data: () => ({}),
+  data: () => ({
+    activeTab: 'usernames',
+  }),
 
   computed: {},
 
-  mounted() {
-
-  }
-})
+  mounted() {},
+});
 </script>
 
 <style lang="scss">

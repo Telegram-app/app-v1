@@ -1,53 +1,46 @@
 <template>
   <AppLayout>
     <component :is="layout">
-      <RouterView/>
+      <RouterView />
     </component>
   </AppLayout>
 </template>
 
 <script lang="ts">
-
-import { defineComponent } from 'vue'
-import { useTelegramStore } from "@/stores/telegram"
+import { defineComponent } from "vue";
+import { useTelegramStore } from "@/stores/telegram";
 
 declare global {
-    interface Window {
-        Telegram: any;
-    }
+  interface Window {
+    Telegram: any;
+  }
 }
 
 export default defineComponent({
-    name: 'App',
+  name: "App",
 
-    setup() {
-        const twa = useTelegramStore()
+  setup() {
+    const twa = useTelegramStore();
 
-        return { twa }
+    return { twa };
+  },
+
+  computed: {
+    layout() {
+      return (this.$route?.meta?.layout || "not-found") + "-layout";
     },
-    
-    computed: {
-        layout() {
-            console.log(this.$route?.meta?.layout)
-            return (this.$route?.meta?.layout || 'not-found') + '-layout'
-        }
-    },
+  },
 
-    data: () => ({
-        //
-    }),
+  data: () => ({
+    //
+  }),
 
-    beforeMount() {
-        this.twa.initTelegramWebApp(window.Telegram.WebApp)
-    },
+  beforeMount() {
+    this.twa.initTelegramWebApp(window.Telegram.WebApp);
+  },
 
-    mounted() {
-
-    },
-})
-
+  mounted() {},
+});
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

@@ -1,1 +1,7 @@
+$input-background-color: var(--tg-theme-bg-color, $tg-bg-color);
+
 @import "bulma/bulma";
+
+body {
+  color: var(--tg-theme-text-color, $tg-text-color);
+}

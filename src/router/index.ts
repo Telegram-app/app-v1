@@ -1,19 +1,19 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'auction',
-    component: import('@/pages/AuctionView.vue'),
+    path: "/",
+    name: "auction",
+    component: import("@/pages/AuctionView.vue"),
     meta: {
-      layout: 'default'
-    }
-  }
-]
+      layout: "default",
+    },
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
