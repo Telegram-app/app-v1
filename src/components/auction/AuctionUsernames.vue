@@ -70,7 +70,7 @@ export default defineComponent({
       cursor: pointer;
       
       &__icon {
-        margin-top: 3.5px;
+        margin-top: 1px;
         margin-left: 4px;
       }
     }
@@ -80,7 +80,7 @@ export default defineComponent({
     
     input {
       height: 33px;
-      padding-bottom: 7px !important;
+      padding-bottom: 4px !important;
       padding-left: 38px !important;
       border: unset;
       border-radius: 5px;

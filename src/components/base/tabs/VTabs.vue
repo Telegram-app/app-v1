@@ -119,7 +119,7 @@ export default defineComponent({
       right: -100%;
       
       margin-left: 8px;
-      padding: 6px 14px 7px;
+      padding: 6px 14px;
       border-radius: 15px;
       
       font-size: 8px;
