@@ -4,7 +4,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "auction",
-    component: () => import("@/pages/AuctionView.vue"),
+    component: import("@/pages/AuctionView.vue"),
     meta: {
       layout: "default",
     },
@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.VITE_BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 

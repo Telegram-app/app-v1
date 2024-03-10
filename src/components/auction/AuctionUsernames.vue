@@ -9,32 +9,139 @@
     
     <div class="auction-usernames__search field">
       <p class="control has-icons-left">
-        <input class="input" type="search" placeholder="Enter a Telegram username...">
+        <input class="input" type="search" placeholder="Enter a Telegram username..." v-model="search">
         <span class="auction-usernames__search__icon">
           <IconSearch h="10" w="9"/>
         </span>
       </p>
     </div>
+    
+    <div class="auction-usernames__sorting">
+      <span class="auction-usernames__sorting__title">Auctions</span>
+      <div class="auction-usernames__sorting__wrapper">
+        <span class="auction-usernames__sorting__active" @click="sortByActive()">{{ sortBy.active === 'asc' ? 'On auction' : 'Not at auction' }} <IconSorting w="7" h="4.67" :sortBy="sortBy.active"/></span>
+        <span class="auction-usernames__sorting__price" @click="sortByPrice()">{{ sortBy.price === 'asc' ? 'Price high to low' : 'Price low to high' }} <IconSorting w="7" h="4.67" :sortBy="sortBy.price"/></span>
+      </div>
+    </div>
+    
+    <table class="auction-usernames__table table is-fullwidth">
+      <thead class="auction-usernames__table__head">
+        <tr>
+          <th>Username</th>
+          <th>Minimum bid</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="auction-usernames__table__body">
+        <tr v-for="key of sortedUsernames" :key="key.id">
+          <td>
+            <div class="auction-usernames__table__body__username">
+              <span>@{{ key.name }}</span>
+              <span>{{ key.link }}</span>
+            </div>
+          </td>
+          <td>
+            <div class="auction-usernames__table__body__price-and-date">
+              <span><IconToken h="14" w="14"/>{{ key.currentBid.toLocaleString('en-US') }}</span>
+              <span>{{ key.leftTimeHumanize }}</span>
+            </div>
+          </td>
+          <td class="has-text-centered">
+            <div class="auction-usernames__table__body__icon">
+              <IconChevronRight h="11" w="6"/>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
+import {mapState} from "pinia";
+import {useAuctionStore} from "@/stores/auction.ts";
+import {Username, generateFakeUsername} from "@/models/username.model.ts";
+import IconToken from "@/components/icons/IconToken.vue";
 
 export default defineComponent({
   name: '',
+  components: {IconToken},
   
   props: [],
   
-  data: () => ({
-  
-  }),
-  
-  computed: {
-  
+  setup() {
+    const store = useAuctionStore()
+    
+    return {store}
   },
   
+  data: () => ({
+    search: '',
+    sortBy: {
+      active: 'asc',
+      price: 'unsorted'
+    },
+    activeSort: 'active',
+    interval: 0,
+  }),
+  
+  mounted() {
+    this.generateFakeUsernames()
+    
+    this.interval = setInterval((): void => {
+      this.store.updateTimeLeft()
+    }, 1000)
+  },
+  
+  beforeUnmount() {
+    clearInterval(this.interval)
+  },
+  
+  computed: {
+    ...mapState(useAuctionStore, {
+      usernames: (state) => state.getUsernames as Username[]
+    }),
+    sortedUsernames() {
+      return [...this.usernames].sort((a, b) => {
+        if (this.activeSort === 'active') {
+          if (this.sortBy.active === 'asc') {
+            return a.leftTime.millisecondsLeft >= b.leftTime.millisecondsLeft ? 1 : 0
+          } else if (this.sortBy.active === 'desc') {
+            return a.leftTime.millisecondsLeft <= b.leftTime.millisecondsLeft ? 1 : 0
+          }
+        } else if (this.activeSort === 'price') {
+          if (this.sortBy.price === 'asc') {
+            return a.currentBid >= b.currentBid ? 1 : 0
+          } else if (this.sortBy.price === 'desc') {
+            return a.currentBid <= b.currentBid ? 1 : 0
+          }
+        }
+        return 0
+      })
+    }
+  },
+  
+  methods: {
+    generateFakeUsernames() {
+      for (let i = 0; i < 10; i++) {
+        this.store.createNewUsername(generateFakeUsername())
+      }
+    },
+    
+    sortByActive() {
+      this.activeSort = 'active'
+      this.sortBy.price = 'unsorted'
+      this.sortBy.active = this.sortBy.active === 'asc' ? 'desc' : 'asc'
+    },
+    
+    sortByPrice() {
+      this.activeSort = 'price'
+      this.sortBy.active = 'unsorted'
+      this.sortBy.price = this.sortBy.price === 'asc' ? 'desc' : 'asc'
+    }
+  }
 })
 
 </script>
@@ -75,6 +182,7 @@ export default defineComponent({
       }
     }
   }
+  
   &__search {
     margin-top: 22px;
     
@@ -121,6 +229,114 @@ export default defineComponent({
       width: 38px;
       
       height: 33px;
+    }
+  }
+  
+  &__sorting {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    height: 14px;
+    
+    font-size: 12px;
+    line-height: 1;
+    
+    color: #7D7D85;
+    
+    &__title {
+    
+    }
+    
+    &__wrapper {
+      display: flex;
+    }
+    
+    &__active {
+      display: flex;
+      margin-right: 20px;
+      
+      cursor: pointer;
+    }
+    
+    &__price {
+      display: flex;
+      
+      cursor: pointer;
+    }
+  }
+  
+  &__table {
+    margin-top: 10px;
+    border-radius: 5px;
+    
+    &__head {
+      tr > th {
+        border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $tg-secondary-bg-color);
+        
+        font-size: 15px;
+        font-weight: 400;
+        
+        color: #7D7D85;
+      }
+    }
+    
+    &__body {
+      tr {
+      
+      }
+      
+      td {
+        vertical-align: middle;
+        border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $tg-secondary-bg-color);
+      }
+      
+      &__username {
+        display: flex;
+        flex-direction: column;
+        
+        span:first-child {
+          font-size: 15px;
+          line-height: 1;
+        }
+        
+        span:last-child {
+          margin-top: 3px;
+          
+          font-size: 12px;
+          line-height: 1;
+          
+          color: var(--tg-theme-link-color, $tg-link-color);
+          
+          cursor: pointer;
+        }
+      }
+      
+      &__price-and-date {
+        display: flex;
+        flex-direction: column;
+        
+        span:first-child {
+          display: flex;
+          
+          font-size: 15px;
+          line-height: 1;
+          
+          svg {
+            margin-right: 5px;
+          }
+        }
+        
+        span:last-child {
+          margin-top: 3px;
+          
+          font-size: 12px;
+          line-height: 1;
+        }
+      }
+      
+      &__icon {
+        cursor: pointer;
+      }
     }
   }
 }

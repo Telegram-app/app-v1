@@ -11,3 +11,7 @@ $tg-section-bg-color: #000000;
 $tg-section-header-text-color: #000000;
 $tg-subtitle-text-color: #000000;
 $tg-destructive-text-color: #000000;
+
+.tg-svg-color {
+  fill: var(--tg-theme-button-color, $tg-button-color)
+}
