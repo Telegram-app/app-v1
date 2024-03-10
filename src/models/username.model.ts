@@ -14,11 +14,11 @@ export interface Username {
 }
 
 export interface LeftTime {
-    days: number,
-    hours: number,
-    minutes: number,
-    seconds: number,
-    millisecondsLeft: number
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+    millisecondsLeft: number;
 }
 
 export function generateFakeUsername(): Username {

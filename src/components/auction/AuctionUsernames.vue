@@ -65,6 +65,18 @@ import {useAuctionStore} from "@/stores/auction.ts";
 import {Username, generateFakeUsername} from "@/models/username.model.ts";
 import IconToken from "@/components/icons/IconToken.vue";
 
+interface Data {
+  search: string;
+  sortBy: SortBy;
+  activeSort: string;
+  interval: number;
+}
+
+interface SortBy {
+  active: string;
+  price: string;
+}
+
 export default defineComponent({
   name: '',
   components: {IconToken},
@@ -85,7 +97,7 @@ export default defineComponent({
     },
     activeSort: 'active',
     interval: 0,
-  }),
+  }) as Data,
   
   mounted() {
     this.generateFakeUsernames()
@@ -107,15 +119,15 @@ export default defineComponent({
       return [...this.usernames].sort((a, b) => {
         if (this.activeSort === 'active') {
           if (this.sortBy.active === 'asc') {
-            return a.leftTime.millisecondsLeft - b.leftTime.millisecondsLeft ? 1 : 0
+            return a.leftTime.millisecondsLeft >= b.leftTime.millisecondsLeft ? 1 : -1
           } else if (this.sortBy.active === 'desc') {
-            return b.leftTime.millisecondsLeft - a.leftTime.millisecondsLeft ? 1 : 0
+            return a.leftTime.millisecondsLeft <= b.leftTime.millisecondsLeft ? 1 : -1
           }
         } else if (this.activeSort === 'price') {
           if (this.sortBy.price === 'asc') {
-            return a.currentBid - b.currentBid ? 1 : 0
+            return a.currentBid >= b.currentBid ? 1 : -1
           } else if (this.sortBy.price === 'desc') {
-            return  b.currentBid - a.currentBid ? 1 : 0
+            return a.currentBid <= b.currentBid ? 1 : -1
           }
         }
         return 0
