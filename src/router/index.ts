@@ -4,7 +4,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "auction",
-    component: import("@/pages/AuctionView.vue"),
+    component: () => import("@/pages/AuctionView.vue"),
     meta: {
       layout: "default",
     },
