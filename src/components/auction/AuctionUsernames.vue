@@ -360,6 +360,8 @@ export default defineComponent({
         span:first-child {
           font-size: 15px;
           line-height: 1;
+          
+          color: var(--tg-theme-text-color, $tg-text-color);
         }
         
         span:last-child {
@@ -384,6 +386,8 @@ export default defineComponent({
           font-size: 15px;
           line-height: 1;
           
+          color: var(--tg-theme-text-color, $tg-text-color);
+          
           svg {
             margin-right: 5px;
           }
@@ -394,6 +398,8 @@ export default defineComponent({
           
           font-size: 12px;
           line-height: 1;
+          
+          color: #7d7d85;
         }
       }
       
