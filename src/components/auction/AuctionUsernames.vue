@@ -107,15 +107,15 @@ export default defineComponent({
       return [...this.usernames].sort((a, b) => {
         if (this.activeSort === 'active') {
           if (this.sortBy.active === 'asc') {
-            return a.leftTime.millisecondsLeft >= b.leftTime.millisecondsLeft ? 1 : 0
+            return a.leftTime.millisecondsLeft - b.leftTime.millisecondsLeft ? 1 : 0
           } else if (this.sortBy.active === 'desc') {
-            return a.leftTime.millisecondsLeft <= b.leftTime.millisecondsLeft ? 1 : 0
+            return b.leftTime.millisecondsLeft - a.leftTime.millisecondsLeft ? 1 : 0
           }
         } else if (this.activeSort === 'price') {
           if (this.sortBy.price === 'asc') {
-            return a.currentBid >= b.currentBid ? 1 : 0
+            return a.currentBid - b.currentBid ? 1 : 0
           } else if (this.sortBy.price === 'desc') {
-            return a.currentBid <= b.currentBid ? 1 : 0
+            return  b.currentBid - a.currentBid ? 1 : 0
           }
         }
         return 0
