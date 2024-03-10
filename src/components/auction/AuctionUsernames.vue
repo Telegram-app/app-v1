@@ -19,12 +19,16 @@
     <div class="auction-usernames__sorting">
       <span class="auction-usernames__sorting__title">Auctions</span>
       <div class="auction-usernames__sorting__wrapper">
-        <span class="auction-usernames__sorting__active" @click="sortByActive()">{{ sortBy.active === 'asc' ? 'On auction' : 'Not at auction' }} <IconSorting w="7" h="4.67" :sortBy="sortBy.active"/></span>
-        <span class="auction-usernames__sorting__price" @click="sortByPrice()">{{ sortBy.price === 'asc' ? 'Price high to low' : 'Price low to high' }} <IconSorting w="7" h="4.67" :sortBy="sortBy.price"/></span>
+        <span class="auction-usernames__sorting__active" @click="search ? '' : sortBy.active = !sortBy.active">{{ sortBy.active ? 'On auction' : 'Not at auction' }} <IconSorting w="7" h="4.67" :coloredArrow="sortBy.active"/></span>
+        <span class="auction-usernames__sorting__price" @click="sortUsernamesBy()">
+          {{ sortBy.isPrice && sortBy.price === 'asc' ? 'Price low to high' : sortBy.isPrice && sortBy.price === 'desc' ? 'Price high to low' : '' }}
+          {{ !sortBy.isPrice && sortBy.timeLeft === 'asc' ? 'Time left low to high' : !sortBy.isPrice && sortBy.timeLeft === 'desc' ? 'Time left high to low' : '' }}
+          <IconSorting w="7" h="4.67" :coloredArrow="sortBy.isPrice ? sortBy.price === 'asc' : sortBy.timeLeft === 'asc'"/>
+        </span>
       </div>
     </div>
     
-    <table class="auction-usernames__table table is-fullwidth">
+    <table class="auction-usernames__table table is-fullwidth" v-show="!loading">
       <thead class="auction-usernames__table__head">
         <tr>
           <th>Username</th>
@@ -36,7 +40,7 @@
         <tr v-for="key of sortedUsernames" :key="key.id">
           <td>
             <div class="auction-usernames__table__body__username">
-              <span>@{{ key.name }}</span>
+              <span>{{ key.name }}</span>
               <span>{{ key.link }}</span>
             </div>
           </td>
@@ -46,11 +50,14 @@
               <span>{{ key.leftTimeHumanize }}</span>
             </div>
           </td>
-          <td class="has-text-centered">
+          <td class="has-text-right">
             <div class="auction-usernames__table__body__icon">
               <IconChevronRight h="11" w="6"/>
             </div>
           </td>
+        </tr>
+        <tr class="auction-usernames__table__body__not-found" v-if="!sortedUsernames.length">
+          <td><span>Not found</span></td>
         </tr>
       </tbody>
     </table>
@@ -65,18 +72,6 @@ import {useAuctionStore} from "@/stores/auction.ts";
 import {Username, generateFakeUsername} from "@/models/username.model.ts";
 import IconToken from "@/components/icons/IconToken.vue";
 
-interface Data {
-  search: string;
-  sortBy: SortBy;
-  activeSort: string;
-  interval: number;
-}
-
-interface SortBy {
-  active: string;
-  price: string;
-}
-
 export default defineComponent({
   name: '',
   components: {IconToken},
@@ -90,14 +85,16 @@ export default defineComponent({
   },
   
   data: () => ({
+    loading: true,
     search: '',
     sortBy: {
-      active: 'asc',
-      price: 'unsorted'
+      active: true,
+      isPrice: false,
+      price: 'asc',
+      timeLeft: 'asc'
     },
-    activeSort: 'active',
     interval: 0,
-  }) as Data,
+  }),
   
   mounted() {
     this.generateFakeUsernames()
@@ -116,43 +113,82 @@ export default defineComponent({
       usernames: (state) => state.getUsernames as Username[]
     }),
     sortedUsernames() {
-      return [...this.usernames].sort((a, b) => {
-        if (this.activeSort === 'active') {
-          if (this.sortBy.active === 'asc') {
-            return a.leftTime.millisecondsLeft >= b.leftTime.millisecondsLeft ? 1 : -1
-          } else if (this.sortBy.active === 'desc') {
-            return a.leftTime.millisecondsLeft <= b.leftTime.millisecondsLeft ? 1 : -1
+      if (this.search) {
+        return this.usernames.filter(username => {
+          return username.name.includes(this.search)
+        })
+      }
+      
+      if (this.sortBy.active) {
+        return [...this.usernames].filter(username => {
+          return username.leftTime.millisecondsLeft > 0
+        }).sort((a, b) => {
+          if (this.sortBy.isPrice) {
+            if (this.sortBy.price === 'asc') {
+              return a.currentBid >= b.currentBid ? 1 : -1
+            } else if (this.sortBy.price === 'desc') {
+              return a.currentBid <= b.currentBid ? 1 : -1
+            }
+          } else {
+            if (this.sortBy.timeLeft === 'asc') {
+              return a.leftTime.millisecondsLeft >= b.leftTime.millisecondsLeft ? 1 : -1
+            } else if (this.sortBy.timeLeft === 'desc') {
+              return a.leftTime.millisecondsLeft <= b.leftTime.millisecondsLeft ? 1 : -1
+            }
           }
-        } else if (this.activeSort === 'price') {
-          if (this.sortBy.price === 'asc') {
-            return a.currentBid >= b.currentBid ? 1 : -1
-          } else if (this.sortBy.price === 'desc') {
-            return a.currentBid <= b.currentBid ? 1 : -1
+          
+          return 0
+        })
+      } else {
+        return [...this.usernames].filter(username => {
+          return username.leftTime.millisecondsLeft <= 0
+        }).sort((a, b) => {
+          if (this.sortBy.isPrice) {
+            if (this.sortBy.price === 'asc') {
+              return a.currentBid >= b.currentBid ? 1 : -1
+            } else if (this.sortBy.price === 'desc') {
+              return a.currentBid <= b.currentBid ? 1 : -1
+            }
+          } else {
+            if (this.sortBy.timeLeft === 'asc') {
+              return a.leftTime.millisecondsLeft >= b.leftTime.millisecondsLeft ? 1 : -1
+            } else if (this.sortBy.timeLeft === 'desc') {
+              return a.leftTime.millisecondsLeft <= b.leftTime.millisecondsLeft ? 1 : -1
+            }
           }
-        }
-        return 0
-      })
-    }
+          
+          return 0
+        })
+      }
+    },
   },
   
   methods: {
-    generateFakeUsernames() {
-      for (let i = 0; i < 10; i++) {
-        this.store.createNewUsername(generateFakeUsername())
+    sortUsernamesBy() {
+      if (this.search) return
+      if (this.sortBy.isPrice && this.sortBy.price === 'asc') {
+        this.sortBy.price = 'desc'
+      } else if (this.sortBy.isPrice && this.sortBy.price === 'desc') {
+        this.sortBy.timeLeft = 'asc'
+        this.sortBy.isPrice = false
+      } else if (!this.sortBy.isPrice && this.sortBy.timeLeft === 'asc') {
+        this.sortBy.timeLeft = 'desc'
+      } else {
+        this.sortBy.price = 'asc'
+        this.sortBy.isPrice = true
       }
     },
     
-    sortByActive() {
-      this.activeSort = 'active'
-      this.sortBy.price = 'unsorted'
-      this.sortBy.active = this.sortBy.active === 'asc' ? 'desc' : 'asc'
+    generateFakeUsernames() {
+      for (let i = 0; i < 10; i++) {
+        this.store.createNewUsername(generateFakeUsername())
+        
+        console.log(i)
+        if (i === 9) {
+          this.loading = false
+        }
+      }
     },
-    
-    sortByPrice() {
-      this.activeSort = 'price'
-      this.sortBy.active = 'unsorted'
-      this.sortBy.price = this.sortBy.price === 'asc' ? 'desc' : 'asc'
-    }
   }
 })
 
@@ -207,6 +243,8 @@ export default defineComponent({
       
       font-size: 12px;
       
+      color: var(--tg-theme-text-color, $tg-text-color);
+      background-color: var(--tg-theme-bg-color, $tg-bg-color);
       box-shadow: unset;
       
       &::placeholder {
@@ -247,6 +285,7 @@ export default defineComponent({
   &__sorting {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 15px;
     height: 14px;
     
@@ -281,14 +320,25 @@ export default defineComponent({
     margin-top: 10px;
     border-radius: 5px;
     
+    background-color: var(--tg-theme-bg-color, $tg-bg-color);
+    
     &__head {
       tr > th {
+        padding: 10px 17px;
         border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $tg-secondary-bg-color);
         
         font-size: 15px;
         font-weight: 400;
         
         color: #7D7D85;
+        
+        &:first-child  {
+          width: 37%;
+        }
+        
+        &:nth-child(2) {
+          width: 53%;
+        }
       }
     }
     
@@ -299,6 +349,7 @@ export default defineComponent({
       
       td {
         vertical-align: middle;
+        padding: 10px 17px;
         border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $tg-secondary-bg-color);
       }
       
@@ -348,6 +399,11 @@ export default defineComponent({
       
       &__icon {
         cursor: pointer;
+      }
+      
+      &__not-found {
+        font-size: 14px;
+        line-height: 1;
       }
     }
   }

@@ -26,7 +26,7 @@ export function generateFakeUsername(): Username {
 
     return {
         id: uuid(),
-        name: randomUserName,
+        name: '@' + randomUserName,
         link: randomUserName + '.t.me',
         currentBid: Number(faker.finance.amount({ min: 10000, max: 99999, dec: 0 })),
         startDate: faker.date.recent({ days: 15 }),

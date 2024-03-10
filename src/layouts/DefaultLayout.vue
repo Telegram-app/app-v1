@@ -16,7 +16,7 @@ export default defineComponent({
 .default__layout {
   min-height: calc(100vh - 66px);
   height: 100%;
-  padding: 0 15px;
+  padding: 0 15px 15px;
 
   background: var(--tg-theme-secondary-bg-color, $tg-secondary-bg-color);
 }
