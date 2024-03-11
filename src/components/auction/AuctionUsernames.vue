@@ -28,39 +28,66 @@
       </div>
     </div>
     
-    <table class="auction-usernames__table table is-fullwidth" v-show="!loading">
-      <thead class="auction-usernames__table__head">
-        <tr>
-          <th>Username</th>
-          <th>Minimum bid</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody class="auction-usernames__table__body">
-        <tr v-for="key of sortedUsernames" :key="key.id">
-          <td>
-            <div class="auction-usernames__table__body__username">
-              <span>{{ key.name }}</span>
-              <span>{{ key.link }}</span>
-            </div>
-          </td>
-          <td>
-            <div class="auction-usernames__table__body__price-and-date">
-              <span><IconToken h="14" w="14"/>{{ key.currentBid.toLocaleString('en-US') }}</span>
-              <span>{{ key.leftTimeHumanize }}</span>
-            </div>
-          </td>
-          <td class="has-text-right">
-            <div class="auction-usernames__table__body__icon">
-              <IconChevronRight h="11" w="6"/>
-            </div>
-          </td>
-        </tr>
-        <tr class="auction-usernames__table__body__not-found" v-if="!sortedUsernames.length">
-          <td><span>Not found</span></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="b-table" :class="{'is-loading table--blur': loading}">
+      <div class="table-wrapper">
+        <table class="auction-usernames__table table is-fullwidth">
+          <thead class="auction-usernames__table__head">
+          <tr>
+            <th>Username</th>
+            <th>Minimum bid</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody class="auction-usernames__table__body">
+          <tr v-for="i of 6" :key="'stub-' + i" v-if="loading && !sortedUsernames.length">
+            <td>
+              <div class="auction-usernames__table__body__username">
+                <span>@sperno</span>
+                <span>sperno.t.me</span>
+              </div>
+            </td>
+            <td>
+              <div class="auction-usernames__table__body__price-and-date">
+                <span><IconToken h="14" w="14"/>100,000</span>
+                <span>1 days 0 hours left</span>
+              </div>
+            </td>
+            <td class="has-text-right">
+              <div class="auction-usernames__table__body__icon">
+                <IconChevronRight h="11" w="6"/>
+              </div>
+            </td>
+          </tr>
+          <tr v-for="key of sortedUsernames" :key="key.id">
+            <td>
+              <div class="auction-usernames__table__body__username">
+                <span>{{ key.name }}</span>
+                <span>{{ key.link }}</span>
+              </div>
+            </td>
+            <td>
+              <div class="auction-usernames__table__body__price-and-date">
+                <span><IconToken h="14" w="14"/>{{ key.currentBid.toLocaleString('en-US') }}</span>
+                <span>{{ key.leftTimeHumanize }}</span>
+              </div>
+            </td>
+            <td class="has-text-right">
+              <div class="auction-usernames__table__body__icon">
+                <IconChevronRight h="11" w="6"/>
+              </div>
+            </td>
+          </tr>
+          <tr class="is-empty auction-usernames__table__body__not-found" v-if="!loading && !sortedUsernames.length">
+            <td colspan="4">
+              <div class="content has-text-centered">
+                <p>Nothing's there…</p>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -182,19 +209,33 @@ export default defineComponent({
     generateFakeUsernames() {
       for (let i = 0; i < 10; i++) {
         this.store.createNewUsername(generateFakeUsername())
-        
-        console.log(i)
-        if (i === 9) {
-          this.loading = false
-        }
       }
     },
+  },
+  
+  watch: {
+    sortedUsernames(newValue) {
+      if (newValue.length) this.loading = false
+    }
   }
 })
 
 </script>
 
 <style lang="scss">
+
+.b-table.is-loading::after {
+  top: calc(50% - 1em);
+  
+  border-top-color: var(--tg-theme-link-color, $tg-link-color);
+  border-right-color: var(--tg-theme-link-color, $tg-link-color);
+}
+
+.table--blur {
+  td {
+    filter: blur(3px);
+  }
+}
 
 .auction-usernames {
   margin-top: 25px;
@@ -410,6 +451,12 @@ export default defineComponent({
       &__not-found {
         font-size: 14px;
         line-height: 1;
+        
+        color: var(--tg-theme-text-color, $tg-text-color);
+        
+        .content {
+          padding: 20px 0;
+        }
       }
     }
   }
