@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <a @click.prevent="closeApp()" class="navbar__close">Cancel</a>
+    <a @click.prevent="route.path === '/' ? closeApp() : router.back()" class="navbar__close">{{ route.path === '/' ? 'Cancel' : 'Back' }}</a>
 
     <div class="navbar__app-name">
       <h1 class="navbar__app-name__text">App</h1>
@@ -17,11 +17,19 @@
 import { defineComponent } from "vue";
 import { mapState } from "pinia";
 import { useTelegramStore } from "@/stores/telegram";
+import { useRouter, useRoute } from "vue-router";
 
 export default defineComponent({
   name: "AppNavbar",
 
   data: () => ({}),
+  
+  setup() {
+    const router = useRouter()
+    const route = useRoute()
+    
+    return { router, route }
+  },
 
   computed: {
     ...mapState(useTelegramStore, {
