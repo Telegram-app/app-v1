@@ -6,3 +6,9 @@ $input-background-color: var(--tg-theme-bg-color, $tg-bg-color);
 body {
   color: var(--tg-theme-text-color, $tg-text-color);
 }
+
+.table--blur {
+  td {
+    filter: blur(3px);
+  }
+}

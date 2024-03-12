@@ -1,8 +1,6 @@
 <template>
   <AppLayout>
-    <component :is="layout">
-      <RouterView />
-    </component>
+    <RouterView />
   </AppLayout>
 </template>
 

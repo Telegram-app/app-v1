@@ -1,26 +1,26 @@
 <template>
-  <div class="auction-usernames">
-    <h1 class="auction-usernames__title">Buy and Sell Usernames</h1>
+  <div class="auction__usernames">
+    <h1 class="auction__usernames__title">Buy and Sell Usernames</h1>
     
-    <p class="auction-usernames__description">
+    <p class="auction__usernames__description">
       Secure your name with blockchain in an ecosystem of 700+ million users and assging it as a link for your personal account, channel or group.
-      <span class="auction-usernames__description__learn-more">Learn more <IconChevronRight class="auction-usernames__description__learn-more__icon" h="9" w="6"/></span>
+      <span class="auction__usernames__description__learn-more">Learn more <IconChevronRight class="auction__usernames__description__learn-more__icon" h="9" w="6"/></span>
     </p>
     
-    <div class="auction-usernames__search field">
+    <div class="auction__usernames__search field">
       <p class="control has-icons-left">
         <input class="input" type="search" placeholder="Enter a Telegram username..." v-model="search">
-        <span class="auction-usernames__search__icon">
+        <span class="auction__usernames__search__icon">
           <IconSearch h="10" w="9"/>
         </span>
       </p>
     </div>
     
-    <div class="auction-usernames__sorting">
-      <span class="auction-usernames__sorting__title">Auctions</span>
-      <div class="auction-usernames__sorting__wrapper">
-        <span class="auction-usernames__sorting__active" @click="search ? '' : sortBy.active = !sortBy.active">{{ sortBy.active ? 'On auction' : 'Not at auction' }} <IconSorting w="7" h="4.67" :coloredArrow="sortBy.active"/></span>
-        <span class="auction-usernames__sorting__price" @click="sortUsernamesBy()">
+    <div class="auction__usernames__sorting">
+      <span class="auction__usernames__sorting__title">Auctions</span>
+      <div class="auction__usernames__sorting__wrapper">
+        <span class="auction__usernames__sorting__active" @click="search ? '' : sortBy.active = !sortBy.active">{{ sortBy.active ? 'On auction' : 'Not at auction' }} <IconSorting w="7" h="4.67" :coloredArrow="sortBy.active"/></span>
+        <span class="auction__usernames__sorting__price" @click="sortUsernamesBy()">
           {{ sortBy.isPrice && sortBy.price === 'asc' ? 'Price low to high' : sortBy.isPrice && sortBy.price === 'desc' ? 'Price high to low' : '' }}
           {{ !sortBy.isPrice && sortBy.timeLeft === 'asc' ? 'Time left low to high' : !sortBy.isPrice && sortBy.timeLeft === 'desc' ? 'Time left high to low' : '' }}
           <IconSorting w="7" h="4.67" :coloredArrow="sortBy.isPrice ? sortBy.price === 'asc' : sortBy.timeLeft === 'asc'"/>
@@ -30,60 +30,66 @@
     
     <div class="b-table" :class="{'is-loading table--blur': loading}">
       <div class="table-wrapper">
-        <table class="auction-usernames__table table is-fullwidth">
-          <thead class="auction-usernames__table__head">
-          <tr>
-            <th>Username</th>
-            <th>Minimum bid</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody class="auction-usernames__table__body">
-          <tr v-for="i of 6" :key="'stub-' + i" v-if="loading && !sortedUsernames.length">
-            <td>
-              <div class="auction-usernames__table__body__username">
-                <span>@sperno</span>
-                <span>sperno.t.me</span>
-              </div>
-            </td>
-            <td>
-              <div class="auction-usernames__table__body__price-and-date">
-                <span><IconToken h="14" w="14"/>100,000</span>
-                <span>1 days 0 hours left</span>
-              </div>
-            </td>
-            <td class="has-text-right">
-              <div class="auction-usernames__table__body__icon">
-                <IconChevronRight h="11" w="6"/>
-              </div>
-            </td>
-          </tr>
-          <tr v-for="key of sortedUsernames" :key="key.id">
-            <td>
-              <div class="auction-usernames__table__body__username">
-                <span>{{ key.name }}</span>
-                <span>{{ key.link }}</span>
-              </div>
-            </td>
-            <td>
-              <div class="auction-usernames__table__body__price-and-date">
-                <span><IconToken h="14" w="14"/>{{ key.currentBid.toLocaleString('en-US') }}</span>
-                <span>{{ key.leftTimeHumanize }}</span>
-              </div>
-            </td>
-            <td class="has-text-right">
-              <div class="auction-usernames__table__body__icon">
-                <IconChevronRight h="11" w="6"/>
-              </div>
-            </td>
-          </tr>
-          <tr class="is-empty auction-usernames__table__body__not-found" v-if="!loading && !sortedUsernames.length">
-            <td colspan="4">
-              <div class="content has-text-centered">
-                <p>Nothing's there…</p>
-              </div>
-            </td>
-          </tr>
+        <table class="auction__usernames__table table is-fullwidth">
+            <thead class="auction__usernames__table__head">
+              <tr>
+                <th>Username</th>
+                <th>Minimum bid</th>
+                <th></th>
+              </tr>
+            </thead>
+          <tbody class="auction__usernames__table__body">
+          
+<!--          loading-->
+            <tr v-for="i of 6" :key="'stub-' + i" v-if="loading && !sortedUsernames.length">
+              <td>
+                <div class="auction__usernames__table__body__username">
+                  <span>@username</span>
+                  <span>username.t.me</span>
+                </div>
+              </td>
+              <td>
+                <div class="auction__usernames__table__body__price-and-date">
+                  <span><IconToken h="14" w="14"/>10,000</span>
+                  <span>1 days 0 hours left</span>
+                </div>
+              </td>
+              <td class="has-text-right">
+                <div class="auction__usernames__table__body__icon">
+                  <IconChevronRight h="11" w="6"/>
+                </div>
+              </td>
+            </tr>
+            
+  <!--          loaded-->
+            <tr v-for="key of sortedUsernames" :key="key.id">
+              <td>
+                <div class="auction__usernames__table__body__username">
+                  <span>{{ key.usernameTypes.telegram }}</span>
+                  <span>{{ key.usernameTypes.ton }}</span>
+                </div>
+              </td>
+              <td>
+                <div class="auction__usernames__table__body__price-and-date">
+                  <span><IconToken h="14" w="14"/>{{ key.bids.highest.toLocaleString('en-US') }}</span>
+                  <span>{{ key.leftTime?.humanize }}</span>
+                </div>
+              </td>
+              <td class="has-text-right">
+                <div class="auction__usernames__table__body__icon" @click="toUsernamePage(key.id)">
+                  <IconChevronRight h="11" w="6"/>
+                </div>
+              </td>
+            </tr>
+            
+  <!--          not found-->
+            <tr class="is-empty auction__usernames__table__body__not-found" v-if="!loading && !sortedUsernames.length">
+              <td colspan="4">
+                <div class="content has-text-centered">
+                  <p>Nothing's there…</p>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -93,22 +99,22 @@
 
 <script lang="ts">
 
-import {defineComponent} from "vue";
-import {mapState} from "pinia";
-import {useAuctionStore} from "@/stores/auction.ts";
-import {Username, generateFakeUsername} from "@/models/username.model.ts";
-import IconToken from "@/components/icons/IconToken.vue";
+import { defineComponent } from "vue";
+import { useRoute } from "vue-router";
+import { mapState } from "pinia";
+import { useAuctionStore } from "@/stores/auction.ts";
+import { Username } from "@/models/username.model.ts";
 
 export default defineComponent({
-  name: '',
-  components: {IconToken},
+  name: 'AuctionUsernames',
   
   props: [],
   
   setup() {
-    const store = useAuctionStore()
+    const auctionStore = useAuctionStore()
+    const route = useRoute()
     
-    return {store}
+    return { auctionStore, route }
   },
   
   data: () => ({
@@ -124,10 +130,10 @@ export default defineComponent({
   }),
   
   mounted() {
-    this.generateFakeUsernames()
+    this.auctionStore.createFakeUsernames()
     
     this.interval = setInterval((): void => {
-      this.store.updateTimeLeft()
+      this.auctionStore.updateTimeLeft()
     }, 1000)
   },
   
@@ -142,7 +148,7 @@ export default defineComponent({
     sortedUsernames() {
       if (this.search) {
         return this.usernames.filter(username => {
-          return username.name.includes(this.search)
+          return username.usernameTypes.telegram.includes(this.search)
         })
       }
       
@@ -152,9 +158,9 @@ export default defineComponent({
         }).sort((a, b) => {
           if (this.sortBy.isPrice) {
             if (this.sortBy.price === 'asc') {
-              return a.currentBid >= b.currentBid ? 1 : -1
+              return a.bids.highest >= b.bids.highest ? 1 : -1
             } else if (this.sortBy.price === 'desc') {
-              return a.currentBid <= b.currentBid ? 1 : -1
+              return a.bids.highest <= b.bids.highest ? 1 : -1
             }
           } else {
             if (this.sortBy.timeLeft === 'asc') {
@@ -172,9 +178,9 @@ export default defineComponent({
         }).sort((a, b) => {
           if (this.sortBy.isPrice) {
             if (this.sortBy.price === 'asc') {
-              return a.currentBid >= b.currentBid ? 1 : -1
+              return a.bids.highest >= b.bids.highest ? 1 : -1
             } else if (this.sortBy.price === 'desc') {
-              return a.currentBid <= b.currentBid ? 1 : -1
+              return a.bids.highest <= b.bids.highest ? 1 : -1
             }
           } else {
             if (this.sortBy.timeLeft === 'asc') {
@@ -206,16 +212,18 @@ export default defineComponent({
       }
     },
     
-    generateFakeUsernames() {
-      for (let i = 0; i < 10; i++) {
-        this.store.createNewUsername(generateFakeUsername())
-      }
+    toUsernamePage(to: string | number) {
+      // this.$router.push(`/auction/usernames/${to}`)
+      this.$router.push({name: 'username', params: { id: to }})
     },
   },
   
   watch: {
     sortedUsernames(newValue) {
       if (newValue.length) this.loading = false
+    },
+    'route.name'(to) {
+      this.loading = true
     }
   }
 })
@@ -231,13 +239,7 @@ export default defineComponent({
   border-right-color: var(--tg-theme-link-color, $tg-link-color);
 }
 
-.table--blur {
-  td {
-    filter: blur(3px);
-  }
-}
-
-.auction-usernames {
+.auction__usernames {
   margin-top: 25px;
   
   &__title {
@@ -359,6 +361,7 @@ export default defineComponent({
   
   &__table {
     margin-top: 10px;
+    border: unset !important;
     border-radius: 5px;
     
     background-color: var(--tg-theme-bg-color, $tg-bg-color);

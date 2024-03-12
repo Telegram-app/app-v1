@@ -1,9 +1,10 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import router from "./router";
+import { createRouter } from "./router";
 import { registerLayouts } from "./layouts/register";
 import dayjs from 'dayjs'
 
+const router = createRouter()
 const pinia = createPinia();
 
 import "@/assets/styles/style.scss";
