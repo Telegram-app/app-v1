@@ -216,6 +216,10 @@ export default defineComponent({
     }, 1000)
   },
   
+  beforeUnmount() {
+    clearInterval(this.interval)
+  },
+  
   methods: {
     dayjs,
     async getTonPrice() {
