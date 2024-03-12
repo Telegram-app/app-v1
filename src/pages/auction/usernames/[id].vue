@@ -334,6 +334,11 @@ export default defineComponent({
     margin-top: 15px;
     
     &__table {
+      border: unset;
+      border-radius: 5px;
+      
+      background-color: var(--tg-theme-bg-color, $tg-bg-color);
+      
       td {
         vertical-align: middle;
         padding: 10px 17px;
