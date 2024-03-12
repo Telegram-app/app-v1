@@ -197,7 +197,7 @@ export default defineComponent({
     },
     sortedBidHistory() {
       return this.username ? this.username?.bids.history?.sort((a, b) => {
-        return new Date(b.date.toString()).getTime() - new Date(b.date.toString()).getTime()
+        return new Date(b.date.toString()).getTime() - new Date(a.date.toString()).getTime()
       }) : []
     }
   },
