@@ -52,7 +52,7 @@
       
       <div class="b-table auction__username__types">
         <div class="table-wrapper">
-          <table class="auction__username__table table is-fullwidth">
+          <table class="auction__username__types__table table is-fullwidth">
             <tbody>
             <tr>
               <td>Telegram Username</td>
@@ -333,20 +333,27 @@ export default defineComponent({
   &__types {
     margin-top: 15px;
     
-    td {
-      vertical-align: middle;
-      padding: 10px 17px;
-      border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $tg-secondary-bg-color);
-      
-      font-size: 15px;
-      line-height: 1;
-      
-      &:nth-child(2) {
-        text-align: end;
+    &__table {
+      td {
+        vertical-align: middle;
+        padding: 10px 17px;
+        border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $tg-secondary-bg-color);
         
-        color: var(--tg-theme-link-color, $tg-link-color);
+        font-size: 15px;
+        line-height: 1;
+        
+        &:first-child {
+          color: var(--tg-theme-text-color, $tg-text-color);
+        }
+        
+        &:nth-child(2) {
+          text-align: end;
+          
+          color: var(--tg-theme-link-color, $tg-link-color);
+        }
       }
     }
+    
   }
   
   &__left-time {
@@ -455,11 +462,11 @@ export default defineComponent({
           color: #7D7D85;
           
           &:first-child  {
-            width: 30%;
+            width: 25%;
           }
           
           &:nth-child(2) {
-            width: 40%;
+            width: 42%;
           }
         }
       }
@@ -473,14 +480,11 @@ export default defineComponent({
           font-size: 15px;
           line-height: 1;
           
+          color: var(--tg-theme-text-color, $tg-text-color);
+          
           &:first-child {
             span {
               display: flex;
-              
-              font-size: 15px;
-              line-height: 1;
-              
-              color: var(--tg-theme-text-color, $tg-text-color);
               
               svg {
                 margin-right: 5px;
