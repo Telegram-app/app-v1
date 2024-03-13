@@ -19,7 +19,7 @@ export const useTelegramStore = defineStore("telegram", {
 
   actions: {
     initTelegramWebApp(WebApp: any) {
-      if (WebApp.ready()) {
+      if (WebApp.initData) {
         WebApp.expand()
         this.WebApp = WebApp;
         this.user = WebApp.initDataUnsafe?.user;
