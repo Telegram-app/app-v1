@@ -41,7 +41,7 @@ export default defineComponent({
 <style lang="scss">
 
 .auction {
-  padding-top: 17px;
+  padding-top: 30px;
 }
 
 </style>

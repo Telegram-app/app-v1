@@ -11,7 +11,11 @@ export const useTelegramStore = defineStore("telegram", {
     user: null,
   }),
 
-  getters: {},
+  getters: {
+    getWebApp(store) {
+      return store.WebApp
+    }
+  },
 
   actions: {
     initTelegramWebApp(WebApp: any) {

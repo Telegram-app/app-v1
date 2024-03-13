@@ -103,6 +103,7 @@ import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import { mapState } from "pinia";
 import { useAuctionStore } from "@/stores/auction.ts";
+import { useTelegramStore } from "@/stores/telegram.ts";
 import { Username } from "@/models/username.model.ts";
 
 export default defineComponent({
@@ -111,6 +112,7 @@ export default defineComponent({
   props: [],
   
   setup() {
+    const tgStore = useTelegramStore()
     const auctionStore = useAuctionStore()
     const route = useRoute()
     
@@ -122,14 +124,16 @@ export default defineComponent({
     search: '',
     sortBy: {
       active: true,
-      isPrice: false,
-      price: 'asc',
+      isPrice: true,
+      price: 'desc',
       timeLeft: 'asc'
     },
     interval: 0,
   }),
   
   mounted() {
+    this.twa.backButton.isVisible = true
+    
     this.auctionStore.createFakeUsernames()
     
     this.interval = setInterval((): void => {
@@ -143,7 +147,10 @@ export default defineComponent({
   
   computed: {
     ...mapState(useAuctionStore, {
-      usernames: (state) => state.getUsernames as Username[]
+      usernames: (state) => state.getUsernames,
+    }),
+    ...mapState(useTelegramStore, {
+      twa: (state) => state.getWebApp
     }),
     sortedUsernames() {
       if (this.search) {

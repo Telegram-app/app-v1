@@ -2,6 +2,7 @@ $input-background-color: var(--tg-theme-bg-color, $tg-bg-color);
 
 @import "bulma-responsive-tables/bulma-responsive-tables";
 @import "bulma/bulma";
+@import "fonts";
 
 body {
   color: var(--tg-theme-text-color, $tg-text-color);
