@@ -1,5 +1,7 @@
 <template>
   <AppLayout>
+    <span>{{ button }}</span>
+    
     <RouterView />
   </AppLayout>
 </template>
@@ -35,7 +37,7 @@ export default defineComponent({
   },
 
   data: () => ({
-    //
+    button: ''
   }),
 
   beforeMount() {
@@ -47,12 +49,14 @@ export default defineComponent({
   watch: {
     'route.path': {
       handler(newValue) {
-        console.log(newValue)
+        console.log(this.twa)
         if (this.twa) {
           if (newValue !== '/') {
             this.twa.BackButton.show()
+            this.button = this.twa.BackButton.show()
           } else {
             this.twa.BackButton.hide()
+            this.button = this.twa.BackButton.hide()
           }
         }
       }, immediate: true
