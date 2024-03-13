@@ -116,7 +116,7 @@ export default defineComponent({
     const auctionStore = useAuctionStore()
     const route = useRoute()
     
-    return { auctionStore, route }
+    return { auctionStore, route, tgStore }
   },
   
   data: () => ({
@@ -132,7 +132,7 @@ export default defineComponent({
   }),
   
   mounted() {
-    this.twa.backButton.isVisible = true
+    this.tgStore.showBackButton()
     
     this.auctionStore.createFakeUsernames()
     

@@ -24,5 +24,11 @@ export const useTelegramStore = defineStore("telegram", {
       this.WebApp = WebApp;
       this.user = WebApp.initDataUnsafe?.user;
     },
+
+    showBackButton() {
+      if (!this.user) return
+
+      this.WebApp.BackButton.show()
+    }
   },
 });
