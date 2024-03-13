@@ -7,6 +7,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useTelegramStore } from "@/stores/telegram";
+import {useRoute} from "vue-router";
 
 declare global {
   interface Window {
@@ -18,15 +19,19 @@ export default defineComponent({
   name: "App",
 
   setup() {
-    const twa = useTelegramStore();
+    const tgStore = useTelegramStore();
+    const route = useRoute()
 
-    return { twa };
+    return { tgStore, route };
   },
 
   computed: {
     layout() {
       return (this.$route?.meta?.layout || "not-found") + "-layout";
     },
+    twa() {
+      return this.tgStore.getWebApp
+    }
   },
 
   data: () => ({
@@ -34,10 +39,25 @@ export default defineComponent({
   }),
 
   beforeMount() {
-    this.twa.initTelegramWebApp(window.Telegram.WebApp);
+    this.tgStore.initTelegramWebApp(window.Telegram.WebApp);
   },
 
   mounted() {},
+  
+  watch: {
+    'route.path': {
+      handler(newValue) {
+        console.log(newValue)
+        if (this.twa) {
+          if (newValue !== '/') {
+            this.twa.BackButton.show()
+          } else {
+            this.twa.BackButton.hide()
+          }
+        }
+      }, immediate: true
+    }
+  }
 });
 </script>
 
