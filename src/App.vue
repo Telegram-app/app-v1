@@ -11,7 +11,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useTelegramStore } from "@/stores/telegram";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 declare global {
   interface Window {
@@ -25,8 +25,9 @@ export default defineComponent({
   setup() {
     const tgStore = useTelegramStore();
     const route = useRoute()
+    const router = useRouter()
 
-    return { tgStore, route };
+    return { tgStore, router, route };
   },
 
   computed: {
@@ -55,7 +56,9 @@ export default defineComponent({
       handler(newValue) {
         if (this.BackButton) {
           if (newValue !== '/') {
-            this.BackButton.show()
+            this.BackButton.show().onClick(() => {
+              this.$router.back()
+            })
           } else {
             this.BackButton.hide()
           }
