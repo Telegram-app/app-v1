@@ -147,10 +147,7 @@ export default defineComponent({
   
   computed: {
     ...mapState(useAuctionStore, {
-      usernames: (state) => state.getUsernames,
-    }),
-    ...mapState(useTelegramStore, {
-      twa: (state) => state.getWebApp
+      usernames: (state) => state.getUsernames as Username[],
     }),
     sortedUsernames() {
       if (this.search) {
