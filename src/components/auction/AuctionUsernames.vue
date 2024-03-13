@@ -132,8 +132,6 @@ export default defineComponent({
   }),
   
   mounted() {
-    this.tgStore.showBackButton()
-    
     this.auctionStore.createFakeUsernames()
     
     this.interval = setInterval((): void => {
