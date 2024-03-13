@@ -33,8 +33,8 @@ export default defineComponent({
     layout() {
       return (this.$route?.meta?.layout || "not-found") + "-layout";
     },
-    twa() {
-      return this.tgStore.getWebApp
+    BackButton() {
+      return this.tgStore.button
     }
   },
 
@@ -53,15 +53,11 @@ export default defineComponent({
   watch: {
     'route.path': {
       handler(newValue) {
-        this.path = newValue
-        this.telegram = this.twa
-        if (this.twa) {
+        if (this.BackButton) {
           if (newValue !== '/') {
-            this.twa.BackButton.show()
-            this.button = this.twa.BackButton.show()
+            this.BackButton.show()
           } else {
-            this.twa.BackButton.hide()
-            this.button = this.twa.BackButton.hide()
+            this.BackButton.hide()
           }
         }
       }, immediate: true
