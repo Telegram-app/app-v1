@@ -50,18 +50,18 @@ export default defineComponent({
   mounted() {},
   
   methods: {
-    routerBack() {
-      this.router.back()
+    routerBack(path: string) {
+      this.router.push(path)
     }
   },
   
   watch: {
     'route.path': {
-      handler(newValue) {
+      handler(newPath, oldPath) {
         if (this.BackButton) {
-          if (newValue !== '/') {
+          if (newPath !== '/') {
             this.BackButton.show().onClick(() => {
-              this.routerBack()
+              this.routerBack(oldPath)
             })
           } else {
             this.BackButton.hide()
