@@ -49,13 +49,19 @@ export default defineComponent({
 
   mounted() {},
   
+  methods: {
+    routerBack() {
+      this.router.back()
+    }
+  },
+  
   watch: {
     'route.path': {
       handler(newValue) {
         if (this.BackButton) {
           if (newValue !== '/') {
             this.BackButton.show().onClick(() => {
-              this.router.go(-1)
+              this.routerBack()
             })
           } else {
             this.BackButton.hide()
