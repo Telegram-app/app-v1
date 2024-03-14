@@ -1,6 +1,6 @@
 <template>
   <div class="app__layout">
-<!--    <AppNavbar />-->
+    <AppNavbar v-if="!twa" />
 
     <slot></slot>
   </div>
@@ -8,9 +8,22 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useTelegramStore } from "@/stores/telegram.ts";
 
 export default defineComponent({
   name: "AppLayout",
+  
+  setup() {
+    const tgStore = useTelegramStore()
+    
+    return { tgStore }
+  },
+  
+  computed: {
+    twa() {
+      return this.tgStore.getWebApp
+    }
+  }
 });
 </script>
 

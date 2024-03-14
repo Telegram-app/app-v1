@@ -3,14 +3,18 @@ import { defineStore } from "pinia";
 type State = {
   WebApp: any;
   user: any;
-  button: any;
+  elements: {
+    BackButton: any
+  };
 };
 
 export const useTelegramStore = defineStore("telegram", {
   state: (): State => ({
     WebApp: null,
     user: null,
-    button: null
+    elements: {
+      BackButton: null
+    }
   }),
 
   getters: {
@@ -23,10 +27,20 @@ export const useTelegramStore = defineStore("telegram", {
     initTelegramWebApp(WebApp: any) {
       if (WebApp.initData) {
         WebApp.expand()
-        this.WebApp = WebApp;
-        this.user = WebApp.initDataUnsafe?.user;
-        this.button = WebApp.BackButton
+
+        this.WebApp = WebApp
+
+        this.initTelegramUser()
+        this.initElements()
       }
+    },
+
+    initTelegramUser() {
+      this.user = this.WebApp.initDataUnsafe.user
+    },
+
+    initElements() {
+      this.elements.BackButton = this.WebApp.BackButton
     }
   },
 });

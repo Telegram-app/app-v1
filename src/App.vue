@@ -1,9 +1,5 @@
 <template>
   <AppLayout>
-    <span v-if="!BackButton" @click="router.back()">Назад</span>
-    <span>{{ oldPath }}</span>
-    <span>{{ newPath }}</span>
-    
     <RouterView />
   </AppLayout>
 </template>
@@ -23,48 +19,35 @@ export default defineComponent({
   name: "App",
 
   setup() {
-    const tgStore = useTelegramStore();
+    const tgStore = useTelegramStore()
     const route = useRoute()
     const router = useRouter()
 
-    return { tgStore, router, route };
+    return { tgStore, router, route }
   },
 
   computed: {
     layout() {
-      return (this.$route?.meta?.layout || "not-found") + "-layout";
+      return (this.$route?.meta?.layout || "not-found") + "-layout"
     },
     BackButton() {
-      return this.tgStore.button
+      return this.tgStore.BackButton
     }
   },
 
-  data: () => ({
-    oldPath: '',
-    newPath: ''
-  }),
-
   beforeMount() {
-    this.tgStore.initTelegramWebApp(window.Telegram.WebApp);
+    this.tgStore.initTelegramWebApp(window.Telegram.WebApp)
   },
 
   mounted() {},
   
-  methods: {
-    routerBack() {
-      this.router.back()
-    }
-  },
-  
   watch: {
     'route.path': {
-      handler(newPath, oldPath) {
+      handler(newPath) {
         if (this.BackButton) {
           if (newPath !== '/') {
             this.BackButton.show().onClick(() => {
-              this.routerBack()
-              this.oldPath = oldPath
-              this.newPath = newPath
+              this.router.back()
             })
           } else {
             this.BackButton.hide()
@@ -76,4 +59,8 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+
+
+
+</style>
