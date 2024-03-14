@@ -1,8 +1,6 @@
 <template>
   <AppLayout>
-    <span>{{ path }}</span>
-    <span>{{ button }}</span>
-    <span>{{ telegram }}</span>
+    <span v-if="!BackButton" @click="router.back()">Назад</span>
     
     <RouterView />
   </AppLayout>
@@ -56,9 +54,7 @@ export default defineComponent({
       handler(newValue) {
         if (this.BackButton) {
           if (newValue !== '/') {
-            this.BackButton.show().onClick(() => {
-              this.$router.back()
-            })
+            this.BackButton.show()
           } else {
             this.BackButton.hide()
           }
