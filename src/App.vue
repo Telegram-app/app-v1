@@ -51,8 +51,8 @@ export default defineComponent({
   mounted() {},
   
   methods: {
-    routerBack(path: string) {
-      this.router.push(path)
+    routerBack() {
+      this.router.back()
     }
   },
   
@@ -62,7 +62,7 @@ export default defineComponent({
         if (this.BackButton) {
           if (newPath !== '/') {
             this.BackButton.show().onClick(() => {
-              this.routerBack(oldPath)
+              this.routerBack()
               this.oldPath = oldPath
               this.newPath = newPath
             })
