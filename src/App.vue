@@ -54,7 +54,9 @@ export default defineComponent({
       handler(newValue) {
         if (this.BackButton) {
           if (newValue !== '/') {
-            this.BackButton.show()
+            this.BackButton.show().onClick(() => {
+              this.router.go(-1)
+            })
           } else {
             this.BackButton.hide()
           }
