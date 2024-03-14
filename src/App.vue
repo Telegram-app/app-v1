@@ -1,6 +1,8 @@
 <template>
   <AppLayout>
     <span v-if="!BackButton" @click="router.back()">Назад</span>
+    <span>{{ oldPath }}</span>
+    <span>{{ newPath }}</span>
     
     <RouterView />
   </AppLayout>
@@ -38,9 +40,8 @@ export default defineComponent({
   },
 
   data: () => ({
-    button: '',
-    path: '',
-    telegram: ''
+    oldPath: '',
+    newPath: ''
   }),
 
   beforeMount() {
@@ -62,6 +63,8 @@ export default defineComponent({
           if (newPath !== '/') {
             this.BackButton.show().onClick(() => {
               this.routerBack(oldPath)
+              this.oldPath = oldPath
+              this.newPath = newPath
             })
           } else {
             this.BackButton.hide()
