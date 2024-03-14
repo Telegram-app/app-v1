@@ -31,7 +31,7 @@ export default defineComponent({
       return (this.$route?.meta?.layout || "not-found") + "-layout"
     },
     BackButton() {
-      return this.tgStore.BackButton
+      return this.tgStore.elements.BackButton
     }
   },
 
