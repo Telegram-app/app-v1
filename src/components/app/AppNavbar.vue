@@ -37,10 +37,7 @@ export default defineComponent({
     }),
     activeLink() {
       return this.$route.name;
-    },
-    isAuctionPage() {
-      return this.activeLink === "auction";
-    },
+    }
   },
 
   methods: {
