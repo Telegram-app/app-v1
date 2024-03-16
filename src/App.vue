@@ -46,8 +46,9 @@ export default defineComponent({
       handler(newPath) {
         if (this.BackButton) {
           if (newPath !== '/') {
+            let arrPaths = newPath.split('/').slice(0, -1).join('/')
             this.BackButton.show().onClick(() => {
-              this.router.back()
+              this.router.push(arrPaths)
             })
           } else {
             this.BackButton.hide()
