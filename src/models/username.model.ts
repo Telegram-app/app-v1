@@ -49,6 +49,8 @@ export function generateFakeUsername(): Username {
         })
     }
 
+    let highestBid = Math.ceil(startBid * (1 + (0.05 * (countRandomBids - 1))))
+
     return {
         id: uuid(),
         usernameTypes: {
@@ -59,9 +61,9 @@ export function generateFakeUsername(): Username {
         },
         bids: {
             start: startBid,
-            highest: startBid * (1 + (0.05 * countRandomBids)),
-            minimum: Math.ceil(startBid * 1.05),
-            step: Math.ceil(startBid * 0.05),
+            highest: highestBid,
+            minimum: Math.ceil(highestBid * 1.05),
+            step: Math.ceil(highestBid * 0.05),
             history: randomHistory
         },
         startDate: faker.date.recent({ days: 15 }),
