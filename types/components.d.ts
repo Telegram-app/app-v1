@@ -9,8 +9,10 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppLayout: typeof import('./../src/layouts/AppLayout.vue')['default']
     AppNavbar: typeof import('./../src/components/app/AppNavbar.vue')['default']
+    AuctionLinks: typeof import('./../src/components/auction/AuctionLinks.vue')['default']
     AuctionUsernames: typeof import('./../src/components/auction/AuctionUsernames.vue')['default']
     DefaultLayout: typeof import('./../src/layouts/DefaultLayout.vue')['default']
+    Header: typeof import('./../src/components/auction/Header.vue')['default']
     IconChevronRight: typeof import('./../src/components/icons/IconChevronRight.vue')['default']
     IconEllipsisCircleOutline: typeof import('./../src/components/icons/IconEllipsisCircleOutline.vue')['default']
     IconSearch: typeof import('./../src/components/icons/IconSearch.vue')['default']

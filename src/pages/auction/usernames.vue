@@ -31,65 +31,65 @@
     <div class="b-table" :class="{'is-loading table--blur': loading}">
       <div class="table-wrapper">
         <table class="auction__usernames__table table is-fullwidth">
-            <thead class="auction__usernames__table__head">
-              <tr>
-                <th>Username</th>
-                <th>Minimum bid</th>
-                <th></th>
-              </tr>
-            </thead>
+          <thead class="auction__usernames__table__head">
+          <tr>
+            <th>Username</th>
+            <th>Minimum bid</th>
+            <th></th>
+          </tr>
+          </thead>
           <tbody class="auction__usernames__table__body">
           
-<!--          loading-->
-            <tr v-for="i of 6" :key="'stub-' + i" v-if="loading && !sortedUsernames.length">
-              <td>
-                <div class="auction__usernames__table__body__username">
-                  <span>@username</span>
-                  <span>username.t.me</span>
-                </div>
-              </td>
-              <td>
-                <div class="auction__usernames__table__body__price-and-date">
-                  <span><IconToken h="14" w="14"/>10,000</span>
-                  <span>1 days 0 hours left</span>
-                </div>
-              </td>
-              <td class="has-text-right">
-                <div class="auction__usernames__table__body__icon">
-                  <IconChevronRight h="11" w="6"/>
-                </div>
-              </td>
-            </tr>
-            
-  <!--          loaded-->
-            <tr v-for="key of sortedUsernames" :key="key.id">
-              <td>
-                <div class="auction__usernames__table__body__username">
-                  <span>{{ key.usernameTypes.telegram }}</span>
-                  <span>{{ key.usernameTypes.ton }}</span>
-                </div>
-              </td>
-              <td>
-                <div class="auction__usernames__table__body__price-and-date">
-                  <span><IconToken h="14" w="14"/>{{ key.bids.highest.toLocaleString('en-US') }}</span>
-                  <span>{{ key.leftTime?.humanize }}</span>
-                </div>
-              </td>
-              <td class="has-text-right">
-                <div class="auction__usernames__table__body__icon" @click="toUsernamePage(key.id)">
-                  <IconChevronRight h="11" w="6"/>
-                </div>
-              </td>
-            </tr>
-            
-  <!--          not found-->
-            <tr class="is-empty auction__usernames__table__body__not-found" v-if="!loading && !sortedUsernames.length">
-              <td colspan="4">
-                <div class="content has-text-centered">
-                  <p>Nothing's there…</p>
-                </div>
-              </td>
-            </tr>
+          <!--          loading-->
+          <tr v-for="i of 6" :key="'stub-' + i" v-if="loading && !sortedUsernames.length">
+            <td>
+              <div class="auction__usernames__table__body__username">
+                <span>@username</span>
+                <span>username.t.me</span>
+              </div>
+            </td>
+            <td>
+              <div class="auction__usernames__table__body__price-and-date">
+                <span><IconToken h="14" w="14"/>10,000</span>
+                <span>1 days 0 hours left</span>
+              </div>
+            </td>
+            <td class="has-text-right">
+              <div class="auction__usernames__table__body__icon">
+                <IconChevronRight h="11" w="6"/>
+              </div>
+            </td>
+          </tr>
+          
+          <!--          loaded-->
+          <tr v-for="key of sortedUsernames" :key="key.id">
+            <td>
+              <div class="auction__usernames__table__body__username">
+                <span>{{ key.usernameTypes.telegram }}</span>
+                <span>{{ key.usernameTypes.ton }}</span>
+              </div>
+            </td>
+            <td>
+              <div class="auction__usernames__table__body__price-and-date">
+                <span><IconToken h="14" w="14"/>{{ key.bids.highest.toLocaleString('en-US') }}</span>
+                <span>{{ key.leftTime?.humanize }}</span>
+              </div>
+            </td>
+            <td class="has-text-right">
+              <div class="auction__usernames__table__body__icon" @click="toUsernamePage(key.usernameTypes.default)">
+                <IconChevronRight h="11" w="6"/>
+              </div>
+            </td>
+          </tr>
+          
+          <!--          not found-->
+          <tr class="is-empty auction__usernames__table__body__not-found" v-if="!loading && !sortedUsernames.length">
+            <td colspan="4">
+              <div class="content has-text-centered">
+                <p>Nothing's there…</p>
+              </div>
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -100,7 +100,7 @@
 <script lang="ts">
 
 import { defineComponent } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { mapState } from "pinia";
 import { useAuctionStore } from "@/stores/auction.ts";
 import { useTelegramStore } from "@/stores/telegram.ts";
@@ -114,9 +114,10 @@ export default defineComponent({
   setup() {
     const tgStore = useTelegramStore()
     const auctionStore = useAuctionStore()
+    const router = useRouter()
     const route = useRoute()
     
-    return { auctionStore, route, tgStore }
+    return { auctionStore, router, route, tgStore }
   },
   
   data: () => ({
@@ -214,9 +215,8 @@ export default defineComponent({
       }
     },
     
-    toUsernamePage(to: string | number) {
-      // this.$router.push(`/auction/usernames/${to}`)
-      this.$router.push({name: 'username', params: { id: to }})
+    toUsernamePage(to: string) {
+      this.router.push({ name: 'username', params: { name: to } })
     },
   },
   

@@ -1,7 +1,7 @@
 <template>
-  <DefaultLayout>
-    <RouterLink to="/auction">Аукцион</RouterLink>
-  </DefaultLayout>
+  <VTab title="Premium">
+    Premium
+  </VTab>
 </template>
 
 <script lang="ts">
@@ -9,23 +9,42 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: '',
+  name: 'AuctionPremium',
   
   props: [],
+  
+  setup() {
+  
+  },
   
   data: () => ({
   
   }),
   
+  mounted() {
+  
+  },
+  
+  beforeUnmount() {
+  
+  },
+  
   computed: {
   
   },
   
+  methods: {
+  
+  },
+  
+  watch: {
+  
+  }
 })
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 
 
 

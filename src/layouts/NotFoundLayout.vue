@@ -1,5 +1,7 @@
 <template>
-  <div class="not-found__layout"></div>
+  <div class="not-found__layout">
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">

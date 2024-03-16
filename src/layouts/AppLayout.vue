@@ -33,7 +33,7 @@ export default defineComponent({
   height: 100%;
   padding: 0 15px 15px;
   
-  font-family: Actor, sans-serif;
+  font-family: "SF Pro Text", sans-serif;
   
   background: var(--tg-theme-secondary-bg-color, $tg-secondary-bg-color);
 }

@@ -35,6 +35,10 @@ export const useAuctionStore = defineStore("auction", {
             return this.usernames.find((item) => item.id === id);
         },
 
+        findByName(name: string) {
+            return this.usernames.find((item) => item.usernameTypes.default === name);
+        },
+
         updateTimeLeft() {
             this.usernames.forEach(username => {
                 let endDate = dayjs(username.startDate).add(10, 'days')

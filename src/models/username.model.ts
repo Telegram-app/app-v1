@@ -5,6 +5,7 @@ import dayjs, {Dayjs} from "dayjs";
 export interface Username {
     id: string | number;
     usernameTypes: {
+        default: string,
         telegram: string,
         web: string,
         ton: string
@@ -51,6 +52,7 @@ export function generateFakeUsername(): Username {
     return {
         id: uuid(),
         usernameTypes: {
+            default: randomUserName,
             telegram: '@' + randomUserName,
             web: 't.me.' + randomUserName,
             ton: randomUserName + '.t.me'

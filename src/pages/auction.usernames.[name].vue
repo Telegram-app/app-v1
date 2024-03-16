@@ -162,7 +162,7 @@
 
 <route lang="json">
 {
-"name": "username"
+  "name": "username"
 }
 </route>
 
@@ -193,7 +193,7 @@ export default defineComponent({
   
   computed: {
     username() {
-      return this.auctionStore.findById(this.route.params.id as string)
+      return this.auctionStore.findByName(this.route.params.name as string)
     },
     sortedBidHistory() {
       return this.username ? this.username?.bids.history?.sort((a, b) => {
@@ -212,7 +212,7 @@ export default defineComponent({
     })
     
     this.interval = setInterval((): void => {
-      this.auctionStore.updateTimeLeftById(this.route.params.id as string)
+      this.auctionStore.updateTimeLeftById(this.username?.id as string)
     }, 1000)
   },
   
@@ -495,6 +495,10 @@ export default defineComponent({
                 margin-right: 5px;
               }
             }
+          }
+          
+          &:nth-child(2) {
+            letter-spacing: -0.5px
           }
           
           &:last-child {

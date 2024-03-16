@@ -1,7 +1,7 @@
 <template>
-  <DefaultLayout>
+  <NotFoundLayout>
     404 - Not found
-  </DefaultLayout>
+  </NotFoundLayout>
 </template>
 
 <script setup lang="ts">
