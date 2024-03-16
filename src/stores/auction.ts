@@ -11,6 +11,7 @@ export type AuctionState = {
     usernames: Username[];
 };
 
+localStorage.removeItem('users')
 const usernamesLocal: Username[] = JSON.parse(localStorage.getItem('users') as string)
 
 export const useAuctionStore = defineStore("auction", {

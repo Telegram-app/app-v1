@@ -59,7 +59,7 @@ export function generateFakeUsername(): Username {
         },
         bids: {
             start: startBid,
-            highest: startBid,
+            highest: startBid * (1 + (0.05 * countRandomBids)),
             minimum: Math.ceil(startBid * 1.05),
             step: Math.ceil(startBid * 0.05),
             history: randomHistory
