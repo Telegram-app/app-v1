@@ -15,7 +15,7 @@ interface Links {
 }
 
 export default defineComponent({
-  name: "AuctionView",
+  name: "AuctionPage",
 
   data: () => ({
     links: [

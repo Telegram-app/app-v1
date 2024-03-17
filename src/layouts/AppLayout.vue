@@ -1,6 +1,6 @@
 <template>
   <div class="app__layout">
-    <AppNavbar v-if="!twa" />
+    <AppNavbar v-if="!twa && showAppBar" />
 
     <slot></slot>
   </div>
@@ -18,6 +18,10 @@ export default defineComponent({
     
     return { tgStore }
   },
+  
+  data:() => ({
+    showAppBar: false
+  }),
   
   computed: {
     twa() {

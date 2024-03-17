@@ -24,5 +24,7 @@ declare module 'vue-router/auto-routes' {
     '/auction/premium': RouteRecordInfo<'/auction/premium', '/auction/premium', Record<never, never>, Record<never, never>>,
     '/auction/usernames': RouteRecordInfo<'/auction/usernames', '/auction/usernames', Record<never, never>, Record<never, never>>,
     'username': RouteRecordInfo<'username', '/auction/usernames/:name', { name: ParamValue<true> }, { name: ParamValue<false> }>,
+    '/market': RouteRecordInfo<'/market', '/market', Record<never, never>, Record<never, never>>,
+    '/market/': RouteRecordInfo<'/market/', '/market', Record<never, never>, Record<never, never>>,
   }
 }

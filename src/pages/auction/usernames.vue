@@ -283,34 +283,7 @@ export default defineComponent({
       height: 33px;
       padding-bottom: 4px !important;
       padding-left: 38px !important;
-      border: unset;
       border-radius: 5px;
-      
-      font-size: 12px;
-      
-      color: var(--tg-theme-text-color, $tg-text-color);
-      background-color: var(--tg-theme-bg-color, $tg-bg-color);
-      box-shadow: unset;
-      
-      &::placeholder {
-        color: #888888;
-      }
-      
-      &:hover {
-        border: unset;
-      }
-      
-      &:focus {
-        border: unset;
-        
-        box-shadow: unset;
-      }
-      
-      &:active {
-        border: unset;
-        
-        box-shadow: unset;
-      }
     }
     
     &__icon {

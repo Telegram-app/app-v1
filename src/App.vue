@@ -30,8 +30,8 @@ export default defineComponent({
     layout() {
       return (this.$route?.meta?.layout || "not-found") + "-layout"
     },
-    BackButton() {
-      return this.tgStore.elements.BackButton
+    twa() {
+      return this.tgStore.WebApp
     }
   },
 
@@ -44,14 +44,14 @@ export default defineComponent({
   watch: {
     'route.path': {
       handler(newPath) {
-        if (this.BackButton) {
+        if (this.twa) {
           if (newPath !== '/') {
             let arrPaths = newPath.split('/').slice(0, -1).join('/')
-            this.BackButton.show().onClick(() => {
+            this.twa.BackButton.show().onClick(() => {
               this.router.push(arrPaths)
             })
           } else {
-            this.BackButton.hide()
+            this.twa.BackButton.hide()
           }
         }
       }, immediate: true

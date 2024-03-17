@@ -1,7 +1,6 @@
 <template>
   <DefaultLayout>
-<!--    <RouterLink to="/auction">Аукцион</RouterLink>-->
-<!--    <RouterLink to="/market">Маркет</RouterLink>-->
+    <RouterView/>
   </DefaultLayout>
 </template>
 
@@ -10,19 +9,13 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: '',
+  name: 'MarketPage',
   
   props: [],
   
   data: () => ({
   
   }),
-  
-  beforeRouteEnter(to, from, next) {
-    if (to.path === '/') {
-      next('/market')
-    }
-  },
   
   computed: {
   
