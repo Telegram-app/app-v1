@@ -1,5 +1,5 @@
 <template>
-  <div>{{ store.id }}</div>
+  <div>asd</div>
 </template>
 
 <script lang="ts">
