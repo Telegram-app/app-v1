@@ -197,7 +197,7 @@ export default defineComponent({
     margin: 0 -15px;
     padding: 12px 0;
     
-    background-image: url('./images/market/market-widget-bg.jpg');
+    background-image: url('/images/market/market-widget-bg.jpg');
     
     span {
       margin-right: 8px;
