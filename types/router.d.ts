@@ -26,5 +26,7 @@ declare module 'vue-router/auto-routes' {
     'username': RouteRecordInfo<'username', '/auction/usernames/:name', { name: ParamValue<true> }, { name: ParamValue<false> }>,
     '/market': RouteRecordInfo<'/market', '/market', Record<never, never>, Record<never, never>>,
     '/market/': RouteRecordInfo<'/market/', '/market', Record<never, never>, Record<never, never>>,
+    '/market/store': RouteRecordInfo<'/market/store', '/market/store', Record<never, never>, Record<never, never>>,
+    '/market/store/[id]': RouteRecordInfo<'/market/store/[id]', '/market/store/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
   }
 }

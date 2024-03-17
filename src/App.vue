@@ -39,7 +39,11 @@ export default defineComponent({
     this.tgStore.initTelegramWebApp(window.Telegram.WebApp)
   },
 
-  mounted() {},
+  mounted() {
+    this.twa.onEvent('themeChanged', function (t) {
+      console.log(t);
+    })
+  },
   
   watch: {
     'route.path': {

@@ -1,7 +1,6 @@
 <template>
   <DefaultLayout>
-<!--    <h1>ТЕСТ</h1>-->
-    <RouterView/>
+    <RouterView></RouterView>
   </DefaultLayout>
 </template>
 
@@ -10,7 +9,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'MarketPage',
+  name: 'StorePage',
   
   props: [],
   

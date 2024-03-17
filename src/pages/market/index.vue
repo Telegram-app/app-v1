@@ -33,14 +33,14 @@
     </swiper>
   </div>
   
-  <div class="market__shops">
+  <div class="market__stores">
     <template v-for="i of 5" :key="i">
-      <div class="market__shops__shop" v-for="(shop, idx) in shops" :key="idx">
-        <img :src="'./images/market/shops/' + shop.image" alt="shop-image">
-        <div class="market__shops__shop__image__shadow" :style="{ backgroundImage: `url('./images/market/shops/${shop.image}')` }"></div>
-        <span class="market__shops__shop__title">{{ shop.title }}</span>
+      <div class="market__stores__store" v-for="(store, idx) in stores" :key="idx">
+        <img :src="'./images/market/stores/' + store.image" alt="store-image">
+        <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.image}')` }"></div>
+        <span class="market__stores__store__title">{{ store.title }}</span>
       </div>
-      <div v-if="i === 1" class="market__shops__line"></div>
+      <div v-if="i === 1" class="market__stores__line"></div>
     </template>
   </div>
   
@@ -112,7 +112,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css'
 
 import { Autoplay } from "swiper/modules";
-// import {useTelegramStore} from "@/stores/telegram.ts";
+import {useTelegramStore} from "@/stores/telegram.ts";
 
 export default defineComponent({
   name: 'Market',
@@ -122,34 +122,34 @@ export default defineComponent({
   props: [],
   
   setup() {
-    // const tgStore = useTelegramStore()
+    const tgStore = useTelegramStore()
     
     return {
-      // tgStore,
+      tgStore,
       modules: [Autoplay]
     }
   },
   
   computed: {
-    // twa() {
-    //   return this.tgStore.WebApp
-    // }
+    twa() {
+      return this.tgStore.WebApp
+    }
   },
   
   mounted() {
-    // if (this.twa) {
-    //   this.twa.MainButton.show().onClick(() => {
-    //     console.log(this.twa)
-    //   })
-    // }
+    if (this.twa) {
+      this.twa.MainButton.show().onClick(() => {
+        console.log(this.twa)
+      })
+    }
   },
   
   data: () => ({
-    shops: [
-      { id: 1, title: "McDonald's", image: 'shop-icon-1.svg' },
-      { id: 2, title: "KFC", image: 'shop-icon-2.svg' },
-      { id: 3, title: "Starbucks", image: 'shop-icon-3.svg' },
-      { id: 4, title: "Burger King", image: 'shop-icon-4.svg' },
+    stores: [
+      { id: 1, title: "McDonald's", image: 'store-icon-1.svg' },
+      { id: 2, title: "KFC", image: 'store-icon-2.svg' },
+      { id: 3, title: "Starbucks", image: 'store-icon-3.svg' },
+      { id: 4, title: "Burger King", image: 'store-icon-4.svg' },
     ],
     search: '',
     footer: [
@@ -248,7 +248,7 @@ export default defineComponent({
     }
   }
   
-  &__shops {
+  &__stores {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -259,7 +259,7 @@ export default defineComponent({
     
     background-color: var(--tg-theme-bg-color, $tg-bg-color);
     
-    &__shop {
+    &__store {
       position: relative;
       
       display: flex;
