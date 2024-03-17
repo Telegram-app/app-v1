@@ -1,4 +1,8 @@
 <template>
+  <div class="market__order__button">
+    <VButton color="green">View order</VButton>
+  </div>
+  
   <div class="market__widget">
     <span class="is-uppercase">Tickets available intil january</span>
     <IconArrowNext h="19" w="19" color="black"/>
@@ -108,7 +112,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css'
 
 import { Autoplay } from "swiper/modules";
-import {useTelegramStore} from "@/stores/telegram.ts";
+// import {useTelegramStore} from "@/stores/telegram.ts";
 
 export default defineComponent({
   name: 'Market',
@@ -118,23 +122,26 @@ export default defineComponent({
   props: [],
   
   setup() {
-    const tgStore = useTelegramStore()
+    // const tgStore = useTelegramStore()
     
-    return { tgStore, modules: [Autoplay] }
+    return {
+      // tgStore,
+      modules: [Autoplay]
+    }
   },
   
   computed: {
-    twa() {
-      return this.tgStore.WebApp
-    }
+    // twa() {
+    //   return this.tgStore.WebApp
+    // }
   },
   
   mounted() {
-    if (this.twa) {
-      this.twa.MainButton.show().onClick(() => {
-        console.log(this.twa)
-      })
-    }
+    // if (this.twa) {
+    //   this.twa.MainButton.show().onClick(() => {
+    //     console.log(this.twa)
+    //   })
+    // }
   },
   
   data: () => ({
@@ -189,12 +196,22 @@ export default defineComponent({
 <style scoped lang="scss">
 
 .market {
+  &__order {
+    &__button {
+      position: fixed;
+      right: 15px;
+      bottom: 7px;
+      left: 15px;
+      z-index: 1000;
+    }
+  }
+  
   &__widget {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(100% + 30px);
-    margin: 0 -15px;
+    width: calc(100% + 40px);
+    margin: 0 -20px;
     padding: 12px 0;
     
     background-image: url('/images/market/market-widget-bg.jpg');
@@ -361,6 +378,7 @@ export default defineComponent({
     flex-wrap: wrap;
     justify-content: space-between;
     row-gap: 15px;
+    margin-bottom: 45px;
     
     &__block {
       display: flex;

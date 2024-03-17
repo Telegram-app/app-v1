@@ -45,6 +45,10 @@ export default defineComponent({
     background: linear-gradient(180deg, #50B2FF 0%, #26A0FF 100%);
   }
   
+  &--green {
+    background-color: #30B645
+  }
+  
   &:focus {
     box-shadow: unset;
   }
