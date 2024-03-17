@@ -40,8 +40,8 @@ export default defineComponent({
   },
 
   mounted() {
-    this.twa.onEvent('themeChanged', function (t) {
-      console.log(t);
+    this.twa.onEvent('themeChanged', function (this: any) {
+      console.log(this);
     })
   },
   
