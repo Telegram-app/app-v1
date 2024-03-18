@@ -130,20 +130,14 @@ export default defineComponent({
     }
   },
   
-  computed: {
-    twa() {
-      return this.tgStore.WebApp
-    }
-  },
-  
   mounted() {
-    if (this.twa) {
+    if (window.Telegram.WebApp) {
       window.Telegram.WebApp.MainButton.setParams({
         text: 'VIEW ORDER',
         is_active: true,
         is_visible: true
       }).onClick(() => {
-        console.log(this.twa?.MainButton);
+        console.log(window.Telegram.WebApp.MainButton);
       })
     }
   },

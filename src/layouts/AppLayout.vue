@@ -25,7 +25,7 @@ export default defineComponent({
   
   computed: {
     twa() {
-      return this.tgStore.getWebApp
+      return window.Telegram.WebApp
     }
   }
 });

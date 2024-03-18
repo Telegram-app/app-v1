@@ -32,9 +32,6 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapState(useTelegramStore, {
-      twa: "WebApp",
-    }),
     activeLink() {
       return this.$route.name;
     }
@@ -42,7 +39,7 @@ export default defineComponent({
 
   methods: {
     closeApp() {
-      this.twa?.close();
+      window.Telegram.WebApp.close();
     },
     toBackPage() {
       console.log(this.activeLink);

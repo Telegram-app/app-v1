@@ -30,19 +30,12 @@ export default defineComponent({
   computed: {
     layout() {
       return (this.$route?.meta?.layout || "not-found") + "-layout"
-    },
-    twa() {
-      return this.tgStore.WebApp
     }
-  },
-
-  beforeMount() {
-    this.tgStore.initTelegramWebApp(window.Telegram.WebApp)
   },
 
   mounted() {
     let self = this
-    this.twa?.onEvent('themeChanged', function (this: any) {
+    window.Telegram.WebApp.onEvent('themeChanged', function (this: any) {
       self.tgStore.theme = this.colorScheme
     })
   },
@@ -50,14 +43,14 @@ export default defineComponent({
   watch: {
     'route.path': {
       handler(newPath) {
-        if (this.twa) {
+        if (window.Telegram.WebApp) {
           if (newPath !== '/') {
             let arrPaths = newPath.split('/').slice(0, -1).join('/')
-            this.twa.BackButton.show().onClick(() => {
+            window.Telegram.WebApp.BackButton.show().onClick(() => {
               this.router.push(arrPaths)
             })
           } else {
-            this.twa.BackButton.hide()
+            window.Telegram.WebApp.BackButton.hide()
           }
         }
       }, immediate: true
