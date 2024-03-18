@@ -1,6 +1,5 @@
 <template>
   <AppLayout>
-    <h1>{{ tgStore.theme }}</h1>
     <RouterView />
   </AppLayout>
 </template>
@@ -44,7 +43,7 @@ export default defineComponent({
     'route.path': {
       handler(newPath) {
         if (window.Telegram.WebApp) {
-          if (newPath !== '/') {
+          if (newPath !== '/' || newPath !== '/market') {
             let arrPaths = newPath.split('/').slice(0, -1).join('/')
             window.Telegram.WebApp.BackButton.show().onClick(() => {
               this.router.push(arrPaths)

@@ -1,8 +1,4 @@
 <template>
-  <div class="market__order__button">
-    <VButton color="green">View order</VButton>
-  </div>
-  
   <div class="market__widget">
     <span class="is-uppercase">Tickets available intil january</span>
     <IconArrowNext h="19" w="19" color="black"/>
@@ -194,16 +190,6 @@ export default defineComponent({
 <style scoped lang="scss">
 
 .market {
-  &__order {
-    &__button {
-      position: fixed;
-      right: 15px;
-      bottom: 7px;
-      left: 15px;
-      z-index: 1000;
-    }
-  }
-  
   &__widget {
     display: flex;
     align-items: center;
