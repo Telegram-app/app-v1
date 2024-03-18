@@ -32,6 +32,7 @@ export const useTelegramStore = defineStore("telegram", {
 
     initTelegramUser() {
       this.user = this.WebApp.initDataUnsafe.user
+      this.theme = this.WebApp.colorScheme
     },
   },
 });

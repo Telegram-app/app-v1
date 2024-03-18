@@ -41,12 +41,11 @@ export default defineComponent({
   },
 
   mounted() {
-    let self = this
+    let currentTheme = this.tgStore.theme
     this.twa.onEvent('themeChanged', function (this: any) {
       console.log(this)
-      console.log(self.tgStore.theme);
-      self.tgStore.theme = this.colorScheme
-      console.log(self.tgStore.theme);
+      console.log(currentTheme)
+      currentTheme = this.colorScheme
     })
   },
   
