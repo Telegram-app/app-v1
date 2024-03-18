@@ -1,5 +1,6 @@
 <template>
   <AppLayout>
+    <h1>{{ tgStore.theme }}</h1>
     <RouterView />
   </AppLayout>
 </template>
