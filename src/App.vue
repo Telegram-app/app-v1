@@ -40,10 +40,12 @@ export default defineComponent({
   },
 
   mounted() {
-    this.twa.onEvent('themeChanged', (event: any) => {
-      console.log(this.tgStore);
-      console.log(event);
-      this.tgStore.theme = event.colorScheme
+    let self = this
+    this.twa.onEvent('themeChanged', function (this: any) {
+      console.log(this)
+      console.log(self.tgStore.theme);
+      self.tgStore.theme = this.colorScheme
+      console.log(self.tgStore.theme);
     })
   },
   
