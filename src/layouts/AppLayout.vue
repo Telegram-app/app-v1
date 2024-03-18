@@ -1,5 +1,5 @@
 <template>
-  <div class="app__layout">
+  <div class="app__layout" :class="[tgStore.theme === 'light' ? 'theme--light' : 'theme--dark']">
     <AppNavbar v-if="!twa && showAppBar" />
 
     <slot></slot>

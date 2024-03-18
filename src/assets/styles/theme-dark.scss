@@ -1,0 +1,14 @@
+.theme--dark {
+  .market__widget {
+    span {
+      color: #0B2349;
+      background: linear-gradient(90deg, #23A2F3 5%, #638FFE 13%, #DE79F1 51%, #87ACFB 75%, #37DFF0 95%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .icon {
+      stroke: #37DFF0;
+    }
+  }
+}
