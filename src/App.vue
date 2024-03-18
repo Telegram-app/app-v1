@@ -42,7 +42,7 @@ export default defineComponent({
 
   mounted() {
     let self = this
-    this.twa.onEvent('themeChanged', function (this: any) {
+    this.twa?.onEvent('themeChanged', function (this: any) {
       self.tgStore.theme = this.colorScheme
     })
   },

@@ -38,6 +38,8 @@ export interface WebApp {
      * An object for controlling the main button, which is displayed at the bottom of the Web App in the Telegram interface.
      */
     MainButton: MainButton;
+
+    BackButton: BackButton;
     /**
      * A method that sets the app event handler.
      */
@@ -216,6 +218,29 @@ export interface MainButton {
      * A method to set the button parameters.
      */
     setParams(params: MainButtonParams): MainButton;
+}
+
+export interface BackButton {
+    /**
+     * Shows whether the button is visible. Set to false by default.
+     */
+    isVisible: boolean;
+    /**
+     * A method that sets the button press event handler. An alias for Telegram.WebApp.onEvent('mainButtonClicked', callback)
+     */
+    onClick(callback: Function): BackButton;
+    /**
+     * A method that sets the button press event handler. An alias for Telegram.WebApp.onEvent('mainButtonClicked', callback)
+     */
+    offClick(callback: Function): BackButton;
+    /**
+     * A method to make the button visible.
+     */
+    show(): BackButton;
+    /**
+     * A method to hide the button.
+     */
+    hide(): BackButton;
 }
 
 export interface MainButtonParams {

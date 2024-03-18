@@ -42,7 +42,7 @@ export default defineComponent({
 
   methods: {
     closeApp() {
-      this.twa.close();
+      this.twa?.close();
     },
     toBackPage() {
       console.log(this.activeLink);
