@@ -138,6 +138,7 @@ export default defineComponent({
   
   mounted() {
     if (this.twa) {
+      console.log(this.twa);
       this.twa.MainButton.setText('VIEW ORDER')
       this.twa.MainButton.isVisible = true
       this.twa.MainButton.isActive = true

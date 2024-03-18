@@ -41,11 +41,9 @@ export default defineComponent({
   },
 
   mounted() {
-    let currentTheme = this.tgStore.theme
+    let self = this
     this.twa.onEvent('themeChanged', function (this: any) {
-      console.log(this)
-      console.log(currentTheme)
-      currentTheme = this.colorScheme
+      self.tgStore.theme = this.colorScheme
     })
   },
   
