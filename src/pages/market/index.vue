@@ -362,7 +362,6 @@ export default defineComponent({
     flex-wrap: wrap;
     justify-content: space-between;
     row-gap: 15px;
-    margin-bottom: 45px;
     
     &__block {
       display: flex;
