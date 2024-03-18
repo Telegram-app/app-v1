@@ -1,16 +1,17 @@
 import { defineStore } from "pinia";
+import {WebApp} from '@/models/telegram.model.ts';
 
 type State = {
-  WebApp: any;
+  WebApp: null | WebApp;
   user: any;
-  theme: string;
+  theme: 'light' | 'dark';
 };
 
 export const useTelegramStore = defineStore("telegram", {
   state: (): State => ({
     WebApp: null,
     user: null,
-    theme: ''
+    theme: 'light'
   }),
 
   getters: {
@@ -31,8 +32,8 @@ export const useTelegramStore = defineStore("telegram", {
     },
 
     initTelegramUser() {
-      this.user = this.WebApp.initDataUnsafe.user
-      this.theme = this.WebApp.colorScheme
+      this.user = this.WebApp?.initDataUnsafe.user
+      this.theme = this.WebApp?.colorScheme || 'light'
     },
   },
 });

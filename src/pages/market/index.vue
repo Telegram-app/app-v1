@@ -143,7 +143,7 @@ export default defineComponent({
       this.twa.MainButton.isVisible = true
       this.twa.MainButton.isActive = true
       this.twa.MainButton.onClick(() => {
-        console.log(this.twa.MainButton);
+        console.log(this.twa?.MainButton);
       })
     }
   },
