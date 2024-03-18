@@ -198,6 +198,9 @@ export default defineComponent({
     margin: 0 -20px;
     padding: 12px 0;
     
+    font-size: 15px;
+    font-family: "SF Pro Text Semibold", sans-serif;
+    
     background-image: url('/images/market/market-widget-bg.jpg');
     
     span {
