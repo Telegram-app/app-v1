@@ -138,9 +138,7 @@ export default defineComponent({
   
   mounted() {
     if (this.twa) {
-      console.log(this.twa);
-      console.log(this.twa.MainButton);
-      this.twa.MainButton.setParams({
+      window.Telegram.WebApp.setParams({
         text: 'VIEW ORDER',
         is_active: true,
         is_visible: true
