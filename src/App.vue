@@ -51,11 +51,13 @@ export default defineComponent({
             // let arrPaths = newPath.split('/').slice(0, -1).join('/')
             setTimeout(() => {
               window.Telegram.WebApp.BackButton.show().onClick(() => {
+                if (this.routerFlag) return
+                
+                this.router.back()
                 this.routerFlag = true
                 setTimeout(() => {
                   this.routerFlag = false
                 }, 600)
-                if (!this.routerFlag) this.router.back()
               })
             })
           } else {
