@@ -8,7 +8,7 @@
   >
     <path
       class="icon"
-      :class="{'icon--black': color && color === 'black'}"
+      :class="['icon--' + color]"
       d="M2.5293 59.8083L27.3376 35L2.5293 10.1375L10.1668 2.5L42.6668 35L10.1668 67.5L2.5293 59.8083Z"
       fill="black"
     />
@@ -32,6 +32,10 @@ svg {
     
     &--black {
       fill: var(--tg-theme-text-color, $tg-text-color);
+    }
+    
+    &--grey {
+      fill: #7D7D85;
     }
   }
 }

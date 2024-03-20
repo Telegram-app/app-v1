@@ -19,6 +19,7 @@
     "*.{ts,vue}": "eslint --fix"
   },
   "dependencies": {
+    "@vueuse/core": "^10.9.0",
     "bulma": "^0.9.4",
     "bulma-responsive-tables": "^1.2.5",
     "dayjs": "^1.11.10",

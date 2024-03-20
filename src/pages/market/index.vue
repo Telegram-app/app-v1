@@ -30,14 +30,17 @@
   </div>
   
   <div class="market__stores">
-    <template v-for="i of 5" :key="i">
-      <div class="market__stores__store" v-for="(store, idx) in stores" :key="idx">
-        <img :src="'./images/market/stores/' + store.image" alt="store-image">
-        <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.image}')` }"></div>
-        <span class="market__stores__store__title">{{ store.title }}</span>
-      </div>
-      <div v-if="i === 1" class="market__stores__line"></div>
-    </template>
+    <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="toStorePage(store.id)">
+      <img :src="'./images/market/stores/' + store.icon" alt="store-image">
+      <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>
+      <span class="market__stores__store__title">{{ store.name }}</span>
+    </div>
+    <div class="market__stores__line"></div>
+    <div class="market__stores__store" v-for="store in stores.slice(4)" :key="store.id" @click="toStorePage(store.id)">
+      <img :src="'./images/market/stores/' + store.icon" alt="store-image">
+      <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>
+      <span class="market__stores__store__title">{{ store.name }}</span>
+    </div>
   </div>
   
   <div class="market__search">
@@ -101,6 +104,12 @@
   </div>
 </template>
 
+<route lang="json">
+{
+"name": "market"
+}
+</route>
+
 <script lang="ts">
 
 import { defineComponent } from "vue";
@@ -108,7 +117,12 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css'
 
 import { Autoplay } from "swiper/modules";
-import {useTelegramStore} from "@/stores/telegram.ts";
+import {useMarketStore} from "@/stores/market.ts";
+import {mapState} from 'pinia';
+import {Username} from '@/models/username.model.ts';
+import {Store} from '@/models/store.model.ts';
+import {string} from 'zod';
+import {useRouter} from 'vue-router';
 
 export default defineComponent({
   name: 'Market',
@@ -118,15 +132,19 @@ export default defineComponent({
   props: [],
   
   setup() {
-    const tgStore = useTelegramStore()
+    const router = useRouter()
+    const marketStore = useMarketStore()
     
     return {
-      tgStore,
+      router,
+      marketStore,
       modules: [Autoplay]
     }
   },
   
   mounted() {
+    this.marketStore.createFakeStores()
+    
     if (window.Telegram.WebApp) {
       window.Telegram.WebApp.MainButton.setParams({
         text: 'VIEW ORDER',
@@ -138,13 +156,13 @@ export default defineComponent({
     }
   },
   
+  computed: {
+    ...mapState(useMarketStore, {
+      stores: (state) => state.getStores as Store[],
+    })
+  },
+  
   data: () => ({
-    stores: [
-      { id: 1, title: "McDonald's", image: 'store-icon-1.svg' },
-      { id: 2, title: "KFC", image: 'store-icon-2.svg' },
-      { id: 3, title: "Starbucks", image: 'store-icon-3.svg' },
-      { id: 4, title: "Burger King", image: 'store-icon-4.svg' },
-    ],
     search: '',
     footer: [
       {
@@ -183,6 +201,12 @@ export default defineComponent({
       }
     ]
   }),
+  
+  methods: {
+    toStorePage(to: number | string) {
+      this.router.push({ name: 'store', params: { id: to } })
+    }
+  }
 })
 
 </script>
@@ -194,8 +218,8 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(100% + 40px);
-    margin: 0 -20px;
+    width: calc(100% + 30px);
+    margin: -15px -15px 0;
     padding: 12px 0;
     
     font-size: 15px;
@@ -254,12 +278,16 @@ export default defineComponent({
       align-items: center;
       flex-basis: 70px;
       
+      cursor: pointer;
+      
       img {
         z-index: 2;
         
         height: 59px;
         width: 59px;
         border-radius: 10px;
+        
+        transition: 0.3s all;
       }
       
       &__image__shadow {
@@ -284,6 +312,14 @@ export default defineComponent({
         
         font-size: 12px;
         line-height: 1;
+      }
+      
+      &:hover {
+        img {
+          -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
+          -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
+          box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
+        }
       }
     }
     
@@ -325,11 +361,13 @@ export default defineComponent({
     height: 198px;
     width: calc(100% + 30px);
     margin: 0 -15px;
+    padding: 0 15px;
     
     &__swiper {
       position: relative;
       height: 100%;
       width: 100%;
+      overflow: visible;
       
       &__slide {
         border-radius: 10px;
@@ -341,10 +379,6 @@ export default defineComponent({
           height: 100%;
           
           object-fit: cover;
-        }
-        
-        &:first-child {
-          margin-left: 15px;
         }
         
         &__text {

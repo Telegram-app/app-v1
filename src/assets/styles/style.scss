@@ -5,6 +5,7 @@ $input-background-color: var(--tg-theme-bg-color, $tg-bg-color);
 @import "fonts";
 @import "theme-light";
 @import "theme-dark";
+@import "reset";
 
 body {
   color: var(--tg-theme-text-color, $tg-text-color);
@@ -16,32 +17,4 @@ body {
   }
 }
 
-input.reset {
-  border: unset;
 
-  font-size: 12px;
-
-  color: var(--tg-theme-text-color, $tg-text-color);
-  background-color: var(--tg-theme-bg-color, $tg-bg-color);
-  box-shadow: unset;
-
-  &::placeholder {
-    color: #888888;
-  }
-
-  &:hover {
-    border: unset;
-  }
-
-  &:focus {
-    border: unset;
-
-    box-shadow: unset;
-  }
-
-  &:active {
-    border: unset;
-
-    box-shadow: unset;
-  }
-}

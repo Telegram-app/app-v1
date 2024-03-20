@@ -35,7 +35,7 @@ export default defineComponent({
 .app__layout {
   min-height: 100vh;
   height: 100%;
-  padding: 0 20px 20px;
+  padding: 15px;
   
   font-family: "SF Pro Text", sans-serif;
   

@@ -19,14 +19,15 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
-    '/[...all]': RouteRecordInfo<'/[...all]', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
+    'notFound': RouteRecordInfo<'notFound', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
     '/auction': RouteRecordInfo<'/auction', '/auction', Record<never, never>, Record<never, never>>,
     '/auction/premium': RouteRecordInfo<'/auction/premium', '/auction/premium', Record<never, never>, Record<never, never>>,
     '/auction/usernames': RouteRecordInfo<'/auction/usernames', '/auction/usernames', Record<never, never>, Record<never, never>>,
     'username': RouteRecordInfo<'username', '/auction/usernames/:name', { name: ParamValue<true> }, { name: ParamValue<false> }>,
     '/market': RouteRecordInfo<'/market', '/market', Record<never, never>, Record<never, never>>,
-    '/market/': RouteRecordInfo<'/market/', '/market', Record<never, never>, Record<never, never>>,
+    'market': RouteRecordInfo<'market', '/market', Record<never, never>, Record<never, never>>,
     '/market/store': RouteRecordInfo<'/market/store', '/market/store', Record<never, never>, Record<never, never>>,
-    '/market/store/[id]': RouteRecordInfo<'/market/store/[id]', '/market/store/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    'store': RouteRecordInfo<'store', '/market/store/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    'product': RouteRecordInfo<'product', '/market/store/:id/products/:productId', { id: ParamValue<true>, productId: ParamValue<true> }, { id: ParamValue<false>, productId: ParamValue<false> }>,
   }
 }

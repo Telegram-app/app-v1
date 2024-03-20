@@ -4,6 +4,12 @@
   </NotFoundLayout>
 </template>
 
+<route lang="json">
+{
+"name": "notFound"
+}
+</route>
+
 <script setup lang="ts">
 
 </script>
