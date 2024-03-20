@@ -324,7 +324,7 @@ export default defineComponent({
       font-family: "SF Pro Text Medium", sans-serif;
       line-height: 1;
       
-      background: linear-gradient(180deg, #51B3FF 0%, #2EA3FF 100%);;
+      background: linear-gradient(180deg, #51B3FF 0%, #2EA3FF 100%);
     }
   }
 }

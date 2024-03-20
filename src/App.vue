@@ -25,6 +25,10 @@ export default defineComponent({
 
     return { tgStore, router, route }
   },
+  
+  data: () => ({
+    routerFlag: false
+  }),
 
   computed: {
     layout() {
@@ -47,7 +51,11 @@ export default defineComponent({
             // let arrPaths = newPath.split('/').slice(0, -1).join('/')
             setTimeout(() => {
               window.Telegram.WebApp.BackButton.show().onClick(() => {
-                this.router.back()
+                this.routerFlag = true
+                setTimeout(() => {
+                  this.routerFlag = false
+                }, 600)
+                if (!this.routerFlag) this.router.back()
               })
             })
           } else {
