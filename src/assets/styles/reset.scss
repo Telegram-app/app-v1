@@ -27,3 +27,21 @@ input.reset, select.reset {
     box-shadow: unset;
   }
 }
+
+a {
+  &:hover {
+    border: unset;
+  }
+
+  &:focus {
+    border: unset;
+
+    box-shadow: unset;
+  }
+
+  &:active {
+    border: unset;
+
+    box-shadow: unset;
+  }
+}

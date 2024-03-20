@@ -301,18 +301,21 @@ export default defineComponent({
       &__top-sales {
         border-radius: 10px 10px 0 0;
         
+        color: #000000;
         background: linear-gradient(90deg, #D4FFDB 0%, #E9FD5D 100%);
       }
       
       &__new {
         margin-top: 5px;
         
+        color: #000000;
         background: linear-gradient(90deg, #6BFFAF 0%, #72E6FF 100%);
       }
       
       &__good-reviews {
         margin-top: 5px;
         
+        color: #000000;
         background: linear-gradient(90deg, #BFCDFF 0%, #4E7AFF 100%);
       }
     }
@@ -524,7 +527,7 @@ export default defineComponent({
       
       font-size: 13px;
       
-      color: #0477FF
+      color: var(--tg-theme-button-color, $tg-button-color);
     }
     
     &--show {
@@ -628,7 +631,7 @@ export default defineComponent({
       
       font-size: 12px;
       
-      color: #0477FF
+      color: var(--tg-theme-button-color, $tg-button-color);
     }
   }
   
@@ -655,7 +658,7 @@ export default defineComponent({
       
       font-size: 12px;
       
-      color: #0477FF;
+      color: var(--tg-theme-button-color, $tg-button-color);
       
       span {
         margin-right: 5px;

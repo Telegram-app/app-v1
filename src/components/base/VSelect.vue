@@ -87,6 +87,8 @@ export default defineComponent({
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+      
+      color: #000000;
     }
     
     svg {
@@ -115,7 +117,7 @@ export default defineComponent({
     overflow: hidden;
     
     background-color: #E1E0E6;
-    color: var(--tg-theme-text-color, $tg-text-color);
+    color: #000000;
     
     div {
       padding: 3px 11px;

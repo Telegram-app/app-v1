@@ -44,9 +44,9 @@ export default defineComponent({
       handler(newPath) {
         if (window.Telegram.WebApp) {
           if (newPath !== '/' && newPath !== '/market') {
-            let arrPaths = newPath.split('/').slice(0, -1).join('/')
+            // let arrPaths = newPath.split('/').slice(0, -1).join('/')
             window.Telegram.WebApp.BackButton.show().onClick(() => {
-              this.router.push(arrPaths)
+              this.router.back()
             })
           } else {
             window.Telegram.WebApp.BackButton.hide()

@@ -179,6 +179,8 @@ export default defineComponent({
         }
         
         &__top-sales {
+          color: #000000;
+          
           background: linear-gradient(90deg, #D4FFDB 0%, #E9FD5D 100%);
         }
         
@@ -253,13 +255,13 @@ export default defineComponent({
           border-radius: 15px;
           
           color: #ffffff;
-          background-color: #0477FF;
+          background-color: var(--tg-theme-button-color, $tg-button-color);;
         }
         
         span {
           margin-left: 6px;
           
-          color: #0477FF;
+          color: var(--tg-theme-button-color, $tg-button-color);;
         }
       }
       
@@ -273,12 +275,15 @@ export default defineComponent({
       }
       
       &__share {
+        display: flex;
+        align-items: center;
+        
         padding: 6px;
         border-radius: 15px;
         
         font-size: 11px;
         
-        color: #0477FF;
+        color: var(--tg-theme-button-color, $tg-button-color);;
         
         span {
           margin-right: 3px;

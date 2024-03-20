@@ -70,6 +70,7 @@ export default defineComponent({
     font-size: 13px;
     line-height: 1;
     
+    color: #000000;
     background: none;
     
     &::placeholder {

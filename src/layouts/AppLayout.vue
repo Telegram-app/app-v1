@@ -36,6 +36,7 @@ export default defineComponent({
   min-height: 100vh;
   height: 100%;
   padding: 15px;
+  overflow: hidden;
   
   font-family: "SF Pro Text", sans-serif;
   
