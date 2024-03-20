@@ -36,7 +36,8 @@ export default defineComponent({
   font-size: 15px;
   line-height: 1;
   
-  color: #ffffff;
+  color: var(--tg-theme-button-text-color, $tg-button-text-color);
+  background-color: var(--tg-theme-button-color, $tg-button-color);
   
   cursor: pointer;
   pointer-events: auto;
