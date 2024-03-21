@@ -38,8 +38,8 @@ export default defineComponent({
 
   mounted() {
     let self = this
+    this.tgStore.theme = window.Telegram.WebApp.colorScheme
     window.Telegram.WebApp.onEvent('themeChanged', function (this: any) {
-      console.log(window.Telegram.WebApp);
       self.tgStore.theme = this.colorScheme
     })
   },
