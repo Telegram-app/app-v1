@@ -258,12 +258,12 @@ export default defineComponent({
     border: unset !important;
     border-radius: 5px;
     
-    background-color: var(--tg-theme-bg-color, $--tg-bg-color);
+    background-color: theme-var(--tg-theme-bg-color, $--tg-bg-color);
     
     &__head {
       tr > th {
         padding: 10px 17px;
-        border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+        border-bottom: 1px solid theme-var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
         
         font-size: 15px;
         font-weight: 400;
@@ -297,7 +297,7 @@ export default defineComponent({
               font-size: 15px;
               line-height: 1;
               
-              color: var(--tg-theme-text-color, $--tg-text-color);
+              color: theme-var(--tg-theme-text-color, $--tg-text-color);
               
               svg {
                 margin-right: 5px;
@@ -323,7 +323,7 @@ export default defineComponent({
           a {
             font-size: 12px;
             
-            color: var(--tg-theme-link-color, $--tg-link-color);
+            color: theme-var(--tg-theme-link-color, $--tg-link-color);
           }
         }
       }
@@ -337,24 +337,24 @@ export default defineComponent({
       border: unset;
       border-radius: 5px;
       
-      background-color: var(--tg-theme-bg-color, $--tg-bg-color);
+      background-color: theme-var(--tg-theme-bg-color, $--tg-bg-color);
       
       td {
         vertical-align: middle;
         padding: 10px 17px;
-        border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+        border-bottom: 1px solid theme-var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
         
         font-size: 15px;
         line-height: 1;
         
         &:first-child {
-          color: var(--tg-theme-text-color, $--tg-text-color);
+          color: theme-var(--tg-theme-text-color, $--tg-text-color);
         }
         
         &:nth-child(2) {
           text-align: end;
           
-          color: var(--tg-theme-link-color, $--tg-link-color);
+          color: theme-var(--tg-theme-link-color, $--tg-link-color);
         }
       }
     }
@@ -406,7 +406,7 @@ export default defineComponent({
           height: 100%;
           width: 1px;
           
-          background-color: var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+          background-color: theme-var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
         }
         
         span:first-child {
@@ -415,7 +415,7 @@ export default defineComponent({
       }
       
       div {
-        background-color: var(--tg-theme-bg-color, $--tg-bg-color);
+        background-color: theme-var(--tg-theme-bg-color, $--tg-bg-color);
         border-radius: 5px;
       }
     }
@@ -432,7 +432,7 @@ export default defineComponent({
     a {
       font-size: 12px;
       
-      color: var(--tg-theme-link-color, $--tg-link-color);
+      color: theme-var(--tg-theme-link-color, $--tg-link-color);
     }
   }
   
@@ -454,12 +454,12 @@ export default defineComponent({
       border: unset !important;
       border-radius: 5px;
       
-      background-color: var(--tg-theme-bg-color, $--tg-bg-color);
+      background-color: theme-var(--tg-theme-bg-color, $--tg-bg-color);
       
       &__head {
         tr > th {
           padding: 10px 17px;
-          border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+          border-bottom: 1px solid theme-var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
           
           font-size: 15px;
           font-weight: 400;
@@ -480,12 +480,12 @@ export default defineComponent({
         td {
           vertical-align: middle;
           padding: 10px 17px;
-          border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+          border-bottom: 1px solid theme-var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
           
           font-size: 15px;
           line-height: 1;
           
-          color: var(--tg-theme-text-color, $--tg-text-color);
+          color: theme-var(--tg-theme-text-color, $--tg-text-color);
           
           &:first-child {
             span {
@@ -503,7 +503,7 @@ export default defineComponent({
           
           &:last-child {
             span {
-              color: var(--tg-theme-link-color, $--tg-link-color);
+              color: theme-var(--tg-theme-link-color, $--tg-link-color);
             }
           }
         }

@@ -237,8 +237,8 @@ export default defineComponent({
 .b-table.is-loading::after {
   top: calc(50% - 1em);
   
-  border-top-color: var(--tg-theme-link-color, $--tg-link-color);
-  border-right-color: var(--tg-theme-link-color, $--tg-link-color);
+  border-top-color: theme-var(--tg-theme-link-color, $--tg-link-color);
+  border-right-color: theme-var(--tg-theme-link-color, $--tg-link-color);
 }
 
 .auction__usernames {
@@ -259,13 +259,13 @@ export default defineComponent({
     line-height: 18px;
     letter-spacing: -0.2px;
     
-    color: var(--tg-theme-hint-color, $--tg-hint-color);
+    color: theme-var(--tg-theme-hint-color, $--tg-hint-color);
     
     &__learn-more {
       display: inline-flex;
       align-items: center;
       
-      color: var(--tg-theme-link-color, $--tg-link-color);
+      color: theme-var(--tg-theme-link-color, $--tg-link-color);
       
       cursor: pointer;
       
@@ -339,12 +339,12 @@ export default defineComponent({
     border: unset !important;
     border-radius: 5px;
     
-    background-color: var(--tg-theme-bg-color, $--tg-bg-color);
+    background-color: theme-var(--tg-theme-bg-color, $--tg-bg-color);
     
     &__head {
       tr > th {
         padding: 10px 17px;
-        border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+        border-bottom: 1px solid theme-var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
         
         font-size: 15px;
         font-weight: 400;
@@ -369,7 +369,7 @@ export default defineComponent({
       td {
         vertical-align: middle;
         padding: 10px 17px;
-        border-bottom: 1px solid var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+        border-bottom: 1px solid theme-var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
       }
       
       &__username {
@@ -380,7 +380,7 @@ export default defineComponent({
           font-size: 15px;
           line-height: 1;
           
-          color: var(--tg-theme-text-color, $--tg-text-color);
+          color: theme-var(--tg-theme-text-color, $--tg-text-color);
         }
         
         span:last-child {
@@ -389,7 +389,7 @@ export default defineComponent({
           font-size: 12px;
           line-height: 1;
           
-          color: var(--tg-theme-link-color, $--tg-link-color);
+          color: theme-var(--tg-theme-link-color, $--tg-link-color);
           
           cursor: pointer;
         }
@@ -405,7 +405,7 @@ export default defineComponent({
           font-size: 15px;
           line-height: 1;
           
-          color: var(--tg-theme-text-color, $--tg-text-color);
+          color: theme-var(--tg-theme-text-color, $--tg-text-color);
           
           svg {
             margin-right: 5px;
@@ -430,7 +430,7 @@ export default defineComponent({
         font-size: 14px;
         line-height: 1;
         
-        color: var(--tg-theme-text-color, $--tg-text-color);
+        color: theme-var(--tg-theme-text-color, $--tg-text-color);
         
         .content {
           padding: 20px 0;

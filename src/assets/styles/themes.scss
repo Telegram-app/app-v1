@@ -1,6 +1,10 @@
 @import 'tg-variables';
 @import 'mixins';
 
+.app__layout {
+  background: theme-var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+}
+
 .app__layout.light {
   @include spread-map($theme-map-light);
 

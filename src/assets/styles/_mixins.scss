@@ -4,13 +4,14 @@
   }
 }
 
-@function theme-var($tg-theme, $key, $fallback: null, $map: $theme-map-light) {
+@function theme-var($telegram_var, $key, $fallback: null, $map: $theme-map-dark) {
   @if not map-has-key($map, $key) {
     @error "key: '#{$key}', is not a key in map: #{$map}";
   }
+
   @if ($fallback) {
-    @return var($tg-theme, $key, $fallback);
+    @return var($telegram_var, map-get($map, $key), $fallback);
   } @else {
-    @return var($tg-theme, $key);
+    @return var($telegram_var, map-get($map, $key));
   }
 }

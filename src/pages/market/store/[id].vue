@@ -222,7 +222,7 @@ export default defineComponent({
       padding: 10px 17px;
       border-radius: 10px;
       
-      background-color: var(--tg-theme-bg-color, $--tg-bg-color);
+      background-color: theme-var(--tg-theme-bg-color, $--tg-bg-color);
     }
   }
   
@@ -235,7 +235,7 @@ export default defineComponent({
     padding: 10px 17px;
     border-radius: 10px;
     
-    background-color: var(--tg-theme-bg-color, $--tg-bg-color);
+    background-color: theme-var(--tg-theme-bg-color, $--tg-bg-color);
     
     p {
       font-size: 12px;
