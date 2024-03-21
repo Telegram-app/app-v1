@@ -111,8 +111,6 @@ export default defineComponent({
   margin-top: 15px;
   border-radius: 10px;
   
-  background-color: var(--tg-theme-bg-color, $tg-bg-color);
-  
   &__wrapper {
     display: flex;
     height: 180px;
@@ -255,13 +253,13 @@ export default defineComponent({
           border-radius: 15px;
           
           color: #ffffff;
-          background-color: var(--tg-theme-button-color, $tg-button-color);;
+          background-color: var(--tg-theme-button-color, $--tg-button-color);;
         }
         
         span {
           margin-left: 6px;
           
-          color: var(--tg-theme-button-color, $tg-button-color);;
+          color: var(--tg-theme-button-color, $--tg-button-color);;
         }
       }
       
@@ -283,7 +281,7 @@ export default defineComponent({
         
         font-size: 11px;
         
-        color: var(--tg-theme-button-color, $tg-button-color);;
+        color: var(--tg-theme-button-color, $--tg-button-color);;
         
         span {
           margin-right: 3px;

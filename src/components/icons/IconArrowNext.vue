@@ -31,10 +31,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 svg {
   .icon {
-    stroke: var(--tg-theme-button-color, $tg-button-color);
+    stroke: var(--tg-theme-button-color, $--tg-button-color);
     
     &--black {
-      stroke: var(--tg-theme-text-color, $tg-text-color);
+      stroke: var(--tg-theme-text-color, $--tg-text-color);
     }
   }
 }

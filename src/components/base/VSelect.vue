@@ -78,7 +78,7 @@ export default defineComponent({
     line-height: 1;
     font-family: "SF Pro Text Medium", sans-serif;
     
-    color: var(--tg-theme-text-color, $tg-text-color);
+    color: var(--tg-theme-text-color, $--tg-text-color);
     
     cursor: pointer;
     user-select: none;

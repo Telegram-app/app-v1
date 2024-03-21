@@ -22,6 +22,7 @@
       <swiper
         :slides-per-view="3.44"
         :space-between="10"
+        :speed="600"
         class="store__filter__swiper"
       >
         <swiper-slide class="store__filter__swiper__slide">
@@ -221,7 +222,7 @@ export default defineComponent({
       padding: 10px 17px;
       border-radius: 10px;
       
-      background-color: var(--tg-theme-bg-color, $tg-bg-color);
+      background-color: var(--tg-theme-bg-color, $--tg-bg-color);
     }
   }
   
@@ -234,7 +235,7 @@ export default defineComponent({
     padding: 10px 17px;
     border-radius: 10px;
     
-    background-color: var(--tg-theme-bg-color, $tg-bg-color);
+    background-color: var(--tg-theme-bg-color, $--tg-bg-color);
     
     p {
       font-size: 12px;

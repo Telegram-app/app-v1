@@ -26,7 +26,7 @@ svg {
     
     &--black {
       path {
-        stroke: var(--tg-theme-text-color, $tg-text-color);
+        stroke: var(--tg-theme-text-color, $--tg-text-color);
       }
     }
   }

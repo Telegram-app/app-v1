@@ -1,4 +1,21 @@
-.theme--dark {
+@import 'tg-variables';
+@import 'mixins';
+
+.app__layout.light {
+  @include spread-map($theme-map-light);
+
+  .market__widget {
+    span {
+      color: var(--tg-theme-text-color, $--tg-text-color);
+    }
+  }
+}
+
+
+
+.app__layout.dark {
+  @include spread-map($theme-map-dark);
+
   .market__widget {
     span {
       color: #0B2349;

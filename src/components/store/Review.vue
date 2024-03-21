@@ -184,7 +184,7 @@ export default defineComponent({
       
       font-size: 13px;
       
-      color: var(--tg-theme-button-color, $tg-button-color);
+      color: var(--tg-theme-button-color, $--tg-button-color);
     }
     
     &--show {
@@ -197,7 +197,7 @@ export default defineComponent({
       font-size: 12px;
       font-family: "SF Pro Text Medium";
       
-      color: var(--tg-theme-button-color, $tg-button-color);
+      color: var(--tg-theme-button-color, $--tg-button-color);
       
       cursor: pointer;
       

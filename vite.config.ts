@@ -33,7 +33,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/assets/styles/_tg-variables.scss";`,
+        additionalData: `@import "@/assets/styles/themes.scss";`,
       },
     },
   },

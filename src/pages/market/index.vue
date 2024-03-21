@@ -9,6 +9,7 @@
       :slides-per-view="1.22"
       :centeredSlides="true"
       :space-between="18"
+      :speed="600"
       :loop="true"
       :autoplay="{
         delay: 4500,
@@ -54,6 +55,7 @@
     <swiper
       :slides-per-view="'auto'"
       :space-between="10"
+      :speed="600"
       :modules="modules"
       class="market__news__swiper"
     >
@@ -268,7 +270,7 @@ export default defineComponent({
     border-radius: 10px;
     row-gap: 15px;
     
-    background-color: var(--tg-theme-bg-color, $tg-bg-color);
+    background-color: var(--tg-theme-bg-color, $--tg-bg-color);
     
     &__store {
       position: relative;

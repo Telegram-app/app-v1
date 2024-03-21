@@ -325,7 +325,7 @@ export default defineComponent({
     padding: 15px 17px;
     border-radius: 0 0 10px 10px;
     
-    background-color: var(--tg-theme-bg-color, $tg-bg-color);
+    background-color: var(--tg-theme-bg-color, $--tg-bg-color);
   }
   
   &__tags {
@@ -527,7 +527,7 @@ export default defineComponent({
       
       font-size: 13px;
       
-      color: var(--tg-theme-button-color, $tg-button-color);
+      color: var(--tg-theme-button-color, $--tg-button-color);
     }
     
     &--show {
@@ -574,7 +574,7 @@ export default defineComponent({
           margin: 0 6px;
           border-radius: 100%;
           
-          background-color: var(--tg-theme-text-color, $tg-text-color);
+          background-color: var(--tg-theme-text-color, $--tg-text-color);
         }
       }
     }
@@ -631,7 +631,7 @@ export default defineComponent({
       
       font-size: 12px;
       
-      color: var(--tg-theme-button-color, $tg-button-color);
+      color: var(--tg-theme-button-color, $--tg-button-color);
     }
   }
   
@@ -658,7 +658,7 @@ export default defineComponent({
       
       font-size: 12px;
       
-      color: var(--tg-theme-button-color, $tg-button-color);
+      color: var(--tg-theme-button-color, $--tg-button-color);
       
       span {
         margin-right: 5px;
