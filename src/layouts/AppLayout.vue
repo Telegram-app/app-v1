@@ -1,5 +1,5 @@
 <template>
-  <div class="app__layout dark">
+  <div class="app__layout" :class="[tgStore.theme === 'light' ? 'light' : 'dark']">
     <AppNavbar v-if="!twa && showAppBar" />
 
     <slot></slot>
@@ -7,7 +7,6 @@
 </template>
 
 <script lang="ts">
-
 import { defineComponent } from "vue";
 import { useTelegramStore } from "@/stores/telegram.ts";
 
