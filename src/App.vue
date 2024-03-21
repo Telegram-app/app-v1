@@ -8,6 +8,7 @@
 import { defineComponent } from "vue";
 import { useTelegramStore } from "@/stores/telegram";
 import {useRoute, useRouter} from "vue-router";
+import {createLogger} from 'vite';
 
 declare global {
   interface Window {
@@ -38,7 +39,7 @@ export default defineComponent({
 
   mounted() {
     let self = this
-    this.tgStore.theme = window.Telegram.WebApp.colorScheme
+    // this.tgStore.theme = window.Telegram.WebApp.colorScheme
     window.Telegram.WebApp.onEvent('themeChanged', function (this: any) {
       self.tgStore.theme = this.colorScheme
     })

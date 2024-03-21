@@ -3,6 +3,10 @@
 @import "fonts";
 @import "reset";
 
+.app__layout {
+  color: theme-var-tg(--tg-theme-text-color, $--tg-text-color)
+}
+
 .table--blur {
   td {
     filter: blur(3px);

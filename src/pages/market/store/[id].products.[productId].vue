@@ -19,8 +19,8 @@
     
     <div class="product__statuses">
       <div class="product__statuses__status product__statuses__status__top-sales">Top sales</div>
-      <div class="product__statuses__status product__statuses__status__new">New</div>
-      <div class="product__statuses__status product__statuses__status__good-reviews">Good Reviews</div>
+<!--      <div class="product__statuses__status product__statuses__status__new">New</div>-->
+<!--      <div class="product__statuses__status product__statuses__status__good-reviews">Good Reviews</div>-->
     </div>
     
     <div class="product__info">
@@ -240,8 +240,6 @@ export default defineComponent({
     height: 1px;
     width: 100%;
     margin-top: 15px;
-    
-    background-color: #EFEEF4;
   }
   
   &__images {
@@ -261,9 +259,6 @@ export default defineComponent({
           border-radius: 10px;
           
           font-size: 10px;
-          
-          color: #6F6F6F;
-          background-color: rgba(248, 233, 213, 0.7);
         }
       }
     }
@@ -300,23 +295,14 @@ export default defineComponent({
       
       &__top-sales {
         border-radius: 10px 10px 0 0;
-        
-        color: #000000;
-        background: linear-gradient(90deg, #D4FFDB 0%, #E9FD5D 100%);
       }
       
       &__new {
         margin-top: 5px;
-        
-        color: #000000;
-        background: linear-gradient(90deg, #6BFFAF 0%, #72E6FF 100%);
       }
       
       &__good-reviews {
         margin-top: 5px;
-        
-        color: #000000;
-        background: linear-gradient(90deg, #BFCDFF 0%, #4E7AFF 100%);
       }
     }
   }
@@ -324,8 +310,6 @@ export default defineComponent({
   &__info {
     padding: 15px 17px;
     border-radius: 0 0 10px 10px;
-    
-    background-color: var(--tg-theme-bg-color, $--tg-bg-color);
   }
   
   &__tags {
@@ -338,9 +322,6 @@ export default defineComponent({
       align-items: center;
       padding: 6px 10px;
       border-radius: 10px;
-      
-      color: #7D7D85;
-      background-color: #F6F6F6;
       
       span {
         margin-right: 4px;
@@ -371,8 +352,6 @@ export default defineComponent({
     
     &__id {
       font-size: 12px;
-      
-      color: #7D7D85;
     }
     
     &__dividing-dot {
@@ -380,14 +359,10 @@ export default defineComponent({
       width: 2px;
       margin: auto 6px;
       border-radius: 100%;
-      
-      background-color: #7d7d85;
     }
     
     &__createdAt {
       font-size: 12px;
-      
-      color: #7D7D85;
     }
     
     &__share {
@@ -397,8 +372,6 @@ export default defineComponent({
       width: 23px;
       height: 23px;
       border-radius: 100%;
-      
-      background-color: #EBF7FE;
     }
   }
   
@@ -411,8 +384,6 @@ export default defineComponent({
       padding: 2px;
       border-radius: 5px;
       
-      background-color: #F1F1F1;
-      
       &--active {
         
         &__background {
@@ -423,8 +394,6 @@ export default defineComponent({
           right: 50%;
           
           border-radius: 5px;
-          
-          background-color: #FFFFFF;
           
           transition: 0.5s all;
         }
@@ -449,8 +418,6 @@ export default defineComponent({
           a {
             font-size: 12px;
             font-family: "SF Pro Text Bold", sans-serif;
-            
-            color: #000000;
           }
         }
       }
@@ -469,8 +436,8 @@ export default defineComponent({
         min-width: 93px;
         max-width: 93px;
         padding: 8px 10px;
-        border: 1px solid #E1E0E6;
         border-radius: 10px;
+        border: 1px solid;
         
         &__name {
           font-size: 12px;
@@ -482,8 +449,6 @@ export default defineComponent({
           font-size: 12px;
           line-height: 1;
           margin-top: 5px;
-          
-          color: #787878;
         }
       }
     }
@@ -500,8 +465,6 @@ export default defineComponent({
     &__title {
       font-size: 12px;
       text-transform: uppercase;
-      
-      color: #7D7D85;
     }
     
     &__text {
@@ -523,11 +486,9 @@ export default defineComponent({
       position: absolute;
       right: 0;
       bottom: -2px;
-      border-bottom: 1px dashed #CFCFD1;
+      border-bottom: 1px dashed;
       
       font-size: 13px;
-      
-      color: var(--tg-theme-button-color, $--tg-button-color);
     }
     
     &--show {
@@ -546,8 +507,6 @@ export default defineComponent({
       
       span:first-child {
         margin-right: 4px;
-        
-        color: #7D7D85;
       }
     }
     
@@ -560,8 +519,6 @@ export default defineComponent({
       
       span:first-child {
         margin-right: 4px;
-        
-        color: #7D7D85;
       }
       
       span:last-child {
@@ -573,8 +530,6 @@ export default defineComponent({
           width: 2px;
           margin: 0 6px;
           border-radius: 100%;
-          
-          background-color: var(--tg-theme-text-color, $--tg-text-color);
         }
       }
     }
@@ -591,8 +546,6 @@ export default defineComponent({
     &__title {
       font-size: 12px;
       text-transform: uppercase;
-      
-      color: #7D7D85;
     }
     
     &__char {
@@ -608,13 +561,11 @@ export default defineComponent({
         
         font-size: 12px;
         
-        color: #7D7D85;
-        
         &:after {
           content: "";
           flex: 1;
           margin: auto 4px 4px 4px;
-          border-bottom: 1px dashed #CFCFD1;
+          border-bottom: 1px dashed;
         }
       }
       
@@ -627,11 +578,9 @@ export default defineComponent({
     &__show-more {
       margin-top: 10px;
       width: max-content;
-      border-bottom: 1px dashed #CFCFD1;
+      border-bottom: 1px dashed;
       
       font-size: 12px;
-      
-      color: var(--tg-theme-button-color, $--tg-button-color);
     }
   }
   
@@ -648,8 +597,6 @@ export default defineComponent({
     &__title {
       font-size: 12px;
       text-transform: uppercase;
-      
-      color: #7D7D85;
     }
     
     &__to-reviews {
@@ -657,8 +604,6 @@ export default defineComponent({
       align-items: center;
       
       font-size: 12px;
-      
-      color: var(--tg-theme-button-color, $--tg-button-color);
       
       span {
         margin-right: 5px;

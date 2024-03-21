@@ -19,11 +19,11 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
-    '/__not-used-either/auction': RouteRecordInfo<'/__not-used-either/auction', '/__not-used-either/auction', Record<never, never>, Record<never, never>>,
-    '/__not-used-either/auction/premium': RouteRecordInfo<'/__not-used-either/auction/premium', '/__not-used-either/auction/premium', Record<never, never>, Record<never, never>>,
-    '/__not-used-either/auction/usernames': RouteRecordInfo<'/__not-used-either/auction/usernames', '/__not-used-either/auction/usernames', Record<never, never>, Record<never, never>>,
-    'username': RouteRecordInfo<'username', '/__not-used-either/auction/usernames/:name', { name: ParamValue<true> }, { name: ParamValue<false> }>,
     'notFound': RouteRecordInfo<'notFound', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
+    '/auction': RouteRecordInfo<'/auction', '/auction', Record<never, never>, Record<never, never>>,
+    '/auction/premium': RouteRecordInfo<'/auction/premium', '/auction/premium', Record<never, never>, Record<never, never>>,
+    '/auction/usernames': RouteRecordInfo<'/auction/usernames', '/auction/usernames', Record<never, never>, Record<never, never>>,
+    'username': RouteRecordInfo<'username', '/auction/usernames/:name', { name: ParamValue<true> }, { name: ParamValue<false> }>,
     '/market': RouteRecordInfo<'/market', '/market', Record<never, never>, Record<never, never>>,
     'market': RouteRecordInfo<'market', '/market', Record<never, never>, Record<never, never>>,
     '/market/store': RouteRecordInfo<'/market/store', '/market/store', Record<never, never>, Record<never, never>>,

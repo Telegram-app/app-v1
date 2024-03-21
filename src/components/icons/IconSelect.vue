@@ -20,10 +20,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 svg {
   .icon {
-    path {
-      stroke: #7D7D85;
-    }
-    
     &--black {
       path {
         stroke: var(--tg-theme-text-color, $--tg-text-color);

@@ -270,8 +270,6 @@ export default defineComponent({
     border-radius: 10px;
     row-gap: 15px;
     
-    background-color: theme-var(--tg-theme-bg-color, $--tg-bg-color);
-    
     &__store {
       position: relative;
       

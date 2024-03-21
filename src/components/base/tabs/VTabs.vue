@@ -132,7 +132,7 @@ export default defineComponent({
     }
     
     &--active {
-      color: theme-var(--tg-theme-link-color, $--tg-link-color);
+      color: theme-var-tg(--tg-theme-link-color, $--tg-link-color);
     }
   }
   
@@ -144,7 +144,7 @@ export default defineComponent({
     height: 4px;
     border-radius: 6px 6px 0 0;
     
-    background-color: theme-var(--tg-theme-link-color, $--tg-link-color);
+    background-color: theme-var-tg(--tg-theme-link-color, $--tg-link-color);
     
     transition: all 0.2s;
   }

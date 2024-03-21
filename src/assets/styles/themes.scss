@@ -1,16 +1,347 @@
 @import 'tg-variables';
 @import 'mixins';
 
-.app__layout {
-  background: theme-var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
-}
-
 .app__layout.light {
   @include spread-map($theme-map-light);
 
-  .market__widget {
-    span {
-      color: var(--tg-theme-text-color, $--tg-text-color);
+  background: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+
+  .market {
+    &__widget {
+      span {
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+      }
+    }
+
+    &__stores {
+      background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+    }
+  }
+
+  .store {
+
+    &__title {
+      &__wrapper {
+        background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+      }
+    }
+
+    &__description {
+      background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+    }
+  }
+
+  .custom-select {
+    background-color: #E1E0E6;
+
+    &__label {
+      color: #7D7D85;
+    }
+
+    &__selected {
+      color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+
+      &__text {
+        color: #000000;
+      }
+
+      .icon {
+        path {
+          stroke: #7D7D85;
+        }
+      }
+    }
+
+    &__items {
+      background-color: #E1E0E6;
+      color: #000000;
+    }
+  }
+
+  .custom-input {
+    background-color: #E1E0E6;
+
+    &__label {
+      color: #7D7D85;
+    }
+
+    input {
+      color: #000000;
+    }
+  }
+
+  .product__card {
+    background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+
+    &__wrapper {
+      border-bottom-color: #EFEEF4;
+    }
+
+    &__info {
+      &__price {
+        color: #7D7D85;
+      }
+
+      &__statuses {
+        &__status {
+          &__top-sales {
+            color: #000000;
+            background: linear-gradient(90deg, #D4FFDB 0%, #E9FD5D 100%);
+          }
+
+          &__new {
+            color: #ffffff;
+            background: linear-gradient(90deg, #9CCEFF 0%, #7C87FD 100%);
+          }
+
+          &__good-reviews {
+            color: #ffffff;
+            background: linear-gradient(180deg, #C58EFF 0%, #A147FE 100%);
+          }
+        }
+      }
+
+      &__store {
+        span {
+          &:first-child {
+            color: #7D7D85;
+          }
+
+          &:last-child {
+            &:before {
+              border-bottom-color: #CFCFD1;
+            }
+          }
+        }
+      }
+
+      &__actions {
+        & > div {
+          background-color: #EBF7FE;
+        }
+
+        &__rating {
+          div {
+            color: #ffffff;
+            background-color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+          }
+
+          span {
+            color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+          }
+        }
+
+        &__share {
+          color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+        }
+      }
+    }
+
+    &__line {
+      background-color: #EFEEF4;
+    }
+
+    &__footer {
+      p {
+        color: #7d7d85;
+      }
+
+      button {
+        background: linear-gradient(180deg, #51B3FF 0%, #2EA3FF 100%);
+      }
+    }
+  }
+
+  .product {
+    .divider {
+      background-color: #EFEEF4;
+    }
+
+    &__images {
+      &__swiper {
+        &__pagination {
+          span {
+            background-color: rgba(248, 233, 213, 0.7);
+          }
+        }
+      }
+    }
+
+    &__statuses {
+      &__status {
+        &__top-sales {
+          color: #000000;
+          background: linear-gradient(90deg, #D4FFDB 0%, #E9FD5D 100%);
+        }
+
+        &__new {
+          color: #000000;
+          background: linear-gradient(90deg, #6BFFAF 0%, #72E6FF 100%);
+        }
+
+        &__good-reviews {
+          color: #000000;
+          background: linear-gradient(90deg, #BFCDFF 0%, #4E7AFF 100%);
+        }
+      }
+    }
+
+    &__info {
+      background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+    }
+
+    &__tags {
+      &__tag {
+        color: #7D7D85;
+        background-color: #F6F6F6;
+      }
+    }
+
+    &__head {
+      &__id {
+        color: #7D7D85;
+      }
+
+      &__dividing-dot {
+        background-color: #7d7d85;
+      }
+
+      &__createdAt {
+        color: #7D7D85;
+      }
+
+      &__share {
+        background-color: #EBF7FE;
+      }
+    }
+
+    &__types {
+      &__tabs {
+        background-color: #F1F1F1;
+        &--active {
+          &__background {
+            background-color: #FFFFFF;
+          }
+        }
+
+        ul {
+          li {
+            a {
+              color: #000000;
+            }
+          }
+        }
+      }
+
+      &__items {
+        &__item {
+          border-color: #E1E0E6;
+
+          &__price {
+            color: #787878;
+          }
+        }
+      }
+    }
+
+    &__description {
+      &__title {
+        color: #7D7D85;
+      }
+
+      &__show-more {
+        border-bottom-color: #CFCFD1;
+
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      }
+    }
+
+    &__store__info {
+      &__seller {
+        span:first-child {
+          color: #7D7D85;
+        }
+      }
+
+      &__deals {
+        span:first-child {
+          color: #7D7D85;
+        }
+
+        span:last-child {
+          div {
+            background-color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+          }
+        }
+      }
+    }
+
+    &__chars {
+      &__title {
+        color: #7D7D85;
+      }
+
+      &__char {
+        &__key {
+          color: #7D7D85;
+
+          &:after {
+            border-bottom-color: #CFCFD1;
+          }
+        }
+      }
+
+      &__show-more {
+        border-bottom-color: #CFCFD1;
+
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      }
+    }
+
+    &__reviews {
+
+      &__title {
+        color: #7D7D85;
+      }
+
+      &__to-reviews {
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      }
+    }
+  }
+
+  .review {
+    &__rating {
+      background-color: #F2F2F2;
+
+      div {
+        color: #ffffff;
+        background-color: #8D78FF;
+      }
+
+      span {
+        color: #7D7D85;
+      }
+    }
+
+    &__id {
+      color: #888888;
+    }
+
+    &__message {
+      &__show-more {
+        border-bottom-color: #CFCFD1;
+
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      }
+
+      &__reply {
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      }
+    }
+
+    &__response {
+      border-left-color: rgba(4, 119, 255, 0.20);
     }
   }
 }
@@ -20,16 +351,351 @@
 .app__layout.dark {
   @include spread-map($theme-map-dark);
 
-  .market__widget {
-    span {
-      color: #0B2349;
-      background: linear-gradient(90deg, #23A2F3 5%, #638FFE 13%, #DE79F1 51%, #87ACFB 75%, #37DFF0 95%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+  background: theme-var($--tg-secondary-bg-color);
+
+  .market {
+    &__widget {
+      span {
+        color: #0B2349;
+        background: linear-gradient(90deg, #23A2F3 5%, #638FFE 13%, #DE79F1 51%, #87ACFB 75%, #37DFF0 95%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .icon {
+        stroke: #37DFF0;
+      }
     }
 
-    .icon {
-      stroke: #37DFF0;
+    &__stores {
+      background: theme-var($--tg-bg-color);
+    }
+  }
+
+  .store {
+
+    &__title {
+      &__wrapper {
+        background-color: theme-var($--tg-bg-color);
+      }
+    }
+
+    &__description {
+      background-color: theme-var($--tg-bg-color);
+    }
+  }
+
+  .custom-select {
+    background-color: theme-var($--tg-bg-color);
+
+    &__label {
+      color: #7D7D85;
+    }
+
+    &__selected {
+      color: #ffffff;
+
+      &__text {
+        color: #ffffff;
+      }
+
+      .icon {
+        path {
+          stroke: #ffffff;
+        }
+      }
+    }
+
+    &__items {
+      background-color: theme-var($--tg-bg-color);
+      color: #ffffff;
+    }
+  }
+
+  .custom-input {
+    background-color: theme-var($--tg-bg-color);
+
+    &__label {
+      color: #7D7D85;
+    }
+
+    input {
+      color: #ffffff;
+    }
+  }
+
+  .product__card {
+    background: theme-var($--tg-bg-color);
+
+    &__wrapper {
+      border-bottom-color: #353537;
+    }
+
+    &__info {
+      &__price {
+        color: #7D7D85;
+      }
+
+      &__statuses {
+        &__status {
+          &__top-sales {
+            color: #000000;
+            background: linear-gradient(90deg, #D4FFDB 0%, #E9FD5D 100%);
+          }
+
+          &__new {
+            color: #ffffff;
+            background: linear-gradient(90deg, #9CCEFF 0%, #7C87FD 100%);
+          }
+
+          &__good-reviews {
+            color: #ffffff;
+            background: linear-gradient(180deg, #C58EFF 0%, #A147FE 100%);
+          }
+        }
+      }
+
+      &__store {
+        span {
+          &:first-child {
+            color: #7D7D85;
+          }
+
+          &:last-child {
+            &:before {
+              border-bottom-color: #353537;
+            }
+          }
+        }
+      }
+
+      &__actions {
+        & > div {
+          background-color: #2d3542;
+        }
+
+        &__rating {
+          div {
+            color: #ffffff;
+            background-color: theme-var($--tg-button-color);
+          }
+
+          span {
+            color: theme-var($--tg-link-color);
+          }
+        }
+
+        &__share {
+          color: theme-var($--tg-link-color);
+        }
+      }
+    }
+
+    &__line {
+      background-color: #353537;
+    }
+
+    &__footer {
+      p {
+        color: #7d7d85;
+      }
+
+      button {
+        background: linear-gradient(180deg, #51B3FF 0%, #2EA3FF 100%);
+      }
+    }
+  }
+
+  .product {
+    .divider {
+      background-color: #353537;
+    }
+
+    &__images {
+      &__swiper {
+        &__pagination {
+          span {
+            background-color: rgba(248, 233, 213, 0.7);
+          }
+        }
+      }
+    }
+
+    &__statuses {
+      &__status {
+        &__top-sales {
+          color: #000000;
+          background: linear-gradient(90deg, #D4FFDB 0%, #E9FD5D 100%);
+        }
+
+        &__new {
+          color: #000000;
+          background: linear-gradient(90deg, #6BFFAF 0%, #72E6FF 100%);
+        }
+
+        &__good-reviews {
+          color: #000000;
+          background: linear-gradient(90deg, #BFCDFF 0%, #4E7AFF 100%);
+        }
+      }
+    }
+
+    &__info {
+      background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+    }
+
+    &__tags {
+      &__tag {
+        color: #7D7D85;
+        background-color: #F6F6F6;
+      }
+    }
+
+    &__head {
+      &__id {
+        color: #7D7D85;
+      }
+
+      &__dividing-dot {
+        background-color: #7d7d85;
+      }
+
+      &__createdAt {
+        color: #7D7D85;
+      }
+
+      &__share {
+        background-color: #2d3542;
+      }
+    }
+
+    &__types {
+      &__tabs {
+        background-color: #F1F1F1;
+        &--active {
+          &__background {
+            background-color: #FFFFFF;
+          }
+        }
+
+        ul {
+          li {
+            a {
+              color: #000000;
+            }
+          }
+        }
+      }
+
+      &__items {
+        &__item {
+          border-color: #E1E0E6;
+
+          &__price {
+            color: #787878;
+          }
+        }
+      }
+    }
+
+    &__description {
+      &__title {
+        color: #7D7D85;
+      }
+
+      &__show-more {
+        border-bottom-color: #CFCFD1;
+
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      }
+    }
+
+    &__store__info {
+      &__seller {
+        span:first-child {
+          color: #7D7D85;
+        }
+      }
+
+      &__deals {
+        span:first-child {
+          color: #7D7D85;
+        }
+
+        span:last-child {
+          div {
+            background-color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+          }
+        }
+      }
+    }
+
+    &__chars {
+      &__title {
+        color: #7D7D85;
+      }
+
+      &__char {
+        &__key {
+          color: #7D7D85;
+
+          &:after {
+            border-bottom-color: #353537;
+          }
+        }
+      }
+
+      &__show-more {
+        border-bottom-color: #353537;
+
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      }
+    }
+
+    &__reviews {
+
+      &__title {
+        color: #7D7D85;
+      }
+
+      &__to-reviews {
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      }
+    }
+  }
+
+  .review {
+    &__rating {
+      background-color: #2d3542;
+
+      div {
+        color: #ffffff;
+        background-color: #8D78FF;
+      }
+
+      span {
+        color: #ffffff;
+      }
+    }
+
+    &__id {
+      color: #888888;
+    }
+
+    &__message {
+      &__show-more {
+        border-bottom-color: #CFCFD1;
+
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      }
+
+      &__reply {
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      }
+    }
+
+    &__response {
+      border-left-color: rgba(4, 119, 255, 0.20);
     }
   }
 }

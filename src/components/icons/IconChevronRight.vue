@@ -28,10 +28,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 svg {
   .icon {
-    fill: theme-var(--tg-theme-button-color, $--tg-button-color);
+    fill: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
     
     &--black {
-      fill: theme-var(--tg-theme-text-color, $--tg-text-color);
+      fill: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
     }
     
     &--grey {

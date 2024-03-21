@@ -140,28 +140,19 @@ export default defineComponent({
     font-family: "SF Pro Text Medium", sans-serif;
     line-height: 1;
     
-    background-color: #F2F2F2;
-    
     div {
       padding: 4px 7px 5px;
       border-radius: 15px;
-      
-      color: #ffffff;
-      background-color: #8D78FF;
     }
     
     span {
       margin-left: 6px;
-      
-      color: #7D7D85;
     }
   }
   
   &__id {
     font-size: 13px;
     line-height: 1;
-    
-    color: #888888;
   }
   
   &__message {
@@ -180,11 +171,9 @@ export default defineComponent({
       position: absolute;
       right: 0;
       bottom: -2px;
-      border-bottom: 1px dashed #CFCFD1;
+      border-bottom: 1px dashed;
       
       font-size: 13px;
-      
-      color: var(--tg-theme-button-color, $--tg-button-color);
     }
     
     &--show {
@@ -196,8 +185,6 @@ export default defineComponent({
       
       font-size: 12px;
       font-family: "SF Pro Text Medium";
-      
-      color: var(--tg-theme-button-color, $--tg-button-color);
       
       cursor: pointer;
       
@@ -215,7 +202,7 @@ export default defineComponent({
     margin-top: 10px;
     margin-left: 10px;
     padding-left: 10px;
-    border-left: 1px rgba(4, 119, 255, 0.20) solid;
+    border-left: 1px solid;
     
     .review__header__info {
       height: 32px;

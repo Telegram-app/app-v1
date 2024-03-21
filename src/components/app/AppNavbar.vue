@@ -71,12 +71,12 @@ export default defineComponent({
   height: 66px;
   padding: 15px 26px;
 
-  background: theme-var(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+  background: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
 
   &__close {
     font-size: 13px;
 
-    color: theme-var(--tg-theme-link-color, $--tg-link-color);
+    color: theme-var-tg(--tg-theme-link-color, $--tg-link-color);
   }
 
   &__app-name {
@@ -100,7 +100,7 @@ export default defineComponent({
 
       text-align: center;
 
-      color: theme-var(--tg-theme-hint-color, $--tg-hint-color);
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
 
       font-size: 13px;
       line-height: 100%;

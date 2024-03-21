@@ -28,7 +28,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 svg {
   path {
-    fill: theme-var(--tg-theme-button-color, $--tg-button-color);
+    fill: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
   }
 }
 </style>
