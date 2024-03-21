@@ -8,7 +8,7 @@ type State = {
 export const useTelegramStore = defineStore("telegram", {
   state: (): State => ({
     user: null,
-    theme: 'dark'
+    theme: 'light'
   }),
 
   getters: {

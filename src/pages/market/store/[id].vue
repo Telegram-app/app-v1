@@ -9,12 +9,12 @@
       <img :src="'../../images/market/' + store.image" alt="store-image">
     </div>
     
-    <div class="store__title__wrapper">
+    <div class="store__title__wrapper card--bg">
       <h1 class="store__title">{{ store.name }}</h1>
       <span class="store__id">{{ store.id }}</span>
     </div>
     
-    <div class="store__description">
+    <div class="store__description card--bg">
       <p>{{ store.description }}</p>
     </div>
     
@@ -153,6 +153,13 @@ export default defineComponent({
   },
   
   mounted() {
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      })
+    }
+    
     let hrefScroll = document.querySelector<HTMLElement>('.store__filter')
     if (hrefScroll) {
       this.pointToShowWidget = hrefScroll.offsetTop - 45
@@ -221,6 +228,8 @@ export default defineComponent({
       margin-top: 12px;
       padding: 10px 17px;
       border-radius: 10px;
+      
+      background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
     }
   }
   
@@ -232,6 +241,8 @@ export default defineComponent({
     margin-top: 15px;
     padding: 10px 17px;
     border-radius: 10px;
+    
+    background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
     
     p {
       font-size: 12px;

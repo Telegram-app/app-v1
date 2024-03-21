@@ -30,7 +30,7 @@
     </swiper>
   </div>
   
-  <div class="market__stores">
+  <div class="market__stores card--bg">
     <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="toStorePage(store.id)">
       <img :src="'./images/market/stores/' + store.icon" alt="store-image">
       <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>
@@ -147,15 +147,15 @@ export default defineComponent({
   mounted() {
     this.marketStore.createFakeStores()
     
-    if (window.Telegram.WebApp) {
-      window.Telegram.WebApp.MainButton.setParams({
-        text: 'VIEW ORDER',
-        is_active: true,
-        is_visible: true
-      }).onClick(() => {
-        console.log(window.Telegram.WebApp.MainButton);
-      })
-    }
+    // if (window.Telegram.WebApp) {
+    //   window.Telegram.WebApp.MainButton.setParams({
+    //     text: 'VIEW ORDER',
+    //     is_active: true,
+    //     is_visible: true
+    //   }).onClick(() => {
+    //     console.log(window.Telegram.WebApp.MainButton);
+    //   })
+    // }
   },
   
   computed: {
@@ -233,6 +233,8 @@ export default defineComponent({
       margin-right: 8px;
       
       line-height: 1;
+      
+      color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
     }
   }
   
@@ -269,6 +271,8 @@ export default defineComponent({
     padding: 10px 13px;
     border-radius: 10px;
     row-gap: 15px;
+    
+    background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
     
     &__store {
       position: relative;
@@ -327,7 +331,7 @@ export default defineComponent({
       height: 1px;
       width: 100%;
       
-      background-color: rgba(4, 119, 255, 0.22);
+      background-color: theme-var($--divider-color);
     }
   }
   

@@ -59,9 +59,13 @@ export default defineComponent({
   border-radius: 10px;
   outline: none;
   
+  background-color: theme-var($--filter-bg-color);
+  
   &__label {
     font-size: 10px;
     line-height: 1;
+    
+    color: #7D7D85;
   }
   
   &__selected {
@@ -74,6 +78,8 @@ export default defineComponent({
     line-height: 1;
     font-family: "SF Pro Text Medium", sans-serif;
     
+    color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+    
     cursor: pointer;
     user-select: none;
     
@@ -81,6 +87,8 @@ export default defineComponent({
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+      
+      color: #000000;
     }
     
     svg {
@@ -107,6 +115,9 @@ export default defineComponent({
     
     border-radius: 0 0 10px 10px;
     overflow: hidden;
+    
+    background-color: theme-var($--filter-bg-color);
+    color: #000000;
     
     div {
       padding: 3px 11px;

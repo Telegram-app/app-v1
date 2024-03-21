@@ -52,9 +52,13 @@ export default defineComponent({
   border-radius: 10px;
   outline: none;
   
+  background-color: theme-var($--filter-bg-color);
+  
   &__label {
     font-size: 10px;
     line-height: 1;
+    
+    color: #7D7D85;
   }
   
   input {
@@ -65,6 +69,8 @@ export default defineComponent({
     
     font-size: 13px;
     line-height: 1;
+    
+    color: #000000;
     background: none;
     
     &::placeholder {

@@ -1,5 +1,5 @@
 <template>
-  <div class="product__card" v-if="product">
+  <div class="product__card card--bg" v-if="product">
     <div class="product__card__wrapper">
       <div class="product__card__image">
         <img :src="'/images/market/stores/products/' + product.image" alt="product-image">
@@ -111,11 +111,12 @@ export default defineComponent({
   margin-top: 15px;
   border-radius: 10px;
   
+  background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+  
   &__wrapper {
     display: flex;
     height: 180px;
-    
-    border-bottom: 1px solid;
+    border-bottom: 1px solid theme-var($--divider-color);
   }
   
   &__image {
@@ -149,6 +150,8 @@ export default defineComponent({
       
       font-size: 11px;
       
+      color: #7D7D85;
+      
       svg {
         margin-right: 4px;
       }
@@ -174,6 +177,22 @@ export default defineComponent({
           font-size: 11px;
           line-height: 1;
         }
+        
+        &__top-sales {
+          color: #000000;
+          
+          background: linear-gradient(90deg, #D4FFDB 0%, #E9FD5D 100%);
+        }
+        
+        &__new {
+          color: #ffffff;
+          background: linear-gradient(90deg, #9CCEFF 0%, #7C87FD 100%);
+        }
+        
+        &__good-reviews {
+          color: #ffffff;
+          background: linear-gradient(180deg, #C58EFF 0%, #A147FE 100%);
+        }
       }
     }
     
@@ -191,6 +210,8 @@ export default defineComponent({
         
         &:first-child {
           display: flex;
+          
+          color: #7D7D85;
         }
         
         &:last-child {
@@ -203,7 +224,7 @@ export default defineComponent({
             
             flex: 1;
             margin: auto 4px 2px 4px;
-            border-bottom: 1px dashed;
+            border-bottom: 1px dashed theme-var($--divider-color);
           }
         }
       }
@@ -215,6 +236,10 @@ export default defineComponent({
       height: 24px;
       margin-top: 5px;
       line-height: 1;
+      
+      & > div {
+        background-color: theme-var($--action-button-color);
+      }
       
       &__rating {
         display: flex;
@@ -228,10 +253,15 @@ export default defineComponent({
         div {
           padding: 7px 7px 8px;
           border-radius: 15px;
+          
+          color: #ffffff;
+          background-color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);;
         }
         
         span {
           margin-left: 6px;
+          
+          color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);;
         }
       }
       
@@ -253,6 +283,8 @@ export default defineComponent({
         
         font-size: 11px;
         
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);;
+        
         span {
           margin-right: 3px;
         }
@@ -265,6 +297,8 @@ export default defineComponent({
     width: calc(100% + 16px);
     margin-top: 5px;
     margin-left: -6px;
+    
+    background-color: theme-var($--divider-color);
   }
   
   &__footer {
@@ -276,6 +310,8 @@ export default defineComponent({
       margin-right: 8px;
       
       font-size: 11px;
+      
+      color: #7d7d85;
     }
     
     button {
@@ -287,6 +323,8 @@ export default defineComponent({
       font-size: 13px;
       font-family: "SF Pro Text Medium", sans-serif;
       line-height: 1;
+      
+      background: linear-gradient(180deg, #51B3FF 0%, #2EA3FF 100%);
     }
   }
 }
