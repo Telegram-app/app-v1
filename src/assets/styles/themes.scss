@@ -34,6 +34,10 @@
   }
 
   .custom-select {
+    &__label {
+      color: #808081;
+    }
+
     .icon {
       path {
         stroke: #ffffff;
@@ -52,8 +56,26 @@
   }
 
   .custom-input {
+    &__label {
+      color: #808081;
+    }
+
     input {
       color: #ffffff;
+    }
+  }
+
+  .product__card__info {
+    &__price {
+      color: #808081;
+    }
+
+    &__store {
+      span {
+        &:first-child {
+          color: #808081;
+        }
+      }
     }
   }
 
