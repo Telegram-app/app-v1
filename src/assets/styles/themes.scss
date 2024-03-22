@@ -12,16 +12,27 @@
     background-color: theme-var($--divider-color);
   }
 
-  .market__widget {
-    span {
-      color: #0B2349;
-      background: linear-gradient(90deg, #23A2F3 5%, #638FFE 13%, #DE79F1 51%, #87ACFB 75%, #37DFF0 95%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+  .market {
+    &__line {
+      background-color: theme-var($--divider-color);
     }
 
-    .icon {
-      stroke: #37DFF0;
+    &__quote__text {
+      color: var(--tg-theme-text-color, #f5f5f5);
+      background-color: theme-var($--hint-color);
+    }
+
+    &__widget {
+      span {
+        color: #0B2349;
+        background: linear-gradient(90deg, #23A2F3 5%, #638FFE 13%, #DE79F1 51%, #87ACFB 75%, #37DFF0 95%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .icon {
+        stroke: #37DFF0;
+      }
     }
   }
 

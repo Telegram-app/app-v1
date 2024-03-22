@@ -258,7 +258,7 @@ export default defineComponent({
     p {
       font-size: 12px;
       
-      color: #787878;
+      color: theme-var($--hint-color);
     }
   }
   

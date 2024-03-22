@@ -16,6 +16,7 @@ $--filter-bg-color: --filter-bg-color;
 $--divider-color: --divider-color;
 $--action-button-color: --action-button-color;
 $--user-rating-color: --user-rating-color;
+$--hint-color: --hint-color;
 
 $theme-map-light: (
         $--tg-accent-text-color: #168acd,
@@ -36,6 +37,7 @@ $theme-map-light: (
         $--divider-color: #EFEEF4,
         $--action-button-color: #EBF7FE,
         $--user-rating-color: #F2F2F2,
+        $--hint-color: #787878
 );
 
 $theme-map-dark: (
@@ -57,4 +59,5 @@ $theme-map-dark: (
         $--divider-color: #323233,
         $--action-button-color: #29303D,
         $--user-rating-color: #29303D,
+        $--hint-color: #787878
 );

@@ -483,7 +483,7 @@ export default defineComponent({
           line-height: 1;
           margin-top: 5px;
           
-          color: #787878;
+          color: theme-var($--hint-color);
         }
       }
     }

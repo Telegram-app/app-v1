@@ -42,12 +42,10 @@
     </div>
   </div>
   
-  <div class="market__search">
-    <span class="market__search__title is-uppercase">Marcus Aurelius</span>
-    <input class="input reset" type="search" placeholder="What we do now echoes in eternity" v-model="search">
+  <div class="market__quote">
+    <span class="market__quote__name is-uppercase">Marcus Aurelius</span>
+    <div class="market__quote__text">What we do now echoes in eternity</div>
   </div>
-  
-  <div class="market__line"></div>
   
   <div class="market__news">
     <swiper
@@ -334,20 +332,26 @@ export default defineComponent({
     }
   }
   
-  &__search {
+  &__quote {
     margin-top: 15px;
     
-    &__title {
+    &__name {
       font-size: 12px;
       line-height: 1;
       
       color: #7D7D85;
     }
     
-    input {
+    &__text {
       margin-top: 10px;
-      padding-left: 17px;
-    
+      padding: 10px 17px;
+      border-radius: 10px;
+      
+      font-size: 12px;
+      line-height: 1;
+      
+      color: theme-var($--hint-color);
+      background-color: theme-var($--card-bg-color);
     }
   }
   
@@ -363,7 +367,7 @@ export default defineComponent({
     position: relative;
     height: 198px;
     width: calc(100% + 30px);
-    margin: 0 -15px;
+    margin: 15px -15px 0;
     padding: 0 15px;
     
     &__swiper {
@@ -420,7 +424,7 @@ export default defineComponent({
       &__link {
         font-size: 12px;
         
-        color: #787878;
+        color: theme-var($--hint-color);
       }
     }
   }
