@@ -1,6 +1,6 @@
 <template>
-  <div class="custom-select" :class="{ 'custom-select--open': open }" @blur="open = false">
-    <div class="custom-select__selected" @click="open = !open">
+  <div class="custom-select" :class="{ 'custom-select--open': open }">
+    <div class="custom-select__selected" @click="$emit('open')">
       <span class="custom-select__label">{{ label }}</span>
       <span class="custom-select__selected__text">{{ modelValue }}</span>
       <IconSelect h="10" w="11"></IconSelect>
@@ -10,7 +10,7 @@
         <div
           v-if="option !== modelValue"
           :key="i"
-          @click="open = false; $emit('update:modelValue', option);"
+          @click="$emit('close'); $emit('update:modelValue', option);"
         >
           {{ option }}
         </div>
@@ -37,12 +37,8 @@ export default defineComponent({
       type: Array,
       required: true,
     },
-  },
-  data() {
-    return {
-      open: false,
-    };
-  },
+    open: Boolean
+  }
   
 })
 

@@ -20,25 +20,26 @@
     
     <div class="store__filter">
       <swiper
+        :free-mode="true"
         :slides-per-view="3.44"
         :space-between="10"
         :speed="600"
         class="store__filter__swiper"
       >
         <swiper-slide class="store__filter__swiper__slide">
-          <VSelect v-model="selects.category.active" :label="selects.category.label" :options="selects.category.options"></VSelect>
+          <VSelect v-model="selects.category.active" :label="selects.category.label" :options="selects.category.options" :open="selects.category.open" @open="openSelect(0)" @close="selects.category.open = false"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filter__swiper__slide">
-          <VSelect v-model="selects.type.active" :label="selects.type.label" :options="selects.type.options"></VSelect>
+          <VSelect v-model="selects.type.active" :label="selects.type.label" :options="selects.type.options" :open="selects.type.open" @open="openSelect(1)" @close="selects.type.open = false"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filter__swiper__slide">
-          <VSelect v-model="selects.city.active" :label="selects.city.label" :options="selects.city.options"></VSelect>
+          <VSelect v-model="selects.city.active" :label="selects.city.label" :options="selects.city.options" :open="selects.city.open" @open="openSelect(2)" @close="selects.city.open = false"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filter__swiper__slide">
-          <VSelect v-model="selects.district.active" :label="selects.district.label" :options="selects.district.options"></VSelect>
+          <VSelect v-model="selects.district.active" :label="selects.district.label" :options="selects.district.options" :open="selects.district.open" @open="openSelect(3)" @close="selects.district.open = false"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filter__swiper__slide">
@@ -94,21 +95,25 @@ export default defineComponent({
     pointToShowWidget: 1000,
     selects: {
       category: {
+        open: false,
         active: 'All',
         label: 'Category',
         options: ['All', 'Category 1', 'Category 2', 'Category 3']
       },
       type: {
+        open: false,
         active: 'All',
         label: 'Type',
         options: ['All', 'Type 1', 'Type 2', 'Type 3']
       },
       city: {
+        open: false,
         active: 'All',
         label: 'City',
         options: ['All', 'Austin', 'Newark', 'Ontario']
       },
       district: {
+        open: false,
         active: 'All',
         label: 'District',
         options: ['All', 'District 1', 'District 2', 'District 3']
@@ -145,6 +150,12 @@ export default defineComponent({
     },
     toProductPage(id: number | string) {
       this.router.push({ name: 'product', params: { id: this.store.id, productId: id } })
+    },
+    openSelect(index: number) {
+      this.selects.category.open = index === 0 ? !this.selects.category.open : false
+      this.selects.type.open = index === 1 ? !this.selects.type.open : false
+      this.selects.city.open = index === 2 ? !this.selects.city.open : false
+      this.selects.district.open = index === 3 ? !this.selects.district.open : false
     }
   },
   

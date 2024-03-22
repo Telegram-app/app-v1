@@ -336,7 +336,7 @@ export default defineComponent({
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 6px 10px;
+      padding: 4px 10px;
       border-radius: 10px;
       
       color: #7D7D85;

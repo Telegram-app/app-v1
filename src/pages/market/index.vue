@@ -6,15 +6,13 @@
   
   <div class="market__banners">
     <swiper
-      :slides-per-view="1.22"
-      :centeredSlides="true"
-      :space-between="18"
-      :speed="600"
+      :initial-slide="1"
+      :free-mode="true"
       :loop="true"
-      :autoplay="{
-        delay: 4500,
-        disableOnInteraction: false,
-      }"
+      :centered-slides="true"
+      :space-between="18"
+      :speed="800"
+      :slides-per-view="1.22"
       :modules="modules"
       class="market__banners__swiper"
     >
@@ -54,6 +52,7 @@
   <div class="market__news">
     <swiper
       :slides-per-view="'auto'"
+      :free-mode="true"
       :space-between="10"
       :speed="600"
       :modules="modules"
@@ -107,9 +106,9 @@
 </template>
 
 <route lang="json">
-{
-"name": "market"
-}
+  {
+  "name": "market"
+  }
 </route>
 
 <script lang="ts">
@@ -118,7 +117,7 @@ import { defineComponent } from "vue";
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css'
 
-import { Autoplay } from "swiper/modules";
+import { Autoplay, FreeMode } from "swiper/modules";
 import {useMarketStore} from "@/stores/market.ts";
 import {mapState} from 'pinia';
 import {Username} from '@/models/username.model.ts';
@@ -140,7 +139,7 @@ export default defineComponent({
     return {
       router,
       marketStore,
-      modules: [Autoplay]
+      modules: [Autoplay, FreeMode]
     }
   },
   
@@ -213,7 +212,7 @@ export default defineComponent({
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 
 .market {
   &__widget {
