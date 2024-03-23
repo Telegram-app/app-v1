@@ -316,14 +316,6 @@ export default defineComponent({
         font-size: 12px;
         line-height: 1;
       }
-      
-      &:hover {
-        img {
-          -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
-          -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
-          box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
-        }
-      }
     }
     
     &__line {
@@ -428,6 +420,26 @@ export default defineComponent({
         
         color: theme-var($--hint-color);
       }
+    }
+  }
+}
+
+@media (hover: hover) {
+  .market__stores__store:hover {
+    img {
+      -webkit-box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
+      box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
+    }
+  }
+}
+
+@media (hover: none) {
+  .market__stores__store:active {
+    img {
+      -webkit-box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
+      box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
     }
   }
 }
