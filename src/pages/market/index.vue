@@ -17,7 +17,7 @@
       :modules="modules"
       class="market__banners__swiper"
     >
-      <template v-for="i of 5" :key="'groop-images-' + i">
+      <template v-for="i of 5" :key="'group-images-' + i">
         <swiper-slide class="market__banners__swiper__slide">
           <img :src="'./images/market/market-banner-1.svg'" alt="banner-1">
         </swiper-slide>
