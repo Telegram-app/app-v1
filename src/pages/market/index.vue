@@ -5,41 +5,29 @@
   </div>
   
   <div class="market__banners">
-<!--    <swiper-->
-<!--      :slides-per-view="1.22"-->
-<!--      :free-mode="true"-->
-<!--      :loop="true"-->
-<!--      :loop-additional-slides="3"-->
-<!--      :centered-slides="true"-->
-<!--      :long-swipes="true"-->
-<!--      -->
-<!--      :space-between="18"-->
-<!--      :speed="800"-->
-<!--      :modules="modules"-->
-<!--      class="market__banners__swiper"-->
-<!--    >-->
-<!--      <swiper-slide class="market__banners__swiper__slide">-->
-<!--        <img :src="'./images/market/market-banner-1.svg'" alt="banner-1">-->
-<!--      </swiper-slide>-->
-<!--      <swiper-slide class="market__banners__swiper__slide">-->
-<!--        <img :src="'./images/market/market-banner-2.svg'" alt="banner-2">-->
-<!--      </swiper-slide>-->
-<!--      <swiper-slide class="market__banners__swiper__slide">-->
-<!--        <img :src="'./images/market/market-banner-3.svg'" alt="banner-3">-->
-<!--      </swiper-slide>-->
-<!--    </swiper>-->
-    
-    <carousel
-      :items-to-show="1.22"
+    <swiper
+      :slides-per-view="1.22"
+      :free-mode="true"
+      :loop="true"
+      :loop-additional-slides="30"
+      :centered-slides="true"
+      :long-swipes="true"
+      
+      :space-between="18"
+      :speed="800"
+      :modules="modules"
       class="market__banners__swiper"
-      :wrap-around="true"
-      snap-align="center"
-      :transition="600"
     >
-      <slide class="market__banners__swiper__slide"><img :src="'./images/market/market-banner-1.svg'" alt="banner-1"></slide>
-      <slide class="market__banners__swiper__slide"><img :src="'./images/market/market-banner-2.svg'" alt="banner-2"></slide>
-      <slide class="market__banners__swiper__slide"><img :src="'./images/market/market-banner-3.svg'" alt="banner-3"></slide>
-    </carousel>
+      <swiper-slide class="market__banners__swiper__slide">
+        <img :src="'./images/market/market-banner-1.svg'" alt="banner-1">
+      </swiper-slide>
+      <swiper-slide class="market__banners__swiper__slide">
+        <img :src="'./images/market/market-banner-2.svg'" alt="banner-2">
+      </swiper-slide>
+      <swiper-slide class="market__banners__swiper__slide">
+        <img :src="'./images/market/market-banner-3.svg'" alt="banner-3">
+      </swiper-slide>
+    </swiper>
   </div>
   
   <div class="market__stores card--bg">
@@ -136,13 +124,10 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, FreeMode } from "swiper/modules";
 import 'swiper/css'
 
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide } from 'vue3-carousel'
-
 export default defineComponent({
   name: 'Market',
   
-  components: { Swiper, SwiperSlide, Carousel, Slide },
+  components: { Swiper, SwiperSlide },
   
   props: [],
   
@@ -260,10 +245,6 @@ export default defineComponent({
     &__swiper {
       height: 100%;
       width: 100%;
-      
-      .carousel__track {
-        gap: 18px;
-      }
       
       &__slide {
         border-radius: 10px;
