@@ -9,7 +9,6 @@
       :slides-per-view="1.22"
       :free-mode="true"
       :loop="true"
-      :loop-additional-slides="30"
       :centered-slides="true"
       :long-swipes="true"
       
@@ -18,15 +17,17 @@
       :modules="modules"
       class="market__banners__swiper"
     >
-      <swiper-slide class="market__banners__swiper__slide">
-        <img :src="'./images/market/market-banner-1.svg'" alt="banner-1">
-      </swiper-slide>
-      <swiper-slide class="market__banners__swiper__slide">
-        <img :src="'./images/market/market-banner-2.svg'" alt="banner-2">
-      </swiper-slide>
-      <swiper-slide class="market__banners__swiper__slide">
-        <img :src="'./images/market/market-banner-3.svg'" alt="banner-3">
-      </swiper-slide>
+      <template v-for="i of 5" :key="'groop-images-' + i">
+        <swiper-slide class="market__banners__swiper__slide">
+          <img :src="'./images/market/market-banner-1.svg'" alt="banner-1">
+        </swiper-slide>
+        <swiper-slide class="market__banners__swiper__slide">
+          <img :src="'./images/market/market-banner-2.svg'" alt="banner-2">
+        </swiper-slide>
+        <swiper-slide class="market__banners__swiper__slide">
+          <img :src="'./images/market/market-banner-3.svg'" alt="banner-3">
+        </swiper-slide>
+      </template>
     </swiper>
   </div>
   
