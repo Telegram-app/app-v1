@@ -317,10 +317,12 @@ export default defineComponent({
         line-height: 1;
       }
       
-      img:focus {
-        -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
+      &:hover {
+        img {
+          -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
+          -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
+          box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
+        }
       }
     }
     
@@ -377,6 +379,7 @@ export default defineComponent({
       overflow: visible;
       
       &__slide {
+        width: 120px;
         border-radius: 10px;
         
         img {
