@@ -5,27 +5,41 @@
   </div>
   
   <div class="market__banners">
-    <swiper
-      :initial-slide="1"
-      :free-mode="true"
-      :loop="true"
-      :centered-slides="true"
-      :space-between="18"
-      :speed="800"
-      :slides-per-view="1.22"
-      :modules="modules"
+<!--    <swiper-->
+<!--      :slides-per-view="1.22"-->
+<!--      :free-mode="true"-->
+<!--      :loop="true"-->
+<!--      :loop-additional-slides="3"-->
+<!--      :centered-slides="true"-->
+<!--      :long-swipes="true"-->
+<!--      -->
+<!--      :space-between="18"-->
+<!--      :speed="800"-->
+<!--      :modules="modules"-->
+<!--      class="market__banners__swiper"-->
+<!--    >-->
+<!--      <swiper-slide class="market__banners__swiper__slide">-->
+<!--        <img :src="'./images/market/market-banner-1.svg'" alt="banner-1">-->
+<!--      </swiper-slide>-->
+<!--      <swiper-slide class="market__banners__swiper__slide">-->
+<!--        <img :src="'./images/market/market-banner-2.svg'" alt="banner-2">-->
+<!--      </swiper-slide>-->
+<!--      <swiper-slide class="market__banners__swiper__slide">-->
+<!--        <img :src="'./images/market/market-banner-3.svg'" alt="banner-3">-->
+<!--      </swiper-slide>-->
+<!--    </swiper>-->
+    
+    <carousel
+      :items-to-show="1.22"
       class="market__banners__swiper"
+      :wrap-around="true"
+      snap-align="center"
+      :transition="600"
     >
-      <swiper-slide class="market__banners__swiper__slide">
-        <img :src="'./images/market/market-banner-1.svg'" alt="banner-1">
-      </swiper-slide>
-      <swiper-slide class="market__banners__swiper__slide">
-        <img :src="'./images/market/market-banner-2.svg'" alt="banner-2">
-      </swiper-slide>
-      <swiper-slide class="market__banners__swiper__slide">
-        <img :src="'./images/market/market-banner-3.svg'" alt="banner-3">
-      </swiper-slide>
-    </swiper>
+      <slide class="market__banners__swiper__slide"><img :src="'./images/market/market-banner-1.svg'" alt="banner-1"></slide>
+      <slide class="market__banners__swiper__slide"><img :src="'./images/market/market-banner-2.svg'" alt="banner-2"></slide>
+      <slide class="market__banners__swiper__slide"><img :src="'./images/market/market-banner-3.svg'" alt="banner-3"></slide>
+    </carousel>
   </div>
   
   <div class="market__stores card--bg">
@@ -112,21 +126,23 @@
 <script lang="ts">
 
 import { defineComponent } from "vue";
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css'
 
-import { Autoplay, FreeMode } from "swiper/modules";
 import {useMarketStore} from "@/stores/market.ts";
 import {mapState} from 'pinia';
-import {Username} from '@/models/username.model.ts';
 import {Store} from '@/models/store.model.ts';
-import {string} from 'zod';
 import {useRouter} from 'vue-router';
+
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Autoplay, FreeMode } from "swiper/modules";
+import 'swiper/css'
+
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide } from 'vue3-carousel'
 
 export default defineComponent({
   name: 'Market',
   
-  components: { Swiper, SwiperSlide },
+  components: { Swiper, SwiperSlide, Carousel, Slide },
   
   props: [],
   
@@ -245,6 +261,10 @@ export default defineComponent({
       height: 100%;
       width: 100%;
       
+      .carousel__track {
+        gap: 18px;
+      }
+      
       &__slide {
         border-radius: 10px;
         
@@ -315,12 +335,10 @@ export default defineComponent({
         line-height: 1;
       }
       
-      &:focus {
-        img {
-          -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
-          -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
-          box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
-        }
+      img:focus {
+        -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
       }
     }
     
@@ -378,7 +396,6 @@ export default defineComponent({
       
       &__slide {
         border-radius: 10px;
-        width: 120px;
         
         img {
           border-radius: 10px;
