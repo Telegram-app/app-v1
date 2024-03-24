@@ -89,7 +89,7 @@ export default defineComponent({
     height: 100vh;
     width: 100vw;
     
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
   }
   
   &__wrapper {
@@ -97,6 +97,7 @@ export default defineComponent({
     
     padding: 15px;
     border-radius: 20px 20px 0 0;
+    border-top: 1px solid #ffffff;
     
     background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
   }

@@ -61,7 +61,7 @@
         
         <template v-for="(type, index) in product.types" :key="'tab-content-' + index">
           <div v-if="activeTypeTab === index" class="product__types__items">
-            <div v-for="item in type.items" class="product__types__items__item" @click="payment.selectedItem = item" :class="{ 'product__types__items__item--selected': payment.selectedItem === item }">
+            <div v-for="item in type.items" class="product__types__items__item" @click="payment.selectedItem = payment.selectedItem === item ? { name: '', price: 0 } : item" :class="{ 'product__types__items__item--selected': payment.selectedItem === item }">
               <span class="product__types__items__item__name">{{ item.name }}</span>
               <span class="product__types__items__item__price">{{ item.price }} TON</span>
             </div>
@@ -122,7 +122,7 @@
       </div>
     </div>
     
-    <button style="position: fixed; right: 0; bottom: 0; left: 0; width: 100%; padding: 10px 0; background-color: rgb(67,148,232)" @click="payment.show = true" v-if="!payment.show">Купить</button>
+    <button style="position: fixed; right: 0; bottom: 0; left: 0; width: 100%; padding: 10px 0; background-color: rgb(67,148,232)" @click="payment.show = true" v-if="payment.selectedItem.name.length && !payment.show">Купить</button>
     
     <VBottomSheet v-model="payment.show">
       <div class="product__payment">
@@ -215,7 +215,7 @@ export default defineComponent({
     charsShowMore: false,
     payment: {
       show: false,
-      selectedItem: {} as { name: string; price: number }
+      selectedItem: { name: '', price: 0 } as { name: string; price: number }
     },
     tonPrice: 0,
   }),
@@ -240,7 +240,7 @@ export default defineComponent({
       this.tonPrice = tonPrice
     })
     
-    if (window.Telegram.WebApp && this.payment.selectedItem) {
+    if (window.Telegram.WebApp && this.payment.selectedItem.name.length) {
       window.Telegram.WebApp.MainButton.setParams({
         text: 'BUY',
         is_active: true,
@@ -564,6 +564,10 @@ export default defineComponent({
         
         &--selected {
           background-color: #E6F1FF;
+          
+          .product__types__items__item__name {
+            color: #000000
+          }
         }
       }
     }
