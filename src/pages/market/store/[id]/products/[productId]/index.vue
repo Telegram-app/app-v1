@@ -19,8 +19,8 @@
     
     <div class="product__statuses">
       <div class="product__statuses__status product__statuses__status__top-sales">Top sales</div>
-<!--      <div class="product__statuses__status product__statuses__status__new">New</div>-->
-<!--      <div class="product__statuses__status product__statuses__status__good-reviews">Good Reviews</div>-->
+      <!--      <div class="product__statuses__status product__statuses__status__new">New</div>-->
+      <!--      <div class="product__statuses__status product__statuses__status__good-reviews">Good Reviews</div>-->
     </div>
     
     <div class="product__info card--bg">
@@ -61,7 +61,7 @@
         
         <template v-for="(type, index) in product.types" :key="'tab-content-' + index">
           <div v-if="activeTypeTab === index" class="product__types__items">
-            <div v-for="item in type.items" class="product__types__items__item">
+            <div v-for="item in type.items" class="product__types__items__item" @click="payment.selectedItem = item" :class="{ 'product__types__items__item--selected': payment.selectedItem === item }">
               <span class="product__types__items__item__name">{{ item.name }}</span>
               <span class="product__types__items__item__price">{{ item.price }} TON</span>
             </div>
@@ -121,27 +121,77 @@
         </div>
       </div>
     </div>
+    
+    <button style="position: fixed; right: 0; bottom: 0; left: 0; width: 100%; padding: 10px 0; background-color: rgb(67,148,232)" @click="payment.show = true" v-if="!payment.show">Купить</button>
+    
+    <VBottomSheet v-model="payment.show">
+      <div class="product__payment">
+        <h3 class="product__payment__title">Payment</h3>
+        
+        <span class="product__payment__subtitle">To be paid</span>
+        
+        <div class="product__payment__price">
+          <span>{{ payment.selectedItem.price }}</span>
+          <span>TON</span>
+        </div>
+        
+        <div class="product__payment__rate">
+          (~{{ (payment.selectedItem.price * tonPrice).toLocaleString('en-US', {minimumFractionDigits: 1}) }}<span>usdt</span>)
+        </div>
+        
+        <div class="product__payment__wallet">
+          <div class="product__payment__wallet__icon">
+            <IconToken h="16" w="16" color="white"/>
+          </div>
+          
+          <div class="product__payment__wallet__info">
+            <span>TON Space</span>
+            <span>EQCZk7u...g2DU</span>
+          </div>
+          
+          <div class="product__payment__wallet__balance">
+            <span>1000 TON</span>
+          </div>
+        </div>
+        
+        <div class="product__payment__premium">
+          <span class="product__payment__premium__title">About telegram premium</span>
+          <div class="product__payment__premium__info">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi incidunt ipsa itaque iure porro quae sed sint sunt, ut!
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi incidunt ipsa itaque iure porro quae sed sint sunt, ut!
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi incidunt ipsa itaque iure porro quae sed sint sunt, ut!
+            </p>
+          </div>
+        </div>
+      
+      </div>
+    </VBottomSheet>
   </div>
 </template>
 
 <route lang="json">
 {
-  "name": "product"
+"name": "product"
 }
 </route>
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
-import { useMarketStore } from '@/stores/market.ts';
+import {defineComponent} from 'vue';
+import {useMarketStore} from '@/stores/market.ts';
 import {useRouter, useRoute} from 'vue-router';
 
 import {Swiper, SwiperSlide} from 'swiper/vue';
 
-import 'swiper/css'
-import 'swiper/css/pagination'
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-import { Pagination } from 'swiper/modules';
+import {Pagination} from 'swiper/modules';
 import dayjs from 'dayjs';
 import reviews from '@/pages/market/store/[id]/products/[productId]/reviews.vue';
 
@@ -152,93 +202,108 @@ export default defineComponent({
   props: [],
   
   setup() {
-    const router = useRouter()
-    const route = useRoute()
-    const marketStore = useMarketStore()
+    const router = useRouter();
+    const route = useRoute();
+    const marketStore = useMarketStore();
     
-    return { router, route, marketStore, modules: [Pagination] }
+    return {router, route, marketStore, modules: [Pagination]};
   },
   
   data: () => ({
     activeTypeTab: 0,
     descShowMore: false,
     charsShowMore: false,
+    payment: {
+      show: false,
+      selectedItem: {} as { name: string; price: number }
+    },
+    tonPrice: 0,
   }),
   
   computed: {
     reviews() {
-      return reviews
+      return reviews;
     },
     product() {
-      return this.marketStore.findProductById(Number(this.route.params.id) as number, Number(this.route.params.productId) as number)
+      return this.marketStore.findProductById(Number(this.route.params.id) as number, Number(this.route.params.productId) as number);
     },
     sellerAndDeals() {
       return {
         seller: this.marketStore.findById(Number(this.route.params.id) as number).seller,
         deals: this.marketStore.findById(Number(this.route.params.id) as number).deals
-      }
+      };
     }
   },
   
   mounted() {
-    if (window.Telegram.WebApp) {
+    this.getTonPrice().then(tonPrice => {
+      this.tonPrice = tonPrice
+    })
+    
+    if (window.Telegram.WebApp && this.payment.selectedItem) {
       window.Telegram.WebApp.MainButton.setParams({
         text: 'BUY',
         is_active: true,
         is_visible: true
       }).onClick(() => {
-        console.log(window.Telegram.WebApp.MainButton);
-      })
+        this.payment.show = true;
+      });
     }
   },
   
   methods: {
     dateToHumanize(date: Date) {
-      let dayjsDate = dayjs(date)
-      return dayjsDate.format('DD.MM.YYYY')
+      let dayjsDate = dayjs(date);
+      return dayjsDate.format('DD.MM.YYYY');
     },
     
     kitcut(text: string, limit: number) {
       text = text.trim();
       if (text.length <= limit) return text;
       
-      text = text.slice( 0, limit);
-      let lastSpace = text.lastIndexOf(" ");
+      text = text.slice(0, limit);
+      let lastSpace = text.lastIndexOf(' ');
       if (lastSpace > 0) {
         text = text.substr(0, lastSpace);
       }
-      return text + "...";
+      return text + '...';
     },
     
     descShowMoreFunc() {
-      this.descShowMore = !this.descShowMore
-      let desc = document.querySelector<HTMLElement>('.product__description__text')!
+      this.descShowMore = !this.descShowMore;
+      let desc = document.querySelector<HTMLElement>('.product__description__text')!;
       
       console.log(this.descShowMore);
       
       if (this.descShowMore) {
-        desc.style.maxHeight = '1000px'
+        desc.style.maxHeight = '1000px';
       } else {
-        desc.style.maxHeight = '80px'
+        desc.style.maxHeight = '80px';
       }
     },
     
     charsShowMoreFunc() {
-      this.charsShowMore = !this.charsShowMore
+      this.charsShowMore = !this.charsShowMore;
+    },
+    
+    async getTonPrice() {
+      const response = await fetch('https://api.coingecko.com/api/v3/coins/the-open-network');
+      const data = await response.json();
+      return data.market_data.current_price.usd;
     }
   },
   
   watch: {
     activeTypeTab(newValue) {
-      let activeLi = document.querySelectorAll<HTMLElement>('.product__types__tabs li')[newValue]
-      let background = document.querySelector<HTMLElement>('.product__types__tabs--active__background')!
+      let activeLi = document.querySelectorAll<HTMLElement>('.product__types__tabs li')[newValue];
+      let background = document.querySelector<HTMLElement>('.product__types__tabs--active__background')!;
       
-      background.style.width = activeLi.clientWidth + 'px'
-      background.style.left = activeLi.offsetLeft + 'px'
+      background.style.width = activeLi.clientWidth + 'px';
+      background.style.left = activeLi.offsetLeft + 'px';
     }
   }
   
-})
+});
 
 </script>
 
@@ -481,6 +546,8 @@ export default defineComponent({
         border: 1px solid #E1E0E6;
         border-radius: 10px;
         
+        cursor: pointer;
+        
         &__name {
           font-size: 12px;
           font-family: "SF Pro Text Semibold", sans-serif;
@@ -493,6 +560,10 @@ export default defineComponent({
           margin-top: 5px;
           
           color: theme-var($--hint-color);
+        }
+        
+        &--selected {
+          background-color: #E6F1FF;
         }
       }
     }
@@ -690,6 +761,142 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       row-gap: 15px;
+    }
+  }
+  
+  &__payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    &__title {
+      margin-top: 6px;
+      
+      font-size: 16px;
+      line-height: 1;
+      text-transform: uppercase;
+      
+      color: #7D7D85;
+    }
+    
+    &__subtitle {
+      margin-top: 20px;
+      
+      font-size: 15px;
+      line-height: 1;
+    }
+    
+    &__price {
+      margin-top: 15px;
+      
+      span:first-child {
+        font-size: 20px;
+        font-family: "SF Pro Text Bold", sans-serif;
+        line-height: 1;
+      }
+      
+      span:last-child {
+        margin-left: 5px;
+        
+        font-size: 14px;
+        font-family: "SF Pro Text Semibold", sans-serif;
+        line-height: 1;
+        
+        color: theme-var($--hint-color);
+      }
+    }
+    
+    &__rate {
+      margin-top: 5px;
+      
+      font-size: 15px;
+      font-family: "SF Pro Text Bold", sans-serif;
+      line-height: 1;
+      
+      span {
+        margin-left: 5px;
+        
+        font-size: 10px;
+        font-family: "SF Pro Text Semibold", sans-serif;
+        text-transform: uppercase;
+        
+        color: theme-var($--hint-color);
+      }
+    }
+    
+    &__wallet {
+      display: flex;
+      align-items: center;
+      margin-top: 18px;
+      width: 100%;
+      padding: 10px 17px;
+      border-radius: 10px;
+      
+      background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+      
+      &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        
+        background-color: #000000;
+      }
+      
+      &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-left: 14px;
+        
+        span:first-child {
+          font-size: 15px;
+          font-family: "SF Pro Text Medium", sans-serif;
+        }
+        
+        span:last-child {
+          font-size: 12px;
+          font-family: "SF Pro Text Medium", sans-serif;
+          
+          color: #888888;
+        }
+      }
+      
+      &__balance {
+        margin-left: auto;
+        span {
+          font-size: 15px;
+          font-family: "SF Pro Text Medium", sans-serif;
+        }
+      }
+    }
+    
+    &__premium {
+      margin-top: 15px;
+      
+      &__title {
+        font-size: 12px;
+        text-transform: uppercase;
+        line-height: 1;
+        
+        color: #7D7D85;
+      }
+      
+      &__info {
+        margin-top: 10px;
+        padding: 10px 17px;
+        border-radius: 10px;
+        
+        background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+        
+        p {
+          font-size: 12px;
+          
+          color: #787878;
+        }
+      }
     }
   }
 }
