@@ -122,7 +122,7 @@
       </div>
     </div>
     
-    <button style="position: fixed; right: 0; bottom: 0; left: 0; width: 100%; padding: 10px 0; background-color: rgb(67,148,232)" @click="payment.show = true" v-if="payment.selectedItem.name.length && !payment.show">Купить</button>
+<!--    <button style="position: fixed; right: 0; bottom: 0; left: 0; width: 100%; padding: 10px 0; background-color: rgb(67,148,232)" @click="payment.show = true" v-if="payment.selectedItem.name.length && !payment.show">Купить</button>-->
     
     <VBottomSheet v-model="payment.show">
       <div class="product__payment">
@@ -239,16 +239,6 @@ export default defineComponent({
     this.getTonPrice().then(tonPrice => {
       this.tonPrice = tonPrice
     })
-    
-    if (window.Telegram.WebApp && this.payment.selectedItem.name.length) {
-      window.Telegram.WebApp.MainButton.setParams({
-        text: 'BUY',
-        is_active: true,
-        is_visible: true
-      }).onClick(() => {
-        this.payment.show = true;
-      });
-    }
   },
   
   methods: {
@@ -300,7 +290,31 @@ export default defineComponent({
       
       background.style.width = activeLi.clientWidth + 'px';
       background.style.left = activeLi.offsetLeft + 'px';
+    },
+    'payment.selectedItem': {
+      handler(newValue) {
+        console.log(newValue);
+        if (newValue.name !== '') {
+          if (window.Telegram.WebApp && this.payment.selectedItem.name.length) {
+            window.Telegram.WebApp.MainButton.setParams({
+              text: 'BUY',
+              is_active: true,
+              is_visible: true
+            }).onClick(() => {
+              this.payment.show = true;
+            });
+          }
+          console.log(newValue);
+        } else {
+          window.Telegram.WebApp.MainButton.setParams({
+            is_active: false,
+            is_visible: false
+          })
+          console.log(newValue);
+        }
+      }
     }
+    
   }
   
 });
