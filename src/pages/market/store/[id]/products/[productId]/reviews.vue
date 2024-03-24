@@ -150,6 +150,9 @@ export default defineComponent({
     }
     
     &__wrapper {
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
       margin-top: 15px;
     }
   }
