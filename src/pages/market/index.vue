@@ -276,7 +276,7 @@ export default defineComponent({
     &:after {
       content: "";
       flex: auto;
-      min-width: 67px;
+      min-width: 70px;
     }
     
     &__store {
@@ -285,7 +285,7 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex-basis: 67px;
+      flex-basis: 70px;
       margin-top: 5px;
       
       cursor: pointer;
