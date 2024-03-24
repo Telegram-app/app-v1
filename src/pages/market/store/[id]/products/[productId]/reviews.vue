@@ -114,7 +114,7 @@ export default defineComponent({
   
   &__image {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
   
   &__content {

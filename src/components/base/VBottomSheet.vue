@@ -85,7 +85,7 @@ export default defineComponent({
   &__overlay {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     height: 100vh;
     width: 100vw;
     
