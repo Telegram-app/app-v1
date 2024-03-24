@@ -6,7 +6,7 @@
     </div>
     
     <div class="store__image">
-      <img :src="'../../images/market/' + store.image" alt="store-image">
+      <img :src="'../../../images/market/' + store.image" alt="store-image">
     </div>
     
     <div class="store__title__wrapper card--bg">
@@ -23,35 +23,37 @@
         :free-mode="true"
         :slides-per-view="3.44"
         :space-between="10"
-        :speed="600"
+        :speed="800"
         class="store__filter__swiper"
+        @slider-move="filterStore.openSelect(-1)"
       >
         <swiper-slide class="store__filter__swiper__slide">
-          <VSelect v-model="selects.category.active" :label="selects.category.label" :options="selects.category.options" :open="selects.category.open" @open="openSelect(0)" @close="selects.category.open = false"></VSelect>
+<!--          <VSelect v-model="selects.category.active" :label="selects.category.label" :options="selects.category.options" :open="selects.category.open" @open="openSelect(0)" @close="selects.category.open = false"></VSelect>-->
+          <VSelect v-model="filterStore.market.selects.category.active" :label="filterStore.market.selects.category.label" @click="router.push({name: 'categories', params: { id: store.id }})"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filter__swiper__slide">
-          <VSelect v-model="selects.type.active" :label="selects.type.label" :options="selects.type.options" :open="selects.type.open" @open="openSelect(1)" @close="selects.type.open = false"></VSelect>
+          <VSelect v-model="filterStore.market.selects.type.active" :label="filterStore.market.selects.type.label" :options="filterStore.market.selects.type.options" :open="filterStore.market.selects.type.open" @open="filterStore.openSelect(0)" @close="filterStore.market.selects.type.open = false"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filter__swiper__slide">
-          <VSelect v-model="selects.city.active" :label="selects.city.label" :options="selects.city.options" :open="selects.city.open" @open="openSelect(2)" @close="selects.city.open = false"></VSelect>
+          <VSelect v-model="filterStore.market.selects.city.active" :label="filterStore.market.selects.city.label" :options="filterStore.market.selects.city.options" :open="filterStore.market.selects.city.open" @open="filterStore.openSelect(1)" @close="filterStore.market.selects.city.open = false"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filter__swiper__slide">
-          <VSelect v-model="selects.district.active" :label="selects.district.label" :options="selects.district.options" :open="selects.district.open" @open="openSelect(3)" @close="selects.district.open = false"></VSelect>
+          <VSelect v-model="filterStore.market.selects.district.active" :label="filterStore.market.selects.district.label" :options="filterStore.market.selects.district.options" :open="filterStore.market.selects.district.open" @open="filterStore.openSelect(2)" @close="filterStore.market.selects.district.open = false"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filter__swiper__slide">
-          <VInput v-model="inputs.quantity.value" :label="inputs.quantity.label" :placeholder="inputs.quantity.placeholder"></VInput>
+          <VInput v-model="filterStore.market.inputs.quantity.value" :label="filterStore.market.inputs.quantity.label" :placeholder="filterStore.market.inputs.quantity.placeholder"></VInput>
         </swiper-slide>
         
         <swiper-slide class="store__filter__swiper__slide">
-          <VInput v-model="inputs.priceFrom.value" :label="inputs.priceFrom.label" :placeholder="inputs.priceFrom.placeholder"></VInput>
+          <VInput v-model="filterStore.market.inputs.priceFrom.value" :label="filterStore.market.inputs.priceFrom.label" :placeholder="filterStore.market.inputs.priceFrom.placeholder"></VInput>
         </swiper-slide>
         
         <swiper-slide class="store__filter__swiper__slide">
-          <VInput v-model="inputs.priceUpTo.value" :label="inputs.priceUpTo.label" :placeholder="inputs.priceUpTo.placeholder"></VInput>
+          <VInput v-model="filterStore.market.inputs.priceUpTo.value" :label="filterStore.market.inputs.priceUpTo.label" :placeholder="filterStore.market.inputs.priceUpTo.placeholder"></VInput>
         </swiper-slide>
       </swiper>
     </div>
@@ -71,13 +73,15 @@
 <script lang="ts">
 
 import { defineComponent } from "vue";
-import { useMarketStore } from '@/stores/market.ts';
 import { useRoute, useRouter } from 'vue-router';
-import {Swiper, SwiperSlide} from 'swiper/vue';
+
+import { useMarketStore } from '@/stores/market.ts';
+import { useFilterStore } from '@/stores/filters.ts';
+import {Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css'
 
 export default defineComponent({
-  name: 'Store',
+  name: 'StorePage',
   components: {Swiper, SwiperSlide},
   
   props: [],
@@ -86,56 +90,14 @@ export default defineComponent({
     const router = useRouter()
     const route = useRoute()
     const marketStore = useMarketStore()
+    const filterStore = useFilterStore()
     
-    return { router, route, marketStore }
+    return { router, route, marketStore, filterStore }
   },
   
   data: () => ({
     storeWidgetShow: false,
-    pointToShowWidget: 1000,
-    selects: {
-      category: {
-        open: false,
-        active: 'All',
-        label: 'Category',
-        options: ['All', 'Category 1', 'Category 2', 'Category 3']
-      },
-      type: {
-        open: false,
-        active: 'All',
-        label: 'Type',
-        options: ['All', 'Type 1', 'Type 2', 'Type 3']
-      },
-      city: {
-        open: false,
-        active: 'All',
-        label: 'City',
-        options: ['All', 'Austin', 'Newark', 'Ontario']
-      },
-      district: {
-        open: false,
-        active: 'All',
-        label: 'District',
-        options: ['All', 'District 1', 'District 2', 'District 3']
-      }
-    },
-    inputs: {
-      quantity: {
-        value: '',
-        label: 'Quantity from',
-        placeholder: '10'
-      },
-      priceFrom: {
-        value: '',
-        label: 'Price from',
-        placeholder: '10 TON'
-      },
-      priceUpTo: {
-        value: '',
-        label: 'Price up to',
-        placeholder: '100 TON'
-      },
-    }
+    pointToShowWidget: 1000
   }),
   
   computed: {
@@ -150,12 +112,6 @@ export default defineComponent({
     },
     toProductPage(id: number | string) {
       this.router.push({ name: 'product', params: { id: this.store.id, productId: id } })
-    },
-    openSelect(index: number) {
-      this.selects.category.open = index === 0 ? !this.selects.category.open : false
-      this.selects.type.open = index === 1 ? !this.selects.type.open : false
-      this.selects.city.open = index === 2 ? !this.selects.city.open : false
-      this.selects.district.open = index === 3 ? !this.selects.district.open : false
     }
   },
   
@@ -180,6 +136,18 @@ export default defineComponent({
   unmounted () {
     window.removeEventListener('scroll', this.showWidget);
   },
+  
+  watch: {
+    'route.query': {
+      handler: function(query) {
+        if (query.category) {
+          this.filterStore.market.selects.category.active = query.category
+        }
+      },
+      deep: true,
+      immediate: true
+    }
+  }
   
 })
 

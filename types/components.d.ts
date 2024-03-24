@@ -13,6 +13,7 @@ declare module 'vue' {
     DefaultLayout: typeof import('./../src/layouts/DefaultLayout.vue')['default']
     IconArrowNext: typeof import('./../src/components/icons/IconArrowNext.vue')['default']
     IconChevronRight: typeof import('./../src/components/icons/IconChevronRight.vue')['default']
+    IconConfirmed: typeof import('./../src/components/icons/IconConfirmed.vue')['default']
     IconEllipsisCircleOutline: typeof import('./../src/components/icons/IconEllipsisCircleOutline.vue')['default']
     IconHeart: typeof import('./../src/components/icons/IconHeart.vue')['default']
     IconSearch: typeof import('./../src/components/icons/IconSearch.vue')['default']

@@ -5,26 +5,31 @@
       <span class="custom-select__selected__text">{{ modelValue }}</span>
       <IconSelect h="10" w="11"></IconSelect>
     </div>
-    <div class="custom-select__items" :class="{ 'custom-select--hide': !open }">
-      <template v-for="(option, i) of options">
-        <div
-          v-if="option !== modelValue"
-          :key="i"
-          @click="$emit('close'); $emit('update:modelValue', option);"
-        >
-          {{ option }}
-        </div>
-      </template>
-    </div>
+    <OnClickOutside @trigger="$emit('close')">
+      <div ref="selectMenu" class="custom-select__items" :class="{ 'custom-select--hide': !open }">
+        <template v-for="(option, i) of options">
+          <div
+            v-if="option !== modelValue"
+            :key="i"
+            @click="$emit('close'); $emit('update:modelValue', option);"
+          >
+            {{ option }}
+          </div>
+        </template>
+      </div>
+    </OnClickOutside>
   </div>
 </template>
 
 <script lang="ts">
 
 import { defineComponent } from "vue";
+import { OnClickOutside } from '@vueuse/components';
 
 export default defineComponent({
   name: 'VSelect',
+  
+  components: { OnClickOutside },
   
   props: {
     modelValue: { type: String },
@@ -33,11 +38,14 @@ export default defineComponent({
       required: true,
       default: 'label',
     },
-    options: {
-      type: Array,
-      required: true,
-    },
+    options: Array,
     open: Boolean
+  },
+  
+  methods: {
+    log() {
+      console.log('triggered');
+    }
   }
   
 })

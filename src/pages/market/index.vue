@@ -126,7 +126,7 @@ import { Autoplay, FreeMode } from "swiper/modules";
 import 'swiper/css'
 
 export default defineComponent({
-  name: 'Market',
+  name: 'MarketPage',
   
   components: { Swiper, SwiperSlide },
   
@@ -264,14 +264,20 @@ export default defineComponent({
   
   &__stores {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 10px;
     margin-top: 15px;
     padding: 10px 13px;
     border-radius: 10px;
-    row-gap: 15px;
     
     background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+    
+    &:after {
+      content: "";
+      flex: auto;
+      min-width: 67px;
+    }
     
     &__store {
       position: relative;
@@ -279,7 +285,8 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex-basis: 70px;
+      flex-basis: 67px;
+      margin-top: 5px;
       
       cursor: pointer;
       
@@ -312,6 +319,7 @@ export default defineComponent({
       
       &__title {
         margin-top: 7px;
+        text-align: center;
         
         font-size: 12px;
         line-height: 1;
@@ -319,6 +327,7 @@ export default defineComponent({
     }
     
     &__line {
+      margin-bottom: -5px;
       height: 1px;
       width: 100%;
       

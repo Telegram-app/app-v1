@@ -16,7 +16,7 @@
   }
 }
 
-@function theme-var-tg($telegram_var, $key, $fallback: null, $map: $theme-map-dark) {
+@function theme-var-tg($telegram_var, $key, $fallback: null, $map: $theme-map-light) {
   @if not map-has-key($map, $key) {
     @error "key: '#{$key}', is not a key in map: #{$map}";
   }

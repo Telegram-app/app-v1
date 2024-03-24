@@ -20,8 +20,12 @@
     
     <div class="review__message__wrapper">
       <div class="review__message" :class="{ 'review__message--show': showMore }">
-        <p class="review__message__text" :class="{'review__message__text__full': showMore}">{{ showMore ? review.message : kitcut(review.message, 165) }}</p>
-        <a class="review__message__show-more" @click="reviewShowMoreFunc()" v-if="review.message.length > 165">{{ showMore ? 'Hide more' : 'Show more' }}</a>
+        <p class="review__message__text" :class="{'review__message__text__full': showMore}">
+          {{ showMore ? review.message : kitcut(review.message, 165) }}
+          <span class="review__message__show-more__wrapper">
+            <a class="review__message__show-more" @click="reviewShowMoreFunc()" v-if="review.message.length > 165">{{ showMore ? 'Hide more' : 'Show more' }}</a>
+          </span>
+        </p>
       </div>
       
       <div class="review__message__reply" v-if="!review.response">
@@ -44,8 +48,12 @@
       </div>
       
       <div class="review__message" :class="{ 'review__message--show': showMoreResponse }">
-        <p class="review__message__text" :class="{'review__message__text__full': showMoreResponse}">{{ showMoreResponse ? review.response.message : kitcut(review.response.message, 200) }}</p>
-        <a class="review__message__show-more" @click="reviewResponseShowMoreFunc()" v-if="review.response.message.length > 200">{{ showMoreResponse ? 'Hide more' : 'Show more' }}</a>
+        <p class="review__message__text" :class="{'review__message__text__full': showMoreResponse}">
+          {{ showMoreResponse ? review.response.message : kitcut(review.response.message, 200) }}
+          <span class="review__message__show-more__wrapper">
+            <a class="review__message__show-more" @click="reviewResponseShowMoreFunc()" v-if="review.response.message.length > 200">{{ showMoreResponse ? 'Hide more' : 'Show more' }}</a>
+          </span>
+        </p>
       </div>
     </div>
   </div>
@@ -57,7 +65,7 @@ import {defineComponent, type PropType} from 'vue';
 import {ProductReview} from '@/models/store.model.ts';
 
 export default defineComponent({
-  name: '',
+  name: 'Review',
   
   props: {
     review: Object as PropType<ProductReview>
@@ -172,14 +180,21 @@ export default defineComponent({
     position: relative;
     
     &__text {
+      position: relative;
+      
       font-size: 13px;
       line-height: 16px;
     }
     
     &__show-more {
+      &__wrapper {
+        display: inline-block;
+        min-width: 70px;
+      }
       position: absolute;
       right: 0;
-      bottom: -2px;
+      bottom: 0;
+      
       border-bottom: 1px dashed #CFCFD1;
       
       font-size: 13px;

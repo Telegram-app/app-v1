@@ -13,7 +13,7 @@ export default defineComponent({
   name: 'VInput',
   
   props: {
-    modelValue: { type: String },
+    modelValue: { type: Number },
     label: {
       type: String,
       required: true,

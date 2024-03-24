@@ -73,8 +73,12 @@
       
       <div class="product__description" :class="{ 'product__description--show': descShowMore }">
         <span class="product__description__title">Description</span>
-        <p class="product__description__text" :class="{'product__description__text__full': descShowMore}">{{ descShowMore ? product.description : kitcut(product.description, 170) }}</p>
-        <a class="product__description__show-more" @click="descShowMoreFunc()" v-if="product.description.length > 170">{{ descShowMore ? 'Hide more' : 'Show more' }}</a>
+        <p class="product__description__text" :class="{'product__description__text__full': descShowMore}">
+          {{ descShowMore ? product.description : kitcut(product.description, 170) }}
+          <span class="product__description__show-more__wrapper">
+            <a class="product__description__show-more" @click="descShowMoreFunc()" v-if="product.description.length > 170">{{ descShowMore ? 'Hide more' : 'Show more' }}</a>
+          </span>
+        </p>
       </div>
       
       <div class="divider"></div>
@@ -106,14 +110,14 @@
       <div class="product__reviews">
         <div class="product__reviews__header">
           <span class="product__reviews__title">Reviews</span>
-          <div class="product__reviews__to-reviews">
+          <div class="product__reviews__to-reviews" @click="router.push({ name: 'reviews', params: { id: route.params.id, productId: product.id } })">
             <span>Show All</span>
             <IconChevronRight h="10"/>
           </div>
         </div>
         
         <div class="product__reviews__wrapper">
-          <Review v-for="(review, index) in product.reviews" :key="'review-' + index" :review="review"/>
+          <Review v-for="(review, index) in product.reviews?.slice(0, 2)" :key="'review-' + index" :review="review"/>
         </div>
       </div>
     </div>
@@ -130,7 +134,7 @@
 
 import { defineComponent } from "vue";
 import { useMarketStore } from '@/stores/market.ts';
-import {useRoute} from 'vue-router';
+import {useRouter, useRoute} from 'vue-router';
 
 import {Swiper, SwiperSlide} from 'swiper/vue';
 
@@ -139,18 +143,20 @@ import 'swiper/css/pagination'
 
 import { Pagination } from 'swiper/modules';
 import dayjs from 'dayjs';
+import reviews from '@/pages/market/store/[id]/products/[productId]/reviews.vue';
 
 export default defineComponent({
-  name: '',
+  name: 'ProductPage',
   components: {Swiper, SwiperSlide},
   
   props: [],
   
   setup() {
+    const router = useRouter()
     const route = useRoute()
     const marketStore = useMarketStore()
     
-    return { route, marketStore, modules: [Pagination] }
+    return { router, route, marketStore, modules: [Pagination] }
   },
   
   data: () => ({
@@ -160,6 +166,9 @@ export default defineComponent({
   }),
   
   computed: {
+    reviews() {
+      return reviews
+    },
     product() {
       return this.marketStore.findProductById(Number(this.route.params.id) as number, Number(this.route.params.productId) as number)
     },
@@ -495,7 +504,6 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    overflow: hidden;
     
     &__title {
       font-size: 12px;
@@ -505,6 +513,8 @@ export default defineComponent({
     }
     
     &__text {
+      position: relative;
+      
       max-height: 80px;
       margin-top: 8px;
       
@@ -520,9 +530,14 @@ export default defineComponent({
     }
     
     &__show-more {
+      &__wrapper {
+        display: inline-block;
+        min-width: 70px;
+      }
+      
       position: absolute;
       right: 0;
-      bottom: -2px;
+      bottom: 0;
       border-bottom: 1px dashed #CFCFD1;
       
       font-size: 13px;
@@ -659,6 +674,8 @@ export default defineComponent({
       font-size: 12px;
       
       color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
+      
+      cursor: pointer;
       
       span {
         margin-right: 5px;

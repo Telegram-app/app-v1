@@ -32,7 +32,7 @@
         <div class="product__card__info__bottom">
           <div class="product__card__info__store">
             <span>Store</span>
-            <span>{{ storeName }}</span>
+            <span>{{ storeName }} <IconConfirmed h="10" w="10"/></span>
           </div>
           <div class="product__card__info__actions">
             <div class="product__card__info__actions__rating">
@@ -67,10 +67,11 @@ import { defineComponent } from "vue";
 import type { PropType } from 'vue'
 import { Product } from '@/models/store.model.ts';
 import IconStar from '@/components/icons/IconStar.vue';
+import IconConfirmed from '@/components/icons/IconConfirmed.vue';
 
 export default defineComponent({
   name: 'ProductCard',
-  components: {IconStar},
+  components: {IconConfirmed, IconStar},
   
   props: {
     product: Object as PropType<Product>,
@@ -218,6 +219,10 @@ export default defineComponent({
           display: flex;
           flex: 1;
           align-items: center;
+          
+          svg {
+            margin-left: 2px;
+          }
           
           &:before {
             content: '';
