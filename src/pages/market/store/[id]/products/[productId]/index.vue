@@ -122,8 +122,6 @@
       </div>
     </div>
     
-<!--    <button style="position: fixed; right: 0; bottom: 0; left: 0; width: 100%; padding: 10px 0; background-color: rgb(67,148,232)" @click="payment.show = true" v-if="payment.selectedItem.name.length && !payment.show">Купить</button>-->
-    
     <VBottomSheet v-model="payment.show">
       <div class="product__payment">
         <h3 class="product__payment__title">Payment</h3>

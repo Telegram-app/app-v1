@@ -124,6 +124,11 @@ export default defineComponent({
   opacity: 0;
 }
 
+.bottom-sheet-outer-enter-to,
+.bottom-sheet-outer-leave-from {
+  opacity: 1;
+}
+
 .bottom-sheet-inner-enter-active,
 .bottom-sheet-inner-leave-active {
   transition: all 0.4s ease;
@@ -132,6 +137,11 @@ export default defineComponent({
 .bottom-sheet-inner-enter-from,
 .bottom-sheet-inner-leave-to {
   transform: translateY(100%);
+}
+
+.bottom-sheet-inner-enter-to,
+.bottom-sheet-inner-leave-from {
+  transform: translateY(0);
 }
 
 </style>
