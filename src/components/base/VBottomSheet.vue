@@ -116,6 +116,7 @@ export default defineComponent({
 
 .bottom-sheet-outer-enter-active,
 .bottom-sheet-outer-leave-active {
+  -webkit-transition: all .4s ease;
   transition: all 0.4s ease;
 }
 
@@ -131,7 +132,8 @@ export default defineComponent({
 
 .bottom-sheet-inner-enter-active,
 .bottom-sheet-inner-leave-active {
-  transition: all 0.4s ease;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
 }
 
 .bottom-sheet-inner-enter-from,
