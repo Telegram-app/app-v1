@@ -36,7 +36,7 @@ export const useMarketStore = defineStore("market", {
         },
 
         createFakeStores() {
-            if (localStorage.getItem('stores')) return
+            if (JSON.parse(localStorage.getItem('stores') as string).length < 35) return
 
             for (let i = 0; i < 40; i++) {
                 this.createNewStore(generateFakeStore())
