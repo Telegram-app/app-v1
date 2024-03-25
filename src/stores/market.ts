@@ -26,11 +26,11 @@ export const useMarketStore = defineStore("market", {
             this.stores.push(store);
         },
 
-        findById(id: number) {
+        findById(id: number | string) {
             return this.stores.find((store) => store.id === id) as Store;
         },
 
-        findProductById(storeId: number,id: number) {
+        findProductById(storeId: number | string, id: number | string) {
             const store = this.stores.find((store) => store.id === storeId) as Store;
             return store.products.find((product) => product.id === id) as Product
         },

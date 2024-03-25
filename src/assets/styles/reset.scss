@@ -2,14 +2,14 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-input.reset, select.reset {
+input.reset, select.reset, textarea.reset {
   border: unset;
 
   font-size: 12px;
   box-shadow: unset;
 
   &::placeholder {
-    color: #888888;
+    color: #7D7D85;
   }
 }
 

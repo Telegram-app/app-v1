@@ -90,7 +90,7 @@
         </div>
         <div class="product__store__info__deals">
           <span>Deals: </span>
-          <span>{{ sellerAndDeals.deals.completed }} <div></div> {{ Math.floor(sellerAndDeals.deals.completed / sellerAndDeals.deals.quantity * 100) }}%</span>
+          <span>{{ sellerAndDeals.deals.completed }} · {{ Math.floor(sellerAndDeals.deals.completed / sellerAndDeals.deals.quantity * 100) }}%</span>
         </div>
       </div>
       
@@ -137,7 +137,7 @@
           (~{{ (payment.selectedItem.price * tonPrice).toLocaleString('en-US', {minimumFractionDigits: 1}) }}<span>usdt</span>)
         </div>
         
-        <div class="product__payment__wallet">
+        <div class="product__payment__wallet" @click="orderProduct()">
           <div class="product__payment__wallet__icon">
             <IconToken h="16" w="16" color="white"/>
           </div>
@@ -166,9 +166,10 @@
             </p>
           </div>
         </div>
-      
       </div>
     </VBottomSheet>
+    
+<!--    <button style="position: fixed; right: 0; bottom: 0; left: 0; width: 100%; padding: 10px 0; background-color: rgb(67,148,232)" @click="payment.show = true" v-if="payment.selectedItem.name.length && !payment.show">Купить</button>-->
   </div>
 </template>
 
@@ -182,6 +183,7 @@
 
 import {defineComponent} from 'vue';
 import {useMarketStore} from '@/stores/market.ts';
+import {useUserStore, Order} from '@/stores/user.ts';
 import {useRouter, useRoute} from 'vue-router';
 
 import {Swiper, SwiperSlide} from 'swiper/vue';
@@ -202,9 +204,10 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const route = useRoute();
+    const userStore = useUserStore();
     const marketStore = useMarketStore();
     
-    return {router, route, marketStore, modules: [Pagination]};
+    return {router, route, userStore, marketStore, modules: [Pagination]};
   },
   
   data: () => ({
@@ -240,6 +243,29 @@ export default defineComponent({
   },
   
   methods: {
+    orderProduct() {
+      this.userStore.orderProduct(Number(this.route.params.id), this.product.id).then(newOrder => {
+        this.router.push({ name: 'orderIssuing', params: { id: newOrder.id } })
+      })
+    },
+    
+    async getTonPrice() {
+      const response = await fetch('https://api.coingecko.com/api/v3/coins/the-open-network');
+      const data = await response.json();
+      return data.market_data.current_price.usd;
+    },
+    
+    descShowMoreFunc() {
+      this.descShowMore = !this.descShowMore;
+      let desc = document.querySelector<HTMLElement>('.product__description__text')!;
+      
+      if (this.descShowMore) {
+        desc.style.maxHeight = '1000px';
+      } else {
+        desc.style.maxHeight = '80px';
+      }
+    },
+    
     dateToHumanize(date: Date) {
       let dayjsDate = dayjs(date);
       return dayjsDate.format('DD.MM.YYYY');
@@ -257,28 +283,9 @@ export default defineComponent({
       return text + '...';
     },
     
-    descShowMoreFunc() {
-      this.descShowMore = !this.descShowMore;
-      let desc = document.querySelector<HTMLElement>('.product__description__text')!;
-      
-      console.log(this.descShowMore);
-      
-      if (this.descShowMore) {
-        desc.style.maxHeight = '1000px';
-      } else {
-        desc.style.maxHeight = '80px';
-      }
-    },
-    
     charsShowMoreFunc() {
       this.charsShowMore = !this.charsShowMore;
     },
-    
-    async getTonPrice() {
-      const response = await fetch('https://api.coingecko.com/api/v3/coins/the-open-network');
-      const data = await response.json();
-      return data.market_data.current_price.usd;
-    }
   },
   
   watch: {
@@ -291,7 +298,6 @@ export default defineComponent({
     },
     'payment.selectedItem': {
       handler(newValue) {
-        console.log(newValue);
         if (newValue.name !== '') {
           if (window.Telegram.WebApp && this.payment.selectedItem.name.length) {
             window.Telegram.WebApp.MainButton.setParams({
@@ -300,15 +306,17 @@ export default defineComponent({
               is_visible: true
             }).onClick(() => {
               this.payment.show = true;
+              window.Telegram.WebApp.MainButton.setParams({
+                is_active: false,
+                is_visible: false
+              })
             });
           }
-          console.log(newValue);
         } else {
           window.Telegram.WebApp.MainButton.setParams({
             is_active: false,
             is_visible: false
           })
-          console.log(newValue);
         }
       }
     }
@@ -669,15 +677,6 @@ export default defineComponent({
       span:last-child {
         display: flex;
         align-items: center;
-        
-        div {
-          height: 2px;
-          width: 2px;
-          margin: 0 6px;
-          border-radius: 100%;
-          
-          background-color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
-        }
       }
     }
   }
@@ -909,6 +908,7 @@ export default defineComponent({
         
         p {
           font-size: 12px;
+          line-height: 12px;
           
           color: #787878;
         }

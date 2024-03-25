@@ -4,8 +4,14 @@
 @import "reset";
 
 .app__layout {
-  color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+  min-height: 100vh;
+  height: 100%;
+  padding: 15px;
+  overflow: hidden;
 
+  font-family: "SF Pro Text", sans-serif;
+
+  color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
   background: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
 }
 
@@ -15,15 +21,23 @@
   }
 }
 
-body {
-  .app__layout {
-    min-height: 100vh;
-    height: 100%;
-    padding: 15px;
-    overflow: hidden;
+.self-card {
+  margin-top: 10px;
+  padding: 10px 17px;
+  border-radius: 10px;
 
-    font-family: "SF Pro Text", sans-serif;
-  }
+  background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+}
+
+.caption {
+  display: inline-block;
+  width: 100%;
+
+  font-size: 12px;
+  text-transform: uppercase;
+  line-height: 1;
+
+  color: #7D7D85;
 }
 
 
