@@ -38,10 +38,10 @@ export const useMarketStore = defineStore("market", {
         createFakeStores() {
             if (localStorage.getItem('stores')) return
 
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 40; i++) {
                 this.createNewStore(generateFakeStore())
 
-                if (i === 19) {
+                if (i === 39) {
                     localStorage.setItem('stores', JSON.stringify(this.stores) as string);
                 }
             }

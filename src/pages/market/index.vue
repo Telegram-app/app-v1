@@ -1,8 +1,8 @@
 <template>
-  <div class="market__widget">
-    <span class="is-uppercase">Tickets available intil january</span>
-    <IconArrowNext h="19" w="19" color="black"/>
-  </div>
+<!--  <div class="market__widget">-->
+<!--    <span class="is-uppercase">Tickets available intil january</span>-->
+<!--    <IconArrowNext h="19" w="19" color="black"/>-->
+<!--  </div>-->
   
   <div class="market__banners">
     <swiper
@@ -38,7 +38,7 @@
       <span class="market__stores__store__title">{{ store.name }}</span>
     </div>
     <div class="market__stores__line"></div>
-    <div class="market__stores__store" v-for="store in stores.slice(4)" :key="store.id" @click="toStorePage(store.id)">
+    <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @click="toStorePage(store.id)">
       <img :src="'./images/market/stores/' + store.icon" alt="store-image">
       <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>
       <span class="market__stores__store__title">{{ store.name }}</span>
@@ -215,33 +215,33 @@ export default defineComponent({
 <style lang="scss">
 
 .market {
-  &__widget {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(100% + 30px);
-    margin: -15px -15px 0;
-    padding: 12px 0;
-    
-    font-size: 15px;
-    font-family: "SF Pro Text Semibold", sans-serif;
-    
-    background-image: url('/images/market/market-widget-bg.jpg');
-    
-    span {
-      margin-right: 8px;
-      
-      line-height: 1;
-      
-      color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
-    }
-  }
+  //&__widget {
+  //  display: flex;
+  //  align-items: center;
+  //  justify-content: center;
+  //  width: calc(100% + 30px);
+  //  margin: -15px -15px 0;
+  //  padding: 12px 0;
+  //
+  //  font-size: 15px;
+  //  font-family: "SF Pro Text Semibold", sans-serif;
+  //
+  //  background-image: url('/images/market/market-widget-bg.jpg');
+  //
+  //  span {
+  //    margin-right: 8px;
+  //
+  //    line-height: 1;
+  //
+  //    color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+  //  }
+  //}
   
   &__banners {
     position: relative;
     height: 165px;
     width: calc(100% + 30px);
-    margin: 20px -15px 0;
+    margin: 0 -15px 0;
     
     &__swiper {
       height: 100%;
@@ -285,7 +285,7 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex-basis: 70px;
+      flex-basis: 23%;
       margin-top: 5px;
       
       cursor: pointer;
@@ -293,8 +293,8 @@ export default defineComponent({
       img {
         z-index: 2;
         
-        height: 59px;
-        width: 59px;
+        height: 80%;
+        width: 80%;
         border-radius: 10px;
         
         transition: 0.3s all;
