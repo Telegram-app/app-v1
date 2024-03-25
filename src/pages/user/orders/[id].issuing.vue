@@ -545,6 +545,7 @@ export default defineComponent({
         
         font-size: 12px;
         
+        color: #000000;
         background-color: #E6F1FF;
         
         &:first-child {
