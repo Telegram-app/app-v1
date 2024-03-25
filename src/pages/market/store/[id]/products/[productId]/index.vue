@@ -7,7 +7,7 @@
         class="product__images__swiper"
       >
         <swiper-slide class="product__images__swiper__slide" v-for="(i, index) in 3" :key="i" :virtualIndex="index">
-          <div class="product__image">
+          <div class="product__images__image">
             <img :src="'/images/market/stores/products/' + product.image" alt="product-image">
             <div class="product__images__swiper__pagination">
               <span>{{ i + '/' + 3 }}</span>
@@ -19,8 +19,6 @@
     
     <div class="product__statuses">
       <div class="product__statuses__status product__statuses__status__top-sales">Top sales</div>
-      <!--      <div class="product__statuses__status product__statuses__status__new">New</div>-->
-      <!--      <div class="product__statuses__status product__statuses__status__good-reviews">Good Reviews</div>-->
     </div>
     
     <div class="product__info card--bg">
@@ -72,7 +70,7 @@
       <div class="divider"></div>
       
       <div class="product__description" :class="{ 'product__description--show': descShowMore }">
-        <span class="product__description__title">Description</span>
+        <span class="caption">Description</span>
         <p class="product__description__text" :class="{'product__description__text__full': descShowMore}">
           {{ descShowMore ? product.description : kitcut(product.description, 170) }}
           <span class="product__description__show-more__wrapper">
@@ -97,7 +95,7 @@
       <div class="divider"></div>
       
       <div class="product__chars" :class="{ 'product__chars--show': charsShowMore }">
-        <span class="product__chars__title">Characteristics</span>
+        <span class="caption">Characteristics</span>
         <div class="product__chars__char" v-for="(char, index) in charsShowMore ? product.characteristics : product.characteristics.slice(0, 2)" :key="'char-' + index">
           <span class="product__chars__char__key">{{ char.key }}</span>
           <span class="product__chars__char__value">{{ char.value }}</span>
@@ -109,7 +107,7 @@
       
       <div class="product__reviews">
         <div class="product__reviews__header">
-          <span class="product__reviews__title">Reviews</span>
+          <span class="caption">Reviews</span>
           <div class="product__reviews__to-reviews" @click="router.push({ name: 'reviews', params: { id: route.params.id, productId: product.id } })">
             <span>Show All</span>
             <IconChevronRight h="10"/>
@@ -137,7 +135,7 @@
           (~{{ (payment.selectedItem.price * tonPrice).toLocaleString('en-US', {minimumFractionDigits: 1}) }}<span>usdt</span>)
         </div>
         
-        <div class="product__payment__wallet" @click="orderProduct()">
+        <div class="product__payment__wallet self-card" @click="orderProduct()">
           <div class="product__payment__wallet__icon">
             <IconToken h="16" w="16" color="white"/>
           </div>
@@ -153,8 +151,8 @@
         </div>
         
         <div class="product__payment__premium">
-          <span class="product__payment__premium__title">About telegram premium</span>
-          <div class="product__payment__premium__info">
+          <span class="caption">About telegram premium</span>
+          <div class="product__payment__premium__info self-card">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi incidunt ipsa itaque iure porro quae sed sint sunt, ut!
             </p>
@@ -168,8 +166,6 @@
         </div>
       </div>
     </VBottomSheet>
-    
-<!--    <button style="position: fixed; right: 0; bottom: 0; left: 0; width: 100%; padding: 10px 0; background-color: rgb(67,148,232)" @click="payment.show = true" v-if="payment.selectedItem.name.length && !payment.show">Купить</button>-->
   </div>
 </template>
 
@@ -187,13 +183,12 @@ import {useUserStore, Order} from '@/stores/user.ts';
 import {useRouter, useRoute} from 'vue-router';
 
 import {Swiper, SwiperSlide} from 'swiper/vue';
+import {Pagination} from 'swiper/modules';
+
+import dayjs from 'dayjs';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-
-import {Pagination} from 'swiper/modules';
-import dayjs from 'dayjs';
-import reviews from '@/pages/market/store/[id]/products/[productId]/reviews.vue';
 
 export default defineComponent({
   name: 'ProductPage',
@@ -216,37 +211,35 @@ export default defineComponent({
     charsShowMore: false,
     payment: {
       show: false,
-      selectedItem: { name: '', price: 0 } as { name: string; price: number }
+      selectedItem: {name: '', price: 0} as { name: string; price: number }
     },
     tonPrice: 0,
   }),
   
   computed: {
-    reviews() {
-      return reviews;
-    },
     product() {
       return this.marketStore.findProductById(Number(this.route.params.id) as number, Number(this.route.params.productId) as number);
     },
     sellerAndDeals() {
+      let store = this.marketStore.findById(Number(this.route.params.id) as number)
       return {
-        seller: this.marketStore.findById(Number(this.route.params.id) as number).seller,
-        deals: this.marketStore.findById(Number(this.route.params.id) as number).deals
+        seller: store.seller,
+        deals: store.deals
       };
     }
   },
   
   mounted() {
     this.getTonPrice().then(tonPrice => {
-      this.tonPrice = tonPrice
-    })
+      this.tonPrice = tonPrice;
+    });
   },
   
   methods: {
     orderProduct() {
       this.userStore.orderProduct(Number(this.route.params.id), this.product.id).then(newOrder => {
-        this.router.push({ name: 'orderIssuing', params: { id: newOrder.id } })
-      })
+        this.router.push({name: 'orderIssuing', params: {id: newOrder.id}});
+      });
     },
     
     async getTonPrice() {
@@ -309,14 +302,14 @@ export default defineComponent({
               window.Telegram.WebApp.MainButton.setParams({
                 is_active: false,
                 is_visible: false
-              })
+              });
             });
           }
         } else {
           window.Telegram.WebApp.MainButton.setParams({
             is_active: false,
             is_visible: false
-          })
+          });
         }
       }
     }
@@ -331,11 +324,7 @@ export default defineComponent({
 
 .product {
   .divider {
-    height: 1px;
-    width: 100%;
     margin-top: 15px;
-    
-    background-color: theme-var($--divider-color);
   }
   
   &__images {
@@ -361,20 +350,20 @@ export default defineComponent({
         }
       }
     }
-  }
-  
-  &__image {
-    position: relative;
     
-    display: flex;
-    justify-content: center;
-    height: 300px;
-    width: 100%;
-    
-    img {
-      height: 100%;
-      width: 300px;
-      border-radius: 10px;
+    &__image {
+      position: relative;
+      
+      display: flex;
+      justify-content: center;
+      height: 300px;
+      width: 100%;
+      
+      img {
+        height: 100%;
+        width: 300px;
+        border-radius: 10px;
+      }
     }
   }
   
@@ -397,20 +386,6 @@ export default defineComponent({
         
         color: #000000;
         background: linear-gradient(90deg, #D4FFDB 0%, #E9FD5D 100%);
-      }
-      
-      &__new {
-        margin-top: 5px;
-        
-        color: #000000;
-        background: linear-gradient(90deg, #6BFFAF 0%, #72E6FF 100%);
-      }
-      
-      &__good-reviews {
-        margin-top: 5px;
-        
-        color: #000000;
-        background: linear-gradient(90deg, #BFCDFF 0%, #4E7AFF 100%);
       }
     }
   }
@@ -598,20 +573,13 @@ export default defineComponent({
     
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
-    
-    &__title {
-      font-size: 12px;
-      text-transform: uppercase;
-      
-      color: #7D7D85;
-    }
+    margin-top: 15px;
     
     &__text {
       position: relative;
       
       max-height: 80px;
-      margin-top: 8px;
+      margin-top: 10px;
       
       font-size: 13px;
       line-height: 16px;
@@ -686,20 +654,13 @@ export default defineComponent({
     
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    margin-top: 15px;
     overflow: hidden;
-    
-    &__title {
-      font-size: 12px;
-      text-transform: uppercase;
-      
-      color: #7D7D85;
-    }
     
     &__char {
       display: flex;
       justify-content: space-between;
-      margin-top: 5px;
+      margin-top: 10px;
       width: 100%;
       
       &__key {
@@ -737,20 +698,13 @@ export default defineComponent({
   }
   
   &__reviews {
-    margin-top: 10px;
+    margin-top: 15px;
     
     &__header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
-    }
-    
-    &__title {
-      font-size: 12px;
-      text-transform: uppercase;
-      
-      color: #7D7D85;
     }
     
     &__to-reviews {
@@ -765,6 +719,8 @@ export default defineComponent({
       
       span {
         margin-right: 5px;
+        
+        white-space: nowrap;
       }
       
       svg {
@@ -844,10 +800,6 @@ export default defineComponent({
       align-items: center;
       margin-top: 18px;
       width: 100%;
-      padding: 10px 17px;
-      border-radius: 10px;
-      
-      background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
       
       &__icon {
         display: flex;
@@ -881,6 +833,7 @@ export default defineComponent({
       
       &__balance {
         margin-left: auto;
+        
         span {
           font-size: 15px;
           font-family: "SF Pro Text Medium", sans-serif;
@@ -891,20 +844,8 @@ export default defineComponent({
     &__premium {
       margin-top: 15px;
       
-      &__title {
-        font-size: 12px;
-        text-transform: uppercase;
-        line-height: 1;
-        
-        color: #7D7D85;
-      }
-      
       &__info {
         margin-top: 10px;
-        padding: 10px 17px;
-        border-radius: 10px;
-        
-        background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
         
         p {
           font-size: 12px;

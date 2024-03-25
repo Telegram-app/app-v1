@@ -8,7 +8,7 @@
         class="order-issuing__product__images__swiper"
       >
         <swiper-slide class="order-issuing__product__images__swiper__slide" v-for="(i, index) in 3" :key="i" :virtualIndex="index">
-          <div class="order-issuing__product__image">
+          <div class="order-issuing__product__images__image">
             <img :src="'/images/market/stores/products/' + productImage" alt="product-image">
           </div>
         </swiper-slide>
@@ -17,6 +17,7 @@
     
     <div class="order-issuing__premium">
       <span class="caption">About telegram premium</span>
+      
       <div class="self-card">
         <p class="order-issuing__premium__text">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi incidunt ipsa itaque iure porro quae sed sint sunt, ut!
@@ -57,19 +58,21 @@
         
         <div class="order-issuing__messenger__content">
           <div class="order-issuing__messenger__username">Vsevolod</div>
+          
           <div class="order-issuing__messenger__message">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do sfsf
           </div>
-          <div class="order-issuing__messenger__time">
-            15:00
-          </div>
+          
+          <div class="order-issuing__messenger__time">15:00</div>
         </div>
       </div>
     </div>
     
     <div class="order-issuing__actions self-card">
       <div class="order-issuing__actions__chat">Chat with the seller</div>
+      
       <div class="divider"></div>
+      
       <div class="order-issuing__actions__submit">Submit an appeal</div>
     </div>
     
@@ -87,25 +90,25 @@
           <div class="divider--short"></div>
           
           <div class="feedback__rating">
-              <input type="radio" id="star-5" name="rating" value="5">
-              
-              <label for="star-5" title="Оценка «5»"></label>
-              
-              <input type="radio" id="star-4" name="rating" value="4">
-              
-              <label for="star-4" title="Оценка «4»"></label>
-              
-              <input type="radio" id="star-3" name="rating" value="3">
-              
-              <label for="star-3" title="Оценка «3»"></label>
-              
-              <input type="radio" id="star-2" name="rating" value="2">
-              
-              <label for="star-2" title="Оценка «2»"></label>
-              
-              <input type="radio" id="star-1" name="rating" value="1">
-              
-              <label for="star-1" title="Оценка «1»"></label>
+            <input type="radio" id="star-5" name="rating" value="5">
+            
+            <label for="star-5" title="Оценка «5»"></label>
+            
+            <input type="radio" id="star-4" name="rating" value="4">
+            
+            <label for="star-4" title="Оценка «4»"></label>
+            
+            <input type="radio" id="star-3" name="rating" value="3">
+            
+            <label for="star-3" title="Оценка «3»"></label>
+            
+            <input type="radio" id="star-2" name="rating" value="2">
+            
+            <label for="star-2" title="Оценка «2»"></label>
+            
+            <input type="radio" id="star-1" name="rating" value="1">
+            
+            <label for="star-1" title="Оценка «1»"></label>
           </div>
           
           <div class="divider--short"></div>
@@ -135,8 +138,6 @@
         </div>
       </div>
     </VBottomSheet>
-    
-<!--    <button style="position: fixed; right: 0; bottom: 0; left: 0; width: 100%; padding: 10px 0; background-color: rgb(67,148,232)" @click="feedback.show = true" v-if="!feedback.show">Оставить отзыв</button>-->
   </div>
 </template>
 
@@ -148,16 +149,17 @@
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import {defineComponent} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import {useUserStore, Order} from '@/stores/user.ts';
 import {useMarketStore} from '@/stores/market.ts';
+
 import {Swiper, SwiperSlide} from 'swiper/vue';
+import {Pagination} from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import {Pagination} from 'swiper/modules';
 
 export default defineComponent({
   name: 'OrderIssuingPage',
@@ -181,20 +183,20 @@ export default defineComponent({
   
   computed: {
     order() {
-      return this.userStore.getOrderById(Number(this.route.params.id)) as Order
+      return this.userStore.getOrderById(Number(this.route.params.id)) as Order;
     },
     
     sellerDeals() {
-      return this.marketStore.findById(this.order.storeId).deals
+      return this.marketStore.findById(this.order.storeId).deals;
     },
     
     productImage() {
-      return this.marketStore.findProductById(this.order.storeId, this.order.productId).image
+      return this.marketStore.findProductById(this.order.storeId, this.order.productId).image;
     }
   },
   
   mounted() {
-    this.showFeedbackButton()
+    this.showFeedbackButton();
   },
   
   methods: {
@@ -205,7 +207,7 @@ export default defineComponent({
           is_active: true,
           is_visible: true
         }).onClick(() => {
-          this.feedback.show = true
+          this.feedback.show = true;
         });
       }
     },
@@ -220,16 +222,16 @@ export default defineComponent({
             is_active: true,
             is_visible: true
           }).onClick(() => {
-            this.feedback.show = false
-          })
+            this.feedback.show = false;
+          });
         } else {
-          this.showFeedbackButton()
+          this.showFeedbackButton();
         }
       }, immediate: true
     }
   }
   
-})
+});
 
 </script>
 
@@ -237,10 +239,7 @@ export default defineComponent({
 
 .order-issuing {
   .divider {
-    height: 1px;
-    width: 100%;
     margin: 7px 0;
-    background-color: theme-var($--divider-color);
   }
   
   &__product {
@@ -272,20 +271,20 @@ export default defineComponent({
           }
         }
       }
-    }
-    
-    &__image {
-      position: relative;
       
-      display: flex;
-      justify-content: center;
-      height: 231px;
-      width: 100%;
-      
-      img {
-        height: 100%;
-        width: 225px;
-        border-radius: 10px;
+      &__image {
+        position: relative;
+        
+        display: flex;
+        justify-content: center;
+        height: 231px;
+        width: 100%;
+        
+        img {
+          height: 100%;
+          width: 225px;
+          border-radius: 10px;
+        }
       }
     }
   }
@@ -387,6 +386,10 @@ export default defineComponent({
 }
 
 .feedback {
+  .divider--short {
+    margin: 15px 0;
+  }
+  
   &__card {
     display: flex;
     flex-direction: column;
@@ -407,19 +410,12 @@ export default defineComponent({
   
   &__title {
     margin-top: 10px;
-  
+    
     font-size: 15px;
     font-family: "SF Pro Text Medium", sans-serif;
     line-height: 1;
     
     color: #0477FF;
-  }
-  
-  .divider--short {
-    height: 1px;
-    width: 50px;
-    margin: 15px 0;
-    background-color: theme-var($--divider-color);
   }
   
   &__rating {
@@ -594,9 +590,12 @@ export default defineComponent({
     &:before {
       content: '';
       position: absolute;
-      top: 0; right: 0; bottom: 0; left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
       z-index: 1;
-      margin: 0px;
+      margin: 0;
       border-radius: 10px;
       background: linear-gradient(90deg, rgba(4, 119, 255, 0.67) 0%, rgba(4, 119, 255, 0.26) 67%);
     }

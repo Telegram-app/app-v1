@@ -1,14 +1,14 @@
 <template>
   <AppLayout>
-    <RouterView />
+    <RouterView/>
   </AppLayout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { useTelegramStore } from "@/stores/telegram";
-import {useRoute, useRouter} from "vue-router";
-import {createLogger} from 'vite';
+
+import {defineComponent} from 'vue';
+import {useTelegramStore} from '@/stores/telegram';
+import {useRoute, useRouter} from 'vue-router';
 
 declare global {
   interface Window {
@@ -17,34 +17,28 @@ declare global {
 }
 
 export default defineComponent({
-  name: "App",
-
+  name: 'App',
+  
   setup() {
-    const tgStore = useTelegramStore()
-    const route = useRoute()
-    const router = useRouter()
-
-    return { tgStore, router, route }
+    const route = useRoute();
+    const router = useRouter();
+    const tgStore = useTelegramStore();
+    
+    return {router, route, tgStore};
   },
   
   data: () => ({
     routerFlag: false
   }),
-
-  computed: {
-    layout() {
-      return (this.$route?.meta?.layout || "not-found") + "-layout"
-    }
-  },
-
+  
   mounted() {
-    window.Telegram.WebApp.expand()
+    window.Telegram.WebApp.expand();
     
-    let self = this
-    this.tgStore.theme = window.Telegram.WebApp.colorScheme
+    let self = this;
+    this.tgStore.theme = window.Telegram.WebApp.colorScheme;
     window.Telegram.WebApp.onEvent('themeChanged', function (this: any) {
-      self.tgStore.theme = this.colorScheme
-    })
+      self.tgStore.theme = this.colorScheme;
+    });
   },
   
   watch: {
@@ -55,17 +49,18 @@ export default defineComponent({
             // let arrPaths = newPath.split('/').slice(0, -1).join('/')
             setTimeout(() => {
               window.Telegram.WebApp.BackButton.show().onClick(() => {
-                if (this.routerFlag) return
+                if (this.routerFlag) return;
                 
-                this.router.back()
-                this.routerFlag = true
+                this.router.back();
+                
+                this.routerFlag = true;
                 setTimeout(() => {
-                  this.routerFlag = false
-                }, 600)
-              })
-            })
+                  this.routerFlag = false;
+                }, 600);
+              });
+            });
           } else {
-            window.Telegram.WebApp.BackButton.hide()
+            window.Telegram.WebApp.BackButton.hide();
           }
         }
       }, immediate: true
@@ -75,7 +70,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-
 
 
 </style>

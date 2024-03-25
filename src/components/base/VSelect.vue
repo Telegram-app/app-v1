@@ -23,16 +23,16 @@
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
-import { OnClickOutside } from '@vueuse/components';
+import {defineComponent} from 'vue';
+import {OnClickOutside} from '@vueuse/components';
 
 export default defineComponent({
   name: 'VSelect',
   
-  components: { OnClickOutside },
+  components: {OnClickOutside},
   
   props: {
-    modelValue: { type: String },
+    modelValue: {type: String},
     label: {
       type: String,
       required: true,
@@ -40,15 +40,9 @@ export default defineComponent({
     },
     options: Array,
     open: Boolean
-  },
-  
-  methods: {
-    log() {
-      console.log('triggered');
-    }
   }
   
-})
+});
 
 </script>
 

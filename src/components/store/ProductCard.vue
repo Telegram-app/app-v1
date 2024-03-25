@@ -55,7 +55,7 @@
     
     <div class="product__card__footer">
       <p>{{ product.shortDescription }}</p>
-      <VButton @click="toProductPage(product.id)">OPEN</VButton>
+      <VButton @click="$emit('toProductPage', product.id)">OPEN</VButton>
     </div>
   </div>
 </template>
@@ -66,12 +66,9 @@ import { defineComponent } from "vue";
 
 import type { PropType } from 'vue'
 import { Product } from '@/models/store.model.ts';
-import IconStar from '@/components/icons/IconStar.vue';
-import IconConfirmed from '@/components/icons/IconConfirmed.vue';
 
 export default defineComponent({
   name: 'ProductCard',
-  components: {IconConfirmed, IconStar},
   
   props: {
     product: Object as PropType<Product>,
@@ -139,7 +136,7 @@ export default defineComponent({
     padding: 7px 10px 5px 6px;
     
     &__name {
-      font-size: 16px;
+      font-size: 15px;
       font-family: "SF Pro Text Bold", sans-serif;
       line-height: 1;
     }
@@ -167,7 +164,7 @@ export default defineComponent({
       &__status {
         display: flex;
         margin-right: 5px;
-        padding: 7px;
+        padding: 5px;
         border-radius: 5px;
         
         svg {

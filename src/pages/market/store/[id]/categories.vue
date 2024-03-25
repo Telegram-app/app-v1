@@ -24,13 +24,13 @@
 
 <route lang="json">
 {
-  "name": "categories"
+"name": "categories"
 }
 </route>
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: 'CategoriesPage',
@@ -42,19 +42,15 @@ export default defineComponent({
       window.Telegram.WebApp.MainButton.setParams({
         is_active: false,
         is_visible: false
-      })
+      });
     }
   },
   
-  data: () => ({
+  data: () => ({}),
   
-  }),
+  computed: {},
   
-  computed: {
-  
-  },
-  
-})
+});
 
 </script>
 

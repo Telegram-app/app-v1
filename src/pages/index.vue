@@ -1,39 +1,38 @@
 <template>
   <DefaultLayout>
-<!--    <RouterLink to="/auction">Аукцион</RouterLink>-->
-<!--    <RouterLink to="/market">Маркет</RouterLink>-->
   </DefaultLayout>
 </template>
 
+<route lang="json">
+{
+"name": "main"
+}
+</route>
+
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: '',
+  name: 'MainPage',
   
   props: [],
   
-  data: () => ({
-  
-  }),
+  data: () => ({}),
   
   beforeRouteEnter(to, from, next) {
     if (to.path === '/') {
-      next('/market')
+      next('/market');
     }
   },
   
-  computed: {
+  computed: {},
   
-  },
-  
-})
+});
 
 </script>
 
 <style scoped lang="scss">
-
 
 
 </style>

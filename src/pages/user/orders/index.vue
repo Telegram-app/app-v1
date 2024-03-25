@@ -15,13 +15,13 @@
 
 <route lang="json">
 {
-  "name": "orders"
+"name": "orders"
 }
 </route>
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import {defineComponent} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import {Order, useUserStore} from '@/stores/user.ts';
 
@@ -39,22 +39,19 @@ export default defineComponent({
     return {router, route, userStore};
   },
   
-  data: () => ({
-  
-  }),
+  data: () => ({}),
   
   computed: {
     orders() {
-      return this.userStore.orders as Order[]
+      return this.userStore.orders as Order[];
     }
   }
   
-})
+});
 
 </script>
 
 <style scoped lang="scss">
-
 
 
 </style>

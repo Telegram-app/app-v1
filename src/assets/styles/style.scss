@@ -40,4 +40,18 @@
   color: #7D7D85;
 }
 
+.divider {
+  height: 1px;
+  width: 100%;
+
+  background-color: theme-var($--divider-color);
+
+  &--short {
+    height: 1px;
+    width: 50px;
+
+    background-color: theme-var($--divider-color);
+  }
+}
+
 

@@ -1,6 +1,5 @@
 <template>
   <DefaultLayout>
-<!--    <h1>ТЕСТ</h1>-->
     <RouterView/>
   </DefaultLayout>
 </template>

@@ -7,13 +7,13 @@
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: 'VInput',
   
   props: {
-    modelValue: { type: Number },
+    modelValue: {type: Number},
     label: {
       type: String,
       required: true,
@@ -28,12 +28,12 @@ export default defineComponent({
   
   methods: {
     input(event: Event) {
-      let target = event.target as HTMLInputElement
-      this.$emit('update:modelValue', Number(target.value))
+      let target = event.target as HTMLInputElement;
+      this.$emit('update:modelValue', Number(target.value));
     }
   }
   
-})
+});
 
 </script>
 

@@ -1,107 +1,105 @@
 <template>
-<!--  <div class="market__widget">-->
-<!--    <span class="is-uppercase">Tickets available intil january</span>-->
-<!--    <IconArrowNext h="19" w="19" color="black"/>-->
-<!--  </div>-->
-  
-  <div class="market__banners">
-    <swiper
-      :slides-per-view="1.22"
-      :free-mode="true"
-      :loop="true"
-      :centered-slides="true"
-      :long-swipes="true"
+  <div class="market">
+    <div class="market__banners">
+      <swiper
+        :slides-per-view="1.22"
+        :free-mode="true"
+        :loop="true"
+        :centered-slides="true"
+        :long-swipes="true"
+        :space-between="18"
+        :speed="800"
+        :modules="modules"
+        class="market__banners__swiper"
+      >
+        <template v-for="i of 5" :key="'group-images-' + i">
+          <swiper-slide class="market__banners__swiper__slide">
+            <img :src="'./images/market/market-banner-1.svg'" alt="banner-1">
+          </swiper-slide>
+          <swiper-slide class="market__banners__swiper__slide">
+            <img :src="'./images/market/market-banner-2.svg'" alt="banner-2">
+          </swiper-slide>
+          <swiper-slide class="market__banners__swiper__slide">
+            <img :src="'./images/market/market-banner-3.svg'" alt="banner-3">
+          </swiper-slide>
+        </template>
+      </swiper>
+    </div>
+    
+    <div class="market__stores self-card">
+      <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="router.push({ name: 'store', params: { id: store.id } })">
+        <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
+        <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>
+        <span class="market__stores__store__name">{{ store.name }}</span>
+      </div>
       
-      :space-between="18"
-      :speed="800"
-      :modules="modules"
-      class="market__banners__swiper"
-    >
-      <template v-for="i of 5" :key="'group-images-' + i">
-        <swiper-slide class="market__banners__swiper__slide">
-          <img :src="'./images/market/market-banner-1.svg'" alt="banner-1">
-        </swiper-slide>
-        <swiper-slide class="market__banners__swiper__slide">
-          <img :src="'./images/market/market-banner-2.svg'" alt="banner-2">
-        </swiper-slide>
-        <swiper-slide class="market__banners__swiper__slide">
-          <img :src="'./images/market/market-banner-3.svg'" alt="banner-3">
-        </swiper-slide>
-      </template>
-    </swiper>
-  </div>
-  
-  <div class="market__stores card--bg">
-    <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="toStorePage(store.id)">
-      <img :src="'./images/market/stores/' + store.icon" alt="store-image">
-      <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>
-      <span class="market__stores__store__title">{{ store.name }}</span>
+      <div class="divider"></div>
+      
+      <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @click="router.push({ name: 'store', params: { id: store.id } })">
+        <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
+        <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>
+        <span class="market__stores__store__name">{{ store.name }}</span>
+      </div>
     </div>
-    <div class="market__stores__line"></div>
-    <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @click="toStorePage(store.id)">
-      <img :src="'./images/market/stores/' + store.icon" alt="store-image">
-      <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>
-      <span class="market__stores__store__title">{{ store.name }}</span>
+    
+    <div class="market__quote">
+      <span class="caption">Marcus Aurelius</span>
+      <div class="market__quote__text">What we do now echoes in eternity</div>
     </div>
-  </div>
-  
-  <div class="market__quote">
-    <span class="market__quote__name is-uppercase">Marcus Aurelius</span>
-    <div class="market__quote__text">What we do now echoes in eternity</div>
-  </div>
-  
-  <div class="market__news">
-    <swiper
-      :slides-per-view="'auto'"
-      :free-mode="true"
-      :space-between="10"
-      :speed="600"
-      :modules="modules"
-      class="market__news__swiper"
-    >
-      <swiper-slide class="market__news__swiper__slide">
-        <img :src="'./images/market/news/market-news-1.png'" alt="news-1">
-        <span class="market__news__swiper__slide__text">Web3</span>
-      </swiper-slide>
-      <swiper-slide class="market__news__swiper__slide">
-        <img :src="'./images/market/news/market-news-2.png'" alt="news-2">
-        <span class="market__news__swiper__slide__text">Web3</span>
-      </swiper-slide>
-      <swiper-slide class="market__news__swiper__slide">
-        <img :src="'./images/market/news/market-news-3.png'" alt="news-3">
-        <span class="market__news__swiper__slide__text">Web3</span>
-      </swiper-slide>
-      <swiper-slide class="market__news__swiper__slide">
-        <img :src="'./images/market/news/market-news-1.png'" alt="news-1">
-        <span class="market__news__swiper__slide__text">Web3</span>
-      </swiper-slide>
-      <swiper-slide class="market__news__swiper__slide">
-        <img :src="'./images/market/news/market-news-2.png'" alt="news-2">
-        <span class="market__news__swiper__slide__text">Web3</span>
-      </swiper-slide>
-      <swiper-slide class="market__news__swiper__slide">
-        <img :src="'./images/market/news/market-news-3.png'" alt="news-3">
-        <span class="market__news__swiper__slide__text">Web3</span>
-      </swiper-slide>
-    </swiper>
-  </div>
-  
-  <div class="market__line"></div>
-  
-  <div class="market__footer">
-    <div class="market__footer__block" v-for="(item, i) of footer" :key="'footer-block-' + i">
-      <h4>{{ item.title }}</h4>
-      <ul class="market__footer__links">
-        <RouterLink
-          v-for="link of item.links"
-          :key="link.title"
-          custom
-          to="#">
-          <li class="market__footer__links__link">
-            {{ link.title }}
-          </li>
-        </RouterLink>
-      </ul>
+    
+    <div class="market__news">
+      <swiper
+        :slides-per-view="'auto'"
+        :free-mode="true"
+        :space-between="10"
+        :speed="600"
+        :modules="modules"
+        class="market__news__swiper"
+      >
+        <swiper-slide class="market__news__swiper__slide">
+          <img :src="'./images/market/news/market-news-1.png'" alt="news-1">
+          <span class="market__news__swiper__slide__text">Web3</span>
+        </swiper-slide>
+        <swiper-slide class="market__news__swiper__slide">
+          <img :src="'./images/market/news/market-news-2.png'" alt="news-2">
+          <span class="market__news__swiper__slide__text">Web3</span>
+        </swiper-slide>
+        <swiper-slide class="market__news__swiper__slide">
+          <img :src="'./images/market/news/market-news-3.png'" alt="news-3">
+          <span class="market__news__swiper__slide__text">Web3</span>
+        </swiper-slide>
+        <swiper-slide class="market__news__swiper__slide">
+          <img :src="'./images/market/news/market-news-1.png'" alt="news-1">
+          <span class="market__news__swiper__slide__text">Web3</span>
+        </swiper-slide>
+        <swiper-slide class="market__news__swiper__slide">
+          <img :src="'./images/market/news/market-news-2.png'" alt="news-2">
+          <span class="market__news__swiper__slide__text">Web3</span>
+        </swiper-slide>
+        <swiper-slide class="market__news__swiper__slide">
+          <img :src="'./images/market/news/market-news-3.png'" alt="news-3">
+          <span class="market__news__swiper__slide__text">Web3</span>
+        </swiper-slide>
+      </swiper>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <div class="market__footer">
+      <div class="market__footer__block" v-for="(item, i) of footer" :key="'footer-block-' + i">
+        <h4 class="market__footer__title">{{ item.title }}</h4>
+        <ul class="market__footer__links">
+          <RouterLink
+            v-for="link of item.links"
+            :key="link.title"
+            custom
+            to="#">
+            <li class="market__footer__links__link">
+              {{ link.title }}
+            </li>
+          </RouterLink>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -116,10 +114,9 @@
 
 import { defineComponent } from "vue";
 
-import {useMarketStore} from "@/stores/market.ts";
-import {mapState} from 'pinia';
-import {Store} from '@/models/store.model.ts';
 import {useRouter} from 'vue-router';
+import {useMarketStore} from "@/stores/market.ts";
+import {Store} from '@/models/store.model.ts';
 
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, FreeMode } from "swiper/modules";
@@ -136,31 +133,17 @@ export default defineComponent({
     const router = useRouter()
     const marketStore = useMarketStore()
     
-    return {
-      router,
-      marketStore,
-      modules: [Autoplay, FreeMode]
-    }
+    return { router, marketStore, modules: [Autoplay, FreeMode] }
   },
   
   mounted() {
     this.marketStore.createFakeStores()
-    
-    // if (window.Telegram.WebApp) {
-    //   window.Telegram.WebApp.MainButton.setParams({
-    //     text: 'VIEW ORDER',
-    //     is_active: true,
-    //     is_visible: true
-    //   }).onClick(() => {
-    //     console.log(window.Telegram.WebApp.MainButton);
-    //   })
-    // }
   },
   
   computed: {
-    ...mapState(useMarketStore, {
-      stores: (state) => state.getStores as Store[],
-    })
+    stores() {
+      return this.marketStore.getStores as Store[]
+    }
   },
   
   data: () => ({
@@ -201,13 +184,7 @@ export default defineComponent({
         ]
       }
     ]
-  }),
-  
-  methods: {
-    toStorePage(to: number | string) {
-      this.router.push({ name: 'store', params: { id: to } })
-    }
-  }
+  })
 })
 
 </script>
@@ -215,28 +192,6 @@ export default defineComponent({
 <style lang="scss">
 
 .market {
-  //&__widget {
-  //  display: flex;
-  //  align-items: center;
-  //  justify-content: center;
-  //  width: calc(100% + 30px);
-  //  margin: -15px -15px 0;
-  //  padding: 12px 0;
-  //
-  //  font-size: 15px;
-  //  font-family: "SF Pro Text Semibold", sans-serif;
-  //
-  //  background-image: url('/images/market/market-widget-bg.jpg');
-  //
-  //  span {
-  //    margin-right: 8px;
-  //
-  //    line-height: 1;
-  //
-  //    color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
-  //  }
-  //}
-  
   &__banners {
     position: relative;
     height: 165px;
@@ -269,9 +224,6 @@ export default defineComponent({
     row-gap: 10px;
     margin-top: 15px;
     padding: 10px 13px;
-    border-radius: 10px;
-    
-    background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
     
     &:after {
       content: "";
@@ -290,7 +242,7 @@ export default defineComponent({
       
       cursor: pointer;
       
-      img {
+      &__image {
         z-index: 2;
         
         height: 80%;
@@ -298,26 +250,26 @@ export default defineComponent({
         border-radius: 10px;
         
         transition: 0.3s all;
+        
+        &__shadow {
+          position: absolute;
+          z-index: 1;
+          top: 50px;
+          right: 12%;
+          left: 13%;
+          
+          height: 11%;
+          border-radius: inherit;
+          
+          background-size: auto;
+          background-position: center bottom;
+          background-repeat: no-repeat;
+          -webkit-filter: blur(5px);
+          filter: blur(5px);
+        }
       }
       
-      &__image__shadow {
-        position: absolute;
-        z-index: 1;
-        top: 50px;
-        right: 12%;
-        left: 13%;
-        
-        height: 11%;
-        border-radius: inherit;
-        
-        background-size: auto;
-        background-position: center bottom;
-        background-repeat: no-repeat;
-        -webkit-filter: blur(5px);
-        filter: blur(5px);
-      }
-      
-      &__title {
+      &__name {
         margin-top: 7px;
         text-align: center;
         
@@ -326,12 +278,8 @@ export default defineComponent({
       }
     }
     
-    &__line {
-      margin-bottom: -5px;
-      height: 1px;
-      width: 100%;
-      
-      background-color: theme-var($--divider-color);
+    .divider {
+      margin: 0 0 -5px !important;
     }
   }
   
@@ -358,9 +306,7 @@ export default defineComponent({
     }
   }
   
-  &__line {
-    height: 1px;
-    width: 100%;
+  .divider {
     margin: 15px 0;
     
     background-color: #e2e2e2;
@@ -415,7 +361,7 @@ export default defineComponent({
       flex-direction: column;
     }
     
-    h4 {
+    &__title {
       font-size: 16px;
       font-family: "SF Pro Text Semibold", sans-serif;
       line-height: 1;

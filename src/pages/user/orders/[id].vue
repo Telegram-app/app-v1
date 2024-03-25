@@ -15,7 +15,7 @@
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import {defineComponent} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import {Order, useUserStore} from '@/stores/user.ts';
 
@@ -33,22 +33,19 @@ export default defineComponent({
     return {router, route, userStore};
   },
   
-  data: () => ({
-  
-  }),
+  data: () => ({}),
   
   computed: {
     order() {
-      return this.userStore.getOrderById(Number(this.route.params.id)) as Order
+      return this.userStore.getOrderById(Number(this.route.params.id)) as Order;
     }
   },
   
-})
+});
 
 </script>
 
 <style scoped lang="scss">
-
 
 
 </style>
