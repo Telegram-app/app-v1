@@ -279,6 +279,21 @@ export default defineComponent({
     charsShowMoreFunc() {
       this.charsShowMore = !this.charsShowMore;
     },
+    
+    showMainButtonBuy() {
+      window.Telegram.WebApp.MainButton.setParams({
+        text: 'BUY',
+        is_active: true,
+        is_visible: true,
+        color: 'linear-gradient(230deg, #C76EDC 0%, #7D81FF 100%)',
+      }).onClick(() => {
+        this.payment.show = true;
+        window.Telegram.WebApp.MainButton.setParams({
+          is_active: false,
+          is_visible: false
+        });
+      });
+    }
   },
   
   watch: {
@@ -293,23 +308,20 @@ export default defineComponent({
       handler(newValue) {
         if (newValue.name !== '') {
           if (window.Telegram.WebApp && this.payment.selectedItem.name.length) {
-            window.Telegram.WebApp.MainButton.setParams({
-              text: 'BUY',
-              is_active: true,
-              is_visible: true
-            }).onClick(() => {
-              this.payment.show = true;
-              window.Telegram.WebApp.MainButton.setParams({
-                is_active: false,
-                is_visible: false
-              });
-            });
+            this.showMainButtonBuy()
           }
         } else {
           window.Telegram.WebApp.MainButton.setParams({
             is_active: false,
             is_visible: false
           });
+        }
+      }
+    },
+    'payment.show': {
+      handler(newValue) {
+        if (newValue === false && this.payment.selectedItem.name !== '') {
+          this.showMainButtonBuy()
         }
       }
     }

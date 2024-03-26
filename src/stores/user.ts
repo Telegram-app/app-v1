@@ -1,8 +1,12 @@
-import {defineStore} from "pinia"
-import {faker} from '@faker-js/faker'
+import {defineStore} from 'pinia';
+import {faker} from '@faker-js/faker';
 
 export type UserState = {
-    orders: Order[]
+    selfStore: {
+        subscription: boolean;
+        created: boolean;
+    };
+    orders: Order[];
 };
 
 export type Order = {
@@ -11,16 +15,20 @@ export type Order = {
     productId: number | string;
 }
 
-const ordersLocal: Order[] = JSON.parse(localStorage.getItem('orders') as string)
+const ordersLocal: Order[] = JSON.parse(localStorage.getItem('orders') as string);
 
-export const useUserStore = defineStore("user", {
+export const useUserStore = defineStore('user', {
     state: () => ({
+        selfStore: {
+            subscription: false,
+            created: false
+        },
         orders: ordersLocal || []
     } as UserState),
 
     getters: {
         getOrderById<Order>() {
-            return (id: number | string) => this.orders.find(o => o.id === id)
+            return (id: number | string) => this.orders.find(o => o.id === id);
         }
     },
 
@@ -30,15 +38,15 @@ export const useUserStore = defineStore("user", {
                 let newOrder: Order = {
                     id: faker.number.int({min: 100000000, max: 999999999}),
                     storeId, productId
-                }
+                };
 
-                this.orders.push(newOrder)
+                this.orders.push(newOrder);
 
-                localStorage.setItem('orders', JSON.stringify(this.orders) as string)
+                localStorage.setItem('orders', JSON.stringify(this.orders) as string);
 
-                resolve(newOrder)
-            })
+                resolve(newOrder);
+            });
         }
     }
 
-})
+});

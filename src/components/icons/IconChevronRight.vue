@@ -37,6 +37,10 @@ svg {
     &--grey {
       fill: #7D7D85;
     }
+    
+    &--transparent-grey {
+      fill: rgba(60, 60, 67, 0.30)
+    }
   }
 }
 </style>

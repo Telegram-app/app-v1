@@ -32,9 +32,13 @@ declare module 'vue-router/auto-routes' {
     'product': RouteRecordInfo<'product', '/market/store/:id/products/:productId', { id: ParamValue<true>, productId: ParamValue<true> }, { id: ParamValue<false>, productId: ParamValue<false> }>,
     'reviews': RouteRecordInfo<'reviews', '/market/store/:id/products/:productId/reviews', { id: ParamValue<true>, productId: ParamValue<true> }, { id: ParamValue<false>, productId: ParamValue<false> }>,
     '/user': RouteRecordInfo<'/user', '/user', Record<never, never>, Record<never, never>>,
+    '/user/': RouteRecordInfo<'/user/', '/user', Record<never, never>, Record<never, never>>,
     'orders': RouteRecordInfo<'orders', '/user/orders', Record<never, never>, Record<never, never>>,
     'order': RouteRecordInfo<'order', '/user/orders/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     'orderIssuing': RouteRecordInfo<'orderIssuing', '/user/orders/:id/issuing', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     'profile': RouteRecordInfo<'profile', '/user/profile', Record<never, never>, Record<never, never>>,
+    'createStore': RouteRecordInfo<'createStore', '/user/store/create', Record<never, never>, Record<never, never>>,
+    'storeSettings': RouteRecordInfo<'storeSettings', '/user/store/settings', Record<never, never>, Record<never, never>>,
+    'subscription': RouteRecordInfo<'subscription', '/user/store/subscription', Record<never, never>, Record<never, never>>,
   }
 }
