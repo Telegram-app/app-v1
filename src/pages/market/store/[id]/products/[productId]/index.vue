@@ -284,8 +284,7 @@ export default defineComponent({
       window.Telegram.WebApp.MainButton.setParams({
         text: 'BUY',
         is_active: true,
-        is_visible: true,
-        color: 'linear-gradient(230deg, #C76EDC 0%, #7D81FF 100%)',
+        is_visible: true
       }).onClick(() => {
         this.payment.show = true;
         window.Telegram.WebApp.MainButton.setParams({

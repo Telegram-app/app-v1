@@ -39,6 +39,10 @@ export default defineComponent({
     window.Telegram.WebApp.onEvent('themeChanged', function (this: any) {
       self.tgStore.theme = this.colorScheme;
     });
+    
+    window.Telegram.WebApp.SettingsButton.show()
+    
+    
   },
   
   watch: {
