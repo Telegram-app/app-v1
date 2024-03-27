@@ -123,6 +123,14 @@ export default defineComponent({
     period: '1 year'
   }),
   
+  beforeRouteEnter(to, from, next) {
+    if (useUserStore().selfStore.created) {
+      next({ name: 'storeSettings' })
+    } else if (useUserStore().selfStore.subscription.has) {
+      next({ name: 'createStore' })
+    }
+  },
+  
   mounted() {
     this.showMainButtonSubscribe()
   },
