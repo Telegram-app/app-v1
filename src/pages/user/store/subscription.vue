@@ -123,8 +123,8 @@ export default defineComponent({
     period: '1 year'
   }),
   
-  computed: {
-  
+  mounted() {
+    this.showMainButtonSubscribe()
   },
   
   methods: {
