@@ -128,6 +128,8 @@ export default defineComponent({
       next({ name: 'storeSettings' })
     } else if (useUserStore().selfStore.subscription.has) {
       next({ name: 'createStore' })
+    } else {
+      next()
     }
   },
   
