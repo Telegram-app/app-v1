@@ -43,7 +43,7 @@ export default defineComponent({
   
   methods: {
     toSelfStore() {
-      if (!this.selfStore.subscription) {
+      if (!this.selfStore.subscription.has) {
         this.router.push({ name: 'subscription' })
       } else if (!this.selfStore.created) {
         this.router.push({ name: 'createStore' })

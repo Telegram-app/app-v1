@@ -41,8 +41,6 @@ export default defineComponent({
     });
     
     window.Telegram.WebApp.SettingsButton.show()
-    
-    
   },
   
   watch: {

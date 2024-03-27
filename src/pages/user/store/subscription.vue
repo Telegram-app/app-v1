@@ -103,11 +103,21 @@
 <script lang="ts">
 
 import { defineComponent } from "vue";
+import {useRoute, useRouter} from 'vue-router';
+import {useUserStore} from '@/stores/user.ts';
 
 export default defineComponent({
   name: '',
   
   props: [],
+  
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+    const userStore = useUserStore();
+    
+    return { router, route, userStore }
+  },
   
   data: () => ({
     period: '1 year'
@@ -116,6 +126,19 @@ export default defineComponent({
   computed: {
   
   },
+  
+  methods: {
+    showMainButtonSubscribe() {
+      window.Telegram.WebApp.MainButton.setParams({
+        text: 'GIFT A SUBSCRIPTION',
+        is_active: true,
+        is_visible: true
+      }).onClick(() => {
+        this.userStore.setSubscription(this.period)
+        this.router.push({ name: 'createStore' })
+      });
+    }
+  }
   
 })
 

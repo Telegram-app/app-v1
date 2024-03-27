@@ -2,10 +2,7 @@ import {defineStore} from 'pinia';
 import {faker} from '@faker-js/faker';
 
 export type UserState = {
-    selfStore: {
-        subscription: boolean;
-        created: boolean;
-    };
+    selfStore: SelfStore;
     orders: Order[];
 };
 
@@ -15,12 +12,23 @@ export type Order = {
     productId: number | string;
 }
 
+export type SelfStore = {
+    subscription: {
+        has: boolean,
+        period: string | undefined
+    };
+    created: boolean;
+}
+
 const ordersLocal: Order[] = JSON.parse(localStorage.getItem('orders') as string);
+const selfStoreLocal: SelfStore = JSON.parse(localStorage.getItem('selfStore') as string);
 
 export const useUserStore = defineStore('user', {
     state: () => ({
-        selfStore: {
-            subscription: false,
+        selfStore: selfStoreLocal || {
+            subscription: {
+                has: false
+            },
             created: false
         },
         orders: ordersLocal || []
@@ -46,6 +54,15 @@ export const useUserStore = defineStore('user', {
 
                 resolve(newOrder);
             });
+        },
+
+        setSubscription(period: string) {
+            this.selfStore.subscription = {
+                has: true,
+                period
+            };
+
+            localStorage.setItem('selfStore', JSON.stringify(this.selfStore));
         }
     }
 

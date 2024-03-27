@@ -86,15 +86,16 @@
     <div class="divider"></div>
     
     <div class="market__footer">
-      <div class="market__footer__block" v-for="(item, i) of footer" :key="'footer-block-' + i">
+      <div class="market__footer__block" v-for="(item, i) of footerLinks" :key="'footer-block-' + i">
         <h4 class="market__footer__title">{{ item.title }}</h4>
         <ul class="market__footer__links">
           <RouterLink
             v-for="link of item.links"
             :key="link.title"
             custom
-            to="#">
-            <li class="market__footer__links__link">
+            v-slot="{ navigate }"
+            :to="{name: link.to}">
+            <li class="market__footer__links__link" @click="navigate">
               {{ link.title }}
             </li>
           </RouterLink>
@@ -105,87 +106,92 @@
 </template>
 
 <route lang="json">
-  {
-  "name": "market"
-  }
+{
+"name": "market"
+}
 </route>
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import {defineComponent} from 'vue';
 
 import {useRouter} from 'vue-router';
-import {useMarketStore} from "@/stores/market.ts";
+import {useMarketStore} from '@/stores/market.ts';
 import {Store} from '@/models/store.model.ts';
 
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Autoplay, FreeMode } from "swiper/modules";
-import 'swiper/css'
+import {Swiper, SwiperSlide} from 'swiper/vue';
+import {Autoplay, FreeMode} from 'swiper/modules';
+import 'swiper/css';
+
+interface Links {
+  title: string;
+  links: { title: string, to: any }[];
+}
 
 export default defineComponent({
   name: 'MarketPage',
   
-  components: { Swiper, SwiperSlide },
+  components: {Swiper, SwiperSlide},
   
   props: [],
   
   setup() {
-    const router = useRouter()
-    const marketStore = useMarketStore()
+    const router = useRouter();
+    const marketStore = useMarketStore();
     
-    return { router, marketStore, modules: [Autoplay, FreeMode] }
+    return {router, marketStore, modules: [Autoplay, FreeMode]};
   },
   
   mounted() {
-    this.marketStore.createFakeStores()
+    this.marketStore.createFakeStores();
   },
   
   computed: {
     stores() {
-      return this.marketStore.getStores as Store[]
+      return this.marketStore.getStores as Store[];
     }
   },
   
   data: () => ({
     search: '',
-    footer: [
+    footerLinks: [
       {
         title: 'Help & contact',
         links: [
-          { title: 'Seller center', to: '#' },
-          { title: 'Contact us', to: '#' },
-          { title: 'eBay Returns', to: '#' },
-          { title: 'eBay Money Back Guarantee', to: '#' },
+          {title: 'Profile', to: 'profile'},
+          {title: 'Contact us', to: 'market'},
+          {title: 'eBay Returns', to: 'market'},
+          {title: 'eBay Money Back Guarantee', to: 'market'},
         ]
       },
       {
         title: 'Community',
         links: [
-          { title: 'Announcements', to: '#' },
-          { title: 'eBay Community', to: '#' },
-          { title: 'eBay for Business Podcast', to: '#' },
+          {title: 'Announcements', to: 'market'},
+          {title: 'eBay Community', to: 'market'},
+          {title: 'eBay for Business Podcast', to: 'market'},
         ]
       },
       {
         title: 'Help & contact',
         links: [
-          { title: 'Seller center', to: '#' },
-          { title: 'Contact us', to: '#' },
-          { title: 'eBay Returns', to: '#' },
-          { title: 'eBay Money Back Guarantee', to: '#' },
+          {title: 'Seller center', to: 'market'},
+          {title: 'Contact us', to: 'market'},
+          {title: 'eBay Returns', to: 'market'},
+          {title: 'eBay Money Back Guarantee', to: 'market'},
         ]
       },
       {
         title: 'Community',
         links: [
-          { title: 'Announcements', to: '#' },
-          { title: 'eBay Community', to: '#' },
-          { title: 'eBay for Business Podcast', to: '#' },
+          {title: 'Announcements', to: 'market'},
+          {title: 'eBay Community', to: 'market'},
+          {title: 'eBay for Business Podcast', to: 'market'},
         ]
       }
-    ]
+    ] as Links[]
   })
-})
+});
 
 </script>
 
@@ -374,6 +380,8 @@ export default defineComponent({
         font-size: 12px;
         
         color: theme-var($--hint-color);
+        
+        cursor: pointer;
       }
     }
   }
@@ -382,9 +390,9 @@ export default defineComponent({
 @media (hover: hover) {
   .market__stores__store:hover {
     img {
-      -webkit-box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
-      -moz-box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
-      box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
+      -webkit-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
+      box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
     }
   }
 }
@@ -392,9 +400,9 @@ export default defineComponent({
 @media (hover: none) {
   .market__stores__store:active {
     img {
-      -webkit-box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
-      -moz-box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
-      box-shadow: 0 0 5px 5px rgba(0,0,0,0.75);
+      -webkit-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
+      box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
     }
   }
 }

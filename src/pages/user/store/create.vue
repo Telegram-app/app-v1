@@ -1,5 +1,5 @@
 <template>
-
+  <h1>Тут будет создание магазина</h1>
 </template>
 
 <route lang="json">
