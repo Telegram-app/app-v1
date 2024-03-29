@@ -91,6 +91,8 @@
         </div>
       </div>
     </div>
+    
+    <NotWebAppButton @click="subscribeToStore()" v-if="notAWebApp">GIFT A SUBSCRIPTION</NotWebAppButton>
   </div>
 </template>
 
@@ -105,9 +107,11 @@
 import { defineComponent } from "vue";
 import {useRoute, useRouter} from 'vue-router';
 import {useUserStore} from '@/stores/user.ts';
+import NotWebAppButton from '@/components/base/NotWebAppButton.vue';
 
 export default defineComponent({
-  name: '',
+  name: 'StoreSubscriptionPage',
+  components: {NotWebAppButton},
   
   props: [],
   
@@ -125,11 +129,26 @@ export default defineComponent({
   
   beforeRouteEnter(to, from, next) {
     if (useUserStore().selfStore.created) {
+      console.log('Магазин создан, редирект в настройки');
       next({ name: 'storeSettings' })
     } else if (useUserStore().selfStore.subscription.has) {
-      next({ name: 'createStore' })
+      console.log(from);
+      if (from.name === 'createStore') {
+        console.log('Магазин не создан, подписка есть, переход из создания магазина. Редирект в профиль');
+        next({name: 'profile'});
+      } else {
+        console.log('Магазин не создан, подписка есть. Редирект в создание магазина');
+        next({name: 'createStore'});
+      }
     } else {
+      console.log('Подписки нет');
       next()
+    }
+  },
+  
+  computed: {
+    notAWebApp() {
+      return window.Telegram.WebApp.platform === 'unknown'
     }
   },
   
@@ -144,9 +163,13 @@ export default defineComponent({
         is_active: true,
         is_visible: true
       }).onClick(() => {
-        this.userStore.setSubscription(this.period)
-        this.router.push({ name: 'createStore' })
+        this.subscribeToStore()
       });
+    },
+    
+    subscribeToStore() {
+      this.userStore.setSubscription(this.period)
+      this.router.push({ name: 'createStore' })
     }
   }
   

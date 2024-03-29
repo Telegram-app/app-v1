@@ -120,6 +120,8 @@
       </div>
     </div>
     
+    <NotWebAppButton @click="orderProduct()" v-if="notAWebApp && payment.selectedItem.name.length">BUY</NotWebAppButton>
+    
     <VBottomSheet v-model="payment.show">
       <div class="product__payment">
         <h3 class="product__payment__title">Payment</h3>
@@ -226,6 +228,10 @@ export default defineComponent({
         seller: store.seller,
         deals: store.deals
       };
+    },
+    
+    notAWebApp() {
+      return window.Telegram.WebApp.platform === 'unknown'
     }
   },
   

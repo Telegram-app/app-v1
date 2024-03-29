@@ -1,5 +1,7 @@
 <template>
-
+  <div class="store-settings">
+    <h1>Тут будут настройки</h1>
+  </div>
 </template>
 
 <route lang="json">
@@ -13,7 +15,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: '',
+  name: 'StoreSettingsPage',
   
   props: [],
   

@@ -14,10 +14,18 @@ export type Order = {
 
 export type SelfStore = {
     subscription: {
-        has: boolean,
-        period: string | undefined
+        has: boolean;
+        period: string | undefined;
     };
     created: boolean;
+    data: undefined | SelfStoreData;
+}
+
+export type SelfStoreData = {
+    image: string;
+    banner: string;
+    name: string;
+    description: string;
 }
 
 const ordersLocal: Order[] = JSON.parse(localStorage.getItem('orders') as string);
@@ -50,7 +58,7 @@ export const useUserStore = defineStore('user', {
 
                 this.orders.push(newOrder);
 
-                localStorage.setItem('orders', JSON.stringify(this.orders) as string);
+                localStorage.setItem('orders', JSON.stringify(this.orders));
 
                 resolve(newOrder);
             });
@@ -61,6 +69,13 @@ export const useUserStore = defineStore('user', {
                 has: true,
                 period
             };
+
+            localStorage.setItem('selfStore', JSON.stringify(this.selfStore));
+        },
+
+        createStore(data: SelfStoreData) {
+            this.selfStore.created = true
+            this.selfStore.data = data
 
             localStorage.setItem('selfStore', JSON.stringify(this.selfStore));
         }

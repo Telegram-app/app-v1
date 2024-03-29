@@ -76,6 +76,8 @@
       <div class="order-issuing__actions__submit">Submit an appeal</div>
     </div>
     
+    <NotWebAppButton @click="feedback.show = true" v-if="notAWebApp && !feedback.show">FEEDBACK</NotWebAppButton>
+    
     <VBottomSheet v-model="feedback.show">
       <div class="feedback">
         <div class="feedback__card self-card">
@@ -136,6 +138,8 @@
         <div class="feedback__textarea">
           <textarea placeholder="Your feedback" rows="2"></textarea>
         </div>
+        
+        <NotWebAppButton @click="feedback.show = false" v-if="notAWebApp && feedback.show">DONE</NotWebAppButton>
       </div>
     </VBottomSheet>
   </div>
@@ -192,6 +196,10 @@ export default defineComponent({
     
     productImage() {
       return this.marketStore.findProductById(this.order.storeId, this.order.productId).image;
+    },
+    
+    notAWebApp() {
+      return window.Telegram.WebApp.platform === 'unknown'
     }
   },
   
@@ -218,7 +226,7 @@ export default defineComponent({
       handler(newValue) {
         if (newValue) {
           window.Telegram.WebApp.MainButton.setParams({
-            text: 'Done',
+            text: 'DONE',
             is_active: true,
             is_visible: true
           }).onClick(() => {

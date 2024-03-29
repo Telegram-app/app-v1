@@ -3,6 +3,8 @@
     <AppNavbar v-if="!twa && showAppBar" />
 
     <slot></slot>
+    
+    <VAlert/>
   </div>
 </template>
 
