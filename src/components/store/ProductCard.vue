@@ -46,7 +46,7 @@
             </div>
             <div class="product__card__info__actions__share">
               <span>Share</span>
-              <IconShare h="8" w="auto"/>
+              <IconShare h="8" w="7"/>
             </div>
           </div>
         </div>

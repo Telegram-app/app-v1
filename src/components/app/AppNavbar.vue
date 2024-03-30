@@ -8,7 +8,7 @@
     </div>
 
     <span class="navbar__button__menu icon">
-      <IconEllipsisCircleOutline h="24px" w="24px" />
+      <IconEllipsisCircleOutline h="24" w="24" />
     </span>
   </nav>
 </template>

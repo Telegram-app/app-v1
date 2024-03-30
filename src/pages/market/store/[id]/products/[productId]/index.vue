@@ -25,7 +25,7 @@
       <div class="product__tags">
         <div class="product__tags__tag">
           <span>Digital goods</span>
-          <IconChevronRight h="10" color="grey"/>
+          <IconChevronRight h="10" w="6" color="grey"/>
         </div>
         
         <div class="product__head__wrapper">
@@ -110,7 +110,7 @@
           <span class="caption">Reviews</span>
           <div class="product__reviews__to-reviews" @click="router.push({ name: 'reviews', params: { id: route.params.id, productId: product.id } })">
             <span>Show All</span>
-            <IconChevronRight h="10"/>
+            <IconChevronRight h="10" w="6"/>
           </div>
         </div>
         
