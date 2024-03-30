@@ -48,7 +48,7 @@ export default defineComponent({
       } else if (!this.selfStore.created) {
         this.router.push({ name: 'createStore' })
       } else {
-        this.router.push({ name: 'storeSettings' })
+        this.router.push({ name: 'storeInfo' })
       }
     }
   },

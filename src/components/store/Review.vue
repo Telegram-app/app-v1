@@ -29,7 +29,7 @@
       </div>
       
       <div class="review__message__reply" v-if="!review.response">
-        <IconShare w="9"/>
+        <IconShare w="9" h="8"/>
         <span>Reply</span>
       </div>
     </div>

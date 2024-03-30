@@ -43,7 +43,7 @@
             </div>
             
             <div class="store-info__links__link__meta" :class="['store-info__links__link__meta__' + link.icon]" v-if="link.meta">
-              {{ link.metaTitle ?? link.metaTitle + ':' }} {{ link.meta }}
+              {{ link.metaTitle ? link.metaTitle + ':' : '' }} {{ link.meta }}{{ link.metaTitle === 'Balance' ? '$' : '' }}
             </div>
             
             <div class="store-info__links__link__to">
