@@ -38,7 +38,7 @@ declare module 'vue-router/auto-routes' {
     'orderIssuing': RouteRecordInfo<'orderIssuing', '/user/orders/:id/issuing', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     'profile': RouteRecordInfo<'profile', '/user/profile', Record<never, never>, Record<never, never>>,
     'createStore': RouteRecordInfo<'createStore', '/user/store/create', Record<never, never>, Record<never, never>>,
-    'storeSettings': RouteRecordInfo<'storeSettings', '/user/store/settings', Record<never, never>, Record<never, never>>,
+    'storeInfo': RouteRecordInfo<'storeInfo', '/user/store/info', Record<never, never>, Record<never, never>>,
     'subscription': RouteRecordInfo<'subscription', '/user/store/subscription', Record<never, never>, Record<never, never>>,
   }
 }

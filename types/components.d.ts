@@ -11,6 +11,7 @@ declare module 'vue' {
     AppNavbar: typeof import('./../src/components/app/AppNavbar.vue')['default']
     AuctionLinks: typeof import('./../src/components/auction/AuctionLinks.vue')['default']
     DefaultLayout: typeof import('./../src/layouts/DefaultLayout.vue')['default']
+    IconAdd: typeof import('./../src/components/icons/IconAdd.vue')['default']
     IconArrowNext: typeof import('./../src/components/icons/IconArrowNext.vue')['default']
     IconCamera: typeof import('./../src/components/icons/IconCamera.vue')['default']
     IconChevronRight: typeof import('./../src/components/icons/IconChevronRight.vue')['default']

@@ -42,7 +42,7 @@
               <span>100%</span>
             </div>
             <div class="product__card__info__actions__like">
-              <IconHeart w="11" h="10"/>
+              <IconHeart w="11" h="10" color="red"/>
             </div>
             <div class="product__card__info__actions__share">
               <span>Share</span>

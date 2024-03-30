@@ -93,13 +93,10 @@ export default defineComponent({
   
   beforeRouteEnter(to, from, next) {
     if (useUserStore().selfStore.created) {
-      console.log('Магазин создан, редирект в настройки');
-      next({name: 'storeSettings'});
+      next({name: 'storeInfo'});
     } else if (useUserStore().selfStore.subscription.has) {
-      console.log('Магазин не создан');
       next();
     } else {
-      console.log('Подписки нет, редирект на подписку');
       next({name: 'subscription'});
     }
   },
@@ -119,7 +116,7 @@ export default defineComponent({
       if (this.createData.image && this.createData.banner && this.createData.name && this.createData.description) {
         this.userStore.createStore(this.createData)
         
-        this.router.push({ name: 'storeSettings' })
+        this.router.push({ name: 'storeInfo' })
       } else {
         this.alertStore.showAlert('error', 'Fill in all the fields')
       }
@@ -198,11 +195,6 @@ export default defineComponent({
         
         cursor: pointer;
         
-        svg {
-          height: 12px;
-          width: 14px;
-        }
-        
         img {
           height: 100%;
           width: 100%;
@@ -236,6 +228,9 @@ export default defineComponent({
         font-size: 12px;
         line-height: 1;
         
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+        background: none;
+        
         &:focus-visible {
           border: transparent;
           outline: transparent;
@@ -265,11 +260,6 @@ export default defineComponent({
         background: none;
         
         cursor: pointer;
-        
-        svg {
-          height: 12px;
-          width: 14px;
-        }
         
         img {
           height: 100%;
@@ -328,6 +318,9 @@ export default defineComponent({
         border: none;
         
         font-size: 12px;
+        
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+        background: none;
         
         resize: unset;
         

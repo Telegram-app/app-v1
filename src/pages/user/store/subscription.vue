@@ -129,19 +129,14 @@ export default defineComponent({
   
   beforeRouteEnter(to, from, next) {
     if (useUserStore().selfStore.created) {
-      console.log('Магазин создан, редирект в настройки');
-      next({ name: 'storeSettings' })
+      next({ name: 'storeInfo' })
     } else if (useUserStore().selfStore.subscription.has) {
-      console.log(from);
       if (from.name === 'createStore') {
-        console.log('Магазин не создан, подписка есть, переход из создания магазина. Редирект в профиль');
         next({name: 'profile'});
       } else {
-        console.log('Магазин не создан, подписка есть. Редирект в создание магазина');
         next({name: 'createStore'});
       }
     } else {
-      console.log('Подписки нет');
       next()
     }
   },

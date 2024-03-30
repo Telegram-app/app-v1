@@ -38,7 +38,7 @@
         
         <div class="order-issuing__deal-details__item">
           <span class="order-issuing__deal-details__item__label">Seller statistics</span>
-          <span class="order-issuing__deal-details__item__value">Deals: {{ sellerDeals.completed }} · {{ Math.floor(sellerDeals.completed / sellerDeals.quantity * 100) }}%</span>
+          <span class="order-issuing__deal-details__item__value">Deals: {{ sellerDeals.completed }} · {{ Math.floor(sellerDeals.completed / sellerDeals.quantity * 100) || 0 }}%</span>
         </div>
         
         <div class="divider"></div>
@@ -580,6 +580,9 @@ export default defineComponent({
       padding: 10px 15px;
       border: 1px solid transparent !important;
       border-radius: 10px;
+      
+      color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+      background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
       background-clip: padding-box;
       
       font-size: 12px;

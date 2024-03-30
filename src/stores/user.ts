@@ -22,6 +22,7 @@ export type SelfStore = {
 }
 
 export type SelfStoreData = {
+    id: number;
     image: string;
     banner: string;
     name: string;
@@ -74,6 +75,7 @@ export const useUserStore = defineStore('user', {
         },
 
         createStore(data: SelfStoreData) {
+            data.id = faker.number.int({ min: 1, max: 999999 })
             this.selfStore.created = true
             this.selfStore.data = data
 

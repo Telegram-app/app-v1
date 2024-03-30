@@ -3,7 +3,7 @@
     <div class="custom-select__selected" @click="$emit('open')">
       <span class="custom-select__label">{{ label }}</span>
       <span class="custom-select__selected__text">{{ modelValue }}</span>
-      <IconSelect h="10" w="11"></IconSelect>
+      <IconSelect h="13" w="11"></IconSelect>
     </div>
     <OnClickOutside @trigger="$emit('close')">
       <div ref="selectMenu" class="custom-select__items" :class="{ 'custom-select--hide': !open }">
@@ -94,9 +94,6 @@ export default defineComponent({
       right: 10px;
       top: 50%;
       transform: translateY(-50%);
-      
-      height: 13px;
-      width: 11px;
     }
   }
   
