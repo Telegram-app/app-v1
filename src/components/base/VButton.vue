@@ -50,6 +50,10 @@ export default defineComponent({
     background-color: #30B645
   }
   
+  &--red {
+    background-color: #e80808
+  }
+  
   &:focus {
     box-shadow: unset;
   }

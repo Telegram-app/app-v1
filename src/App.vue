@@ -40,6 +40,9 @@ export default defineComponent({
       self.tgStore.theme = this.colorScheme;
     });
     
+    window.Telegram.WebApp.SettingsButton.onClick(() => {
+      this.router.push({ name: 'settings' })
+    })
     window.Telegram.WebApp.SettingsButton.show()
   },
   

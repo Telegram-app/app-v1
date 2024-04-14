@@ -197,6 +197,7 @@ export default defineComponent({
     },
     touchEnd() {
       clearInterval(this.touch.interval)
+      this.touch.timeStamp = 0
     },
     openMenu(event: any) {
       let tr = event.target.closest('tr');
@@ -222,7 +223,7 @@ export default defineComponent({
     'touch.timeStamp'(newValue) {
       if (newValue >= 20000) {
         this.openMenu(this.touch.target)
-        this.touch.timeStamp = 0
+        this.touchEnd()
       }
     }
   }
