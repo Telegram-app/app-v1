@@ -25,23 +25,23 @@
         :space-between="10"
         :speed="800"
         class="store__filters__swiper"
-        @slider-move="filterStore.openSelect(-1)"
+        @slider-move="filterStore.openMarketSelect(-1)"
       >
         <swiper-slide class="store__filters__swiper__slide">
-          <!--          <VSelect v-model="selects.category.active" :label="selects.category.label" :options="selects.category.options" :open="selects.category.open" @open="openSelect(0)" @close="selects.category.open = false"></VSelect>-->
-          <VSelect v-model="filterStore.market.selects.category.active" :label="filterStore.market.selects.category.label" @click="router.push({name: 'categories', params: { id: store.id }})"></VSelect>
+          <!--          <VSelect :type="1" v-model="selects.category.active" :label="selects.category.label" :options="selects.category.options" :open="selects.category.open" @open="openMarketSelect(0)" @close="selects.category.open = false"></VSelect>-->
+          <VSelect :type="1" v-model="filterStore.market.selects.category.active" :label="filterStore.market.selects.category.label" @click="router.push({name: 'categories', params: { id: store.id }})"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filters__swiper__slide">
-          <VSelect v-model="filterStore.market.selects.type.active" :label="filterStore.market.selects.type.label" :options="filterStore.market.selects.type.options" :open="filterStore.market.selects.type.open" @open="filterStore.openSelect(0)" @close="filterStore.market.selects.type.open = false"></VSelect>
+          <VSelect :type="1" v-model="filterStore.market.selects.type.active" :label="filterStore.market.selects.type.label" :options="filterStore.market.selects.type.options" :open="filterStore.market.selects.type.open" @open="filterStore.openMarketSelect(0)" @close="filterStore.market.selects.type.open = false"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filters__swiper__slide">
-          <VSelect v-model="filterStore.market.selects.city.active" :label="filterStore.market.selects.city.label" :options="filterStore.market.selects.city.options" :open="filterStore.market.selects.city.open" @open="filterStore.openSelect(1)" @close="filterStore.market.selects.city.open = false"></VSelect>
+          <VSelect :type="1" v-model="filterStore.market.selects.city.active" :label="filterStore.market.selects.city.label" :options="filterStore.market.selects.city.options" :open="filterStore.market.selects.city.open" @open="filterStore.openMarketSelect(1)" @close="filterStore.market.selects.city.open = false"></VSelect>
         </swiper-slide>
         
         <swiper-slide class="store__filters__swiper__slide">
-          <VSelect v-model="filterStore.market.selects.district.active" :label="filterStore.market.selects.district.label" :options="filterStore.market.selects.district.options" :open="filterStore.market.selects.district.open" @open="filterStore.openSelect(2)"
+          <VSelect :type="1" v-model="filterStore.market.selects.district.active" :label="filterStore.market.selects.district.label" :options="filterStore.market.selects.district.options" :open="filterStore.market.selects.district.open" @open="filterStore.openMarketSelect(2)"
                    @close="filterStore.market.selects.district.open = false"></VSelect>
         </swiper-slide>
         
@@ -76,7 +76,7 @@
 import {defineComponent} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import {useMarketStore} from '@/stores/market.ts';
-import {useFilterStore} from '@/stores/filters.ts';
+import {useFilter} from '@/stores/filters.ts';
 
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import 'swiper/css';
@@ -91,7 +91,7 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
     const marketStore = useMarketStore();
-    const filterStore = useFilterStore();
+    const filterStore = useFilter();
     
     return {router, route, marketStore, filterStore};
   },

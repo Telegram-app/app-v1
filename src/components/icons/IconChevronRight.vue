@@ -1,7 +1,7 @@
 <template>
   <svg
     :style="{ height: h + 'px', width: w + 'px' }"
-    :class="['icon', 'icon--' + color, 'dark' ?? dark === 'dark']"
+    :class="['icon', 'icon--' + color, {'dark': isDark}]"
     viewBox="0 0 45 70"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -22,8 +22,8 @@ export default defineComponent({
   props: ['h', 'w', 'color'],
   
   computed: {
-    dark() {
-      return useTelegramStore().theme
+    isDark() {
+      return useTelegramStore().theme === 'dark'
     }
   }
 });

@@ -37,5 +37,17 @@ export default defineComponent({
       stroke: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
     }
   }
+  
+  &--white {
+    path {
+      stroke: #ffffff;
+    }
+  }
+  
+  &--purple {
+    path {
+      stroke: #7f32cb;
+    }
+  }
 }
 </style>

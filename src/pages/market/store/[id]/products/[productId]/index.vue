@@ -59,7 +59,7 @@
         
         <template v-for="(type, index) in product.types" :key="'tab-content-' + index">
           <div v-if="activeTypeTab === index" class="product__types__items">
-            <div v-for="item in type.items" class="product__types__items__item" @click="payment.selectedItem = payment.selectedItem === item ? { name: '', price: 0 } : item" :class="{ 'product__types__items__item--selected': payment.selectedItem === item }">
+            <div v-for="item in type.items" class="product__types__items__item" @click="selectItem(item, index === 0 ? 1 : 2)" :class="{ 'product__types__items__item--selected': payment.selectedItem.name === item.name }">
               <span class="product__types__items__item__name">{{ item.name }}</span>
               <span class="product__types__items__item__price">{{ item.price }} TON</span>
             </div>
@@ -213,7 +213,7 @@ export default defineComponent({
     charsShowMore: false,
     payment: {
       show: false,
-      selectedItem: {name: '', price: 0} as { name: string; price: number }
+      selectedItem: {type: 1, name: '', price: 0} as { type: 1 | 2; name: string; price: number }
     },
     tonPrice: 0,
   }),
@@ -242,8 +242,20 @@ export default defineComponent({
   },
   
   methods: {
+    selectItem(item: {name: string; price: number}, type: 1 | 2) {
+      if (this.payment.selectedItem.name === item.name) {
+        this.payment.selectedItem = {type: 1, name: '', price: 0}
+      } else  {
+        this.payment.selectedItem = {
+          type: type,
+          name: item.name,
+          price: item.price
+        }
+      }
+    },
+    
     orderProduct() {
-      this.userStore.orderProduct(Number(this.route.params.id), this.product.id).then(newOrder => {
+      this.userStore.orderProduct(Number(this.route.params.id), this.product.id, this.payment.selectedItem).then(newOrder => {
         this.router.push({name: 'orderIssuing', params: {id: newOrder.id}});
       });
     },

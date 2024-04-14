@@ -28,5 +28,11 @@ export default defineComponent({
   path {
     stroke: #888888;
   }
+  
+  &--grey {
+    path {
+      stroke: #7D7D85;
+    }
+  }
 }
 </style>

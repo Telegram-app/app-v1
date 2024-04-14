@@ -132,7 +132,7 @@ export default defineComponent({
       next({ name: 'storeInfo' })
     } else if (useUserStore().selfStore.subscription.has) {
       if (from.name === 'createStore') {
-        next({name: 'profile'});
+        next({name: 'account'});
       } else {
         next({name: 'createStore'});
       }

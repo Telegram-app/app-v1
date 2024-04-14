@@ -158,7 +158,7 @@ export default defineComponent({
       {
         title: 'Help & contact',
         links: [
-          {title: 'Profile', to: 'profile'},
+          {title: 'Profile', to: 'account'},
           {title: 'Contact us', to: 'market'},
           {title: 'eBay Returns', to: 'market'},
           {title: 'eBay Money Back Guarantee', to: 'market'},

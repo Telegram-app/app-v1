@@ -1,21 +1,21 @@
 <template>
-  <div>USER PAGE</div>
+  <div>Notes</div>
 </template>
+
+<route lang="json">
+{
+"name": "profileNotes"
+}
+</route>
 
 <script lang="ts">
 
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: '',
+  name: 'ProfileNotesPage',
   
   props: [],
-  
-  beforeRouteEnter(to, from, next) {
-    if (to.path === '/user') {
-      next('/user/account');
-    }
-  },
   
   data: () => ({
   

@@ -34,6 +34,7 @@ export default defineComponent({
   border-radius: 10px;
   
   font-size: 15px;
+  font-family: "SF Pro Text Regular", sans-serif;
   line-height: 1;
   
   color: #ffffff;
@@ -51,6 +52,12 @@ export default defineComponent({
   
   &:focus {
     box-shadow: unset;
+  }
+  
+  &--light-blue {
+    background: linear-gradient(211deg, #EAF4FD 0%, #84C4E7 100%);
+    
+    color: #000000;
   }
 }
 

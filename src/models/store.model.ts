@@ -27,6 +27,7 @@ export interface Product {
 }
 
 export interface ProductType {
+    type: 1 | 2;
     title: string;
     items: ProductTypeItem[];
 }
@@ -99,7 +100,7 @@ export function generateFakeProduct(): Product {
     let reviews = []
 
     for (let i = 1; i <= faker.number.int({ min: 1, max: 2 }); i++) {
-        types.push(generateFakeProductType())
+        types.push(generateFakeProductType(i === 1 ? 1 : 2))
     }
 
     for (let i = 1; i <= faker.number.int({ min: 1, max: 10 }); i++) {
@@ -123,7 +124,7 @@ export function generateFakeProduct(): Product {
     }
 }
 
-export function generateFakeProductType(): ProductType {
+export function generateFakeProductType(type: 1 | 2): ProductType {
     let items = []
 
     for (let i = 1; i <= faker.number.int({ min: 1, max: 10 }); i++) {
@@ -131,6 +132,7 @@ export function generateFakeProductType(): ProductType {
     }
 
     return {
+        type,
         title: faker.lorem.word({ length: { min: 4, max: 7 } }),
         items: items
     }

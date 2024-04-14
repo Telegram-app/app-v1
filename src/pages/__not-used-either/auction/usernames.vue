@@ -294,9 +294,8 @@ export default defineComponent({
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 38px;
-      
       height: 33px;
+      width: 38px;
     }
   }
   

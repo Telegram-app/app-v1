@@ -47,9 +47,55 @@ export type FilterState = {
             };
         }
     };
+    selfStore: {
+        clients: {
+            selects: {
+                city: {
+                    open: boolean;
+                    active: string;
+                    label: string;
+                    options: string[];
+                };
+                product: {
+                    open: boolean;
+                    active: string;
+                    label: string;
+                    options: string[];
+                }
+            };
+            inputs: {
+                search: {
+                    value: undefined | string;
+                    placeholder: string;
+                },
+            }
+        };
+        employers: {
+            selects: {
+                city: {
+                    open: boolean;
+                    active: string;
+                    label: string;
+                    options: string[];
+                };
+                product: {
+                    open: boolean;
+                    active: string;
+                    label: string;
+                    options: string[];
+                }
+            };
+            inputs: {
+                search: {
+                    value: undefined | string;
+                    placeholder: string;
+                },
+            }
+        }
+    }
 };
 
-export const useFilterStore = defineStore("filter", {
+export const useFilter = defineStore("filter", {
     state: () => ({
         market: {
             selects: {
@@ -96,6 +142,52 @@ export const useFilterStore = defineStore("filter", {
                 },
             }
         },
+        selfStore: {
+            clients: {
+                selects: {
+                    city: {
+                        open: false,
+                        active: 'All',
+                        label: 'City',
+                        options: ['All', 'Austin', 'Newark', 'Ontario']
+                    },
+                    product: {
+                        open: false,
+                        active: 'All',
+                        label: 'Product',
+                        options: ['All', 'Product 1', 'Product 2', 'Product 3']
+                    }
+                },
+                inputs: {
+                    search: {
+                        value: undefined,
+                        placeholder: 'Search'
+                    },
+                }
+            },
+            employers: {
+                selects: {
+                    city: {
+                        open: false,
+                        active: 'All',
+                        label: 'City',
+                        options: ['All', 'Austin', 'Newark', 'Ontario']
+                    },
+                    product: {
+                        open: false,
+                        active: 'All',
+                        label: 'Product',
+                        options: ['All', 'Product 1', 'Product 2', 'Product 3']
+                    }
+                },
+                inputs: {
+                    search: {
+                        value: undefined,
+                        placeholder: 'Search'
+                    },
+                }
+            }
+        }
     } as FilterState),
 
     getters: {
@@ -103,11 +195,19 @@ export const useFilterStore = defineStore("filter", {
     },
 
     actions: {
-        openSelect(index: number) {
+        openMarketSelect(index: number) {
             this.market.selects.type.open = index === 0 ? !this.market.selects.type.open : false
             this.market.selects.city.open = index === 1 ? !this.market.selects.city.open : false
             this.market.selects.district.open = index === 2 ? !this.market.selects.district.open : false
-        }
+        },
+        openSelfStoreClientsSelect(index: number) {
+            this.selfStore.clients.selects.city.open = index === 0 ? !this.selfStore.clients.selects.city.open : false
+            this.selfStore.clients.selects.product.open = index === 1 ? !this.selfStore.clients.selects.product.open : false
+        },
+        openSelfStoreEmployersSelect(index: number) {
+            this.selfStore.employers.selects.city.open = index === 0 ? !this.selfStore.employers.selects.city.open : false
+            this.selfStore.employers.selects.product.open = index === 1 ? !this.selfStore.employers.selects.product.open : false
+        },
     }
 
 })

@@ -40,6 +40,12 @@ export default defineComponent({
     stroke: #000000;
   }
   
+  &--white {
+    path, circle {
+      stroke: #FFFFFF;
+    }
+  }
+  
   &--black {
     path, circle {
       stroke: theme-var-tg(--tg-theme-text-color, $--tg-text-color);

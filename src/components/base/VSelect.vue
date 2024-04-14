@@ -1,12 +1,21 @@
 <template>
-  <div class="custom-select" :class="{ 'custom-select--open': open }">
-    <div class="custom-select__selected" @click="$emit('open')">
-      <span class="custom-select__label">{{ label }}</span>
-      <span class="custom-select__selected__text">{{ modelValue }}</span>
+  <div class="custom-select" :class="{ 'custom-select--open': open, 'custom-select__type--2': type === 2 }">
+    <div v-if="type === 1" class="custom-select__type--1__selected" @click="$emit('open')">
+      <span class="custom-select__type--1__label">{{ label }}</span>
+      <span class="custom-select__type--1__selected__text">{{ modelValue }}</span>
       <IconSelect h="13" w="11"></IconSelect>
     </div>
+    
+    <div v-if="type === 2" class="custom-select__type--2__selected" @click="$emit('open')">
+      <span class="custom-select__type--2__label" v-if="modelValue === 'All'">{{ label }}</span>
+      <span class="custom-select__type--2__selected__text" v-else>{{ modelValue }}</span>
+      <div class="custom-select__type--2__icon">
+        <IconSorting h="5" w="7"></IconSorting>
+      </div>
+    </div>
+    
     <OnClickOutside @trigger="$emit('close')">
-      <div ref="selectMenu" class="custom-select__items" :class="{ 'custom-select--hide': !open }">
+      <div ref="selectMenu" class="custom-select__items" :class="{ 'custom-select--hide': !open, 'custom-select__type--2__items': type === 2 }">
         <template v-for="(option, i) of options">
           <div
             v-if="option !== modelValue"
@@ -32,6 +41,7 @@ export default defineComponent({
   components: {OnClickOutside},
   
   props: {
+    type: Number,
     modelValue: {type: String},
     label: {
       type: String,
@@ -40,7 +50,11 @@ export default defineComponent({
     },
     options: Array,
     open: Boolean
-  }
+  },
+  
+  mounted() {
+  
+  },
   
 });
 
@@ -59,41 +73,94 @@ export default defineComponent({
   
   background-color: theme-var($--filter-bg-color);
   
-  &__label {
-    font-size: 10px;
-    line-height: 1;
-    
-    color: #7D7D85;
-  }
-  
-  &__selected {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    
-    font-size: 13px;
-    line-height: 1;
-    font-family: "SF Pro Text Medium", sans-serif;
-    
-    color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
-    
-    cursor: pointer;
-    user-select: none;
-    
-    &__text {
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
+  &__type--1 {
+    &__label {
+      font-size: 10px;
+      line-height: 1;
       
-      color: #000000;
+      color: #7D7D85;
     }
     
-    svg {
+    &__selected {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      
+      font-size: 13px;
+      line-height: 1;
+      font-family: "SF Pro Text Medium", sans-serif;
+      
+      color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+      
+      cursor: pointer;
+      user-select: none;
+      
+      &__text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        
+        color: #000000;
+      }
+      
+      svg {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+  
+  &__type--2 {
+    height: 25px;
+    padding: 5px 29px 5px 17px;
+    text-align: center;
+    
+    &__label {
+      font-size: 12px;
+      line-height: 1;
+      
+      color: #7D7D85;
+    }
+    
+    &__selected {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      
+      font-size: 12px;
+      line-height: 1;
+      
+      color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+      
+      cursor: pointer;
+      user-select: none;
+      
+      &__text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        
+        color: #000000;
+      }
+    }
+    
+    &__icon {
       position: absolute;
-      right: 10px;
+      right: 17px;
       top: 50%;
       transform: translateY(-50%);
+    }
+    
+    &__items {
+      top: 25px !important;
+      
+      div {
+        font-size: 12px !important;
+      }
     }
   }
   

@@ -6,8 +6,8 @@
       </div>
       <div class="review__header__info">
         <div class="review__header__wrapper">
-          <div class="review__name">{{ review.from.name }}</div>
-          <div class="review__rating">
+          <div class="review__name" @click="router.push({name: 'profileReviews', params: {id: review.from.id}})">{{ review.from.name }}</div>
+          <div class="review__rating" v-if="review.from.deals">
             <div>
               {{ review.from.deals.completed }}
             </div>
@@ -28,7 +28,7 @@
         </p>
       </div>
       
-      <div class="review__message__reply" v-if="!review.response">
+      <div class="review__message__reply" v-if="!review.response && review.from.deals">
         <IconShare w="9" h="8"/>
         <span>Reply</span>
       </div>
@@ -41,7 +41,7 @@
         </div>
         <div class="review__header__info">
           <div class="review__header__wrapper">
-            <div class="review__name">{{ review.response.from.name }}</div>
+            <div class="review__name" @click="router.push({name: 'profile', params: {id: review.response.from.role}})">{{ review.response.from.name }}</div>
           </div>
           <div class="review__id"><span>{{ review.response.from.role }}</span></div>
         </div>
@@ -62,13 +62,35 @@
 <script lang="ts">
 
 import {defineComponent, type PropType} from 'vue';
-import {ProductReview} from '@/models/store.model.ts';
+import {ProductReview, ProductReviewResponse} from '@/models/store.model.ts';
+import {useRouter} from 'vue-router';
+
+interface Review {
+  from: {
+    id: string | number;
+    name: string;
+    image: string;
+    deals?: {
+      quantity: number;
+      completed: number;
+    }
+  };
+  rating?: number;
+  message: string;
+  response?: ProductReviewResponse;
+}
 
 export default defineComponent({
   name: 'Review',
   
   props: {
-    review: Object as PropType<ProductReview>
+    review: Object as PropType<Review>
+  },
+  
+  setup() {
+    const router = useRouter()
+    
+    return { router }
   },
   
   data: () => ({
