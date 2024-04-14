@@ -190,16 +190,13 @@ export default defineComponent({
   
   methods: {
     touchStart(event: any) {
-      console.log('TouchStart!');
       this.touch.target = event
       this.touch.interval = setInterval(() => {
         this.touch.timeStamp = event.timeStamp
-        console.log(this.touch.timeStamp);
       }, 100)
     },
     touchEnd() {
       clearInterval(this.touch.interval)
-      console.log('TouchEnd!');
     },
     openMenu(event: any) {
       let tr = event.target.closest('tr');
@@ -223,10 +220,9 @@ export default defineComponent({
       }
     },
     'touch.timeStamp'(newValue) {
-      console.log(newValue);
-      if (newValue >= 20000) {
-        console.log(newValue);
+      if (newValue >= 50000) {
         this.openMenu(this.touch.target)
+        this.touch.timeStamp = 0
       }
     }
   }
