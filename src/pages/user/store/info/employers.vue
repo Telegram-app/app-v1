@@ -131,11 +131,26 @@
     <transition name="fade">
 <!--      :class="{ 'store-employers__menu&#45;&#45;show': menuOpened }-->
       <div class="store-employers__menu" v-show="menuOpened">
-        <div>Award a prize</div>
+        <div>
+          <div class="store-employers__menu__icon">
+            <img src="/images/icons/selfStore/smile.svg" alt="icon">
+          </div>
+          <span>Award a prize</span>
+        </div>
         <div class="divider"></div>
-        <div>Edit permissions</div>
+        <div>
+          <div class="store-employers__menu__icon">
+            <img src="/images/icons/selfStore/permission.svg" alt="icon">
+          </div>
+          <span>Edit permissions</span>
+        </div>
         <div class="divider"></div>
-        <div>Make a note</div>
+        <div>
+          <div class="store-employers__menu__icon">
+            <img src="/images/icons/selfStore/pencil.svg" alt="icon">
+          </div>
+          <span>Make a note</span>
+        </div>
       </div>
     </transition>
   </div>
@@ -153,10 +168,8 @@ import {defineComponent} from 'vue';
 import {useRouter} from 'vue-router';
 import {useFilter} from '@/stores/filters.ts';
 
-import {onClickOutside, timestamp} from '@vueuse/core';
-
 export default defineComponent({
-  name: 'storeEmployers',
+  name: 'StoreEmployersPage',
   
   props: [],
   
@@ -165,6 +178,15 @@ export default defineComponent({
     const filterStore = useFilter();
     
     return {router, filterStore};
+  },
+  
+  mounted() {
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      });
+    }
   },
   
   data: () => ({
@@ -529,7 +551,14 @@ export default defineComponent({
     transition: 0.5s all;
     
     div {
+      display: flex;
+      align-items: center;
       padding: 0 40px 0 13px;
+    }
+    
+    &__icon {
+      margin-right: 10px;
+      padding: 0 !important;
     }
     
     .divider {

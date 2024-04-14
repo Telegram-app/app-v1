@@ -121,11 +121,20 @@ export default defineComponent({
     return {router, userStore, modules: [FreeMode]};
   },
   
+  mounted() {
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      });
+    }
+  },
+  
   data: () => ({
     links: [
       {icon: 'premoder', title: 'Awaiting pre-moderation', metaTitle: undefined, meta: 17, to: 'notFound'},
       {icon: 'orders', title: 'Orders', metaTitle: 'Orders awaiting attention', meta: 10, to: 'notFound'},
-      {icon: 'finances', title: 'Finances', metaTitle: 'Balance', meta: 100, to: 'notFound'},
+      {icon: 'finances', title: 'Finances', metaTitle: 'Balance', meta: 100, to: 'info/finances'},
       {icon: 'products', title: 'Products', metaTitle: 'Active', meta: 50, to: 'notFound'},
       {icon: 'reviews', title: 'Reviews', metaTitle: 'New in the last 24 hours', meta: 10, to: 'notFound'},
       {icon: 'staff', title: 'Staff', metaTitle: 'Active employees in the last 24 hours', meta: 5, to: 'info/employers'},

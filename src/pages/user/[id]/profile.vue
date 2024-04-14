@@ -67,6 +67,15 @@ export default defineComponent({
   
   }),
   
+  mounted() {
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      });
+    }
+  },
+  
   computed: {
     user() {
       return this.userStore.getUserById(Number(this.route.params.id))

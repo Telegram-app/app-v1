@@ -34,6 +34,15 @@ export default defineComponent({
     return {router, route, userStore};
   },
   
+  mounted() {
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      });
+    }
+  },
+  
   data: () => ({}),
   
   computed: {

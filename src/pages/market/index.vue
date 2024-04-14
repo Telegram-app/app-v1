@@ -141,9 +141,14 @@ export default defineComponent({
     
     return {router, marketStore, modules: [Autoplay, FreeMode]};
   },
-  
   mounted() {
     this.marketStore.createFakeStores();
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      });
+    }
   },
   
   computed: {

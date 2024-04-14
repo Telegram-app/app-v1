@@ -16,7 +16,16 @@
 import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: 'NotFound'
+  name: 'NotFound',
+  
+  mounted() {
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      });
+    }
+  },
 })
 
 </script>

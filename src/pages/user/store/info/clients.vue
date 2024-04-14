@@ -49,14 +49,13 @@
       <div class="table-wrapper">
         <table class="store-clients__table table is-fullwidth">
           <thead class="store-clients__table__head">
-            <tr>
-              <th>Username</th>
-              <th class="has-text-centered">Market</th>
-              <th class="has-text-centered">Store</th>
-              <th class="has-text-centered">More</th>
-            </tr>
+          <tr>
+            <th>Username</th>
+            <th class="has-text-centered">Market</th>
+            <th class="has-text-centered">Store</th>
+            <th class="has-text-centered">More</th>
+          </tr>
           </thead>
-          
           <transition name="fade-blur">
             <div class="backdrop--blur" v-show="menuOpened" @click="menuOpened = false"></div>
           </transition>
@@ -65,7 +64,7 @@
           
           <!--          loading-->
           <!--          <tr v-for="i of 6" :key="'stub-' + i" v-if="loading && !sortedUsernames.length">-->
-          <tr v-for="i of 6" :key="'stub-' + i">
+          <tr v-for="i of 6" :key="'stub-' + i" @touchstart="touchStart($event)" @touchend="touchEnd()" @contextmenu.prevent>
             <td>
               <div class="store-clients__table__body__username">
                 <div>
@@ -128,6 +127,32 @@
         </table>
       </div>
     </div>
+    
+    <transition name="fade">
+      <!--      :class="{ 'store-clients__menu&#45;&#45;show': menuOpened }-->
+      <div class="store-clients__menu" v-show="menuOpened">
+        <div>
+          <div class="store-clients__menu__icon">
+            <img src="/images/icons/selfStore/profile.svg" alt="icon">
+          </div>
+          <span>Open profile</span>
+        </div>
+        <div class="divider"></div>
+        <div>
+          <div class="store-clients__menu__icon">
+            <img src="/images/icons/selfStore/card.svg" alt="icon">
+          </div>
+          <span>Provide a promo code</span>
+        </div>
+        <div class="divider"></div>
+        <div>
+          <div class="store-clients__menu__icon">
+            <img src="/images/icons/selfStore/pencil.svg" alt="icon">
+          </div>
+          <span>Make a note</span>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -144,7 +169,7 @@ import {useRouter} from 'vue-router';
 import {useFilter} from '@/stores/filters.ts';
 
 export default defineComponent({
-  name: 'storeClients',
+  name: 'StoreClientsPage',
   
   props: [],
   
@@ -155,6 +180,15 @@ export default defineComponent({
     return {router, filterStore};
   },
   
+  mounted() {
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      });
+    }
+  },
+  
   data: () => ({
     links: [
       {icon: 'promo', title: 'Promo code', to: 'notFound'},
@@ -162,7 +196,12 @@ export default defineComponent({
       {icon: 'message', title: 'Sending messages', to: 'notFound'},
     ],
     loading: false,
-    menuOpened: false
+    menuOpened: false,
+    touch: {
+      target: undefined,
+      interval: 0,
+      timeStamp: 0
+    }
   }),
   
   computed: {
@@ -172,9 +211,27 @@ export default defineComponent({
   },
   
   methods: {
+    touchStart(event: any) {
+      this.touch.target = event
+      this.touch.interval = setInterval(() => {
+        this.touch.timeStamp = event.timeStamp
+      }, 100)
+    },
+    touchEnd() {
+      clearInterval(this.touch.interval)
+      this.touch.timeStamp = 0
+    },
     openMenu(event: any) {
       let tr = event.target.closest('tr');
+      let trRect = tr.getBoundingClientRect()
+      let menu = document.querySelector<HTMLElement>('.store-clients__menu')!
+      
       this.menuOpened = true
+      
+      setTimeout(() => {
+        menu.style.top = trRect.top - trRect.height - menu.scrollHeight - 9 + 'px'
+      })
+      
       tr.classList.add('item-selected');
     }
   },
@@ -183,6 +240,12 @@ export default defineComponent({
     menuOpened(newValue) {
       if (newValue === false) {
         document.querySelector<HTMLElement>('.item-selected')?.classList.remove('item-selected')
+      }
+    },
+    'touch.timeStamp'(newValue) {
+      if (newValue >= 20000) {
+        this.openMenu(this.touch.target)
+        this.touchEnd()
       }
     }
   }
@@ -210,12 +273,14 @@ export default defineComponent({
     position: relative;
     z-index: 9999;
     
+    transition: 2s all;
+    
     td {
       &:first-child {
-        border-radius: 10px 0 0 10px;
+        border-radius: 10px 0 0 10px !important;
       }
       &:last-child {
-        border-radius: 0 10px 10px 0;
+        border-radius: 0 10px 10px 0 !important;
       }
     }
   }
@@ -232,8 +297,8 @@ export default defineComponent({
       font-family: "SF Pro Text Medium", sans-serif;
       line-height: 1;
       
-      color: #B366FF;
-      background: linear-gradient(180deg, #B366FF 0%, #7F32CB 100%);
+      color: #56A2FF;
+      background: linear-gradient(180deg, #56A2FF 0%, #216DCB 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -334,7 +399,7 @@ export default defineComponent({
     }
     
     &__products {
-    
+      
     }
   }
   
@@ -363,7 +428,7 @@ export default defineComponent({
         td {
           background: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
           
-          transition: 2s all;
+          transition: .5s all;
         }
         
         &:first-child {
@@ -443,11 +508,11 @@ export default defineComponent({
         }
       }
       
-      &__market span:first-child{
+      &__market span:first-child {
         background: #8D78FF;
       }
       
-      &__store span:first-child{
+      &__store span:first-child {
         background: #4CD863;
       }
       
@@ -467,6 +532,44 @@ export default defineComponent({
       }
     }
   }
+  
+  &__menu {
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+    
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 9px 0;
+    
+    font-size: 12px;
+    line-height: 1;
+    
+    background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+    
+    transition: 0.5s all;
+    
+    div {
+      display: flex;
+      align-items: center;
+      padding: 0 40px 0 13px;
+    }
+    
+    &__icon {
+      margin-right: 10px;
+      padding: 0 !important;
+    }
+    
+    .divider {
+      padding: 0;
+      margin: 7px 0;
+    }
+    
+    &--show {
+      display: flex;
+    }
+  }
 }
 
 .fade-blur-enter-active {
@@ -483,6 +586,15 @@ export default defineComponent({
   100% {
     backdrop-filter: blur(11px) opacity(1);
   }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 </style>
