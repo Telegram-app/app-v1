@@ -72,7 +72,7 @@
         <IconArrowNext h="13" w="14" color="white"/>
       </div>
       
-      <div class="self-card">
+      <div class="self-card" v-if="userStore.orders.length">
         <OrderCard :order="lastOrder"/>
       </div>
     </div>
@@ -124,9 +124,9 @@ export default defineComponent({
     },
     
     lastOrder() {
-      return this.userStore.orders.sort((a, b) => {
+      return this.userStore.orders.length > 1 ? this.userStore.orders.sort((a, b) => {
         return a.date <= b.date ? 1 : -1
-      })[0] as Order
+      })[0] as Order : this.userStore.orders[0]
     },
   },
   

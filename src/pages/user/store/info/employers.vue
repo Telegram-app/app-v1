@@ -64,7 +64,7 @@
           
           <!--          loading-->
           <!--          <tr v-for="i of 6" :key="'stub-' + i" v-if="loading && !sortedUsernames.length">-->
-          <tr v-for="i of 6" :key="'stub-' + i" @touchstart="touchStart($event)" @touchend="touchEnd()">
+          <tr v-for="i of 6" :key="'stub-' + i" @touchstart="touchStart($event)" @touchend="touchEnd()" @contextmenu.prevent>
             <td>
               <div class="store-employers__table__body__username">
                 <div>
@@ -220,7 +220,7 @@ export default defineComponent({
       }
     },
     'touch.timeStamp'(newValue) {
-      if (newValue >= 50000) {
+      if (newValue >= 20000) {
         this.openMenu(this.touch.target)
         this.touch.timeStamp = 0
       }
