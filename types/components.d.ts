@@ -29,6 +29,7 @@ declare module 'vue' {
     NotFoundLayout: typeof import('./../src/layouts/NotFoundLayout.vue')['default']
     NotWebAppButton: typeof import('./../src/components/base/NotWebAppButton.vue')['default']
     OrderCard: typeof import('./../src/components/account/OrderCard.vue')['default']
+    OrdersLinks: typeof import('./../src/components/store/OrdersLinks.vue')['default']
     ProductCard: typeof import('./../src/components/store/ProductCard.vue')['default']
     ProfileLinks: typeof import('./../src/components/profile/ProfileLinks.vue')['default']
     Review: typeof import('./../src/components/store/Review.vue')['default']

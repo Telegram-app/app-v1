@@ -1,5 +1,5 @@
 <template>
-  <div class="account__order__card" v-if="order">
+  <div class="account__order__card" :class="['account__order__card--' + color]" v-if="order">
     <div class="is-flex is-flex-direction-column">
       <div class="account__order__card__status">{{ order.status }}</div>
       <div class="account__order__card__target">{{ order.item.name }}</div>
@@ -32,7 +32,8 @@ export default defineComponent({
   name: 'OrderCard',
   
   props: {
-    order: Object as PropType<Order>
+    order: Object as PropType<Order>,
+    color: String
   },
   
   data: () => ({
@@ -59,6 +60,8 @@ export default defineComponent({
 <style scoped lang="scss">
 
 .account__order__card {
+  $self: &;
+  
   display: flex;
   justify-content: space-between;
   
@@ -85,6 +88,22 @@ export default defineComponent({
     margin: auto 0;
     
     cursor: pointer;
+  }
+  
+  &--white {
+    #{ $self } {
+      &__status {
+      
+      }
+      
+      &__target {
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+      }
+      
+      &__info {
+      
+      }
+    }
   }
 }
 

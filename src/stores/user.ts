@@ -1,6 +1,7 @@
 import {defineStore} from 'pinia';
 import {faker} from '@faker-js/faker';
 import {useMarketStore} from '@/stores/market.ts';
+import {Dayjs} from 'dayjs';
 
 export type UserState = {
     tgData: any,
@@ -21,7 +22,7 @@ export type Order = {
     storeId: number | string;
     productId: number | string;
     item: { type: 1 | 2; name: string; price: number };
-    date: Date;
+    date: Date | Dayjs;
 }
 
 export type SelfStore = {
