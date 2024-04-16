@@ -224,7 +224,7 @@ export default defineComponent({
           display: inline-block;
           height: 20px;
           width: 20px;
-          border: 1px solid #787878;
+          border: 1px solid theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
           border-radius: 100%;
           outline: none;
           
@@ -286,7 +286,7 @@ export default defineComponent({
           font-size: 12px;
           line-height: 1;
           
-          color: theme-var($--hint-color);
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
         
         &-per-month {
@@ -296,7 +296,7 @@ export default defineComponent({
           font-size: 15px;
           line-height: 1;
           
-          color: theme-var($--hint-color);
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
       }
     }
@@ -342,7 +342,7 @@ export default defineComponent({
         font-size: 12px;
         line-height: 12px;
         
-        color: theme-var($--hint-color);
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
       
       &__more {

@@ -117,23 +117,6 @@ export default defineComponent({
     
     cursor: pointer;
     
-    &--new {
-      position: absolute;
-      right: -100%;
-      
-      margin-left: 8px;
-      padding: 6px 14px;
-      border-radius: 15px;
-      
-      font-size: 8px;
-      line-height: 100%;
-      
-      color: #ffffff;
-      background-color: #51B3FF;
-      
-      cursor: default;
-    }
-    
     &--active {
       color: theme-var-tg(--tg-theme-link-color, $--tg-link-color);
     }

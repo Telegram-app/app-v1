@@ -40,7 +40,7 @@ export default defineComponent({
   
   &--white {
     path {
-      stroke: #ffffff;
+      stroke: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
     }
   }
   

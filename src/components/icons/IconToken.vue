@@ -41,13 +41,13 @@ export default defineComponent({
 .icon {
   &--grey {
     path {
-      fill: #7D7D85;
+      fill: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
   }
   
   &--white {
     path {
-      fill: #ffffff;
+      fill: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
     }
   }
 }

@@ -37,7 +37,7 @@ export default defineComponent({
   font-family: "SF Pro Text Regular", sans-serif;
   line-height: 1;
   
-  color: #ffffff;
+  color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
   
   cursor: pointer;
   pointer-events: auto;
@@ -47,11 +47,11 @@ export default defineComponent({
   }
   
   &--green {
-    background-color: #30B645
+    background-color: theme-var($--success-color)
   }
   
   &--red {
-    background-color: #e80808
+    background-color: theme-var($--error-color)
   }
   
   &:focus {
@@ -59,9 +59,8 @@ export default defineComponent({
   }
   
   &--light-blue {
-    background: linear-gradient(211deg, #EAF4FD 0%, #84C4E7 100%);
-    
     color: #000000;
+    background: linear-gradient(211deg, #EAF4FD 0%, #84C4E7 100%);
   }
 }
 

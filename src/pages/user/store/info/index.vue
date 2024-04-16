@@ -78,7 +78,7 @@
               <div class="store-info__news__item__text">Find out what's new in the wallet</div>
               <div class="store-info__news__item__read-more">
                 <span>Read</span>
-                <IconChevronRight h="9" w="5" color="blue"/>
+                <IconChevronRight h="9" w="5"/>
               </div>
             </div>
             <div class="store-info__news__item__image">
@@ -176,7 +176,7 @@ export default defineComponent({
       font-size: 15px;
       font-family: "SF Pro Text Semibold", sans-serif;
       
-      color: #ffffff;
+      color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
     }
     
     &__id {
@@ -185,7 +185,7 @@ export default defineComponent({
       
       font-size: 10px;
       
-      color: #ffffff;
+      color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
     }
   }
   
@@ -194,7 +194,7 @@ export default defineComponent({
     
     font-size: 12px;
     
-    color: theme-var($--hint-color);
+    color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
   }
   
   &__links {
@@ -332,7 +332,7 @@ export default defineComponent({
           
           font-size: 12px;
           
-          color: #0477FF;
+          color: theme-var-tg(--tg-theme-link-color, $--tg-link-color);
         }
       }
       

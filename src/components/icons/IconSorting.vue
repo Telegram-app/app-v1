@@ -53,7 +53,7 @@ export default defineComponent({
 
 .icon {
   path {
-    fill: #7D7D85;
+    fill: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
   }
 }
 

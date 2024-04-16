@@ -417,7 +417,7 @@ export default defineComponent({
           font-size: 12px;
           line-height: 1;
           
-          color: #7d7d85;
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
       }
       

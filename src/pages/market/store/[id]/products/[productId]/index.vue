@@ -120,7 +120,7 @@
       </div>
     </div>
     
-    <NotWebAppButton @click="orderProduct()" v-if="notAWebApp && payment.selectedItem.name.length">BUY</NotWebAppButton>
+    <NotWebAppButton @click="payment.show = true" v-if="notAWebApp && payment.selectedItem.name.length">BUY</NotWebAppButton>
     
     <VBottomSheet v-model="payment.show">
       <div class="product__payment">
@@ -256,7 +256,13 @@ export default defineComponent({
     
     orderProduct() {
       this.userStore.orderProduct(Number(this.route.params.id), this.product.id, this.payment.selectedItem).then(newOrder => {
-        this.router.push({name: 'orderIssuing', params: {id: newOrder.id}});
+        if (newOrder.item.type === 1) {
+          this.router.push({name: 'orderIssuing', params: {id: newOrder.id}});
+        } else if (newOrder.item.type === 2) {
+          this.router.push({name: 'order', params: {id: newOrder.id}});
+        } else {
+          console.log('error');
+        }
       });
     },
     
@@ -374,7 +380,7 @@ export default defineComponent({
           
           font-size: 10px;
           
-          color: #6F6F6F;
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
           background-color: rgba(248, 233, 213, 0.7);
         }
       }
@@ -437,8 +443,8 @@ export default defineComponent({
       padding: 4px 10px;
       border-radius: 10px;
       
-      color: #7D7D85;
-      background-color: #F6F6F6;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
+      background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
       
       span {
         margin-right: 4px;
@@ -470,7 +476,7 @@ export default defineComponent({
     &__id {
       font-size: 12px;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     &__dividing-dot {
@@ -479,13 +485,13 @@ export default defineComponent({
       margin: auto 6px;
       border-radius: 100%;
       
-      background-color: #7d7d85;
+      background-color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     &__createdAt {
       font-size: 12px;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     &__share {
@@ -509,7 +515,7 @@ export default defineComponent({
       padding: 2px;
       border-radius: 5px;
       
-      background-color: #F1F1F1;
+      background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
       
       &--active {
         
@@ -522,7 +528,7 @@ export default defineComponent({
           
           border-radius: 5px;
           
-          background-color: #FFFFFF;
+          background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);;
           
           transition: 0.5s all;
         }
@@ -548,7 +554,7 @@ export default defineComponent({
             font-size: 12px;
             font-family: "SF Pro Text Bold", sans-serif;
             
-            color: #000000;
+            color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
           }
         }
       }
@@ -567,7 +573,7 @@ export default defineComponent({
         min-width: 93px;
         max-width: 93px;
         padding: 8px 10px;
-        border: 1px solid #E1E0E6;
+        border: 1px solid theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         border-radius: 10px;
         
         cursor: pointer;
@@ -583,14 +589,14 @@ export default defineComponent({
           line-height: 1;
           margin-top: 5px;
           
-          color: theme-var($--hint-color);
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
         
         &--selected {
-          background-color: #E6F1FF;
+          background-color: #EBF7FE;
           
           .product__types__items__item__name {
-            color: #000000
+            color: #000000;
           }
         }
       }
@@ -630,7 +636,7 @@ export default defineComponent({
       position: absolute;
       right: 0;
       bottom: 0;
-      border-bottom: 1px dashed #CFCFD1;
+      border-bottom: 1px dashed theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       
       font-size: 13px;
       
@@ -654,7 +660,7 @@ export default defineComponent({
       span:first-child {
         margin-right: 4px;
         
-        color: #7D7D85;
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
     }
     
@@ -668,7 +674,7 @@ export default defineComponent({
       span:first-child {
         margin-right: 4px;
         
-        color: #7D7D85;
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
       
       span:last-child {
@@ -699,13 +705,13 @@ export default defineComponent({
         
         font-size: 12px;
         
-        color: #7D7D85;
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         
         &:after {
           content: "";
           flex: 1;
           margin: auto 4px 4px 4px;
-          border-bottom: 1px dashed #CFCFD1;
+          border-bottom: 1px dashed theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
       }
       
@@ -718,7 +724,7 @@ export default defineComponent({
     &__show-more {
       margin-top: 10px;
       width: max-content;
-      border-bottom: 1px dashed #CFCFD1;
+      border-bottom: 1px dashed theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       
       font-size: 12px;
       
@@ -776,7 +782,7 @@ export default defineComponent({
       line-height: 1;
       text-transform: uppercase;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     &__subtitle {
@@ -802,7 +808,7 @@ export default defineComponent({
         font-family: "SF Pro Text Semibold", sans-serif;
         line-height: 1;
         
-        color: theme-var($--hint-color);
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
     }
     
@@ -820,7 +826,7 @@ export default defineComponent({
         font-family: "SF Pro Text Semibold", sans-serif;
         text-transform: uppercase;
         
-        color: theme-var($--hint-color);
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
     }
     
@@ -856,7 +862,7 @@ export default defineComponent({
           font-size: 12px;
           font-family: "SF Pro Text Medium", sans-serif;
           
-          color: #888888;
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
       }
       
@@ -880,7 +886,7 @@ export default defineComponent({
           font-size: 12px;
           line-height: 12px;
           
-          color: #787878;
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
       }
     }

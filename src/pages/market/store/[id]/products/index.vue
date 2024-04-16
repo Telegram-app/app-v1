@@ -219,7 +219,7 @@ export default defineComponent({
     &__text {
       font-size: 12px;
       
-      color: theme-var($--hint-color);
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);;
     }
   }
   

@@ -43,7 +43,7 @@ export default defineComponent({
   
   &--grey {
     path {
-      fill: #7D7D85;
+      fill: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
   }
   
@@ -55,7 +55,7 @@ export default defineComponent({
   
   &--blue {
     path {
-      fill: #0477FF
+      fill: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
     }
   }
 }

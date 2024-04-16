@@ -27,12 +27,12 @@ export default defineComponent({
 
 .icon {
   path {
-    fill: #FFFFFF;
+    fill: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
   }
   
   &--red {
     path {
-      fill: #ff0000;
+      fill: theme-var($--error-color);
     }
   }
 }

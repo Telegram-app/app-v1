@@ -98,7 +98,7 @@ export default defineComponent({
     width: 50px;
     border-radius: 100%;
     
-    background-color: #E6F1FF;
+    background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
   }
   
   &__title {
@@ -108,7 +108,7 @@ export default defineComponent({
     font-family: "SF Pro Text Medium", sans-serif;
     line-height: 1;
     
-    color: #0477FF;
+    color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
   }
   
   &__rating {
@@ -234,8 +234,8 @@ export default defineComponent({
         
         font-size: 12px;
         
-        color: #000000;
-        background-color: #E6F1FF;
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);;
+        background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
         
         &:first-child {
           margin-right: 15px;
@@ -275,7 +275,7 @@ export default defineComponent({
       resize: none;
       
       &::placeholder {
-        color: #7D7D85;
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
       
       &:focus {

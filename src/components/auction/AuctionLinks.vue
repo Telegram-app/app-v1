@@ -125,8 +125,8 @@ export default defineComponent({
       font-size: 8px;
       line-height: 100%;
       
-      color: #ffffff;
-      background-color: #51B3FF;
+      color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
+      background-color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
       
       cursor: default;
     }

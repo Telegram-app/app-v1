@@ -83,23 +83,23 @@ export default defineComponent({
   }
   
   &--success {
-    color: #ffffff;
+    color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
     background: linear-gradient(180deg, #3ADB53 0%, #57C268 100%);
   }
   
   &--info {
-    color: #ffffff;
-    background: #646b6d;
+    color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
+    background: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
   }
   
   &--warning {
-    color: #ffffff;
-    background: #646b6d;
+    color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
+    background: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
   }
   
   &--error {
-    color: #ffffff;
-    background: #FF3923;
+    color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
+    background: theme-var($--error-color);
   }
 }
 

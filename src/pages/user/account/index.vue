@@ -66,8 +66,8 @@
       </div>
     </div>
     
-    <div class="account__orders">
-      <div class="account__orders__link" @click="router.push({name: 'orders'})">
+    <div class="account__order__last">
+      <div class="account__order__last__link" @click="router.push({name: 'orders'})">
         <span>Orders</span>
         <IconArrowNext h="13" w="14" color="white"/>
       </div>
@@ -248,7 +248,7 @@ export default defineComponent({
         line-height: 1;
         text-decoration: underline;
         
-        color: #3D4C5E;
+        color: theme-var($--dark-text);
         background: none;
       }
       
@@ -276,7 +276,7 @@ export default defineComponent({
       font-size: 12px;
       line-height: 1;
       
-      color: #3D4C5E;
+      color: theme-var($--dark-text);
     }
     
     &__info {
@@ -285,7 +285,7 @@ export default defineComponent({
       font-size: 14px;
       line-height: 1;
       
-      color: #3D4C5E;
+      color: theme-var($--dark-text);
       
       &__balance {
         
@@ -333,7 +333,7 @@ export default defineComponent({
       text-transform: uppercase;
       line-height: 1;
       
-      color: #FFFFFF;
+      color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
       
       cursor: pointer;
       
@@ -368,12 +368,12 @@ export default defineComponent({
         
         font-size: 12px;
         
-        color: #3D4C5E;
+        color: theme-var($--dark-text);
       }
     }
   }
   
-  &__orders {
+  &__order__last {
     margin-top: 15px;
     
     &__link {
@@ -385,7 +385,7 @@ export default defineComponent({
       text-transform: uppercase;
       line-height: 1;
       
-      color: #FFFFFF;
+      color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
       
       cursor: pointer;
       

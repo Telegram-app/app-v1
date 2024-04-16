@@ -301,7 +301,7 @@ export default defineComponent({
       font-size: 12px;
       line-height: 1;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     &__text {
@@ -312,7 +312,7 @@ export default defineComponent({
       font-size: 12px;
       line-height: 1;
       
-      color: theme-var($--hint-color);
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       background-color: theme-var($--card-bg-color);
     }
   }
@@ -384,7 +384,7 @@ export default defineComponent({
       &__link {
         font-size: 12px;
         
-        color: theme-var($--hint-color);
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         
         cursor: pointer;
       }

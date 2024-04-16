@@ -34,7 +34,7 @@ export default defineComponent({
 
 .icon {
   path {
-    fill: #0477FF;
+    fill: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
   }
   
   &--blue-gradient {

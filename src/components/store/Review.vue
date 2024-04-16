@@ -170,7 +170,7 @@ export default defineComponent({
     font-family: "SF Pro Text Medium", sans-serif;
     line-height: 1;
     
-    background-color: theme-var($--user-rating-color);
+    background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
     
     div {
       padding: 4px 7px 5px;
@@ -183,7 +183,7 @@ export default defineComponent({
     span {
       margin-left: 6px;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
   }
   
@@ -191,7 +191,7 @@ export default defineComponent({
     font-size: 13px;
     line-height: 1;
     
-    color: #888888;
+    color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
   }
   
   &__message {
@@ -217,7 +217,7 @@ export default defineComponent({
       right: 0;
       bottom: 0;
       
-      border-bottom: 1px dashed #CFCFD1;
+      border-bottom: 1px dashed theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       
       font-size: 13px;
       
@@ -252,7 +252,7 @@ export default defineComponent({
     margin-top: 10px;
     margin-left: 10px;
     padding-left: 10px;
-    border-left: 1px rgba(4, 119, 255, 0.20) solid;
+    border-left: 1px solid theme-var($--dark-text);
     
     .review__header__info {
       height: 32px;

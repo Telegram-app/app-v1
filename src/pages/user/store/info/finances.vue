@@ -158,7 +158,7 @@ export default defineComponent({
       line-height: 1;
       text-transform: uppercase;
       
-      color: theme-var($--hint-color);
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
   }
   
@@ -210,7 +210,7 @@ export default defineComponent({
         
         font-size: 12px;
         
-        color: #7D7D85;
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
     }
     
@@ -258,7 +258,7 @@ export default defineComponent({
           font-size: 12px;
           line-height: 1;
           
-          color: #888888
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
         
         &__order {
@@ -270,7 +270,7 @@ export default defineComponent({
           font-size: 12px;
           line-height: 1;
           
-          background-color: #F6F6F6;
+          background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
         }
       }
       
@@ -291,7 +291,7 @@ export default defineComponent({
           line-height: 1;
           text-transform: uppercase;
           
-          color: #888888;
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
       }
     }

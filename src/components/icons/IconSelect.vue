@@ -30,7 +30,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .icon {
   path {
-    stroke: #7D7D85;
+    stroke: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
   }
   
   &--black {

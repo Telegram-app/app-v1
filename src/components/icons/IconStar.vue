@@ -26,12 +26,12 @@ export default defineComponent({
 
 .icon {
   path {
-    fill: #FFFFFF;
+    fill: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
   }
   
   &--black {
     path {
-      fill: #000000;
+      fill: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
     }
   }
 }

@@ -155,7 +155,7 @@ export default defineComponent({
         line-height: 1;
         text-decoration: underline;
         
-        color: #3D4C5E;
+        color: theme-var($--dark-text);
         background: none;
       }
       
@@ -182,7 +182,7 @@ export default defineComponent({
       font-size: 14px;
       line-height: 1;
       
-      color: #3D4C5E;
+      color: theme-var($--dark-text);
       
       &__balance {
         

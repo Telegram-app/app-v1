@@ -209,11 +209,11 @@ export default defineComponent({
             width: 5px;
             height: 5px;
             
-            background: #D8D9DB;
+            background: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
             opacity: 1;
             
             &-active {
-              background: #66A9E0;
+              background: theme-var-tg(--tg-theme-link-color, $--tg-link-color);
             }
           }
         }
@@ -243,7 +243,7 @@ export default defineComponent({
       font-size: 12px;
       line-height: 13px;
       
-      color: #787878;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
   }
   
@@ -258,7 +258,7 @@ export default defineComponent({
         font-size: 15px;
         line-height: 1;
         
-        color: #7D7D85;
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
       
       &__value {
@@ -299,7 +299,7 @@ export default defineComponent({
     &__message {
       font-size: 12px;
       
-      color: #888888;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     &__time {
@@ -309,7 +309,7 @@ export default defineComponent({
       
       font-size: 12px;
       
-      color: #888888;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
   }
   
@@ -319,13 +319,13 @@ export default defineComponent({
     font-size: 15px;
     
     &__chat {
-      color: #0477FF;
+      color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
       
       cursor: pointer;
     }
     
     &__submit {
-      color: #FF3923;
+      color: theme-var($--error-color);
       
       cursor: pointer;
     }

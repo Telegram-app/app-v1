@@ -148,7 +148,7 @@ export default defineComponent({
       
       font-size: 11px;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       
       svg {
         margin-right: 4px;
@@ -209,7 +209,7 @@ export default defineComponent({
         &:first-child {
           display: flex;
           
-          color: #7D7D85;
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
         
         &:last-child {
@@ -240,7 +240,7 @@ export default defineComponent({
       line-height: 1;
       
       & > div {
-        background-color: theme-var($--action-button-color);
+        background-color: #EBF7FE;
       }
       
       &__rating {
@@ -256,8 +256,8 @@ export default defineComponent({
           padding: 7px 7px 8px;
           border-radius: 15px;
           
-          color: #ffffff;
-          background-color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);;
+          color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
+          background-color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
         }
         
         span {
@@ -285,7 +285,7 @@ export default defineComponent({
         
         font-size: 11px;
         
-        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);;
+        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
         
         span {
           margin-right: 3px;
@@ -313,7 +313,7 @@ export default defineComponent({
       
       font-size: 11px;
       
-      color: #7d7d85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     button {

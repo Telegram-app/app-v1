@@ -11,12 +11,13 @@ $--tg-section-bg-color: --tg-section-bg-color;
 $--tg-section-header-text-color: --tg-section-header-text-color;
 $--tg-subtitle-text-color: --tg-subtitle-text-color;
 $--tg-destructive-text-color: --tg-destructive-text-color;
+
 $--card-bg-color: --card-bg-color;
-$--filter-bg-color: --filter-bg-color;
 $--divider-color: --divider-color;
-$--action-button-color: --action-button-color;
-$--user-rating-color: --user-rating-color;
-$--hint-color: --hint-color;
+$--dark-text: --dark-text;
+
+$--success-color: --success-color;
+$--error-color: --error-color;
 
 $theme-map-light: (
         $--tg-accent-text-color: #168acd,
@@ -32,12 +33,13 @@ $theme-map-light: (
         $--tg-section-header-text-color: #168acd,
         $--tg-subtitle-text-color: #999999,
         $--tg-text-color: #000000,
+
         $--card-bg-color: #ffffff,
-        $--filter-bg-color: #ffffff,
         $--divider-color: #EFEEF4,
-        $--action-button-color: #EBF7FE,
-        $--user-rating-color: #F2F2F2,
-        $--hint-color: #787878
+        $--dark-text: #3D4C5E,
+
+        $--success-color: #30B645,
+        $--error-color: #FF3923,
 );
 
 $theme-map-dark: (
@@ -54,10 +56,11 @@ $theme-map-dark: (
         $--tg-section-header-text-color: #67bbf3,
         $--tg-subtitle-text-color: #82868a,
         $--tg-text-color: #f5f5f5,
+
         $--card-bg-color: #282828,
-        $--filter-bg-color: #313133,
         $--divider-color: #323233,
-        $--action-button-color: #29303D,
-        $--user-rating-color: #29303D,
-        $--hint-color: #787878
+        $--dark-text: #919294,
+
+        $--success-color: #30B645,
+        $--error-color: #FF3923,
 );

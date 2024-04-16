@@ -237,7 +237,7 @@ export default defineComponent({
         }
         
         &::placeholder {
-          color: #787878;
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
       }
     }
@@ -302,7 +302,7 @@ export default defineComponent({
       font-size: 10px;
       line-height: 1;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
   }
   
@@ -330,7 +330,7 @@ export default defineComponent({
         }
         
         &::placeholder {
-          color: #787878;
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
       }
     }

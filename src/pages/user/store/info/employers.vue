@@ -30,7 +30,7 @@
         <p class="control has-icons-left">
           <input class="input reset" type="search" :placeholder="filter.selfStore.employers.inputs.search.placeholder" v-model="filter.selfStore.employers.inputs.search.value">
           <span class="store-employers__filters__search__icon">
-              <IconSearch h="9" w="8" color="grey"/>
+              <IconSearch h="9" w="8"/>
             </span>
         </p>
       </div>
@@ -311,7 +311,7 @@ export default defineComponent({
       line-height: 1;
       text-transform: uppercase;
       
-      color: theme-var($--hint-color);
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
   }
   
@@ -366,10 +366,13 @@ export default defineComponent({
         font-size: 12px;
         line-height: 1;
         
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+        background-color: theme-var($--card-bg-color);
+        
         &::placeholder {
           line-height: 1;
           
-          color: #7D7D85;
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
           opacity: 1;
         }
         
@@ -419,7 +422,7 @@ export default defineComponent({
         font-family: "SF Pro Text Regular", sans-serif;
         font-weight: 400;
         
-        color: #7D7D85;
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
     }
     
@@ -463,6 +466,8 @@ export default defineComponent({
         font-size: 14px;
         line-height: 1;
         
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+        
         div {
           margin-right: 10px;
           height: 25px;
@@ -486,7 +491,7 @@ export default defineComponent({
         padding: 1px 5px 1px 1px;
         border-radius: 15px;
         
-        background: #F2F2F2;
+        background: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
         
         span {
           font-size: 8px;
@@ -497,13 +502,13 @@ export default defineComponent({
             padding: 5px 6px;
             border-radius: 15px;
             
-            color: #ffffff;
+            color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
           }
           
           &:last-child {
             margin-left: 5px;
             
-            color: #7D7D85;
+            color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
           }
         }
       }
@@ -513,7 +518,7 @@ export default defineComponent({
       }
       
       &__store span:first-child {
-        background: #4CD863;
+        background: theme-var($--success-color)
       }
       
       &__icon {
@@ -527,7 +532,7 @@ export default defineComponent({
           width: 3px;
           border-radius: 1px;
           
-          background: rgba(60, 60, 67, 0.3);
+          background: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color)
         }
       }
     }

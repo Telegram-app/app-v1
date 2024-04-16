@@ -37,12 +37,12 @@ export default defineComponent({
 <style lang="scss" scoped>
 .icon {
   path, circle {
-    stroke: #000000;
+    stroke: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
   }
   
   &--white {
     path, circle {
-      stroke: #FFFFFF;
+      stroke: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
     }
   }
   

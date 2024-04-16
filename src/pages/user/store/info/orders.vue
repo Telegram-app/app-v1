@@ -83,7 +83,7 @@ export default defineComponent({
       font-size: 13px;
       line-height: 1;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       
       .icon {
         margin-left: 5px;
@@ -96,7 +96,7 @@ export default defineComponent({
       font-size: 13px;
       line-height: 1;
       
-      color: #0477FF
+      color: theme-var-tg(--tg-theme-link-color, $--tg-link-color);
     }
   }
   

@@ -71,14 +71,14 @@ export default defineComponent({
   border-radius: 10px;
   outline: none;
   
-  background-color: theme-var($--filter-bg-color);
+  background-color: theme-var($--card-bg-color);
   
   &__type--1 {
     &__label {
       font-size: 10px;
       line-height: 1;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     &__selected {
@@ -101,7 +101,7 @@ export default defineComponent({
         overflow: hidden;
         white-space: nowrap;
         
-        color: #000000;
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
       }
       
       svg {
@@ -122,7 +122,7 @@ export default defineComponent({
       font-size: 12px;
       line-height: 1;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     &__selected {
@@ -144,7 +144,7 @@ export default defineComponent({
         overflow: hidden;
         white-space: nowrap;
         
-        color: #000000;
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
       }
     }
     
@@ -178,8 +178,8 @@ export default defineComponent({
     border-radius: 0 0 10px 10px;
     overflow: hidden;
     
-    background-color: theme-var($--filter-bg-color);
-    color: #000000;
+    background-color: theme-var($--card-bg-color);
+    color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
     
     div {
       padding: 3px 11px;

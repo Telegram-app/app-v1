@@ -2,7 +2,7 @@
   <div class="account__order__card" :class="['account__order__card--' + color]" v-if="order">
     <div class="is-flex is-flex-direction-column">
       <div class="account__order__card__status">{{ order.status }}</div>
-      <div class="account__order__card__target">{{ order.item.name }}</div>
+      <div class="account__order__card__product">{{ order.item.name }}</div>
       <div class="account__order__card__info">
         <span class="account__order__card__store-id">OS-{{ order.storeId }}</span>
         ·
@@ -67,21 +67,15 @@ export default defineComponent({
   
   font-size: 12px;
   
+  color: theme-var($--dark-text);
+  
   &__status {
     font-family: "SF Pro Text Medium", sans-serif;
     text-transform: uppercase;
-    
-    color: #3D4C5E;
   }
   
-  &__target {
+  &__product {
     font-family: "SF Pro Text Medium", sans-serif;
-    
-    color: #FFFFFF;
-  }
-  
-  &__info {
-    color: #3D4C5E;
   }
   
   &__link {
@@ -92,16 +86,8 @@ export default defineComponent({
   
   &--white {
     #{ $self } {
-      &__status {
-      
-      }
-      
-      &__target {
+      &__product {
         color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
-      }
-      
-      &__info {
-      
       }
     }
   }

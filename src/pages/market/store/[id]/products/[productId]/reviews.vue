@@ -98,7 +98,7 @@ export default defineComponent({
         font-size: 15px;
         font-family: "SF Pro Text Semibold", sans-serif;
         
-        color: #ffffff;
+        color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
       }
       
       &-id {
@@ -107,7 +107,7 @@ export default defineComponent({
         
         font-size: 10px;
         
-        color: #ffffff;
+        color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
       }
     }
   }
@@ -133,7 +133,7 @@ export default defineComponent({
         font-size: 12px;
         text-transform: uppercase;
         
-        color: #7D7D85;
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
       
       &__filters {

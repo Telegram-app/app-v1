@@ -268,7 +268,7 @@ export default defineComponent({
         font-size: 15px;
         font-weight: 400;
         
-        color: #7D7D85;
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         
         &:first-child {
           width: 33%;
@@ -310,7 +310,7 @@ export default defineComponent({
               font-size: 12px;
               line-height: 1;
               
-              color: #7d7d85;
+              color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
             }
           }
         }
@@ -370,7 +370,7 @@ export default defineComponent({
     &__text {
       font-size: 15px;
       
-      color: #7d7d85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     &__clock {
@@ -385,7 +385,7 @@ export default defineComponent({
         
         font-size: 20px;
         
-        color: #D9D9D9;
+        color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       }
       
       &__days {
@@ -443,7 +443,7 @@ export default defineComponent({
       font-size: 12px;
       line-height: 1;
       
-      color: #7D7D85;
+      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
     }
     
     .b-table {
@@ -464,7 +464,7 @@ export default defineComponent({
           font-size: 15px;
           font-weight: 400;
           
-          color: #7D7D85;
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
           
           &:first-child  {
             width: 25%;
