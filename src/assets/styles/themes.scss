@@ -23,8 +23,12 @@
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/users/profile-bg.png');
 
     .self-card, .button {
-      background: linear-gradient(211deg, rgba(234, 244, 253, 0.7) 0%, rgba(132, 169, 231, 0.7) 100%);
+      background: rgba(4, 6, 21, 0.7);
     }
+  }
+
+  .account__order__card__product {
+    color: #ffffff;
   }
   //
   //.self-card {

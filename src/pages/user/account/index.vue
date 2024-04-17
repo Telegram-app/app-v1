@@ -78,8 +78,8 @@
     </div>
     
     <div class="account__buttons">
-      <VButton color="light-blue">Favorites</VButton>
-      <VButton color="light-blue" @click="router.push({ name: 'accountSettings' })">Settings</VButton>
+      <VButton>Favorites</VButton>
+      <VButton @click="router.push({ name: 'accountSettings' })">Settings</VButton>
     </div>
   </div>
 </template>
@@ -398,6 +398,9 @@ export default defineComponent({
   &__buttons {
     .button {
       margin-top: 15px;
+      
+      color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+      background: linear-gradient(211deg, #EAF4FD 0%, #84C4E7 100%);
     }
   }
 }

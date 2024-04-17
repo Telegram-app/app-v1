@@ -31,7 +31,7 @@ export default defineComponent({
   
   &--black {
     path {
-      fill: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+      fill: #000000;
     }
   }
 }

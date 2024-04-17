@@ -76,6 +76,8 @@ export default defineComponent({
   
   &__product {
     font-family: "SF Pro Text Medium", sans-serif;
+    
+    color: #ffffff;
   }
   
   &__link {

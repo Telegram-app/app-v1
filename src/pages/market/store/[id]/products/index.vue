@@ -179,6 +179,8 @@ export default defineComponent({
     
     &__text {
       margin-left: 5px;
+      
+      color: #ffffff;
     }
     
     &--show {
