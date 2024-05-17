@@ -7,7 +7,7 @@
     
     <div class="self-card store-clients__links">
       <template v-for="(link, i) in links" :key="'link-' + i">
-        <div class="store-clients__links__link" @click="router.push(link.to)">
+        <div class="store-clients__links__link" @click="linkOnClick(link.title)">
           <div class="store-clients__links__link__icon">
             <img :src="'/images/icons/selfStore/' + link.icon + '.svg'" alt="icon">
           </div>
@@ -153,6 +153,67 @@
         </div>
       </div>
     </transition>
+    
+    <VBottomSheet v-model="discount.show">
+      <div class="store-clients__give-discount__title caption has-text-centered">Discount</div>
+      
+      <div class="store-clients__give-discount__selects self-card">
+        <div class="is-flex is-justify-content-space-between">
+          <span class="store-clients__give-discount__selects__select__title">Discount type</span>
+          <div class="is-flex is-align-items-center">
+            <span class="store-clients__give-discount__selects__select__selected">Personal</span>
+            <IconChevronRight h="11" w="7" color="grey"/>
+          </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="is-flex is-justify-content-space-between">
+          <span class="store-clients__give-discount__selects__select__title">Time of action</span>
+          <div class="is-flex is-align-items-center">
+            <span class="store-clients__give-discount__selects__select__selected">Temporary</span>
+            <IconChevronRight h="11" w="7" color="grey"/>
+          </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="is-flex is-justify-content-space-between">
+          <span class="store-clients__give-discount__selects__select__title">Usage limit</span>
+          <div class="is-flex is-align-items-center">
+            <span class="store-clients__give-discount__selects__select__selected">No limits</span>
+            <IconChevronRight h="11" w="7" color="grey"/>
+          </div>
+        </div>
+      </div>
+      
+      <div class="store-clients__give-discount__inputs">
+        <div class="is-flex is-flex-direction-column">
+          <div class="caption">Enter the wallet address</div>
+          <input class="input" type="text" placeholder="EQCZk7u...g2DU">
+        </div>
+        
+        <div class="is-flex is-flex-direction-column">
+          <div class="caption">enter the discount amount</div>
+          <input class="input" type="text" placeholder="0 - 100%">
+        </div>
+        
+        <div class="is-flex is-flex-direction-column">
+          <div class="caption">Enter the discount start date</div>
+          
+          <VueDatePicker v-model="discount.data.startDate" :format="'MM.dd.yyyy'">
+            <template #trigger>
+              <input class="input" type="text" placeholder="17.12.2023" v-model="discount.data.startDate">
+            </template>
+          </VueDatePicker>
+        </div>
+        
+        <div class="is-flex is-flex-direction-column">
+          <div class="caption">Enter the discount end date</div>
+          <input class="input" type="text" placeholder="18.12.2023">
+        </div>
+      </div>
+    </VBottomSheet>
   </div>
 </template>
 
@@ -191,9 +252,9 @@ export default defineComponent({
   
   data: () => ({
     links: [
-      {icon: 'promo', title: 'Promo code', to: 'notFound'},
-      {icon: 'discounts', title: 'Discounts', to: 'notFound'},
-      {icon: 'message', title: 'Sending messages', to: 'notFound'},
+      {icon: 'promo', title: 'Promo code'},
+      {icon: 'discounts', title: 'Discounts'},
+      {icon: 'message', title: 'Sending messages'},
     ],
     loading: false,
     menuOpened: false,
@@ -201,6 +262,13 @@ export default defineComponent({
       target: undefined,
       interval: 0,
       timeStamp: 0
+    },
+    
+    discount: {
+      show: false,
+      data: {
+        startDate: null
+      }
     }
   }),
   
@@ -211,6 +279,20 @@ export default defineComponent({
   },
   
   methods: {
+    linkOnClick(link: string) {
+      if (link === 'Promo code') {
+        console.log(link);
+      }
+      
+      if (link === 'Discounts') {
+        this.discount.show = true
+      }
+      
+      if (link === 'Sending messages') {
+        console.log(link);
+      }
+    },
+    
     touchStart(event: any) {
       this.touch.target = event
       this.touch.interval = setInterval(() => {
@@ -573,6 +655,69 @@ export default defineComponent({
     
     &--show {
       display: flex;
+    }
+  }
+  
+  &__give-discount {
+    &__title {
+      margin-top: 6px;
+      
+      font-size: 16px;
+    }
+    
+    &__selects {
+      margin-top: 20px;
+      
+      .divider {
+        margin: 7px 0;
+      }
+      
+      &__select {
+        font-size: 15px;
+        
+        &__title {
+          line-height: 1;
+        }
+        
+        &__selected {
+          margin-right: 10px;
+          
+          line-height: 1;
+          
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
+        }
+      }
+    }
+    
+    &__inputs {
+      & > div {
+        margin-top: 15px;
+      }
+      
+      input {
+        height: 34px;
+        width: 100%;
+        margin-top: 10px;
+        padding: 0 17px;
+        border: none;
+        border-radius: 10px;
+        
+        font-size: 12px;
+        line-height: 1;
+        
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+        background: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+        
+        &::placeholder {
+          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
+          opacity: 1;
+        }
+        
+        &:focus {
+          outline: none;
+          box-shadow: unset;
+        }
+      }
     }
   }
 }

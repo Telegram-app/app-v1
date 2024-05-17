@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-select" :class="{ 'custom-select--open': open, 'custom-select__type--2': type === 2 }">
+  <div class="custom-select" :class="{ 'custom-select--open': open, 'custom-select__type--2': type === 2, 'custom-select__type--3': type === 3 }">
     <div v-if="type === 1" class="custom-select__type--1__selected" @click="$emit('open')">
       <span class="custom-select__type--1__label">{{ label }}</span>
       <span class="custom-select__type--1__selected__text">{{ modelValue }}</span>
@@ -11,6 +11,14 @@
       <span class="custom-select__type--2__selected__text" v-else>{{ modelValue }}</span>
       <div class="custom-select__type--2__icon">
         <IconSorting h="5" w="7"></IconSorting>
+      </div>
+    </div>
+    
+    <div v-if="type === 3" class="custom-select__type--3__selected">
+      <span class="custom-select__type--3__label" v-if="modelValue === 'All'">{{ label }}</span>
+      <span class="custom-select__type--3__selected__text" v-else>{{ modelValue }}</span>
+      <div class="custom-select__type--3__icon">
+        <IconArrowDown h="4" w="4"></IconArrowDown>
       </div>
     </div>
     
@@ -34,11 +42,12 @@
 
 import {defineComponent} from 'vue';
 import {OnClickOutside} from '@vueuse/components';
+import IconArrowDown from '@/components/icons/IconArrowDown.vue';
 
 export default defineComponent({
   name: 'VSelect',
   
-  components: {OnClickOutside},
+  components: {IconArrowDown, OnClickOutside},
   
   props: {
     type: Number,
@@ -161,6 +170,38 @@ export default defineComponent({
       div {
         font-size: 12px !important;
       }
+    }
+  }
+  
+  &__type--3 {
+    height: 12px;
+    padding: unset;
+    border-radius: unset;
+    
+    background: none;
+    
+    &__label {
+      font-size: 12px;
+      line-height: 1;
+      
+      color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+    }
+    
+    &__selected {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      
+      font-size: 12px;
+      line-height: 1;
+      
+      color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+    }
+    
+    &__icon {
+      margin-left: 5px;
+      margin-bottom: 2px;
     }
   }
   

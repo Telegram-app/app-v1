@@ -4,7 +4,7 @@
       <div class="account__order__card__status">{{ order.status }}</div>
       <div class="account__order__card__product">{{ order.item.name }}</div>
       <div class="account__order__card__info">
-        <span class="account__order__card__store-id">OS-{{ order.storeId }}</span>
+        <span class="account__order__card__store-id">{{ order.storeId }}</span>
         ·
         <span class="account__order__card__price">{{ order.item.price }}$</span>
       </div>

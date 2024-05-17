@@ -2,7 +2,9 @@
   <div class="auction">
     <AuctionLinks :links="links"/>
     
-    <RouterView/>
+    <transition>
+      <RouterView/>
+    </transition>
   </div>
 </template>
 

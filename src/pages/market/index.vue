@@ -145,8 +145,11 @@ export default defineComponent({
     this.marketStore.createFakeStores();
     if (window.Telegram.WebApp) {
       window.Telegram.WebApp.MainButton.setParams({
-        is_active: false,
-        is_visible: false
+        text: 'Новая страничка',
+        is_active: true,
+        is_visible: true
+      }).onClick(() => {
+        this.router.push({ name: 'newpage' })
       });
     }
   },
