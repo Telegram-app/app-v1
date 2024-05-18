@@ -43,6 +43,7 @@ import {CSSProperties, defineComponent, type PropType} from 'vue';
 import dayjs, {Dayjs} from 'dayjs';
 
 interface Card {
+  index: Number,
   image: String,
   title: String,
   name: String,
@@ -98,8 +99,6 @@ export default defineComponent({
     bottom: 0;
     left: 0;
     z-index: 2;
-    
-    border-radius: 16px;
   }
   
   &__wrapper {

@@ -64,6 +64,7 @@ export default defineComponent({
     notify: true,
     cards: [
       {
+        index: 0,
         image: 'first-card.jpg',
         title: 'Bash Scripting on Linux',
         name: 'Learn Linux TV',
@@ -77,11 +78,13 @@ export default defineComponent({
             backgroundColor: '#0f653a'
           },
           gradientCard: {
+            borderRadius: '16px 16px 0 0',
             background: 'linear-gradient(to bottom, rgba(15,101,58,0.800) 0%, rgba(15,101,58,0.298) 33.000001%, rgba(15,15,15,1.000) 100%)',
           }
         }
       },
       {
+        index: 1,
         image: 'second-card.jpg',
         title: 'Grand Theft Auto: Celebrating A Decade on YouTube',
         name: 'YouTube',
@@ -95,11 +98,13 @@ export default defineComponent({
             backgroundColor: '#653c59'
           },
           gradientCard: {
+            borderRadius: '0',
             background: 'linear-gradient(to bottom, rgba(101,60,89,0.800) 0%, rgba(101,60,89,0.298) 33.000001%, rgba(15,15,15,1.000) 100%)',
           }
         }
       },
       {
+        index: 2,
         image: 'third-card.jpg',
         title: 'At the peak',
         name: 'YouTube',
@@ -113,6 +118,7 @@ export default defineComponent({
             backgroundColor: '#394d59'
           },
           gradientCard: {
+            borderRadius: '0 0 16px 16px',
             background: 'linear-gradient(to bottom, rgba(57,77,89,0.800) 0%, rgba(57,77,89,0.298) 33.000001%, rgba(15,15,15,1.000) 100%)',
           }
         }
@@ -144,12 +150,12 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     margin: -15px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding: 10px 15px;
     
     line-height: 1;
     
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #ffffff;
     -webkit-box-shadow: 0px -3px 6px 0px rgba(0, 0, 0, 0.37);
     -moz-box-shadow: 0px -3px 6px 0px rgba(0, 0, 0, 0.37);
     box-shadow: 0px -3px 6px 0px rgba(0, 0, 0, 0.37);
@@ -196,9 +202,9 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding: 8px 20px 8px 15px;
-    border-radius: 12px;
+    border-radius: 8px;
     
     background: rgba(0, 0, 0, 0.06);
     
@@ -225,7 +231,20 @@ export default defineComponent({
   &__cards {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    //row-gap: 10px;
+    margin: 0 -15px;
+    
+    .card {
+      border-radius: 0;
+      
+      &:first-child {
+        border-radius: 16px 16px 0 0;
+      }
+      
+      &:last-child {
+        border-radius: 0 0 16px 16px;
+      }
+    }
   }
 }
 
