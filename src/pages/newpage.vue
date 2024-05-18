@@ -234,7 +234,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     //row-gap: 10px;
-    margin: 0 -15px;
+    margin: 0 -15px -15px;
   }
 }
 
