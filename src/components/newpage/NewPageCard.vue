@@ -85,7 +85,7 @@ export default defineComponent({
 <style scoped lang="scss">
 
 .card {
-  padding: 24px;
+  padding: 16px;
   
   color: #FFFFFF;
   
