@@ -166,10 +166,11 @@ export default defineComponent({
       if (window.scrollY === 0 && !this.isLoading) {
         const cards = document.querySelector<HTMLElement>('.newpage__cards')!
         
-        cards.style.transform = `translateY(0px)`
+        cards.style.transform = `translateY(-70px)`
       }
     },
     swipe(e: any) {
+      // let flag = this.checkParent(firstCard, e.target)
       if (typeof e["changedTouches"] !== "undefined") {
         let touch = e.changedTouches[0]
         this.pCurrent.x = touch.screenX
@@ -178,6 +179,12 @@ export default defineComponent({
         this.pCurrent.x = e.screenX
         this.pCurrent.y = e.screenY
       }
+      
+      let firstCard = document.querySelector('.newpage__cards')!.childNodes[1] as HTMLElement
+      let checkTarget = this.checkParent(firstCard, e.target)
+      
+      if (!checkTarget) return
+      
       let changeY = this.pStart.y < this.pCurrent.y ? Math.abs(this.pStart.y - this.pCurrent.y) : 0
       
       const cards = document.querySelector<HTMLElement>('.newpage__cards')!
@@ -189,17 +196,28 @@ export default defineComponent({
           cards.style.transform = `translateY(${70 - changeY}px)`
         }
       }
+    },
+    checkParent(parent: HTMLElement, child: HTMLElement) {
+      let node = child.parentNode;
+      
+      // keep iterating unless null
+      while (node !== null) {
+        if (node === parent) {
+          return true;
+        }
+        node = node.parentNode;
+      }
+      return false;
     }
   },
   
   mounted() {
-    // this.ptr = PullToRefresh.init({
-    //   mainElement: '#refreshCards',
-    //   triggerElement: '#refreshCards',
-    //   onRefresh() {
-    //     console.log('refresh');
-    //   }
-    // });
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      });
+    }
     
     document.addEventListener("touchstart", e => this.swipeStart(e), false)
     document.addEventListener("touchmove", e => this.swipe(e), false)

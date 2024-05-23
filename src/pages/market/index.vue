@@ -153,15 +153,6 @@ export default defineComponent({
         this.router.push({ name: 'newpage' })
       });
     }
-    
-    this.ptr = PullToRefresh.init({
-      mainElement: 'body',
-      triggerElement: 'body',
-      shouldPullToRefresh: () => window.scrollY,
-      onRefresh() {
-        console.log('refresh');
-      }
-    });
   },
   
   computed: {
@@ -207,8 +198,7 @@ export default defineComponent({
           {title: 'eBay for Business Podcast', to: 'market'},
         ]
       }
-    ] as Links[],
-    ptr: null
+    ] as Links[]
   }),
   
   methods: {
