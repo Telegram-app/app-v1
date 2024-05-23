@@ -191,11 +191,8 @@ export default defineComponent({
   
   &__product {
     &__images {
-      margin-top: 15px;
-      
       &__swiper {
-        margin: 0 -15px;
-        padding: 0 15px;
+        margin: -15px;
         
         &__slide {
           padding-bottom: 22px;
@@ -224,20 +221,21 @@ export default defineComponent({
         
         display: flex;
         justify-content: center;
-        height: 231px;
+        height: 250px;
         width: 100%;
         
         img {
           height: 100%;
-          width: 225px;
-          border-radius: 10px;
+          width: 100%;
+          object-fit: cover;
+          
         }
       }
     }
   }
   
   &__premium {
-    margin-top: 5px;
+    margin-top: 10px;
     
     &__text {
       font-size: 12px;

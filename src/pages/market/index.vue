@@ -29,7 +29,7 @@
     <div class="market__stores self-card">
       <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="router.push({ name: 'store', params: { id: store.id } })">
         <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
-        <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>
+<!--        <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>-->
         <span class="market__stores__store__name">{{ store.name }}</span>
       </div>
       
@@ -37,7 +37,7 @@
       
       <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @click="router.push({ name: 'store', params: { id: store.id } })">
         <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
-        <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>
+<!--        <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>-->
         <span class="market__stores__store__name">{{ store.name }}</span>
       </div>
     </div>
@@ -122,6 +122,7 @@ import {Store} from '@/models/store.model.ts';
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import {Autoplay, FreeMode} from 'swiper/modules';
 import 'swiper/css';
+import PullToRefresh from 'pulltorefreshjs';
 
 interface Links {
   title: string;
@@ -152,6 +153,15 @@ export default defineComponent({
         this.router.push({ name: 'newpage' })
       });
     }
+    
+    this.ptr = PullToRefresh.init({
+      mainElement: 'body',
+      triggerElement: 'body',
+      shouldPullToRefresh: () => window.scrollY,
+      onRefresh() {
+        console.log('refresh');
+      }
+    });
   },
   
   computed: {
@@ -197,8 +207,13 @@ export default defineComponent({
           {title: 'eBay for Business Podcast', to: 'market'},
         ]
       }
-    ] as Links[]
-  })
+    ] as Links[],
+    ptr: null
+  }),
+  
+  methods: {
+  
+  }
 });
 
 </script>
@@ -232,18 +247,14 @@ export default defineComponent({
   }
   
   &__stores {
+    position: relative;
+    
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    row-gap: 10px;
-    margin-top: 15px;
-    padding: 10px 13px;
-    
-    &:after {
-      content: "";
-      flex: auto;
-      min-width: 70px;
-    }
+    row-gap: 23px;
+    margin: 15px -5px 0 -5px;
+    padding: 15px 13px;
     
     &__store {
       position: relative;
@@ -252,39 +263,38 @@ export default defineComponent({
       flex-direction: column;
       align-items: center;
       flex-basis: 23%;
-      margin-top: 5px;
       
       cursor: pointer;
       
       &__image {
         z-index: 2;
         
-        height: 80%;
-        width: 80%;
-        border-radius: 10px;
+        height: 57px;
+        width: 57px;
+        border-radius: 100%;
         
         transition: 0.3s all;
         
-        &__shadow {
-          position: absolute;
-          z-index: 1;
-          top: 50px;
-          right: 12%;
-          left: 13%;
-          
-          height: 11%;
-          border-radius: inherit;
-          
-          background-size: auto;
-          background-position: center bottom;
-          background-repeat: no-repeat;
-          -webkit-filter: blur(5px);
-          filter: blur(5px);
-        }
+        //&__shadow {
+        //  position: absolute;
+        //  z-index: 1;
+        //  top: 50px;
+        //  right: 12%;
+        //  left: 13%;
+        //
+        //  height: 11%;
+        //  border-radius: inherit;
+        //
+        //  background-size: auto;
+        //  background-position: center bottom;
+        //  background-repeat: no-repeat;
+        //  -webkit-filter: blur(5px);
+        //  filter: blur(5px);
+        //}
       }
       
       &__name {
-        margin-top: 7px;
+        margin-top: 5px;
         text-align: center;
         
         font-size: 12px;
@@ -293,7 +303,11 @@ export default defineComponent({
     }
     
     .divider {
-      margin: 0 0 -5px !important;
+      position: absolute;
+      top: 100px;
+      
+      margin: 0 !important;
+      width: calc(100% - 26px);
     }
   }
   

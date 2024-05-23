@@ -20,6 +20,13 @@
         </div>
         <IconClose h="18" w="18" color="grey" @click="notify = false"/>
       </div>
+<!--      id="refreshCards"-->
+      
+      <div class="loading__container">
+        <transition name="slide">
+          <div class="loading" v-if="isLoading"></div>
+        </transition>
+      </div>
       
       <div class="newpage__cards">
         <template v-for="card of cards">
@@ -38,13 +45,24 @@
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import dayjs from 'dayjs';
+import {useScroll} from '@vueuse/core';
+
+import PullToRefresh from 'pulltorefreshjs'
 
 export default defineComponent({
   name: 'NewPage',
   
   props: [],
+  
+  setup() {
+  
+  },
+  
+  computed: {
+  
+  },
   
   data: () => ({
     selects: {
@@ -117,27 +135,85 @@ export default defineComponent({
           }
         }
       },
-    ]
+    ],
+    // ptr: null,
+    isLoading: false,
+    pStart: { x: 0, y: 0 },
+    pCurrent: { x: 0, y: 0 },
   }),
   
-  mounted() {
-    if (window.Telegram.WebApp) {
-      window.Telegram.WebApp.MainButton.setParams({
-        is_active: false,
-        is_visible: false
-      })
+  methods: {
+    loading() {
+      this.isLoading = true
+      const cards = document.querySelector<HTMLElement>('.newpage__cards')!
+      cards.style.transform = `translateY(0)`
+      setTimeout(() => {
+        cards.style.transform = `translateY(-70px)`
+        this.isLoading = false
+      }, 2000)
+    },
+    swipeStart(e: any) {
+      if (typeof e["targetTouches"] !== "undefined") {
+        let touch = e.targetTouches[0]
+        this.pStart.x = touch.screenX
+        this.pStart.y = touch.screenY
+      } else {
+        this.pStart.x = e.screenX
+        this.pStart.y = e.screenY
+      }
+    },
+    swipeEnd(e: any) {
+      if (window.scrollY === 0 && !this.isLoading) {
+        const cards = document.querySelector<HTMLElement>('.newpage__cards')!
+        
+        cards.style.transform = `translateY(0px)`
+      }
+    },
+    swipe(e: any) {
+      if (typeof e["changedTouches"] !== "undefined") {
+        let touch = e.changedTouches[0]
+        this.pCurrent.x = touch.screenX
+        this.pCurrent.y = touch.screenY
+      } else {
+        this.pCurrent.x = e.screenX
+        this.pCurrent.y = e.screenY
+      }
+      let changeY = this.pStart.y < this.pCurrent.y ? Math.abs(this.pStart.y - this.pCurrent.y) : 0
+      
+      const cards = document.querySelector<HTMLElement>('.newpage__cards')!
+      
+      if (window.scrollY === 0) {
+        if (changeY > 70) {
+          this.loading();
+        } else {
+          cards.style.transform = `translateY(${70 - changeY}px)`
+        }
+      }
     }
   },
   
-  computed: {
-  
+  mounted() {
+    // this.ptr = PullToRefresh.init({
+    //   mainElement: '#refreshCards',
+    //   triggerElement: '#refreshCards',
+    //   onRefresh() {
+    //     console.log('refresh');
+    //   }
+    // });
+    
+    document.addEventListener("touchstart", e => this.swipeStart(e), false)
+    document.addEventListener("touchmove", e => this.swipe(e), false)
+    document.addEventListener("touchend", e => this.swipeEnd(e), false)
   },
   
+  watch: {
+  
+  }
 })
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 
 .newpage {
   padding-top: 17px;
@@ -231,11 +307,53 @@ export default defineComponent({
   }
   
   &__cards {
+    transform: translateY(-70px);
+    
     display: flex;
     flex-direction: column;
     //row-gap: 10px;
     margin: 0 -15px -15px;
+    overflow-y: scroll;
+    
+    transition: 0.7s all;
   }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  opacity: 1;
+  transition: all 1s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+}
+
+.loading__container {
+  height: 70px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  transition: 0.7s all;
+  
+  .loading {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 </style>
