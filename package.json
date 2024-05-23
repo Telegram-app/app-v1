@@ -25,6 +25,7 @@
     "bulma": "^0.9.4",
     "bulma-responsive-tables": "^1.2.5",
     "dayjs": "^1.11.10",
+    "html2canvas": "^1.4.1",
     "pinia": "^2.1.7",
     "sass-loader": "^14.1.1",
     "swiper": "^11.0.7",

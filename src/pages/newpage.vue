@@ -12,18 +12,20 @@
         </div>
       </div>
       
-      <div class="newpage__notify" v-if="notify">
-<!--        <IconInfo h="40" w="40" color="black"/>-->
+      <div class="newpage__notify" :class="{ 'newpage__notify--hidden': !notify.show }" id="notify" :style="{ opacity: notify.opacity }">
+        <!--        <IconInfo h="40" w="40" color="black"/>-->
         <div>
           <h5 class="newpage__notify__title">Title</h5>
           <p class="newpage__notify__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, labore unde. Autem eaque error id nobis?</p>
         </div>
-        <IconClose h="18" w="18" color="grey" @click="notify = false"/>
+        <IconClose id="notifyClose" h="18" w="18" color="grey" v-if="notify.close" @click="closeNotify"/>
       </div>
+      
+      <div class="newpage__notify__effect"></div>
 <!--      id="refreshCards"-->
       
       <div class="loading__container">
-        <transition name="slide">
+        <transition name="fade">
           <div class="loading" v-if="isLoading"></div>
         </transition>
       </div>
@@ -47,9 +49,8 @@
 
 import { defineComponent, ref } from "vue";
 import dayjs from 'dayjs';
-import {useScroll} from '@vueuse/core';
 
-import PullToRefresh from 'pulltorefreshjs'
+import html2canvas from 'html2canvas';
 
 export default defineComponent({
   name: 'NewPage',
@@ -79,7 +80,11 @@ export default defineComponent({
         options: ['All', 'Austin', 'Newark', 'Ontario'],
       },
     },
-    notify: true,
+    notify: {
+      show: true,
+      opacity: 1,
+      close: true
+    },
     cards: [
       {
         image: 'first-card.jpg',
@@ -143,6 +148,103 @@ export default defineComponent({
   }),
   
   methods: {
+    closeNotify(e: Event) {
+      let self = e.target! as HTMLElement
+      self.parentNode!.removeChild(self)
+      
+      this.thanosSnap()
+    },
+    
+    thanosSnap() {
+      const target = document.querySelector<HTMLElement>("#notify")!
+      const childrenDiv = target.children[0] as HTMLElement
+      
+      childrenDiv.style.paddingRight = '30px'
+      const effect = document.querySelector('.newpage__notify__effect') as HTMLElement
+      
+      const bRect = target.getBoundingClientRect();
+      effect.style.left = `${bRect.left - 15}px`;
+      effect.style.top = `${bRect.top - 15}px`;
+      effect.style.width = `${bRect.width}px`;
+      effect.style.height = `${bRect.height}px`;
+      
+      html2canvas(target, {
+        backgroundColor: 'rgba(0, 0, 0, 0.06)'
+      }).then(canvas => {
+        this.notify.opacity = 0
+        const context = canvas.getContext('2d')!;
+        const { width, height } = canvas;
+        
+        // get element imageData
+        const imgData = context.getImageData(0, 0, width, height);
+            
+            // init empty imageData
+        const effectImgDatas = [];
+        for (let i = 0; i < 32; i++) {
+          effectImgDatas.push(context.createImageData(width, height));
+        }
+        this.sampler(effectImgDatas, imgData, width, height, 32);
+            
+            // create cloned canvases
+        for (let i = 0; i < 32; i++) {
+          const canvasClone = canvas.cloneNode() as HTMLCanvasElement;
+          
+          canvasClone.getContext('2d')!.putImageData(effectImgDatas[i], 0, 0);
+          
+          
+          const transitionDelay = 1.35 * (i / 32);
+          canvasClone.style.transitionDelay = `${transitionDelay}s`;
+          
+          effect.insertAdjacentElement('beforeend', canvasClone);
+          
+          this.delay(0)
+            .then(() => {
+              const rotate1 = 15 * (Math.random() - .5);
+              const rotate2 = 15 * (Math.random() - .5);
+              const fac = 2 * Math.PI * (Math.random() - .5);
+              const translateX = 60 * Math.cos(fac);
+              const translateY = 30 * Math.sin(fac);
+              
+              canvasClone.style.transform = `rotate(${rotate1}deg) translate(${translateX}px, ${translateY}px) rotate(${rotate2}deg)`;
+              canvasClone.style.opacity = '0';
+              
+              const removeDelay = 1e3 * (1.5 + 1 + Math.random());
+              
+              this.delay(removeDelay - 1000).then(() => { this.notify.show = false })
+              
+              this.delay(removeDelay)
+                .then(() => {
+                  canvasClone.remove();
+                });
+            });
+        }
+      })
+    },
+    
+    sampler(imgDatas: any, sourceImgData: any, width: any, height: any, layerCount: any) {
+      for (let x = 0; x < width; x++) {
+        for (let y = 0; y < height; y++) {
+          for (let l = 0; l < 2; l++) {
+            // random piece index which tend to grow with x
+            const pieceIndex = Math.floor(layerCount * (Math.random() + 2 * x / width) / 3);
+            const pixelPos = 4 * (y * width + x);
+            for (let rgbaIndex = 0; rgbaIndex < 4; rgbaIndex++) {
+              const dataPos = pixelPos + rgbaIndex;
+              imgDatas[pieceIndex].data[dataPos] = sourceImgData.data[dataPos];
+            }
+          }
+        }
+      }
+    },
+    
+    delay(ms: number) {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(1)
+        }, ms);
+      })
+    },
+    
     loading() {
       this.isLoading = true
       const cards = document.querySelector<HTMLElement>('.newpage__cards')!
@@ -302,13 +404,19 @@ export default defineComponent({
     justify-content: space-between;
     margin-top: 10px;
     margin-bottom: 10px;
+    min-height: 80px;
     padding: 8px 20px 8px 15px;
     border-radius: 8px;
     
     background: rgba(0, 0, 0, 0.06);
     
+    transition: margin 0.5s ease-in-out,
+                height 0.5s ease-in-out,
+                min-height 0.5s ease-in-out,
+                padding 0.5s ease-in-out;
+    
     div {
-      margin-right: 10px;
+      padding-right: 10px;
       
       line-height: 100%;
     }
@@ -324,6 +432,30 @@ export default defineComponent({
     
     svg:last-child {
       cursor: pointer;
+    }
+    
+    &--hidden {
+      margin: 0;
+      height: 0;
+      min-height: 0;
+      padding: 0;
+    }
+    
+    &__effect {
+      position: absolute;
+      z-index: 800;
+      
+      pointer-events: none;
+      
+      canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        border-radius: 8px;
+        
+        transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+      }
     }
   }
   
@@ -343,12 +475,23 @@ export default defineComponent({
 
 .slide-enter-active,
 .slide-leave-active {
-  opacity: 1;
+  transform: translateY(0px);
   transition: all 1s ease;
 }
 
 .slide-enter-from,
 .slide-leave-to {
+  transform: translateY(-100px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  opacity: 1;
+  transition: all 1s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
