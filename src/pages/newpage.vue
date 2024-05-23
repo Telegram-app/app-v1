@@ -147,8 +147,10 @@ export default defineComponent({
       this.isLoading = true
       const cards = document.querySelector<HTMLElement>('.newpage__cards')!
       cards.style.transform = `translateY(0)`
+      cards.style.marginBottom = '-15px'
       setTimeout(() => {
         cards.style.transform = `translateY(-70px)`
+        cards.style.marginBottom = '-85px'
         this.isLoading = false
       }, 2000)
     },
@@ -194,6 +196,7 @@ export default defineComponent({
           this.loading();
         } else {
           cards.style.transform = `translateY(${70 - changeY}px)`
+          cards.style.marginBottom = `${-85 + changeY}px)`
         }
       }
     },
@@ -331,6 +334,7 @@ export default defineComponent({
     flex-direction: column;
     //row-gap: 10px;
     margin: 0 -15px -15px;
+    margin-bottom: -85px;
     overflow-y: scroll;
     
     transition: 0.7s all;
