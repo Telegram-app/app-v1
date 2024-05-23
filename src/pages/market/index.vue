@@ -102,6 +102,12 @@
         </ul>
       </div>
     </div>
+    
+    <div class="refer__container">
+      <transition name="fade">
+        <div class="refer">Next page</div>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -153,6 +159,10 @@ export default defineComponent({
         this.router.push({ name: 'newpage' })
       });
     }
+    
+    document.addEventListener("touchstart", e => this.swipeStart(e), false)
+    document.addEventListener("touchmove", e => this.swipe(e), false)
+    document.addEventListener("touchend", e => this.swipeEnd(e), false)
   },
   
   computed: {
@@ -198,11 +208,70 @@ export default defineComponent({
           {title: 'eBay for Business Podcast', to: 'market'},
         ]
       }
-    ] as Links[]
+    ] as Links[],
+    isRefer: false,
+    pStart: { x: 0, y: 0 },
+    pCurrent: { x: 0, y: 0 },
   }),
   
   methods: {
-  
+    refer() {
+      this.isRefer = true
+      
+      const footer = document.querySelector('.market__footer') as HTMLElement
+      
+      footer.style.marginBottom = '100px'
+      setTimeout(() => {
+        this.router.push({ name: 'newpage' })
+      }, 2000)
+      // setTimeout(() => {
+      //   this.isRefer = false
+      //   footer.style.marginBottom = '0'
+      // }, 2000)
+    },
+    swipeStart(e: any) {
+      if (typeof e["targetTouches"] !== "undefined") {
+        let touch = e.targetTouches[0]
+        this.pStart.x = touch.screenX
+        this.pStart.y = touch.screenY
+      } else {
+        this.pStart.x = e.screenX
+        this.pStart.y = e.screenY
+      }
+    },
+    swipeEnd(e: any) {
+      console.log(window.scrollY);
+      console.log(document.querySelector('body')!.clientHeight - window.innerHeight);
+      console.log(this.isRefer);
+      if (document.querySelector('body')!.clientHeight - window.innerHeight >= window.scrollY && !this.isRefer) {
+        const footer = document.querySelector('.market__footer') as HTMLElement
+        footer.style.marginBottom = '0px'
+      }
+    },
+    swipe(e: any) {
+      // let flag = this.checkParent(firstCard, e.target)
+      if (typeof e["changedTouches"] !== "undefined") {
+        let touch = e.changedTouches[0]
+        this.pCurrent.x = touch.screenX
+        this.pCurrent.y = touch.screenY
+      } else {
+        this.pCurrent.x = e.screenX
+        this.pCurrent.y = e.screenY
+      }
+      
+      let changeY = this.pStart.y > this.pCurrent.y ? Math.abs(this.pCurrent.y - this.pStart.y) : 0
+      const footer = document.querySelector('.market__footer') as HTMLElement
+      
+      console.log(changeY);
+      
+      if (document.querySelector('body')!.clientHeight - window.innerHeight >= window.scrollY) {
+        if (changeY > 70) {
+          this.refer();
+        } else {
+          footer.style.marginBottom = changeY + 'px'
+        }
+      }
+    },
   }
 });
 
@@ -374,6 +443,8 @@ export default defineComponent({
     justify-content: space-between;
     row-gap: 15px;
     
+    transition: 1s all;
+    
     &__block {
       display: flex;
       flex-direction: column;
@@ -396,6 +467,22 @@ export default defineComponent({
         cursor: pointer;
       }
     }
+  }
+}
+
+.refer {
+  text-align: center;
+  
+  &__container {
+    position: absolute;
+    bottom: -150px;
+    left: 0;
+    right: 0;
+    
+    height: 100px;
+    width: 100%;
+    
+    transition: 1s all;
   }
 }
 
