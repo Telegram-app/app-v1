@@ -151,13 +151,17 @@ export default defineComponent({
   mounted() {
     this.marketStore.createFakeStores();
     if (window.Telegram.WebApp) {
+      // window.Telegram.WebApp.MainButton.setParams({
+      //   text: 'Новая страничка',
+      //   is_active: true,
+      //   is_visible: true
+      // }).onClick(() => {
+      //   this.router.push({ name: 'newpage' })
+      // });
       window.Telegram.WebApp.MainButton.setParams({
-        text: 'Новая страничка',
-        is_active: true,
-        is_visible: true
-      }).onClick(() => {
-        this.router.push({ name: 'newpage' })
-      });
+          is_active: false,
+          is_visible: false
+        })
     }
     
     document.addEventListener("touchstart", e => this.swipeStart(e), false)
