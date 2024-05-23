@@ -36,8 +36,6 @@ export default defineComponent({
   mounted() {
     window.Telegram.WebApp.expand();
     
-    window.Telegram.WebApp.isClosingConfirmationEnabled = true
-    
     let self = this;
     
     this.tgStore.theme = window.Telegram.WebApp.colorScheme;

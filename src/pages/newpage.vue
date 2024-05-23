@@ -159,7 +159,7 @@ export default defineComponent({
       const target = document.querySelector<HTMLElement>("#notify")!
       const childrenDiv = target.children[0] as HTMLElement
       
-      childrenDiv.style.paddingRight = '30px'
+      childrenDiv.style.paddingRight = '26px'
       const effect = document.querySelector('.newpage__notify__effect') as HTMLElement
       
       const bRect = target.getBoundingClientRect();
