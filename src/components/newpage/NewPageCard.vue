@@ -182,6 +182,7 @@ export default defineComponent({
     
     &__play {
       display: flex;
+      justify-content: center;
       align-items: center;
       width: calc(50% - 5px);
       padding: 0 10px;
@@ -209,6 +210,7 @@ export default defineComponent({
     
     &__mix {
       display: flex;
+      justify-content: center;
       align-items: center;
       width: calc(50% - 5px);
       padding: 0 10px;
