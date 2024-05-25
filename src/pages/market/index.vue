@@ -164,9 +164,21 @@ export default defineComponent({
         })
     }
     
+    this.scrollMax = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.body.clientHeight
+    )
+    
     document.addEventListener("touchstart", e => this.swipeStart(e), false)
     document.addEventListener("touchmove", e => this.swipe(e), false)
     document.addEventListener("touchend", e => this.swipeEnd(e), false)
+  },
+  
+  unmounted() {
+    document.removeEventListener("touchstart", e => this.swipeStart(e), false)
+    document.removeEventListener("touchmove", e => this.swipe(e), false)
+    document.removeEventListener("touchend", e => this.swipeEnd(e), false)
   },
   
   computed: {
@@ -214,25 +226,12 @@ export default defineComponent({
       }
     ] as Links[],
     isRefer: false,
+    scrollMax: 0,
     pStart: { x: 0, y: 0 },
     pCurrent: { x: 0, y: 0 },
   }),
   
   methods: {
-    refer() {
-      this.isRefer = true
-      
-      const footer = document.querySelector('.market__footer') as HTMLElement
-      
-      footer.style.marginBottom = '100px'
-      setTimeout(() => {
-        this.router.push({ name: 'newpage' })
-      }, 2000)
-      // setTimeout(() => {
-      //   this.isRefer = false
-      //   footer.style.marginBottom = '0'
-      // }, 2000)
-    },
     swipeStart(e: any) {
       if (typeof e["targetTouches"] !== "undefined") {
         let touch = e.targetTouches[0]
@@ -244,10 +243,12 @@ export default defineComponent({
       }
     },
     swipeEnd(e: any) {
-      console.log(window.scrollY);
-      console.log(document.querySelector('body')!.clientHeight - window.innerHeight);
-      console.log(this.isRefer);
-      if (document.querySelector('body')!.clientHeight - window.innerHeight >= window.scrollY && !this.isRefer) {
+      if (this.isRefer) {
+        this.isRefer = false
+        this.router.push({ name: 'newpage' })
+      } else {
+        this.isRefer = false
+        
         const footer = document.querySelector('.market__footer') as HTMLElement
         footer.style.marginBottom = '0px'
       }
@@ -266,12 +267,13 @@ export default defineComponent({
       let changeY = this.pStart.y > this.pCurrent.y ? Math.abs(this.pCurrent.y - this.pStart.y) : 0
       const footer = document.querySelector('.market__footer') as HTMLElement
       
-      console.log(changeY);
-      
-      if (document.querySelector('body')!.clientHeight - window.innerHeight >= window.scrollY) {
-        if (changeY > 70) {
-          this.refer();
+      if (window.scrollY >= this.scrollMax - innerHeight) {
+        
+        console.log(this.scrollMax);
+        if (window.scrollY >= this.scrollMax - innerHeight + 100) {
+          this.isRefer = true
         } else {
+          this.isRefer = false
           footer.style.marginBottom = changeY + 'px'
         }
       }

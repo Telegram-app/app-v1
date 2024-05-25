@@ -329,6 +329,12 @@ export default defineComponent({
     document.addEventListener("touchend", e => this.swipeEnd(e), false)
   },
   
+  unmounted() {
+    document.removeEventListener("touchstart", e => this.swipeStart(e), false)
+    document.removeEventListener("touchmove", e => this.swipe(e), false)
+    document.removeEventListener("touchend", e => this.swipeEnd(e), false)
+  },
+  
   watch: {
   
   }
