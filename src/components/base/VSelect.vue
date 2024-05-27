@@ -127,6 +127,8 @@ export default defineComponent({
     padding: 5px 29px 5px 17px;
     text-align: center;
     
+    border-radius: 20px;
+    
     &__label {
       font-size: 12px;
       line-height: 1;

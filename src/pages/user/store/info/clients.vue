@@ -1,9 +1,9 @@
 <template>
   <div class="store-clients">
-    <div class="store-clients__stats">
-      <span class="store-clients__stats__count">11</span>
-      <span class="store-clients__stats__title">clients</span>
-    </div>
+<!--    <div class="store-clients__stats">-->
+<!--      <span class="store-clients__stats__count">11</span>-->
+<!--      <span class="store-clients__stats__title">clients</span>-->
+<!--    </div>-->
     
     <div class="self-card store-clients__links">
       <template v-for="(link, i) in links" :key="'link-' + i">
@@ -50,10 +50,10 @@
         <table class="store-clients__table table is-fullwidth">
           <thead class="store-clients__table__head">
           <tr>
-            <th>Username</th>
+            <th>У вас 535 клиентов</th>
             <th class="has-text-centered">Market</th>
             <th class="has-text-centered">Store</th>
-            <th class="has-text-centered">More</th>
+            <th class="has-text-centered">Sort By</th>
           </tr>
           </thead>
           <transition name="fade-blur">
@@ -367,38 +367,38 @@ export default defineComponent({
     }
   }
   
-  &__stats {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 28px;
-    
-    &__count {
-      font-size: 36px;
-      font-family: "SF Pro Text Medium", sans-serif;
-      line-height: 1;
-      
-      color: #56A2FF;
-      background: linear-gradient(180deg, #56A2FF 0%, #216DCB 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    &__title {
-      margin-top: 10px;
-      
-      font-size: 16px;
-      font-family: "SF Pro Text Medium", sans-serif;
-      line-height: 1;
-      text-transform: uppercase;
-      
-      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
-    }
-  }
+  //&__stats {
+  //  display: flex;
+  //  flex-direction: column;
+  //  justify-content: center;
+  //  align-items: center;
+  //  margin-top: 28px;
+  //
+  //  &__count {
+  //    font-size: 36px;
+  //    font-family: "SF Pro Text Medium", sans-serif;
+  //    line-height: 1;
+  //
+  //    color: #56A2FF;
+  //    background: linear-gradient(180deg, #56A2FF 0%, #216DCB 100%);
+  //    -webkit-background-clip: text;
+  //    -webkit-text-fill-color: transparent;
+  //  }
+  //
+  //  &__title {
+  //    margin-top: 10px;
+  //
+  //    font-size: 16px;
+  //    font-family: "SF Pro Text Medium", sans-serif;
+  //    line-height: 1;
+  //    text-transform: uppercase;
+  //
+  //    color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
+  //  }
+  //}
   
   &__links {
-    margin-top: 25px;
+    margin-top: 0;
     
     .divider {
       margin: 7px 0;
@@ -436,7 +436,8 @@ export default defineComponent({
     margin-top: 15px;
     
     &__search {
-      margin-right: 15px;
+      flex: 1;
+      margin-right: 5px;
       margin-bottom: 0;
       
       input {
@@ -497,6 +498,8 @@ export default defineComponent({
       
       th {
         padding-bottom: 10px;
+        padding-left: 0;
+        padding-right: 0;
         border: none;
         
         font-size: 12px;
@@ -505,18 +508,41 @@ export default defineComponent({
         font-weight: 400;
         
         color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
+        
+        &:first-child {
+          padding-left: 17px;
+        }
+        
+        &:last-child {
+          padding-right: 17px;
+        }
       }
     }
     
     &__body {
       tr {
         td {
+          padding-bottom: 7px;
+          padding-left: 0;
+          padding-right: 0;
+          
           background: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
           
           transition: .5s all;
+          
+          &:first-child {
+            padding-left: 17px;
+          }
+          &:last-child {
+            padding-right: 17px;
+          }
         }
         
         &:first-child {
+          td {
+            padding-top: 10px;
+          }
+          
           td:first-child {
             border-radius: 10px 0 0 0;
           }
@@ -526,6 +552,10 @@ export default defineComponent({
         }
         
         &:last-child {
+          td {
+            padding-bottom: 10px;
+          }
+          
           td:first-child {
             border-radius: 0 0 0 10px;
           }
