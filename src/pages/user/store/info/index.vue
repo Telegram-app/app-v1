@@ -11,29 +11,9 @@
     </div>
     
     <div class="store-info__links">
-      <div class="store-info__links__links self-card">
-        <div class="store-info__links__link">
-          <div class="store-info__links__link__icon">
-            <img :src="'/images/icons/selfStore/' + links[0].icon + '.svg'" alt="icon">
-          </div>
-          
-          <div class="store-info__links__link__title">
-            {{ links[0].title }}
-          </div>
-          
-          <div class="store-info__links__link__meta" :class="['store-info__links__link__meta__' + links[0].icon]" v-if="links[0].meta">
-            {{ links[0].meta }}
-          </div>
-          
-          <div class="store-info__links__link__to">
-            <IconChevronRight h="11" w="7" color="transparent-grey"/>
-          </div>
-        </div>
-      </div>
-      
-      <div class="self-card">
-        <template v-for="(link, i) in links.slice(1)" :key="'link-' + i">
-          <div class="store-info__links__link" @click="router.push(link.to)">
+      <template v-for="(linkGroup, i) in links" :key="'linkGroup-' + i">
+        <div class="store-info__links__wrapper">
+          <div v-for="( link, n ) in linkGroup" class="store-info__links__link" @click="routerPush(link.to)" :key="'link-' + i">
             <div class="store-info__links__link__icon">
               <img :src="'/images/icons/selfStore/' + link.icon + '.svg'" alt="icon">
             </div>
@@ -50,10 +30,9 @@
               <IconChevronRight h="11" w="7" color="transparent-grey"/>
             </div>
           </div>
-          
-          <div class="divider" v-if="i !== links.slice(1).length - 1"></div>
-        </template>
-      </div>
+        </div>
+      </template>
+      
     </div>
     
     <div class="store-info__add-items">
@@ -132,17 +111,27 @@ export default defineComponent({
   
   data: () => ({
     links: [
-      {icon: 'premoder', title: 'Awaiting pre-moderation', metaTitle: undefined, meta: 17, to: 'notFound'},
-      {icon: 'orders', title: 'Orders', metaTitle: 'Orders awaiting attention', meta: 10, to: 'info/orders'},
-      {icon: 'finances', title: 'Finances', metaTitle: 'Balance', meta: 100, to: 'info/finances'},
-      {icon: 'products', title: 'Products', metaTitle: 'Active', meta: 50, to: 'notFound'},
-      {icon: 'reviews', title: 'Reviews', metaTitle: 'New in the last 24 hours', meta: 10, to: 'notFound'},
-      {icon: 'staff', title: 'Staff', metaTitle: 'Active employees in the last 24 hours', meta: 5, to: 'info/employers'},
-      {icon: 'clients', title: 'Clients', metaTitle: undefined, meta: undefined, to: 'info/clients'},
-      {icon: 'messenger', title: 'Messenger', metaTitle: 'Unread messages', meta: 5, to: 'notFound'},
-      {icon: 'statistics', title: 'Statistics', metaTitle: undefined, meta: undefined, to: 'notFound'},
-      {icon: 'activity-log', title: 'Activity log', metaTitle: 'Actions in the last 24 hours', meta: 10, to: 'notFound'},
-      {icon: 'settings', title: 'Settings', metaTitle: undefined, meta: undefined, to: 'notFound'},
+      [
+        {icon: 'premoder', title: 'Awaiting pre-moderation', metaTitle: undefined, meta: 17, to: 'notFound'},
+      ],
+      [
+        {icon: 'orders', title: 'Orders', metaTitle: 'Orders awaiting attention', meta: 10, to: 'info/orders'},
+        {icon: 'finances', title: 'Finances', metaTitle: 'Balance', meta: 100, to: 'info/finances'},
+        {icon: 'products', title: 'Products', metaTitle: 'Active', meta: 50, to: 'notFound'},
+        {icon: 'reviews', title: 'Reviews', metaTitle: 'New in the last 24 hours', meta: 10, to: 'notFound'},
+      ],
+      [
+        
+        {icon: 'staff', title: 'Staff', metaTitle: 'Active employees in the last 24 hours', meta: 5, to: 'info/employers'},
+        {icon: 'clients', title: 'Clients', metaTitle: undefined, meta: undefined, to: 'info/clients'},
+        {icon: 'messenger', title: 'Messenger', metaTitle: 'Unread messages', meta: 5, to: 'notFound'},
+        {icon: 'add', title: 'Add new items', metaTitle: undefined, meta: undefined, to: 'notFound'},
+      ],
+      [
+        {icon: 'statistics', title: 'Statistics', metaTitle: undefined, meta: undefined, to: 'notFound'},
+        {icon: 'activity-log', title: 'Activity log', metaTitle: 'Actions in the last 24 hours', meta: 10, to: 'notFound'},
+        {icon: 'settings', title: 'Settings', metaTitle: undefined, meta: undefined, to: 'notFound'},
+      ]
     ]
   }),
   
@@ -151,6 +140,14 @@ export default defineComponent({
       return this.userStore.selfStore.data!;
     }
   },
+  
+  methods: {
+    routerPush(link: string) {
+      setTimeout(() => {
+        this.router.push(link)
+      }, 300)
+    }
+  }
   
 });
 
@@ -200,10 +197,10 @@ export default defineComponent({
   &__links {
     margin-top: 15px;
     
-    .self-card {
-      &:last-child {
-        margin-top: 15px;
-      }
+    &__wrapper {
+      margin-top: 15px;
+      border-radius: 10px;
+      overflow: hidden;
     }
     
     .divider {
@@ -213,8 +210,17 @@ export default defineComponent({
     &__link {
       display: flex;
       align-items: center;
+      padding: 10px 17px;
+      
+      background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
       
       cursor: pointer;
+      
+      transition: 0.2s all;
+      
+      &:active, &:focus, &:hover {
+        background: rgba(0,0,0, 0.1);
+      }
       
       &__icon {
         display: flex;

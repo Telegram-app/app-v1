@@ -103,11 +103,11 @@
       </div>
     </div>
     
-    <div class="refer__container">
-      <transition name="fade">
-        <div class="refer">Next page</div>
-      </transition>
-    </div>
+<!--    <div class="refer__container">-->
+<!--      <transition name="fade">-->
+<!--        <div class="refer">Next page</div>-->
+<!--      </transition>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -151,34 +151,36 @@ export default defineComponent({
   mounted() {
     this.marketStore.createFakeStores();
     if (window.Telegram.WebApp) {
-      // window.Telegram.WebApp.MainButton.setParams({
-      //   text: 'Новая страничка',
-      //   is_active: true,
-      //   is_visible: true
-      // }).onClick(() => {
-      //   this.router.push({ name: 'newpage' })
-      // });
       window.Telegram.WebApp.MainButton.setParams({
-          is_active: false,
-          is_visible: false
-        })
+        text: 'Новая страничка',
+        is_active: true,
+        is_visible: true
+      }).onClick(() => {
+        this.router.push({ name: 'newpage' })
+      });
+      // window.Telegram.WebApp.MainButton.setParams({
+      //     is_active: false,
+      //     is_visible: false
+      //   })
     }
     
-    this.scrollMax = Math.max(
-      document.body.scrollHeight,
-      document.body.offsetHeight,
-      document.body.clientHeight
-    )
+    // swipe to next page events
     
-    document.addEventListener("touchstart", e => this.swipeStart(e), false)
-    document.addEventListener("touchmove", e => this.swipe(e), false)
-    document.addEventListener("touchend", e => this.swipeEnd(e), false)
+    // this.scrollMax = Math.max(
+    //   document.body.scrollHeight,
+    //   document.body.offsetHeight,
+    //   document.body.clientHeight
+    // )
+    //
+    // document.addEventListener("touchstart", e => this.swipeStart(e), false)
+    // document.addEventListener("touchmove", e => this.swipe(e), false)
   },
   
   unmounted() {
-    document.removeEventListener("touchstart", e => this.swipeStart(e), false)
-    document.removeEventListener("touchmove", e => this.swipe(e), false)
-    document.removeEventListener("touchend", e => this.swipeEnd(e), false)
+    // swipe to next page events
+    
+    // document.removeEventListener("touchstart", e => this.swipeStart(e), false)
+    // document.removeEventListener("touchmove", e => this.swipe(e), false)
   },
   
   computed: {
@@ -225,59 +227,46 @@ export default defineComponent({
         ]
       }
     ] as Links[],
-    isRefer: false,
-    scrollMax: 0,
-    pStart: { x: 0, y: 0 },
-    pCurrent: { x: 0, y: 0 },
+    // isRefer: false,
+    // scrollMax: 0,
+    // pStart: { x: 0, y: 0 },
+    // pCurrent: { x: 0, y: 0 },
   }),
   
   methods: {
-    swipeStart(e: any) {
-      if (typeof e["targetTouches"] !== "undefined") {
-        let touch = e.targetTouches[0]
-        this.pStart.x = touch.screenX
-        this.pStart.y = touch.screenY
-      } else {
-        this.pStart.x = e.screenX
-        this.pStart.y = e.screenY
-      }
-    },
-    swipeEnd(e: any) {
-      if (this.isRefer) {
-        this.isRefer = false
-        this.router.push({ name: 'newpage' })
-      } else {
-        this.isRefer = false
-        
-        const footer = document.querySelector('.market__footer') as HTMLElement
-        footer.style.marginBottom = '0px'
-      }
-    },
-    swipe(e: any) {
-      // let flag = this.checkParent(firstCard, e.target)
-      if (typeof e["changedTouches"] !== "undefined") {
-        let touch = e.changedTouches[0]
-        this.pCurrent.x = touch.screenX
-        this.pCurrent.y = touch.screenY
-      } else {
-        this.pCurrent.x = e.screenX
-        this.pCurrent.y = e.screenY
-      }
-      
-      let changeY = this.pStart.y > this.pCurrent.y ? Math.abs(this.pCurrent.y - this.pStart.y) : 0
-      const footer = document.querySelector('.market__footer') as HTMLElement
-      
-      if (window.scrollY >= this.scrollMax - innerHeight) {
-        
-        console.log(this.scrollMax);
-        if (window.scrollY >= this.scrollMax - innerHeight + 100) {
-          this.isRefer = true
-        } else {
-          this.isRefer = false
-          footer.style.marginBottom = changeY + 'px'
-        }
-      }
-    },
+    // swipeStart(e: any) {
+    //   if (typeof e["targetTouches"] !== "undefined") {
+    //     let touch = e.targetTouches[0]
+    //     this.pStart.x = touch.screenX
+    //     this.pStart.y = touch.screenY
+    //   } else {
+    //     this.pStart.x = e.screenX
+    //     this.pStart.y = e.screenY
+    //   }
+    // },
+    // swipe(e: any) {
+    //   // let flag = this.checkParent(firstCard, e.target)
+    //   if (typeof e["changedTouches"] !== "undefined") {
+    //     let touch = e.changedTouches[0]
+    //     this.pCurrent.x = touch.screenX
+    //     this.pCurrent.y = touch.screenY
+    //   } else {
+    //     this.pCurrent.x = e.screenX
+    //     this.pCurrent.y = e.screenY
+    //   }
+    //
+    //   let changeY = this.pStart.y > this.pCurrent.y ? Math.abs(this.pCurrent.y - this.pStart.y) : 0
+    //   const footer = document.querySelector('.market__footer') as HTMLElement
+    //
+    //   if (window.scrollY >= this.scrollMax - innerHeight) {
+    //     if (changeY > 100) {
+    //       this.router.push({ name: 'newpage' })
+    //     } else {
+    //       this.isRefer = false
+    //       footer.style.marginBottom = changeY + 'px'
+    //     }
+    //   }
+    // },
   }
 });
 
