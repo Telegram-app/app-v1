@@ -234,39 +234,33 @@ export default defineComponent({
       
       this.marketStore.createFakeStores();
       
-      console.log(this.loading);
-      
-      if (window.Telegram.WebApp) {
-        
-        console.log(window.Telegram.WebApp.ready());
-        if (window.Telegram.WebApp.ready()) {
+      window.addEventListener('load', () => {
+        setTimeout(() => {
           this.loading = false
           enableBodyScroll(scrollbar)
           
-          console.log(this.loading);
-          
-          window.Telegram.WebApp.MainButton.setParams({
-            text: 'Новая страничка',
-            is_active: true,
-            is_visible: true
-          }).onClick(() => {
-            this.router.push({ name: 'newpage' })
-          });
-        }
-        // window.Telegram.WebApp.MainButton.setParams({
-        //     is_active: false,
-        //     is_visible: false
-        //   })
-      } else {
-        document.addEventListener('DOMContentLoaded', () => {
-          let to = setTimeout(() => {
-            this.loading = false
+          if (window.Telegram.WebApp.platform !== "unknown") {
+            console.log(window.Telegram.WebApp);
+            
+            window.Telegram.WebApp.ready()
             enableBodyScroll(scrollbar)
             
-            clearTimeout(to)
-          }, 3000)
-        })
-      }
+            window.Telegram.WebApp.MainButton.setParams({
+              text: 'Новая страничка',
+              is_active: true,
+              is_visible: true
+            }).onClick(() => {
+              this.router.push({ name: 'newpage' })
+            });
+            // window.Telegram.WebApp.MainButton.setParams({
+            //     is_active: false,
+            //     is_visible: false
+            //   })
+          }
+        }, 3000)
+      })
+      
+      
     }
     // swipeStart(e: any) {
     //   if (typeof e["targetTouches"] !== "undefined") {
