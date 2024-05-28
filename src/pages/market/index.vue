@@ -235,6 +235,9 @@ export default defineComponent({
       this.marketStore.createFakeStores();
       
       window.addEventListener('load', () => {
+        
+        console.log('LOADED!!!!!!!!!!');
+        
         setTimeout(() => {
           this.loading = false
           enableBodyScroll(scrollbar)
