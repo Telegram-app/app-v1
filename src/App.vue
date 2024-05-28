@@ -78,6 +78,14 @@ export default defineComponent({
 
 <style lang="scss">
 
+html {
+  overflow-y: scroll;
+}
+
+html, body {
+  height: 100%;
+}
+
 .v-enter-active,
 .v-leave-active {
   transition: all 0.5s ease;

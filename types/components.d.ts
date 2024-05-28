@@ -24,6 +24,7 @@ declare module 'vue' {
     IconFilters: typeof import('./../src/components/icons/IconFilters.vue')['default']
     IconHeart: typeof import('./../src/components/icons/IconHeart.vue')['default']
     IconInfo: typeof import('./../src/components/icons/IconInfo.vue')['default']
+    IconLoading: typeof import('./../src/components/icons/IconLoading.vue')['default']
     IconSearch: typeof import('./../src/components/icons/IconSearch.vue')['default']
     IconSelect: typeof import('./../src/components/icons/IconSelect.vue')['default']
     IconShare: typeof import('./../src/components/icons/IconShare.vue')['default']

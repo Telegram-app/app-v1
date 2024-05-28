@@ -1,4 +1,10 @@
 <template>
+  <transition name="fade">
+    <div class="main-loading" v-if="loading">
+      <IconLoading h="50" w="50" color="light-grey"/>
+    </div>
+  </transition>
+  
   <div class="market">
     <div class="market__banners">
       <swiper
@@ -125,10 +131,10 @@ import {useRouter} from 'vue-router';
 import {useMarketStore} from '@/stores/market.ts';
 import {Store} from '@/models/store.model.ts';
 
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import {Autoplay, FreeMode} from 'swiper/modules';
 import 'swiper/css';
-import PullToRefresh from 'pulltorefreshjs';
 
 interface Links {
   title: string;
@@ -149,6 +155,17 @@ export default defineComponent({
     return {router, marketStore, modules: [Autoplay, FreeMode]};
   },
   mounted() {
+    let scrollbar = document.querySelector<HTMLElement>('html')!
+    disableBodyScroll(scrollbar)
+    
+    window.addEventListener('load', () => {
+      let to = setTimeout(() => {
+        this.loading = false
+        enableBodyScroll(scrollbar)
+        clearTimeout(to)
+      }, 3000)
+    })
+    
     this.marketStore.createFakeStores();
     if (window.Telegram.WebApp) {
       window.Telegram.WebApp.MainButton.setParams({
@@ -190,7 +207,7 @@ export default defineComponent({
   },
   
   data: () => ({
-    search: '',
+    loading: true,
     footerLinks: [
       {
         title: 'Help & contact',
@@ -273,6 +290,30 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+
+.main-loading {
+  position: absolute;
+  right: -100px;
+  left: -100px;
+  z-index: 10000;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+  background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 
 .market {
   &__banners {

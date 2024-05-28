@@ -145,7 +145,32 @@ export default defineComponent({
     isLoading: false,
     pStart: { x: 0, y: 0 },
     pCurrent: { x: 0, y: 0 },
+    disableScroll: false,
+    scrollHeight: 0,
+    scrollPos: 0,
+    cardsHeight: 0
   }),
+  
+  mounted() {
+    if (window.Telegram.WebApp) {
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      });
+    }
+    
+    if (document.readyState !== 'loading') {
+      this.initScrollEvents()
+    } else {
+      document.addEventListener('DOMContentLoaded', e => this.initScrollEvents(), false)
+    }
+  },
+  
+  unmounted() {
+    document.removeEventListener("touchstart", e => this.swipeStart(e), false)
+    document.removeEventListener("touchmove", e => this.swipe(e), false)
+    document.removeEventListener("touchend", e => this.swipeEnd(e), false)
+  },
   
   methods: {
     closeNotify(e: Event) {
@@ -245,6 +270,16 @@ export default defineComponent({
       })
     },
     
+    initScrollEvents() {
+      // this.reCalc()
+      
+      document.addEventListener("touchstart", e => this.swipeStart(e), false)
+      document.addEventListener("touchmove", e => this.swipe(e), false)
+      document.addEventListener("touchend", e => this.swipeEnd(e), false)
+      
+      // document.addEventListener("scroll", e => this.scrollToCard(e), false)
+    },
+    
     loading() {
       this.isLoading = true
       const cards = document.querySelector<HTMLElement>('.newpage__cards')!
@@ -313,26 +348,44 @@ export default defineComponent({
         node = node.parentNode;
       }
       return false;
-    }
-  },
-  
-  mounted() {
-    if (window.Telegram.WebApp) {
-      window.Telegram.WebApp.MainButton.setParams({
-        is_active: false,
-        is_visible: false
-      });
-    }
+    },
     
-    document.addEventListener("touchstart", e => this.swipeStart(e), false)
-    document.addEventListener("touchmove", e => this.swipe(e), false)
-    document.addEventListener("touchend", e => this.swipeEnd(e), false)
-  },
-  
-  unmounted() {
-    document.removeEventListener("touchstart", e => this.swipeStart(e), false)
-    document.removeEventListener("touchmove", e => this.swipe(e), false)
-    document.removeEventListener("touchend", e => this.swipeEnd(e), false)
+    // reCalc() {
+    //   this.scrollPos = document.documentElement.scrollTop - (document.documentElement.clientTop || 0);
+    //   this.scrollHeight = document.documentElement.scrollHeight;
+    //   this.getCardsHeight();
+    //
+    //   if (this.scrollPos <= 0) {
+    //     document.documentElement.scrollTop = 1; // Scroll 1 pixel to allow upwards scrolling
+    //   }
+    // },
+    // scrollToCard(e: any) {
+    //
+    //   if (!this.disableScroll) {
+    //     if (this.cardsHeight + this.scrollPos >= this.scrollHeight) {
+    //       document.documentElement.scrollTop = 1;
+    //       this.disableScroll = true;
+    //     } else if (this.scrollPos <= 0) {
+    //       document.documentElement.scrollTop = this.scrollHeight - this.cardsHeight;
+    //       this.disableScroll = true;
+    //     }
+    //   }
+    //
+    //   if (this.disableScroll) {
+    //     setTimeout(() => {
+    //       this.disableScroll = false;
+    //     }, 40);
+    //   }
+    // },
+    //
+    // getCardsHeight() {
+    //   let cards = document.querySelectorAll<HTMLElement>('.card')
+    //   this.cardsHeight = 0;
+    //
+    //   for (let i = 0; i < cards.length; i += 1) {
+    //     this.cardsHeight = this.cardsHeight + cards[i].offsetHeight;
+    //   }
+    // }
   },
   
   watch: {
@@ -476,6 +529,10 @@ export default defineComponent({
     overflow-y: scroll;
     
     transition: 0.7s all;
+    
+    .card {
+      scroll-snap-align: start;
+    }
   }
 }
 
