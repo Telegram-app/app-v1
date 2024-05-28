@@ -161,10 +161,8 @@ export default defineComponent({
     this.marketStore.createFakeStores();
     
     if (window.Telegram.WebApp && window.Telegram.WebApp.ready()) {
-      setTimeout(() => {
-        this.loading = false
-        enableBodyScroll(scrollbar)
-      }, 3000)
+      this.loading = false
+      enableBodyScroll(scrollbar)
       
       window.Telegram.WebApp.MainButton.setParams({
         text: 'Новая страничка',
