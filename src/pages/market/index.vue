@@ -160,8 +160,6 @@ export default defineComponent({
     
     window.addEventListener('load', () => {
       let to = setTimeout(() => {
-        clearTimeout(to)
-        
         this.loading = false
         enableBodyScroll(scrollbar)
         
@@ -178,6 +176,8 @@ export default defineComponent({
           //     is_active: false,
           //     is_visible: false
           //   })
+          
+          clearTimeout(to)
         }
       }, 3000)
     })
