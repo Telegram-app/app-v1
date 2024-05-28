@@ -158,29 +158,35 @@ export default defineComponent({
     let scrollbar = document.querySelector<HTMLElement>('html')!
     disableBodyScroll(scrollbar)
     
-    document.addEventListener('DOMContentLoaded', () => {
-      let to = setTimeout(() => {
-        this.loading = false
-        enableBodyScroll(scrollbar)
-        
-        this.marketStore.createFakeStores();
-        if (window.Telegram.WebApp) {
-          window.Telegram.WebApp.MainButton.setParams({
-            text: 'Новая страничка',
-            is_active: true,
-            is_visible: true
-          }).onClick(() => {
-            this.router.push({ name: 'newpage' })
-          });
-          // window.Telegram.WebApp.MainButton.setParams({
-          //     is_active: false,
-          //     is_visible: false
-          //   })
-        }
-        
-        clearTimeout(to)
-      }, 3000)
-    })
+    this.marketStore.createFakeStores();
+    
+    if (window.Telegram.WebApp && window.Telegram.WebApp.ready()) {
+      this.loading = false
+      enableBodyScroll(scrollbar)
+      
+      window.Telegram.WebApp.MainButton.setParams({
+        text: 'Новая страничка',
+        is_active: true,
+        is_visible: true
+      }).onClick(() => {
+        this.router.push({ name: 'newpage' })
+      });
+      // window.Telegram.WebApp.MainButton.setParams({
+      //     is_active: false,
+      //     is_visible: false
+      //   })
+    } else {
+      document.addEventListener('DOMContentLoaded', () => {
+        let to = setTimeout(() => {
+          this.loading = false
+          enableBodyScroll(scrollbar)
+          
+          clearTimeout(to)
+        }, 3000)
+      })
+    }
+    
+    
     
     // swipe to next page events
     
