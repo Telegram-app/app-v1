@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="main-loading" v-if="loading">
+    <div class="main-loading" v-if="tgStore.loading">
       <IconLoading h="50" w="50" color="light-grey"/>
     </div>
   </transition>
@@ -129,6 +129,7 @@ import {defineComponent} from 'vue';
 
 import {useRouter} from 'vue-router';
 import {useMarketStore} from '@/stores/market.ts';
+import {useTelegramStore} from '@/stores/telegram.ts';
 import {Store} from '@/models/store.model.ts';
 
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
@@ -150,9 +151,10 @@ export default defineComponent({
   
   setup() {
     const router = useRouter();
+    const tgStore = useTelegramStore()
     const marketStore = useMarketStore();
     
-    return {router, marketStore, modules: [Autoplay, FreeMode]};
+    return {router, tgStore, marketStore, modules: [Autoplay, FreeMode]};
   },
   
   created() {
@@ -192,7 +194,6 @@ export default defineComponent({
   },
   
   data: () => ({
-    loading: true,
     footerLinks: [
       {
         title: 'Help & contact',
@@ -240,7 +241,7 @@ export default defineComponent({
       let scrollbar = document.querySelector<HTMLElement>('html')!
       
       setTimeout(() => {
-        this.loading = false
+        this.tgStore.loading = false
         enableBodyScroll(scrollbar)
         
         if (window.Telegram.WebApp.platform !== "unknown") {
