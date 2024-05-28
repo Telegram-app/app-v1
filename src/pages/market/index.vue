@@ -160,7 +160,7 @@ export default defineComponent({
     
     this.marketStore.createFakeStores();
     
-    window.addEventListener('load', this.init, false)
+    window.onload = this.init
     
     
     // swipe to next page events
