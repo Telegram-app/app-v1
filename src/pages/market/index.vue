@@ -237,6 +237,8 @@ export default defineComponent({
       console.log(this.loading);
       
       if (window.Telegram.WebApp) {
+        
+        console.log(window.Telegram.WebApp.ready());
         if (window.Telegram.WebApp.ready()) {
           this.loading = false
           enableBodyScroll(scrollbar)
