@@ -160,8 +160,6 @@ export default defineComponent({
     
     this.marketStore.createFakeStores();
     
-    this.init()
-    
     window.addEventListener('load', this.init, false)
     
     
@@ -238,15 +236,11 @@ export default defineComponent({
     init() {
       let scrollbar = document.querySelector<HTMLElement>('html')!
       
-      console.log('LOADED!!!!!!!!!!');
-      
       setTimeout(() => {
         this.loading = false
         enableBodyScroll(scrollbar)
         
         if (window.Telegram.WebApp.platform !== "unknown") {
-          console.log(window.Telegram.WebApp);
-          
           window.Telegram.WebApp.ready()
           enableBodyScroll(scrollbar)
           
