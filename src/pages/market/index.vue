@@ -176,9 +176,9 @@ export default defineComponent({
           //     is_active: false,
           //     is_visible: false
           //   })
-          
-          clearTimeout(to)
         }
+        
+        clearTimeout(to)
       }, 3000)
     })
     
