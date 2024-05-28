@@ -158,7 +158,7 @@ export default defineComponent({
     let scrollbar = document.querySelector<HTMLElement>('html')!
     disableBodyScroll(scrollbar)
     
-    window.addEventListener('load', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       let to = setTimeout(() => {
         this.loading = false
         enableBodyScroll(scrollbar)
