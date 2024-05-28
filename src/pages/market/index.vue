@@ -154,13 +154,16 @@ export default defineComponent({
     
     return {router, marketStore, modules: [Autoplay, FreeMode]};
   },
+  
+  created() {
+    this.marketStore.createFakeStores();
+  },
+  
   mounted() {
     let scrollbar = document.querySelector<HTMLElement>('html')!
     disableBodyScroll(scrollbar)
     
-    this.marketStore.createFakeStores();
-    
-    window.onload = this.init
+    this.init()
     
     
     // swipe to next page events
