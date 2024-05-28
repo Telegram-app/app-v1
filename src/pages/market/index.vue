@@ -155,7 +155,14 @@ export default defineComponent({
     return {router, marketStore, modules: [Autoplay, FreeMode]};
   },
   mounted() {
+    let scrollbar = document.querySelector<HTMLElement>('html')!
+    disableBodyScroll(scrollbar)
+    
+    this.marketStore.createFakeStores();
+    
     this.init()
+    
+    window.addEventListener('load', this.init, false)
     
     
     // swipe to next page events
@@ -230,40 +237,32 @@ export default defineComponent({
   methods: {
     init() {
       let scrollbar = document.querySelector<HTMLElement>('html')!
-      disableBodyScroll(scrollbar)
       
-      this.marketStore.createFakeStores();
+      console.log('LOADED!!!!!!!!!!');
       
-      window.addEventListener('load', () => {
+      setTimeout(() => {
+        this.loading = false
+        enableBodyScroll(scrollbar)
         
-        console.log('LOADED!!!!!!!!!!');
-        
-        setTimeout(() => {
-          this.loading = false
+        if (window.Telegram.WebApp.platform !== "unknown") {
+          console.log(window.Telegram.WebApp);
+          
+          window.Telegram.WebApp.ready()
           enableBodyScroll(scrollbar)
           
-          if (window.Telegram.WebApp.platform !== "unknown") {
-            console.log(window.Telegram.WebApp);
-            
-            window.Telegram.WebApp.ready()
-            enableBodyScroll(scrollbar)
-            
-            window.Telegram.WebApp.MainButton.setParams({
-              text: 'Новая страничка',
-              is_active: true,
-              is_visible: true
-            }).onClick(() => {
-              this.router.push({ name: 'newpage' })
-            });
-            // window.Telegram.WebApp.MainButton.setParams({
-            //     is_active: false,
-            //     is_visible: false
-            //   })
-          }
-        }, 3000)
-      })
-      
-      
+          window.Telegram.WebApp.MainButton.setParams({
+            text: 'Новая страничка',
+            is_active: true,
+            is_visible: true
+          }).onClick(() => {
+            this.router.push({ name: 'newpage' })
+          });
+          // window.Telegram.WebApp.MainButton.setParams({
+          //     is_active: false,
+          //     is_visible: false
+          //   })
+        }
+      }, 3000)
     }
     // swipeStart(e: any) {
     //   if (typeof e["targetTouches"] !== "undefined") {
