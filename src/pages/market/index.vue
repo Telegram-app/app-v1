@@ -141,7 +141,7 @@ import 'swiper/css';
 
 interface FooterItem {
   title: string;
-  links: { title: string; to: string; }[];
+  links: { title: string; to: any; }[];
   expanded: boolean;
 }
 
