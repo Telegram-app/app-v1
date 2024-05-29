@@ -10,7 +10,7 @@ export const useTelegramStore = defineStore("telegram", {
   state: (): State => ({
     user: null,
     theme: 'dark',
-    loading: false
+    loading: true
   }),
 
   getters: {

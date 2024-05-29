@@ -35,7 +35,6 @@
     <div class="market__stores self-card">
       <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="router.push({ name: 'store', params: { id: store.id } })">
         <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
-<!--        <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>-->
         <span class="market__stores__store__name">{{ store.name }}</span>
       </div>
       
@@ -43,7 +42,6 @@
       
       <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @click="router.push({ name: 'store', params: { id: store.id } })">
         <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
-<!--        <div class="market__stores__store__image__shadow" :style="{ backgroundImage: `url('./images/market/stores/${store.icon}')` }"></div>-->
         <span class="market__stores__store__name">{{ store.name }}</span>
       </div>
     </div>
@@ -92,19 +90,23 @@
     <div class="divider"></div>
     
     <div class="market__footer">
-      <div class="market__footer__block" v-for="(item, i) of footerLinks" :key="'footer-block-' + i">
-        <h4 class="market__footer__title">{{ item.title }}</h4>
-        <ul class="market__footer__links">
-          <RouterLink
-            v-for="link of item.links"
-            :key="link.title"
-            custom
-            v-slot="{ navigate }"
-            :to="{name: link.to}">
-            <li class="market__footer__links__link" @click="navigate">
-              {{ link.title }}
-            </li>
-          </RouterLink>
+      <div v-for="( position, posIdx ) in footerItems">
+        <ul class="market__footer__items">
+          <li class="market__footer__item" v-for="(item, itemIdx) in position" @click="expandItem($event, posIdx, itemIdx)">
+            <a class="market__footer__item__title">{{ item.title }} <span class="market__footer__item__icon" :class="{ 'market__footer__item__icon--expanded': item.expanded }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
+            <ul class="market__footer__links" :class="{ 'market__footer__links--expanded': item.expanded }" v-if="item.links[0]">
+              <RouterLink
+                v-for="(link, linkIdx) in item.links"
+                :key="link.title"
+                custom
+                v-slot="{ navigate }"
+                :to="{name: link.to}">
+                <li class="market__footer__link" @click="navigate">
+                  <a class="market__footer__link__title">{{ link.title }}</a>
+                </li>
+              </RouterLink>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -137,9 +139,10 @@ import {Swiper, SwiperSlide} from 'swiper/vue';
 import {Autoplay, FreeMode} from 'swiper/modules';
 import 'swiper/css';
 
-interface Links {
+interface FooterItem {
   title: string;
-  links: { title: string, to: any }[];
+  links: { title: string; to: string; }[];
+  expanded: boolean;
 }
 
 export default defineComponent({
@@ -162,10 +165,12 @@ export default defineComponent({
   },
   
   mounted() {
-    let scrollbar = document.querySelector<HTMLElement>('html')!
-    disableBodyScroll(scrollbar)
-    
-    this.init()
+    if (this.tgStore) {
+      let scrollbar = document.querySelector<HTMLElement>('html')!
+      disableBodyScroll(scrollbar)
+      
+      this.init()
+    }
     
     
     // swipe to next page events
@@ -194,42 +199,60 @@ export default defineComponent({
   },
   
   data: () => ({
-    footerLinks: [
-      {
-        title: 'Help & contact',
-        links: [
-          {title: 'Profile', to: 'account'},
-          {title: 'Contact us', to: 'market'},
-          {title: 'eBay Returns', to: 'market'},
-          {title: 'eBay Money Back Guarantee', to: 'market'},
-        ]
-      },
-      {
-        title: 'Community',
-        links: [
-          {title: 'Announcements', to: 'market'},
-          {title: 'eBay Community', to: 'market'},
-          {title: 'eBay for Business Podcast', to: 'market'},
-        ]
-      },
-      {
-        title: 'Help & contact',
-        links: [
-          {title: 'Seller center', to: 'market'},
-          {title: 'Contact us', to: 'market'},
-          {title: 'eBay Returns', to: 'market'},
-          {title: 'eBay Money Back Guarantee', to: 'market'},
-        ]
-      },
-      {
-        title: 'Community',
-        links: [
-          {title: 'Announcements', to: 'market'},
-          {title: 'eBay Community', to: 'market'},
-          {title: 'eBay for Business Podcast', to: 'market'},
-        ]
-      }
-    ] as Links[],
+    footerItems: [
+      [
+        {
+          title: 'Title',
+          links: [
+            {title: 'Profile', to: 'account'},
+            {title: 'Contact us', to: 'market'},
+            {title: 'eBay Returns', to: 'market'},
+            {title: 'eBay Money Back', to: 'market'},
+          ],
+          expanded: false
+        },
+        {
+          title: 'Title 1',
+          links: [
+            {title: 'Profile', to: 'account'},
+            {title: 'Contact us', to: 'market'},
+            {title: 'eBay Returns', to: 'market'},
+            {title: 'eBay Money Back', to: 'market'},
+          ],
+          expanded: false
+        },
+        {
+          title: 'Title 2',
+          links: [
+            {title: 'Announcements', to: 'market'},
+            {title: 'eBay Community', to: 'market'},
+            {title: 'eBay for Business', to: 'market'},
+          ],
+          expanded: false
+        },
+      ],
+      [
+        {
+          title: 'Title 3',
+          links: [
+            {title: 'Seller center', to: 'market'},
+            {title: 'Contact us', to: 'market'},
+            {title: 'eBay Returns', to: 'market'},
+            {title: 'eBay Money Back', to: 'market'},
+          ],
+          expanded: false
+        },
+        {
+          title: 'Title 4',
+          links: [
+            {title: 'Announcements', to: 'market'},
+            {title: 'eBay Community', to: 'market'},
+            {title: 'eBay for Business', to: 'market'},
+          ],
+          expanded: false
+        }
+      ]
+    ] as FooterItem[][],
     // isRefer: false,
     // scrollMax: 0,
     // pStart: { x: 0, y: 0 },
@@ -246,7 +269,6 @@ export default defineComponent({
         
         if (window.Telegram.WebApp.platform !== "unknown") {
           window.Telegram.WebApp.ready()
-          enableBodyScroll(scrollbar)
           
           window.Telegram.WebApp.MainButton.setParams({
             text: 'Новая страничка',
@@ -261,6 +283,20 @@ export default defineComponent({
           //   })
         }
       }, 3000)
+    },
+    
+    expandItem(event: any, posIdx: number, itemIdx: number) {
+      this.footerItems[posIdx][itemIdx].expanded = !this.footerItems[posIdx][itemIdx].expanded
+      
+      if (this.footerItems[posIdx][itemIdx].expanded) {
+        let interval = setInterval(() => {
+          event.target.scrollIntoView({ behavior: "smooth", block: "start" })
+        }, 1)
+        
+        setTimeout(() => {
+          clearInterval(interval)
+        }, 150)
+      }
     }
     // swipeStart(e: any) {
     //   if (typeof e["targetTouches"] !== "undefined") {
@@ -380,23 +416,6 @@ export default defineComponent({
         border-radius: 100%;
         
         transition: 0.3s all;
-        
-        //&__shadow {
-        //  position: absolute;
-        //  z-index: 1;
-        //  top: 50px;
-        //  right: 12%;
-        //  left: 13%;
-        //
-        //  height: 11%;
-        //  border-radius: inherit;
-        //
-        //  background-size: auto;
-        //  background-position: center bottom;
-        //  background-repeat: no-repeat;
-        //  -webkit-filter: blur(5px);
-        //  filter: blur(5px);
-        //}
       }
       
       &__name {
@@ -486,28 +505,81 @@ export default defineComponent({
   
   &__footer {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    row-gap: 15px;
+    column-gap: 15px;
     
-    transition: 1s all;
-    
-    &__block {
-      display: flex;
-      flex-direction: column;
+    & > div {
+      flex: 1;
     }
     
-    &__title {
-      font-size: 16px;
-      font-family: "SF Pro Text Semibold", sans-serif;
-      line-height: 1;
+    &__items {
+    
+    }
+    
+    &__item {
+      padding: 10px 0;
+      border-bottom: 1px solid theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
+      
+      cursor: pointer;
+      
+      &__title {
+        display: flex;
+        justify-content: space-between;
+        
+        font-size: 13px;
+        font-family: "SF Pro Text Medium", sans-serif;
+        line-height: 1;
+        
+        color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
+      }
+      
+      &__icon {
+        svg {
+          transform: rotate(90deg);
+          
+          transition: all 0.15s ease-out;
+        }
+        
+        &--expanded {
+          svg {
+            transform: rotate(-90deg);
+            
+            transition: all 0.15s ease-in;
+          }
+        }
+      }
     }
     
     &__links {
-      margin-top: 5px;
+      position: relative;
       
-      &__link {
+      max-height: 0;
+      overflow: hidden;
+      
+      transition: max-height 0.15s ease-out;
+      
+      &--expanded {
+        max-height: 500px;
+        
+        transition: max-height 0.25s ease-in;
+      }
+    }
+    
+    &__link {
+      display: flex;
+      margin-top: 7px;
+      height: auto;
+      padding-left: 10px;
+      
+      &:first-child {
+        margin-top: 10px;
+      }
+      &:last-child {
+        margin-bottom: 10px;
+      }
+      
+      &__title {
         font-size: 12px;
+        line-height: 1;
         
         color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         
@@ -517,40 +589,40 @@ export default defineComponent({
   }
 }
 
-.refer {
-  text-align: center;
-  
-  &__container {
-    position: absolute;
-    bottom: -150px;
-    left: 0;
-    right: 0;
-    
-    height: 100px;
-    width: 100%;
-    
-    transition: 1s all;
-  }
-}
+//.refer {
+//  text-align: center;
+//
+//  &__container {
+//    position: absolute;
+//    bottom: -150px;
+//    left: 0;
+//    right: 0;
+//
+//    height: 100px;
+//    width: 100%;
+//
+//    transition: 1s all;
+//  }
+//}
 
-@media (hover: hover) {
-  .market__stores__store:hover {
-    img {
-      -webkit-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
-      box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
-    }
-  }
-}
-
-@media (hover: none) {
-  .market__stores__store:active {
-    img {
-      -webkit-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
-      box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
-    }
-  }
-}
+//@media (hover: hover) {
+//  .market__stores__store:hover {
+//    img {
+//      -webkit-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
+//      -moz-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
+//      box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
+//    }
+//  }
+//}
+//
+//@media (hover: none) {
+//  .market__stores__store:active {
+//    img {
+//      -webkit-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
+//      -moz-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
+//      box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.75);
+//    }
+//  }
+//}
 
 </style>
