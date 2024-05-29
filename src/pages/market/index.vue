@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-once class="main-loading" v-if="tgStore.loading ? tgStore : loading">
+    <div class="main-loading" v-if="tgStore.loading ? tgStore : loading">
       <IconLoading h="50" w="50" color="light-grey"/>
     </div>
   </transition>
