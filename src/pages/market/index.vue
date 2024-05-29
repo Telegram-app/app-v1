@@ -92,8 +92,8 @@
     <div class="market__footer">
       <div v-for="( position, posIdx ) in footerItems">
         <ul class="market__footer__items">
-          <li class="market__footer__item" v-for="(item, itemIdx) in position" @click="expandItem($event, posIdx, itemIdx)">
-            <a class="market__footer__item__title">{{ item.title }} <span class="market__footer__item__icon" :class="{ 'market__footer__item__icon--expanded': item.expanded }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
+          <li class="market__footer__item" v-for="(item, itemIdx) in position">
+            <a class="market__footer__item__title" @click="expandItem($event, posIdx, itemIdx)">{{ item.title }} <span class="market__footer__item__icon" :class="{ 'market__footer__item__icon--expanded': item.expanded }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
             <ul class="market__footer__links" :class="{ 'market__footer__links--expanded': item.expanded }" v-if="item.links[0]">
               <RouterLink
                 v-for="(link, linkIdx) in item.links"
@@ -165,7 +165,7 @@ export default defineComponent({
   },
   
   mounted() {
-    if (this.tgStore) {
+    if (this.tgStore.loading) {
       let scrollbar = document.querySelector<HTMLElement>('html')!
       disableBodyScroll(scrollbar)
       
