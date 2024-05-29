@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="main-loading" v-if="tgStore.loading">
+    <div v-once class="main-loading" v-if="tgStore.loading ? tgStore : loading">
       <IconLoading h="50" w="50" color="light-grey"/>
     </div>
   </transition>
@@ -153,11 +153,12 @@ export default defineComponent({
   props: [],
   
   setup() {
+    let loading = true
     const router = useRouter();
     const tgStore = useTelegramStore()
     const marketStore = useMarketStore();
     
-    return {router, tgStore, marketStore, modules: [Autoplay, FreeMode]};
+    return {loading, router, tgStore, marketStore, modules: [Autoplay, FreeMode]};
   },
   
   created() {
@@ -170,6 +171,8 @@ export default defineComponent({
       disableBodyScroll(scrollbar)
       
       this.init()
+    } else {
+      this.initMainButton()
     }
     
     
@@ -264,25 +267,30 @@ export default defineComponent({
       let scrollbar = document.querySelector<HTMLElement>('html')!
       
       setTimeout(() => {
+        this.loading = false
         this.tgStore.loading = false
         enableBodyScroll(scrollbar)
         
-        if (window.Telegram.WebApp.platform !== "unknown") {
-          window.Telegram.WebApp.ready()
-          
-          window.Telegram.WebApp.MainButton.setParams({
-            text: 'Новая страничка',
-            is_active: true,
-            is_visible: true
-          }).onClick(() => {
-            this.router.push({ name: 'newpage' })
-          });
-          // window.Telegram.WebApp.MainButton.setParams({
-          //     is_active: false,
-          //     is_visible: false
-          //   })
-        }
+        this.initMainButton()
       }, 3000)
+    },
+    
+    initMainButton() {
+      if (window.Telegram.WebApp.platform !== "unknown") {
+        window.Telegram.WebApp.ready()
+        
+        window.Telegram.WebApp.MainButton.setParams({
+          text: 'Новая страничка',
+          is_active: true,
+          is_visible: true
+        }).onClick(() => {
+          this.router.push({ name: 'newpage' })
+        });
+        // window.Telegram.WebApp.MainButton.setParams({
+        //     is_active: false,
+        //     is_visible: false
+        //   })
+      }
     },
     
     expandItem(event: any, posIdx: number, itemIdx: number) {
