@@ -41,12 +41,13 @@ export default defineComponent({
     this.tgStore.theme = window.Telegram.WebApp.colorScheme;
     if (this.tgStore.theme === 'light') {
       window.Telegram.WebApp.setHeaderColor('#948f8c')
-    } else {
-      window.Telegram.WebApp.setHeaderColor('#948f8c')
     }
     
     window.Telegram.WebApp.onEvent('themeChanged', function (this: any) {
       self.tgStore.theme = this.colorScheme;
+      if (this.colorScheme === 'light') {
+        window.Telegram.WebApp.setHeaderColor('#948f8c')
+      }
     });
     
     window.Telegram.WebApp.SettingsButton.show().onClick(() => {

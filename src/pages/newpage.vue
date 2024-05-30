@@ -326,9 +326,13 @@ export default defineComponent({
       
       let changeY = this.pStart.y < this.pCurrent.y ? Math.abs(this.pStart.y - this.pCurrent.y) : 0
       
+      console.log(this.pStart.y);
+      console.log(this.pCurrent.y);
+      console.log(changeY);
+      
       const cards = document.querySelector<HTMLElement>('.newpage__cards')!
       
-      if (window.scrollY === 0) {
+      if (window.scrollY === 0 && changeY !== 0) {
         if (changeY > 70) {
           this.loading();
         } else {
