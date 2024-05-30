@@ -39,6 +39,8 @@ export default defineComponent({
     let self = this;
     
     this.tgStore.theme = window.Telegram.WebApp.colorScheme;
+    window.Telegram.WebApp.setHeaderColor('#ff0000')
+    
     window.Telegram.WebApp.onEvent('themeChanged', function (this: any) {
       self.tgStore.theme = this.colorScheme;
     });
