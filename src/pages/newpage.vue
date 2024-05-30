@@ -12,29 +12,26 @@
         </div>
       </div>
       
-      <div class="newpage__notify" :class="{ 'newpage__notify--hidden': !notify.show }" id="notify" :style="{ opacity: notify.opacity }">
+      <div class="newpage__notify__wrapper" :class="{ 'newpage__notify--hidden': !notify.show }">
         <!--        <IconInfo h="40" w="40" color="black"/>-->
-        <div>
-          <h5 class="newpage__notify__title">Title</h5>
-          <p class="newpage__notify__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, labore unde. Autem eaque error id nobis?</p>
+        <div class="newpage__notify" id="notify" :style="{ opacity: notify.opacity }">
+          <div>
+            <h5 class="newpage__notify__title">Title</h5>
+            <p class="newpage__notify__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, labore unde. Autem eaque error id nobis?</p>
+          </div>
+          <IconClose id="notifyClose" h="18" w="18" color="grey" v-if="notify.close" @click="closeNotify"/>
         </div>
-        <IconClose id="notifyClose" h="18" w="18" color="grey" v-if="notify.close" @click="closeNotify"/>
+        
+        <div class="newpage__notify__effect"></div>
       </div>
-      
-      <div class="newpage__notify__effect"></div>
-<!--      id="refreshCards"-->
       
       <div class="loading__container">
-        <transition name="fade">
-          <div class="loading" v-if="isLoading"></div>
-        </transition>
+        <div class="loading"></div>
       </div>
       
-      <div class="newpage__cards">
-        <template v-for="card of cards">
-          <NewPageCard :card="card"/>
-        </template>
-      </div>
+      <template v-for="card of cards">
+        <NewPageCard :card="card"/>
+      </template>
     </div>
   </DefaultLayout>
 </template>
@@ -173,13 +170,13 @@ export default defineComponent({
   },
   
   methods: {
+    // thanos snap methods
     closeNotify(e: Event) {
       let self = e.target! as HTMLElement
       self.parentNode!.removeChild(self)
       
       this.thanosSnap()
     },
-    
     thanosSnap() {
       const target = document.querySelector<HTMLElement>("#notify")!
       const childrenDiv = target.children[0] as HTMLElement
@@ -188,13 +185,13 @@ export default defineComponent({
       const effect = document.querySelector('.newpage__notify__effect') as HTMLElement
       
       const bRect = target.getBoundingClientRect();
-      effect.style.left = `${bRect.left - 15}px`;
-      effect.style.top = `${bRect.top - 15}px`;
+      effect.style.left = `${bRect.left}px`;
+      effect.style.top = `${bRect.top}px`;
       effect.style.width = `${bRect.width}px`;
       effect.style.height = `${bRect.height}px`;
       
       html2canvas(target, {
-        backgroundColor: 'rgba(0, 0, 0, 0.06)'
+        backgroundColor: '#e3e3e3'
       }).then(canvas => {
         this.notify.opacity = 0
         const context = canvas.getContext('2d')!;
@@ -245,7 +242,6 @@ export default defineComponent({
         }
       })
     },
-    
     sampler(imgDatas: any, sourceImgData: any, width: any, height: any, layerCount: any) {
       for (let x = 0; x < width; x++) {
         for (let y = 0; y < height; y++) {
@@ -261,7 +257,6 @@ export default defineComponent({
         }
       }
     },
-    
     delay(ms: number) {
       return new Promise(resolve => {
         setTimeout(() => {
@@ -280,15 +275,19 @@ export default defineComponent({
       // document.addEventListener("scroll", e => this.scrollToCard(e), false)
     },
     
-    loading() {
+    // loader cards methods
+    loading(loaderContainer: HTMLElement, loaderIcon: HTMLElement) {
       this.isLoading = true
-      const cards = document.querySelector<HTMLElement>('.newpage__cards')!
-      cards.style.transform = `translateY(0)`
-      cards.style.marginBottom = '-15px'
+      
+      loaderContainer.style.maxHeight = '100px'
+      loaderIcon.style.transform = `scale(1)`
+      loaderIcon.style.animation = 'spin 2s linear infinite'
       setTimeout(() => {
-        cards.style.transform = `translateY(-70px)`
-        cards.style.marginBottom = '-85px'
         this.isLoading = false
+        
+        loaderContainer.style.maxHeight = '0'
+        loaderIcon.style.transform = `scale(0)`
+        loaderIcon.style.animation = 'unset'
       }, 2000)
     },
     swipeStart(e: any) {
@@ -303,9 +302,11 @@ export default defineComponent({
     },
     swipeEnd(e: any) {
       if (window.scrollY === 0 && !this.isLoading) {
-        const cards = document.querySelector<HTMLElement>('.newpage__cards')!
+        const loaderContainer = document.querySelector<HTMLElement>('.loading__container')!
+        const loaderIcon = document.querySelector<HTMLElement>('.loading__container .loading')!
         
-        cards.style.transform = `translateY(-70px)`
+        loaderContainer.style.maxHeight = '0'
+        loaderIcon.style.transform = `scale(0)`
       }
     },
     swipe(e: any) {
@@ -319,25 +320,21 @@ export default defineComponent({
         this.pCurrent.y = e.screenY
       }
       
-      let firstCard = document.querySelector('.newpage__cards')!.childNodes[1] as HTMLElement
+      let firstCard = document.querySelector('.card')! as HTMLElement
       let checkTarget = this.checkParent(firstCard, e.target)
       
       if (!checkTarget) return
       
       let changeY = this.pStart.y < this.pCurrent.y ? Math.abs(this.pStart.y - this.pCurrent.y) : 0
       
-      console.log(this.pStart.y);
-      console.log(this.pCurrent.y);
-      console.log(changeY);
-      
-      const cards = document.querySelector<HTMLElement>('.newpage__cards')!
+      const loaderContainer = document.querySelector<HTMLElement>('.loading__container')!
+      const loaderIcon = document.querySelector<HTMLElement>('.loading__container .loading')!
       
       if (window.scrollY === 0 && changeY !== 0) {
-        if (changeY > 70) {
-          this.loading();
+        if (changeY > 55) {
+          this.loading(loaderContainer, loaderIcon);
         } else {
-          cards.style.transform = `translateY(${70 - changeY}px)`
-          cards.style.marginBottom = `${-85 + changeY}px)`
+          loaderContainer.style.maxHeight = changeY + 'px'
         }
       }
     },
@@ -353,43 +350,6 @@ export default defineComponent({
       }
       return false;
     },
-    
-    // reCalc() {
-    //   this.scrollPos = document.documentElement.scrollTop - (document.documentElement.clientTop || 0);
-    //   this.scrollHeight = document.documentElement.scrollHeight;
-    //   this.getCardsHeight();
-    //
-    //   if (this.scrollPos <= 0) {
-    //     document.documentElement.scrollTop = 1; // Scroll 1 pixel to allow upwards scrolling
-    //   }
-    // },
-    // scrollToCard(e: any) {
-    //
-    //   if (!this.disableScroll) {
-    //     if (this.cardsHeight + this.scrollPos >= this.scrollHeight) {
-    //       document.documentElement.scrollTop = 1;
-    //       this.disableScroll = true;
-    //     } else if (this.scrollPos <= 0) {
-    //       document.documentElement.scrollTop = this.scrollHeight - this.cardsHeight;
-    //       this.disableScroll = true;
-    //     }
-    //   }
-    //
-    //   if (this.disableScroll) {
-    //     setTimeout(() => {
-    //       this.disableScroll = false;
-    //     }, 40);
-    //   }
-    // },
-    //
-    // getCardsHeight() {
-    //   let cards = document.querySelectorAll<HTMLElement>('.card')
-    //   this.cardsHeight = 0;
-    //
-    //   for (let i = 0; i < cards.length; i += 1) {
-    //     this.cardsHeight = this.cardsHeight + cards[i].offsetHeight;
-    //   }
-    // }
   },
   
   watch: {
@@ -401,8 +361,22 @@ export default defineComponent({
 
 <style lang="scss">
 
+html {
+ overflow-y: hidden;
+}
+
 .newpage {
-  padding-top: 17px;
+  position: relative;
+  
+  padding-top: 32px;
+  margin: -15px;
+  height: 100vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y mandatory;
+  scroll-padding: 30px;
+  scrollbar-width: unset;
   
   &__filters {
     position: fixed;
@@ -462,11 +436,19 @@ export default defineComponent({
   }
   
   &__notify {
+    &__wrapper {
+      padding: 15px;
+      min-height: 110px;
+      
+      transition: margin 0.5s ease-in-out,
+                  height 0.5s ease-in-out,
+                  min-height 0.5s ease-in-out,
+                  padding 0.5s ease-in-out;
+    }
+    
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 10px;
-    margin-bottom: 10px;
     min-height: 80px;
     padding: 8px 20px 8px 15px;
     border-radius: 8px;
@@ -522,22 +504,50 @@ export default defineComponent({
     }
   }
   
-  &__cards {
-    transform: translateY(-70px);
-    
-    display: flex;
-    flex-direction: column;
-    //row-gap: 10px;
-    margin: 0 -15px -15px;
-    margin-bottom: -85px;
-    overflow-y: scroll;
-    
-    transition: 0.7s all;
-    
-    .card {
-      scroll-snap-align: start;
-    }
+  //&__cards {
+  //  transform: translateY(-70px);
+  //
+  //  display: flex;
+  //  flex-direction: column;
+  //  //row-gap: 10px;
+  //  margin: 0 -15px -15px;
+  //  margin-bottom: -85px;
+  //
+  //  transition: 0.7s all;
+  //}
+  
+  & > div {
+    scroll-snap-align: start;
   }
+}
+
+.loading__container {
+  max-height: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  transition: max-height 0.3s;
+  
+  .loading {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    margin-bottom: 15px;
+    width: 40px;
+    height: 40px;
+    
+    transition: transform .3s;
+    
+    transform: scale(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .slide-enter-active,
@@ -560,32 +570,6 @@ export default defineComponent({
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-}
-
-.loading__container {
-  height: 70px;
-  padding: 10px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
-  transition: 0.7s all;
-  
-  .loading {
-    border: 4px solid #f3f3f3; /* Light grey */
-    border-top: 4px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 2s linear infinite;
-  }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 
 </style>
