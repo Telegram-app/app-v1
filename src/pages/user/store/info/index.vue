@@ -29,17 +29,11 @@
             <div class="store-info__links__link__to">
               <IconChevronRight h="11" w="7" color="transparent-grey"/>
             </div>
+            
+            <div class="store-info__links__link__divider" v-if="n !== linkGroup.length - 1"></div>
           </div>
         </div>
       </template>
-      
-    </div>
-    
-    <div class="store-info__add-items">
-      <div class="store-info__add-items__wrapper">
-        <IconAdd h="14" w="14"/>
-        <span class="store-info__add-items__label">Add new items</span>
-      </div>
     </div>
     
     <div class="store-info__news">
@@ -203,11 +197,9 @@ export default defineComponent({
       overflow: hidden;
     }
     
-    .divider {
-      margin: 7px 0;
-    }
-    
     &__link {
+      position: relative;
+      
       display: flex;
       align-items: center;
       padding: 10px 17px;
@@ -218,7 +210,18 @@ export default defineComponent({
       
       transition: 0.2s all;
       
-      &:active, &:focus, &:hover {
+      &__divider {
+        position: absolute;
+        bottom: 0;
+        left: 60px;
+        
+        height: 1px;
+        width: 100%;
+        
+        background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
+      }
+      
+      &:active {
         background: rgba(0,0,0, 0.1);
       }
       
@@ -226,6 +229,11 @@ export default defineComponent({
         display: flex;
         align-items: center;
         margin-right: 15px;
+        
+        img {
+          height: 28px;
+          width: 28px;
+        }
       }
       
       &__title {
@@ -261,43 +269,6 @@ export default defineComponent({
         
         cursor: pointer;
       }
-    }
-  }
-  
-  &__add-items {
-    position: relative;
-    
-    margin: 15px auto 0;
-    width: 90%;
-    border: solid 1px transparent;
-    border-radius: 8px;
-    
-    background: linear-gradient(180deg, #4CB2FF 0%, #34A6FF 100%);
-    
-    cursor: pointer;
-    
-    &__wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px 0;
-      border-radius: 7px;
-      
-      background: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
-      background-clip: padding-box;
-    }
-    
-    &__label {
-      margin-left: 5px;
-      
-      font-size: 13px;
-      font-family: "SF Pro Text Semibold", sans-serif;
-      line-height: 1;
-      
-      color: #4CB2FF;
-      background: linear-gradient(180deg, #4CB2FF 0%, #34A6FF 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
   }
   
