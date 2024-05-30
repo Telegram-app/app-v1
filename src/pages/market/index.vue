@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="main-loading" v-if="tgStore.loading ? tgStore.loading : loading">
+    <div class="main-loading" v-if="tgStore.loading">
       <IconLoading h="50" w="50" color="light-grey"/>
     </div>
   </transition>
@@ -153,12 +153,11 @@ export default defineComponent({
   props: [],
   
   setup() {
-    let loading = true
     const router = useRouter();
     const tgStore = useTelegramStore()
     const marketStore = useMarketStore();
     
-    return {loading, router, tgStore, marketStore, modules: [Autoplay, FreeMode]};
+    return {router, tgStore, marketStore, modules: [Autoplay, FreeMode]};
   },
   
   created() {
@@ -267,7 +266,6 @@ export default defineComponent({
       let scrollbar = document.querySelector<HTMLElement>('html')!
       
       setTimeout(() => {
-        this.loading = false
         this.tgStore.loading = false
         enableBodyScroll(scrollbar)
         
