@@ -293,16 +293,6 @@ export default defineComponent({
     
     expandItem(event: any, posIdx: number, itemIdx: number) {
       this.footerItems[posIdx][itemIdx].expanded = !this.footerItems[posIdx][itemIdx].expanded
-      
-      if (this.footerItems[posIdx][itemIdx].expanded) {
-        let interval = setInterval(() => {
-          event.target.scrollIntoView({ behavior: "smooth", block: "start" })
-        }, 1)
-        
-        setTimeout(() => {
-          clearInterval(interval)
-        }, 150)
-      }
     }
     // swipeStart(e: any) {
     //   if (typeof e["targetTouches"] !== "undefined") {

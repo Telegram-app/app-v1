@@ -76,6 +76,12 @@ export default defineComponent({
           } else {
             window.Telegram.WebApp.BackButton.hide();
           }
+          
+          if (newPath !== '/newpage') {
+            window.Telegram.WebApp.setHeaderColor('#ffffff')
+          } else {
+            window.Telegram.WebApp.setHeaderColor('#f1f1f1')
+          }
         }
       }, immediate: true
     }
@@ -91,6 +97,8 @@ html {
 
 html, body {
   height: 100%;
+  
+  background: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
 }
 
 .v-enter-active,
