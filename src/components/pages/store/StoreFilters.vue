@@ -66,7 +66,7 @@ export default defineComponent({
   
   props: {
     storeId: {
-      type: String || Number,
+      type: [String, Number],
       required: true
     }
   },
