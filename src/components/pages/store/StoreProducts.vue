@@ -11,6 +11,11 @@ import {defineComponent, PropType, ref} from 'vue';
 import {Product} from '@/models/store.model.ts';
 import {useRouter} from 'vue-router';
 
+interface Store {
+  id: string | number;
+  name: string
+}
+
 const loadProducts = async () => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -24,7 +29,7 @@ export default defineComponent({
   
   props: {
     store: {
-      type: Object as PropType<{ id: string | number, name: string }>,
+      type: Object as PropType<Store>,
       required: true
     },
     products: {
