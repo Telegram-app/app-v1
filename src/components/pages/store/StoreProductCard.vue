@@ -1,5 +1,5 @@
 <template>
-  <div class="product__card card--bg" v-if="product">
+  <div class="product__card card--bg">
     <div class="product__card__wrapper">
       <div class="product__card__image">
         <img :src="'/images/market/stores/products/' + product.image" alt="product-image">
@@ -68,10 +68,13 @@ import type { PropType } from 'vue'
 import { Product } from '@/models/store.model.ts';
 
 export default defineComponent({
-  name: 'ProductCard',
+  name: 'StoreProductCard',
   
   props: {
-    product: Object as PropType<Product>,
+    product: {
+      type: Object as PropType<Product>,
+      required: true
+    },
     storeName: String
   },
   

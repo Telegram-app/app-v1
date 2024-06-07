@@ -1,67 +1,48 @@
 <template>
   <div class="store">
-    <div class="store__widget" :class="{ 'store__widget--show': storeWidgetShow }">
-      <IconStar h="12" w="12"/>
-      <span class="store__widget__text">First decentralized catalogue</span>
-    </div>
+    <Transition mode="out-in">
+      <Suspense>
+        <template #default>
+          <VWidget :widget="widget"/>
+        </template>
+      </Suspense>
+    </Transition>
     
-    <div class="store__image">
-      <img :src="'/images/market/' + store.image" alt="store-image">
-    </div>
+    <Transition mode="out-in">
+      <Suspense>
+        <template #default>
+          <store-header :data="storeHeader"/>
+        </template>
+        
+        <template #fallback>
+          <store-header-skeleton/>
+        </template>
+      </Suspense>
+    </Transition>
     
-    <div class="store__title__wrapper self-card">
-      <h1 class="store__title">{{ store.name }}</h1>
-      <span class="store__id">{{ store.id }}</span>
-    </div>
+    <Transition mode="out-in">
+      <Suspense>
+        <template #default>
+          <store-filters :storeId="store.id"/>
+        </template>
+        
+        <template #fallback>
+          <store-filters-skeleton/>
+        </template>
+      </Suspense>
+    </Transition>
     
-    <div class="store__description self-card">
-      <p class="store__description__text">{{ store.description }}</p>
-    </div>
-    
-    <div class="store__filters">
-      <swiper
-        :free-mode="true"
-        :slides-per-view="3.44"
-        :space-between="10"
-        :speed="800"
-        class="store__filters__swiper"
-        @slider-move="filterStore.openMarketSelect(-1)"
-      >
-        <swiper-slide class="store__filters__swiper__slide">
-          <!--          <VSelect :type="1" v-model="selects.category.active" :label="selects.category.label" :options="selects.category.options" :open="selects.category.open" @open="openMarketSelect(0)" @close="selects.category.open = false"></VSelect>-->
-          <VSelect :type="1" v-model="filterStore.market.selects.category.active" :label="filterStore.market.selects.category.label" @click="router.push({name: 'categories', params: { id: store.id }})"></VSelect>
-        </swiper-slide>
+    <Transition mode="out-in">
+      <Suspense>
+        <template #default>
+          <store-products :products="store.products" :store="storeProducts"/>
+        </template>
         
-        <swiper-slide class="store__filters__swiper__slide">
-          <VSelect :type="1" v-model="filterStore.market.selects.type.active" :label="filterStore.market.selects.type.label" :options="filterStore.market.selects.type.options" :open="filterStore.market.selects.type.open" @open="filterStore.openMarketSelect(0)" @close="filterStore.market.selects.type.open = false"></VSelect>
-        </swiper-slide>
-        
-        <swiper-slide class="store__filters__swiper__slide">
-          <VSelect :type="1" v-model="filterStore.market.selects.city.active" :label="filterStore.market.selects.city.label" :options="filterStore.market.selects.city.options" :open="filterStore.market.selects.city.open" @open="filterStore.openMarketSelect(1)" @close="filterStore.market.selects.city.open = false"></VSelect>
-        </swiper-slide>
-        
-        <swiper-slide class="store__filters__swiper__slide">
-          <VSelect :type="1" v-model="filterStore.market.selects.district.active" :label="filterStore.market.selects.district.label" :options="filterStore.market.selects.district.options" :open="filterStore.market.selects.district.open" @open="filterStore.openMarketSelect(2)"
-                   @close="filterStore.market.selects.district.open = false"></VSelect>
-        </swiper-slide>
-        
-        <swiper-slide class="store__filters__swiper__slide">
-          <VInput v-model="filterStore.market.inputs.quantity.value" :label="filterStore.market.inputs.quantity.label" :placeholder="filterStore.market.inputs.quantity.placeholder"></VInput>
-        </swiper-slide>
-        
-        <swiper-slide class="store__filters__swiper__slide">
-          <VInput v-model="filterStore.market.inputs.priceFrom.value" :label="filterStore.market.inputs.priceFrom.label" :placeholder="filterStore.market.inputs.priceFrom.placeholder"></VInput>
-        </swiper-slide>
-        
-        <swiper-slide class="store__filters__swiper__slide">
-          <VInput v-model="filterStore.market.inputs.priceUpTo.value" :label="filterStore.market.inputs.priceUpTo.label" :placeholder="filterStore.market.inputs.priceUpTo.placeholder"></VInput>
-        </swiper-slide>
-      </swiper>
-    </div>
-    
-    <div class="store__products">
-      <ProductCard v-for="product in store.products" :key="product.id" :product="product" :storeName="store.name" @toProductPage="toProductPage"></ProductCard>
-    </div>
+        <template #fallback>
+          <store-products-skeleton/>
+        </template>
+      </Suspense>
+    </Transition>
   </div>
 </template>
 
@@ -74,30 +55,29 @@
 <script lang="ts">
 
 import {defineComponent} from 'vue';
-import {useRoute, useRouter} from 'vue-router';
+import {useRoute} from 'vue-router';
 import {useMarketStore} from '@/stores/market.ts';
-import {useFilter} from '@/stores/filters.ts';
 
-import {Swiper, SwiperSlide} from 'swiper/vue';
-import 'swiper/css';
+import {useFilter} from '@/stores/filters.ts';
 
 export default defineComponent({
   name: 'StorePage',
-  components: {Swiper, SwiperSlide},
-  
-  props: [],
   
   setup() {
-    const router = useRouter();
     const route = useRoute();
     const marketStore = useMarketStore();
-    const filterStore = useFilter();
+    const filterStore = useFilter()
     
-    return {router, route, marketStore, filterStore};
+    return {route, marketStore, filterStore};
   },
   
   data: () => ({
-    storeWidgetShow: false,
+    widget: {
+      show: false,
+      color: 'blue',
+      icon: 'star',
+      text: 'First decentralized catalogue'
+    },
     pointToShowWidget: 1000
   }),
   
@@ -105,19 +85,34 @@ export default defineComponent({
     store() {
       return this.marketStore.findById(Number(this.route.params.id) as number);
     },
+    storeHeader() {
+      return {
+        id: this.store.id,
+        image: this.store.image,
+        name: this.store.name,
+        description: this.store.description
+      }
+    },
+    storeProducts() {
+      return {
+        id: this.store.id,
+        name: this.store.name
+      }
+    }
   },
   
   methods: {
     showWidget() {
-      this.storeWidgetShow = this.pointToShowWidget <= window.scrollY;
+      this.widget.show = this.pointToShowWidget <= window.scrollY;
     },
-    toProductPage(id: number | string) {
-      this.router.push({name: 'product', params: {id: this.store.id, productId: id}});
-    }
   },
   
   created() {
     window.addEventListener('scroll', this.showWidget);
+  },
+  
+  unmounted() {
+    window.removeEventListener('scroll', this.showWidget);
   },
   
   mounted() {
@@ -132,10 +127,6 @@ export default defineComponent({
     if (hrefScroll) {
       this.pointToShowWidget = hrefScroll.offsetTop - 45;
     }
-  },
-  
-  unmounted() {
-    window.removeEventListener('scroll', this.showWidget);
   },
   
   watch: {
@@ -157,85 +148,6 @@ export default defineComponent({
 <style scoped lang="scss">
 
 .store {
-  &__widget {
-    position: fixed;
-    top: -45px;
-    right: 0;
-    left: 0;
-    z-index: 100;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 11px 0;
-    
-    font-size: 15px;
-    font-family: "SF Pro Text Semibold", sans-serif;
-    
-    background: linear-gradient(270deg, rgba(105, 189, 254, 0.70) 0%, #4D98FD 100%);
-    
-    transition: 0.6s all;
-    
-    &__text {
-      margin-left: 5px;
-      
-      color: #ffffff;
-    }
-    
-    &--show {
-      top: 0;
-    }
-  }
-  
-  &__image {
-    height: 100px;
-    width: 100%;
-    
-    img {
-      height: 100%;
-      width: 100%;
-      border-radius: 10px;
-    }
-  }
-  
-  &__title {
-    font-size: 15px;
-    font-family: "SF Pro Text Medium", sans-serif;
-    
-    &__wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 12px;
-    }
-  }
-  
-  &__id {
-    font-size: 10px;
-  }
-  
-  &__description {
-    margin-top: 15px;
-    
-    &__text {
-      font-size: 12px;
-      
-      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);;
-    }
-  }
-  
-  &__filters {
-    width: calc(100% + 30px);
-    margin: 15px -15px 0;
-    padding: 0 15px;
-    
-    &__swiper {
-      height: 40px;
-      overflow: visible;
-    }
-  }
-  
   &__products {
     margin-top: 15px;
   }
