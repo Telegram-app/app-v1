@@ -1,0 +1,25 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input.reset, select.reset, textarea.reset {
+  border: unset;
+
+  font-size: 12px;
+  box-shadow: unset;
+
+  &::placeholder {
+    color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
+  }
+}
+
+button, a {
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+a:hover {
+  color: unset;
+}
