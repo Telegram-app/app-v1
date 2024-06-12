@@ -10,7 +10,7 @@
     >
       <swiper-slide class="store__filters__swiper__slide">
         <!--          <VSelect :type="1" v-model="selects.category.active" :label="selects.category.label" :options="selects.category.options" :open="selects.category.open" @open="openMarketSelect(0)" @close="selects.category.open = false"></VSelect>-->
-        <VSelect :type="1" v-model="filterStore.market.selects.category.active" :label="filterStore.market.selects.category.label" @click="router.push({name: 'categories', params: { id: storeId }})"></VSelect>
+        <VSelect :type="1" v-model="filterStore.market.selects.category.active" :label="filterStore.market.selects.category.label" @click="$emit('pushToCategories')"></VSelect>
       </swiper-slide>
       
       <swiper-slide class="store__filters__swiper__slide">
@@ -64,13 +64,6 @@ export default defineComponent({
   name: 'StoreFilters',
   components: {SwiperSlide, Swiper},
   
-  props: {
-    storeId: {
-      type: [String, Number],
-      required: true
-    }
-  },
-  
   async setup() {
     const load = ref(await loadFilters())
     const router = useRouter();
@@ -78,6 +71,9 @@ export default defineComponent({
     
     return {load, router, filterStore};
   },
+  
+  methods: {
+  }
   
 })
 

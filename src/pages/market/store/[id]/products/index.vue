@@ -23,7 +23,7 @@
     <Transition mode="out-in">
       <Suspense>
         <template #default>
-          <store-filters :storeId="store.id"/>
+          <store-filters @pushToCategories="router.push({name: 'categories', params: { id: store.id }})"/>
         </template>
         
         <template #fallback>
@@ -55,7 +55,7 @@
 <script lang="ts">
 
 import {defineComponent} from 'vue';
-import {useRoute} from 'vue-router';
+import {useRouter, useRoute} from 'vue-router';
 import {useMarketStore} from '@/stores/market.ts';
 
 import {useFilter} from '@/stores/filters.ts';
@@ -64,11 +64,12 @@ export default defineComponent({
   name: 'StorePage',
   
   setup() {
+    const router = useRouter();
     const route = useRoute();
     const marketStore = useMarketStore();
     const filterStore = useFilter()
     
-    return {route, marketStore, filterStore};
+    return {router, route, marketStore, filterStore};
   },
   
   data: () => ({
