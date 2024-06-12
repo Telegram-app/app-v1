@@ -1,48 +1,47 @@
 <template>
   <div class="store">
-    <Transition mode="out-in">
-      <Suspense>
-        <template #default>
-          <VWidget :widget="widget"/>
-        </template>
-      </Suspense>
-    </Transition>
-    
+<!--    <Transition mode="out-in">-->
+<!--      <Suspense>-->
+<!--        <template #default>-->
+<!--          <VWidget :widget="widget"/>-->
+<!--        </template>-->
+<!--      </Suspense>-->
+<!--    </Transition>-->
+<!--    -->
     <Transition mode="out-in">
       <Suspense>
         <template #default>
           <store-header :data="storeHeader"/>
         </template>
-        
         <template #fallback>
           <store-header-skeleton/>
         </template>
       </Suspense>
     </Transition>
-    
-    <Transition mode="out-in">
-      <Suspense>
-        <template #default>
-          <store-filters @pushToCategories="router.push({name: 'categories', params: { id: store.id }})"/>
-        </template>
-        
-        <template #fallback>
-          <store-filters-skeleton/>
-        </template>
-      </Suspense>
-    </Transition>
-    
-    <Transition mode="out-in">
-      <Suspense>
-        <template #default>
-          <store-products :products="store.products" :store="storeProducts"/>
-        </template>
-        
-        <template #fallback>
-          <store-products-skeleton/>
-        </template>
-      </Suspense>
-    </Transition>
+<!--    -->
+<!--    <Transition mode="out-in">-->
+<!--      <Suspense>-->
+<!--        <template #default>-->
+<!--          <store-filters @pushToCategories="router.push({name: 'categories', params: { id: store.id }})"/>-->
+<!--        </template>-->
+<!--        -->
+<!--        <template #fallback>-->
+<!--          <store-filters-skeleton/>-->
+<!--        </template>-->
+<!--      </Suspense>-->
+<!--    </Transition>-->
+<!--    -->
+<!--    <Transition mode="out-in">-->
+<!--      <Suspense>-->
+<!--        <template #default>-->
+<!--          <store-products :products="store.products" :store="storeProducts"/>-->
+<!--        </template>-->
+<!--        -->
+<!--        <template #fallback>-->
+<!--          <store-products-skeleton/>-->
+<!--        </template>-->
+<!--      </Suspense>-->
+<!--    </Transition>-->
   </div>
 </template>
 
@@ -90,6 +89,7 @@ export default defineComponent({
       return {
         id: this.store.id,
         image: this.store.image,
+        deals: this.store.deals,
         name: this.store.name,
         description: this.store.description
       }
@@ -123,8 +123,7 @@ export default defineComponent({
         is_visible: false
       });
     }
-    
-    let hrefScroll = document.querySelector<HTMLElement>('.store__filters');
+    let hrefScroll = document.querySelector<HTMLElement>('.store__filters__skeleton');
     if (hrefScroll) {
       this.pointToShowWidget = hrefScroll.offsetTop - 45;
     }
