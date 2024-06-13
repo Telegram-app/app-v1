@@ -1,13 +1,13 @@
 <template>
   <div class="market__stores self-card">
-    <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="router.push({ name: 'store', params: { id: store.id } })">
+    <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="router.push({ name: 'storeProducts', params: { id: store.id } })">
       <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
       <span class="market__stores__store__name">{{ store.name }}</span>
     </div>
     
     <div class="divider"></div>
     
-    <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @click="router.push({ name: 'store', params: { id: store.id } })">
+    <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @click="router.push({ name: 'storeProducts', params: { id: store.id } })">
       <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
       <span class="market__stores__store__name">{{ store.name }}</span>
     </div>

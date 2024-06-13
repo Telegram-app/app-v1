@@ -13,10 +13,10 @@
       </div>
     </div>
     
-    <div class="store__header__description self-card">
+    <div class="store__header__description self-card" :class="{'store__header__description--open': showMoreDesc}">
       <h6 class="store__header__description__title">Описание</h6>
-      <p class="store__header__description__text" :class="{'store__header__description__text--open': showMoreDesc}">
-        {{ showMoreDesc ? data.description : kitcut(data.description, 160) }}
+      <p class="store__header__description__text">
+        {{ data.description }}
         <span class="store__header__description__show-more">
           <a @click="reviewShowMoreFunc()" v-if="data.description.length > 160">{{ showMoreDesc ? 'Свернуть' : 'Еще' }}</a>
         </span>
@@ -77,20 +77,17 @@ export default defineComponent({
   }),
   
   methods: {
-    kitcut(text: string, limit: number) {
-      text = text.trim();
-      if (text.length <= limit) return text;
-      
-      text = text.slice(0, limit);
-      let lastSpace = text.lastIndexOf(' ');
-      if (lastSpace > 0) {
-        text = text.substr(0, lastSpace);
-      }
-      return text;
-    },
-    
     reviewShowMoreFunc() {
       this.showMoreDesc = !this.showMoreDesc;
+
+      let text = document.querySelector<HTMLElement>('.store__header__description__text')!
+      let descOpened = document.querySelector<HTMLElement>('.store__header__description')!
+
+      if (this.showMoreDesc) {
+        descOpened.style.maxHeight = text.clientHeight + 41 + 'px'
+      } else {
+        descOpened.style.maxHeight = '110px';
+      }
     },
   }
 });
@@ -109,7 +106,7 @@ export default defineComponent({
     justify-content: center;
     margin: 0 -15px 58px;
     
-    transition: 1s all;
+    transition: 1s all, margin 0.2s;
     
     &--expand {
       margin-top: -15px;
@@ -125,11 +122,13 @@ export default defineComponent({
     border-radius: 100%;
     
     object-fit: cover;
+    object-position: center 20%;
     
     transition: 0.5s all;
     
     &--expand {
-      max-height: 100%;
+      min-height: 200px;
+      max-height: 350px;
       min-width: 100%;
       max-width: 100%;
       border-radius: 0;
@@ -197,9 +196,16 @@ export default defineComponent({
   }
   
   &__description {
-    margin-top: 15px;
+    position: relative;
     
-    transition: 1s all;
+    margin-top: 15px;
+    max-height: 110px;
+    margin-bottom: -10px;
+    border-bottom: 10px solid theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+
+    overflow: hidden;
+    
+    transition: 1s max-height;
     
     &__title {
       font-size: 12px;
@@ -211,14 +217,6 @@ export default defineComponent({
       font-family: "SF Pro Text Regular", sans-serif;
       
       color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
-      
-      &--open {
-        .store__header__description__text--open {
-          min-width: 65px;
-          
-          background-color: unset;
-        }
-      }
     }
     
     &__show-more {
@@ -229,13 +227,23 @@ export default defineComponent({
       a {
         position: absolute;
         right: 17px;
-        bottom: 10px;
+        bottom: 0;
         
         padding-left: 25px;
         
         font-size: 13px;
         
         background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 40%);
+
+        transition: 1s all;
+      }
+    }
+
+    &--open {
+      .store__header__description__show-more a {
+        min-width: 65px;
+
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 30%);
       }
     }
   }

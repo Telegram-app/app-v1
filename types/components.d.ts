@@ -72,6 +72,7 @@ declare module 'vue' {
     StoreProductCardSkeleton: typeof import('./../src/components/pages/store/skeleton/StoreProductCardSkeleton.vue')['default']
     StoreProducts: typeof import('./../src/components/pages/store/StoreProducts.vue')['default']
     StoreProductsSkeleton: typeof import('./../src/components/pages/store/skeleton/StoreProductsSkeleton.vue')['default']
+    StoreTabs: typeof import('./../src/components/pages/store/StoreTabs.vue')['default']
     VAlert: typeof import('./../src/components/base/VAlert.vue')['default']
     VBottomSheet: typeof import('./../src/components/base/VBottomSheet.vue')['default']
     VButton: typeof import('./../src/components/base/VButton.vue')['default']
