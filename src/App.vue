@@ -77,7 +77,7 @@ export default defineComponent({
             window.Telegram.WebApp.BackButton.hide();
           }
           
-          if (newPath !== '/newpage') {
+          if (newPath !== '/catalog') {
             window.Telegram.WebApp.setHeaderColor('#ffffff')
           } else {
             window.Telegram.WebApp.setHeaderColor('#f1f1f1')

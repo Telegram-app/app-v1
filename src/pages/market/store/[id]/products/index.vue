@@ -1,6 +1,6 @@
 <template>
   <div class="store__products">
-    <h1>ТОВАРЫ</h1>
+    <StoreProductCard v-for="product in store.products" :key="product.id" :product="product" :storeName="store.name" @toProductPage="toProductPage"></StoreProductCard>
   </div>
 </template>
 
@@ -16,8 +16,6 @@ import {defineComponent} from 'vue';
 import {useRouter, useRoute} from 'vue-router';
 import {useMarketStore} from '@/stores/market.ts';
 
-import {useFilter} from '@/stores/filters.ts';
-
 export default defineComponent({
   name: 'StoreProductsPage',
 
@@ -25,9 +23,8 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
     const marketStore = useMarketStore();
-    const filterStore = useFilter()
 
-    return {router, route, marketStore, filterStore};
+    return {router, route, marketStore};
   },
 
   data: () => ({}),
@@ -36,24 +33,13 @@ export default defineComponent({
     store() {
       return this.marketStore.findById(Number(this.route.params.id) as number);
     },
-    storeHeader() {
-      return {
-        id: this.store.id,
-        image: this.store.image,
-        deals: this.store.deals,
-        name: this.store.name,
-        description: this.store.description
-      }
-    },
-    storeProducts() {
-      return {
-        id: this.store.id,
-        name: this.store.name
-      }
-    }
   },
 
-  methods: {},
+  methods: {
+    toProductPage(id: number | string) {
+      this.router.push({name: 'product', params: {id: this.store.id, productId: id}});
+    }
+  },
 
 });
 
@@ -62,7 +48,14 @@ export default defineComponent({
 <style scoped lang="scss">
 
 .store__products {
-  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-column-gap: 7px;
+  grid-row-gap: 20px;
+  margin: 0 -15px -15px;
+  padding: 15px;
+  
+  background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
 }
 
 </style>

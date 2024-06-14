@@ -82,18 +82,13 @@ export default defineComponent({
 
         if (newActiveLinkRect.left >= lastActiveLinkRect.left) {
           linksLine.style.width = (newActiveLinkRect.left - linkLineRect.left) + newActiveLinkRect.width + 'px'
-
-          setTimeout(() => {
-            linksLine.style.left = newActiveLinkRect.left + 'px'
-            linksLine.style.width = newActiveLinkRect.width + 'px'
-          }, 200)
+          linksLine.style.left = newActiveLinkRect.left + 'px'
+          linksLine.style.width = newActiveLinkRect.width + 'px'
         } else {
           linksLine.style.left = newActiveLinkRect.left + 'px'
           linksLine.style.width = linkLineRect.left - newActiveLinkRect.left + linkLineRect.width + 'px'
 
-          setTimeout(() => {
-            linksLine.style.width = newActiveLinkRect.width + 'px'
-          }, 200)
+          linksLine.style.width = newActiveLinkRect.width + 'px'
         }
 
         setTimeout(() => {
@@ -111,8 +106,9 @@ export default defineComponent({
 .store__tabs {
   position: relative;
 
-  margin: 30px -15px 25px -15px;
+  margin: 30px -15px 0 -15px;
   padding-top: 10px;
+  border-bottom: 0.5px solid theme-var-tg(--tg-theme-link-color, $--tg-link-color);
 
   background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
 

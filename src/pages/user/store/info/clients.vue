@@ -504,8 +504,8 @@ export default defineComponent({
         
         font-size: 12px;
         line-height: 1;
-        font-family: "SF Pro Text Regular", sans-serif;
-        font-weight: 400;
+        font-family: "Helvetica Neue Cyr Roman", "Helvetica Neue", sans-serif;
+        font-weight: normal;
         
         color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         
@@ -607,7 +607,8 @@ export default defineComponent({
         
         span {
           font-size: 8px;
-          font-family: "SF Pro Text Medium", sans-serif;
+          font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+          font-weight: 400;
           line-height: 1;
           
           &:first-child {

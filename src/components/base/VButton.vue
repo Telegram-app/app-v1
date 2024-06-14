@@ -34,7 +34,8 @@ export default defineComponent({
   border-radius: 10px;
   
   font-size: 15px;
-  font-family: "SF Pro Text Regular", sans-serif;
+  font-family: "Helvetica Neue Cyr Roman", "Helvetica Neue", sans-serif;
+  font-weight: normal;
   line-height: 1;
   
   color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);

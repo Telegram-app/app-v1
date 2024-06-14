@@ -8,7 +8,7 @@
           <h1>{{ data.name }}</h1>
         </div>
         <div>
-          <span>Выполненные сделки: {{ data.deals.quantity === 0 ? '0' : data.deals.completed + ' · ' + Math.floor(data.deals.completed / data.deals.quantity * 100) }}%</span>
+          <span>Выполненные сделки: {{ data.deals.completed }}</span>
         </div>
       </div>
     </div>
@@ -17,8 +17,8 @@
       <h6 class="store__header__description__title">Описание</h6>
       <p class="store__header__description__text">
         {{ data.description }}
-        <span class="store__header__description__show-more">
-          <a @click="reviewShowMoreFunc()" v-if="data.description.length > 160">{{ showMoreDesc ? 'Свернуть' : 'Еще' }}</a>
+        <span class="store__header__description__show-more" v-if="!showMoreDesc">
+          <a @click="reviewShowMoreFunc()" v-if="data.description.length > 160">еще</a>
         </span>
       </p>
     </div>
@@ -161,7 +161,8 @@ export default defineComponent({
       display: inline-block;
       
       font-size: 20px;
-      font-family: "SF Pro Text Medium", sans-serif;
+      font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+      font-weight: 400;
       line-height: 1;
       
       transition: all 0.5s linear;
@@ -173,7 +174,8 @@ export default defineComponent({
       display: inline-block;
       
       font-size: 14px;
-      font-family: "SF Pro Text Light", sans-serif;
+      font-family: "Helvetica Neue Cyr Light", "Helvetica Neue", sans-serif;
+      font-weight: lighter;
       line-height: 1;
       
       transition: all 0.5s linear;
@@ -209,12 +211,14 @@ export default defineComponent({
     
     &__title {
       font-size: 12px;
-      font-family: "SF Pro Text Medium", sans-serif;
+      font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+      font-weight: 400;
     }
     
     &__text {
       font-size: 12px;
-      font-family: "SF Pro Text Regular", sans-serif;
+      font-family: "Helvetica Neue Cyr Roman", "Helvetica Neue", sans-serif;
+      font-weight: normal;
       
       color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
     }
@@ -240,10 +244,12 @@ export default defineComponent({
     }
 
     &--open {
-      .store__header__description__show-more a {
-        min-width: 65px;
-
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 30%);
+      .store__header__description__show-more {
+        min-width: 71px;
+        
+        a {
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 30%);
+        }
       }
     }
   }

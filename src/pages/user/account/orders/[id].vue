@@ -237,7 +237,8 @@ export default defineComponent({
           margin-right: 5px;
           
           font-size: 20px;
-          font-family: "SF Pro Text Semibold", sans-serif;
+          font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+          font-weight: 400;
           line-height: 1;
         }
         
@@ -383,7 +384,8 @@ export default defineComponent({
     
     &__name {
       font-size: 13px;
-      font-family: "SF Pro Text Medium", sans-serif;
+      font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+      font-weight: 400;
     }
     
     &__message {

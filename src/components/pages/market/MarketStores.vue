@@ -51,7 +51,7 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  row-gap: 23px;
+  row-gap: 8px;
   margin: 15px -5px 0 -5px;
   padding: 15px 13px;
   
@@ -62,8 +62,16 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     flex-basis: 23%;
+    padding: 5px 0;
+    border-radius: 4px;
     
     cursor: pointer;
+    
+    transition: 0.3s all;
+    
+    &:hover, &:active {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
     
     &__image {
       z-index: 2;
@@ -86,7 +94,7 @@ export default defineComponent({
   
   .divider {
     position: absolute;
-    top: 100px;
+    top: 102.5px;
     
     margin: 0 !important;
     width: calc(100% - 26px);

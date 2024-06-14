@@ -1,44 +1,42 @@
 <template>
-  <DefaultLayout>
-    <div class="newpage">
-      <div class="newpage__filters">
-        <div class="newpage__filters--left">
-          <VSelect :type="3" v-model="selects.category.active" :label="selects.category.label" :options="selects.category.options" :open="selects.category.open" @open="selects.category.open = !selects.category.open" @close="selects.category.open = false"></VSelect>
-          <VSelect :type="3" v-model="selects.city.active" :label="selects.city.label" :options="selects.city.options" :open="selects.city.open" @open="selects.city.open = !selects.city.open" @close="selects.city.open = false"></VSelect>
-        </div>
-        
-        <div class="newpage__filters--right">
-          <span>Filters <IconFilters h="11" w="11"/></span>
-        </div>
+  <div class="catalog">
+    <div class="catalog__filters">
+      <div class="catalog__filters--left">
+        <VSelect :type="3" v-model="selects.category.active" :label="selects.category.label" :options="selects.category.options" :open="selects.category.open" @open="selects.category.open = !selects.category.open" @close="selects.category.open = false"></VSelect>
+        <VSelect :type="3" v-model="selects.city.active" :label="selects.city.label" :options="selects.city.options" :open="selects.city.open" @open="selects.city.open = !selects.city.open" @close="selects.city.open = false"></VSelect>
       </div>
       
-      <div class="newpage__notify__wrapper" :class="{ 'newpage__notify--hidden': !notify.show }">
-        <!--        <IconInfo h="40" w="40" color="black"/>-->
-        <div class="newpage__notify" id="notify" :style="{ opacity: notify.opacity }">
-          <div>
-            <h5 class="newpage__notify__title">Title</h5>
-            <p class="newpage__notify__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, labore unde. Autem eaque error id nobis?</p>
-          </div>
-          <IconClose id="notifyClose" h="18" w="18" color="grey" v-if="notify.close" @click="closeNotify"/>
-        </div>
-        
-        <div class="newpage__notify__effect"></div>
+      <div class="catalog__filters--right">
+        <span>Filters <IconFilters h="11" w="11"/></span>
       </div>
-      
-      <div class="loading__container">
-        <div class="loading"></div>
-      </div>
-      
-      <template v-for="card of cards">
-        <NewPageCard :card="card"/>
-      </template>
     </div>
-  </DefaultLayout>
+    
+    <div class="catalog__notify__wrapper" :class="{ 'catalog__notify--hidden': !notify.show }">
+      <!--        <IconInfo h="40" w="40" color="black"/>-->
+      <div class="catalog__notify" id="notify" :style="{ opacity: notify.opacity }">
+        <div>
+          <h5 class="catalog__notify__title">Title</h5>
+          <p class="catalog__notify__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, labore unde. Autem eaque error id nobis?</p>
+        </div>
+        <IconClose id="notifyClose" h="18" w="18" color="grey" v-if="notify.close" @click="closeNotify"/>
+      </div>
+      
+      <div class="catalog__notify__effect"></div>
+    </div>
+    
+    <div class="loading__container">
+      <div class="loading"></div>
+    </div>
+    
+    <template v-for="card of cards">
+      <CatalogProductCard :card="card"/>
+    </template>
+  </div>
 </template>
 
 <route lang="json">
 {
-  "name": "newpage"
+"name": "catalog"
 }
 </route>
 
@@ -50,7 +48,7 @@ import dayjs from 'dayjs';
 import html2canvas from 'html2canvas';
 
 export default defineComponent({
-  name: 'NewPage',
+  name: 'CatalogPage',
   
   props: [],
   
@@ -182,7 +180,7 @@ export default defineComponent({
       const childrenDiv = target.children[0] as HTMLElement
       
       childrenDiv.style.paddingRight = '26px'
-      const effect = document.querySelector('.newpage__notify__effect') as HTMLElement
+      const effect = document.querySelector('.catalog__notify__effect') as HTMLElement
       
       const bRect = target.getBoundingClientRect();
       effect.style.left = `${bRect.left}px`;
@@ -199,15 +197,15 @@ export default defineComponent({
         
         // get element imageData
         const imgData = context.getImageData(0, 0, width, height);
-            
-            // init empty imageData
+        
+        // init empty imageData
         const effectImgDatas = [];
         for (let i = 0; i < 32; i++) {
           effectImgDatas.push(context.createImageData(width, height));
         }
         this.sampler(effectImgDatas, imgData, width, height, 32);
-            
-            // create cloned canvases
+        
+        // create cloned canvases
         for (let i = 0; i < 32; i++) {
           const canvasClone = canvas.cloneNode() as HTMLCanvasElement;
           
@@ -362,10 +360,10 @@ export default defineComponent({
 <style lang="scss">
 
 html {
- overflow-y: hidden;
+  overflow-y: hidden;
 }
 
-.newpage {
+.catalog {
   position: relative;
   
   padding-top: 32px;
@@ -441,9 +439,9 @@ html {
       min-height: 110px;
       
       transition: margin 0.5s ease-in-out,
-                  height 0.5s ease-in-out,
-                  min-height 0.5s ease-in-out,
-                  padding 0.5s ease-in-out;
+      height 0.5s ease-in-out,
+      min-height 0.5s ease-in-out,
+      padding 0.5s ease-in-out;
     }
     
     display: flex;
@@ -456,9 +454,9 @@ html {
     background: rgba(0, 0, 0, 0.06);
     
     transition: margin 0.5s ease-in-out,
-                height 0.5s ease-in-out,
-                min-height 0.5s ease-in-out,
-                padding 0.5s ease-in-out;
+    height 0.5s ease-in-out,
+    min-height 0.5s ease-in-out,
+    padding 0.5s ease-in-out;
     
     div {
       padding-right: 10px;
@@ -468,7 +466,8 @@ html {
     
     &__title {
       font-size: 12px;
-      font-family: "SF Pro Text Semibold";
+      font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+      font-weight: 400;
     }
     
     &__text {

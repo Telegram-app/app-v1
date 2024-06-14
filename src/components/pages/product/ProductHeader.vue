@@ -109,7 +109,8 @@ export default defineComponent({
   &__title {
     font-size: 16px;
     line-height: 1;
-    font-family: "SF Pro Text Bold", sans-serif;
+    font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+    font-weight: 400;
   }
   
   &__id {

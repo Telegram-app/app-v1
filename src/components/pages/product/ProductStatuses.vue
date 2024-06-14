@@ -41,7 +41,8 @@ export default defineComponent({
     text-align: center;
     
     font-size: 10px;
-    font-family: "SF Pro Text Semibold", sans-serif;
+    font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+    font-weight: 400;
     text-transform: uppercase;
     
     &__top-sales {

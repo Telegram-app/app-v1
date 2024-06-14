@@ -142,7 +142,7 @@
 
 <script lang="ts">
 
-import {defineComponent} from 'vue';
+import {defineComponent, isProxy, toRaw} from 'vue';
 import {useMarketStore} from '@/stores/market.ts';
 import {useUserStore, Order} from '@/stores/user.ts';
 import {useRouter, useRoute} from 'vue-router';
@@ -365,7 +365,8 @@ export default defineComponent({
       
       span:first-child {
         font-size: 20px;
-        font-family: "SF Pro Text Bold", sans-serif;
+        font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+        font-weight: 400;
         line-height: 1;
       }
       
@@ -373,7 +374,8 @@ export default defineComponent({
         margin-left: 5px;
         
         font-size: 14px;
-        font-family: "SF Pro Text Semibold", sans-serif;
+        font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+        font-weight: 400;
         line-height: 1;
         
         color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
@@ -384,14 +386,16 @@ export default defineComponent({
       margin-top: 5px;
       
       font-size: 15px;
-      font-family: "SF Pro Text Bold", sans-serif;
+      font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+      font-weight: 400;
       line-height: 1;
       
       span {
         margin-left: 5px;
         
         font-size: 10px;
-        font-family: "SF Pro Text Semibold", sans-serif;
+        font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+        font-weight: 400;
         text-transform: uppercase;
         
         color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
@@ -423,12 +427,14 @@ export default defineComponent({
         
         span:first-child {
           font-size: 15px;
-          font-family: "SF Pro Text Medium", sans-serif;
+          font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+          font-weight: 400;
         }
         
         span:last-child {
           font-size: 12px;
-          font-family: "SF Pro Text Medium", sans-serif;
+          font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+          font-weight: 400;
           
           color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
         }
@@ -439,7 +445,8 @@ export default defineComponent({
         
         span {
           font-size: 15px;
-          font-family: "SF Pro Text Medium", sans-serif;
+          font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+          font-weight: 400;
         }
       }
     }

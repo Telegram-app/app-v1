@@ -152,10 +152,4 @@ export default defineComponent({
 
 <style scoped lang="scss">
 
-.store {
-  &__products {
-    margin-top: 15px;
-  }
-}
-
 </style>

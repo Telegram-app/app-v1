@@ -156,7 +156,8 @@ export default defineComponent({
     margin-right: 5px;
     
     font-size: 13px;
-    font-family: "SF Pro Text Medium", sans-serif;
+    font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+    font-weight: 400;
     line-height: 1;
   }
   
@@ -167,7 +168,8 @@ export default defineComponent({
     border-radius: 15px;
     
     font-size: 8px;
-    font-family: "SF Pro Text Medium", sans-serif;
+    font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+    font-weight: 400;
     line-height: 1;
     
     background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
@@ -232,7 +234,8 @@ export default defineComponent({
       margin-top: 5px;
       
       font-size: 12px;
-      font-family: "SF Pro Text Medium";
+      font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+      font-weight: 400;
       
       color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
       

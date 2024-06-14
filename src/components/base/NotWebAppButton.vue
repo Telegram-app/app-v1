@@ -39,7 +39,8 @@ export default defineComponent({
   outline: unset;
   
   font-size: 15px;
-  font-family: "SF Pro Text Semibold", sans-serif;
+  font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+  font-weight: 400;
   
   color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
   background: linear-gradient(230deg, #C76EDC 0%, #7D81FF 100%);

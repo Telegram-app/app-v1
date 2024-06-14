@@ -96,7 +96,7 @@ export default defineComponent({
     position: relative;
     
     padding: 15px;
-    border-radius: 20px 20px 0 0;
+    border-radius: 10px 10px 0 0;
     border-top: 1px solid #ffffff;
     
     background-color: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);

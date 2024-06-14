@@ -90,7 +90,7 @@ export default defineComponent({
 
     &__text {
       font-size: 17px;
-      font-weight: bold;
+      font-weight: 400;
       line-height: 100%;
     }
 

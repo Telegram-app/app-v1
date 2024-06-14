@@ -98,7 +98,8 @@ export default defineComponent({
       
       font-size: 13px;
       line-height: 1;
-      font-family: "SF Pro Text Medium", sans-serif;
+      font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
+      font-weight: 400;
       
       color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
       

@@ -24,7 +24,7 @@
 
 <script lang="ts">
 
-import {defineComponent, PropType, ref} from 'vue';
+import {defineComponent, PropType, ref, toRaw} from 'vue';
 import {ProductType} from '@/models/store.model.ts';
 
 const loadTypes = async () => {
@@ -61,7 +61,7 @@ export default defineComponent({
   
   methods: {
     selectItem(item: {name: string; price: number}, type: 1 | 2) {
-      this.$emit('selectItem', {item, type})
+      this.$emit('selectItem', item, type)
     },
   },
   
@@ -117,7 +117,8 @@ export default defineComponent({
         
         a {
           font-size: 12px;
-          font-family: "SF Pro Text Bold", sans-serif;
+          font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+          font-weight: 400;
           
           color: theme-var-tg(--tg-theme-text-color, $--tg-text-color);
         }
@@ -145,7 +146,8 @@ export default defineComponent({
       
       &__name {
         font-size: 12px;
-        font-family: "SF Pro Text Semibold", sans-serif;
+        font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+        font-weight: 400;
         line-height: 1;
       }
       

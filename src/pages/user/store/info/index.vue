@@ -165,7 +165,8 @@ export default defineComponent({
       margin-left: 10px;
       
       font-size: 15px;
-      font-family: "SF Pro Text Semibold", sans-serif;
+      font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+      font-weight: 400;
       
       color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
     }
@@ -248,7 +249,8 @@ export default defineComponent({
         border-radius: 10px;
         
         font-size: 8px;
-        font-family: "SF Pro Text Semibold", sans-serif;
+        font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+        font-weight: 400;
         line-height: 1;
         
         &__premoder { color: #FFFFFF; background: #FF2C55; }

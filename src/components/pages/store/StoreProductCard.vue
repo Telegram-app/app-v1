@@ -1,61 +1,16 @@
 <template>
   <div class="product__card card--bg">
-    <div class="product__card__wrapper">
-      <div class="product__card__image">
-        <img :src="'/images/market/stores/products/' + product.image" alt="product-image">
-      </div>
-      <div class="product__card__info">
-        <h2 class="product__card__info__name">{{ product.name }}</h2>
-        
-        <span class="product__card__info__price">
-          <IconToken h="9" w="9" :color="'grey'"/>
-          {{ fromToPrice }}
-        </span>
-        
-        <div class="product__card__line"></div>
-        
-        <div class="product__card__info__statuses">
-          <div class="product__card__info__statuses__status product__card__info__statuses__status__top-sales">
-            <IconStar h="10" w="10" color="black"/>
-            <span>Top Sales</span>
-          </div>
-          <div class="product__card__info__statuses__status product__card__info__statuses__status__new">
-            <IconStar h="10" w="10"/>
-            <span>New</span>
-          </div>
-          <div class="product__card__info__statuses__status product__card__info__statuses__status__good-reviews">
-            <IconStar h="10" w="10"/>
-            <span>Good reviews</span>
-          </div>
-        </div>
-        
-        <div class="product__card__info__bottom">
-          <div class="product__card__info__store">
-            <span>Store</span>
-            <span>{{ storeName }} <IconConfirmed h="10" w="10"/></span>
-          </div>
-          <div class="product__card__info__actions">
-            <div class="product__card__info__actions__rating">
-              <div>
-                100
-              </div>
-              <span>100%</span>
-            </div>
-            <div class="product__card__info__actions__like">
-              <IconHeart w="11" h="10" color="red"/>
-            </div>
-            <div class="product__card__info__actions__share">
-              <span>Share</span>
-              <IconShare h="8" w="7"/>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="product__card__image">
+      <img :src="'/images/market/stores/products/' + product.image" alt="image">
     </div>
     
-    <div class="product__card__footer">
-      <p>{{ product.shortDescription }}</p>
-      <VButton @click="$emit('toProductPage', product.id)">OPEN</VButton>
+    <div class="product__card__info">
+      <span class="product__card__name">{{ product.name }} </span>
+      <span class="product__card__price">/ {{ minPrice }}</span>
+    </div>
+    
+    <div class="product__card__button">
+      <VButton color="blue" @click="$emit('toProductPage', product.id)">Открыть</VButton>
     </div>
   </div>
 </template>
@@ -83,7 +38,7 @@ export default defineComponent({
   }),
   
   computed: {
-    fromToPrice() {
+    minPrice() {
       let arrPrices: number[] = []
       
       this.product?.types.forEach(type => {
@@ -92,7 +47,7 @@ export default defineComponent({
         })
       })
       
-      return `from ${Math.min(...arrPrices)} to ${Math.max(...arrPrices)}`
+      return `От ${Math.min(...arrPrices)}р`
     }
   },
   
@@ -109,227 +64,74 @@ export default defineComponent({
 <style scoped lang="scss">
 
 .product__card {
-  margin-top: 15px;
-  border-radius: 10px;
-  
-  background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
-  
-  &__wrapper {
-    display: flex;
-    height: 180px;
-    border-bottom: 1px solid theme-var($--divider-color);
-  }
+  display: flex;
+  flex-direction: column;
   
   &__image {
-    height: calc(100% + 1px);
-    width: 174px;
-    min-width: 174px;
+    position: relative;
+    
+    display: inline-block;
+    width: 100%;
+    
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
     
     img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      
       height: 100%;
       width: 100%;
-      border-radius: 10px 10px 10px 0;
+      border-radius: 8px;
       
+      object-fit: cover;
     }
   }
   
   &__info {
-    display: flex;
-    flex-direction: column;
-    padding: 7px 10px 5px 6px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    max-height: 28px;
+    max-width: 100%;
+    overflow: hidden;
     
-    &__name {
-      font-size: 15px;
-      font-family: "SF Pro Text Bold", sans-serif;
-      line-height: 1;
-    }
-    
-    &__price {
-      display: flex;
-      align-items: center;
-      margin-top: 5px;
-      
-      font-size: 11px;
-      
-      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
-      
-      svg {
-        margin-right: 4px;
-      }
-    }
-    
-    &__statuses {
-      display: flex;
-      flex-wrap: wrap;
-      row-gap: 3px;
-      margin-top: 5px;
-      
-      &__status {
-        display: flex;
-        margin-right: 5px;
-        padding: 5px;
-        border-radius: 5px;
-        
-        svg {
-          margin-right: 4px;
-        }
-        
-        span {
-          font-size: 11px;
-          line-height: 1;
-        }
-        
-        &__top-sales {
-          color: #000000;
-          
-          background: linear-gradient(90deg, #D4FFDB 0%, #E9FD5D 100%);
-        }
-        
-        &__new {
-          color: #ffffff;
-          background: linear-gradient(90deg, #9CCEFF 0%, #7C87FD 100%);
-        }
-        
-        &__good-reviews {
-          color: #ffffff;
-          background: linear-gradient(180deg, #C58EFF 0%, #A147FE 100%);
-        }
-      }
-    }
-    
-    &__bottom {
-      margin-top: auto;
-    }
-    
-    &__store {
-      display: flex;
-      justify-content: space-between;
-      
-      span {
-        font-size: 12px;
-        line-height: 1;
-        
-        &:first-child {
-          display: flex;
-          
-          color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
-        }
-        
-        &:last-child {
-          display: flex;
-          flex: 1;
-          align-items: center;
-          
-          svg {
-            margin-left: 2px;
-          }
-          
-          &:before {
-            content: '';
-            
-            flex: 1;
-            margin: auto 4px 2px 4px;
-            border-bottom: 1px dashed theme-var($--divider-color);
-          }
-        }
-      }
-    }
-    
-    &__actions {
-      display: flex;
-      justify-content: space-between;
-      height: 24px;
-      margin-top: 5px;
-      line-height: 1;
-      
-      & > div {
-        background-color: #EBF7FE;
-      }
-      
-      &__rating {
-        display: flex;
-        align-items: center;
-        padding: 1px 6px 1px 1px;
-        border-radius: 15px;
-        
-        font-size: 8px;
-        font-family: "SF Pro Text Medium", sans-serif;
-        
-        div {
-          padding: 7px 7px 8px;
-          border-radius: 15px;
-          
-          color: theme-var-tg(--tg-theme-button-text-color, $--tg-button-text-color);
-          background-color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
-        }
-        
-        span {
-          margin-left: 6px;
-          
-          color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);;
-        }
-      }
-      
-      &__like {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 24px;
-        width: 24px;
-        border-radius: 100%;
-      }
-      
-      &__share {
-        display: flex;
-        align-items: center;
-        
-        padding: 6px;
-        border-radius: 15px;
-        
-        font-size: 11px;
-        
-        color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
-        
-        span {
-          margin-right: 3px;
-        }
-      }
-    }
+    text-overflow: ellipsis;
+    font-size: 12px;
+    line-height: 1.2;
+    -webkit-line-clamp: 2;
   }
   
-  &__line {
-    height: 1px;
-    width: calc(100% + 16px);
-    margin-top: 5px;
-    margin-left: -6px;
-    
-    background-color: theme-var($--divider-color);
+  &__name {
+  
   }
   
-  &__footer {
-    display: flex;
-    align-items: center;
-    padding: 6px 10px;
+  &__price {
+    margin-left: 4px;
     
-    p {
-      margin-right: 8px;
-      
-      font-size: 11px;
-      
-      color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
-    }
+    text-overflow: ellipsis;
+    
+    color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
+  }
+  
+  &__button {
+    display: flex;
+    justify-content: center;
+    
+    margin-top: auto;
     
     button {
-      height: 23px;
-      width: auto;
-      padding: 7px 17px 8px;
-      border-radius: 15px;
+      height: 30px;
+      border-radius: 8px;
       
-      font-size: 13px;
-      font-family: "SF Pro Text Medium", sans-serif;
-      line-height: 1;
-      
-      background: linear-gradient(180deg, #51B3FF 0%, #2EA3FF 100%);
+      font-size: 14px;
     }
   }
 }

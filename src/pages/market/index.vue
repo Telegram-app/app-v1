@@ -132,11 +132,11 @@ export default defineComponent({
         window.Telegram.WebApp.ready()
         
         window.Telegram.WebApp.MainButton.setParams({
-          text: 'Новая страничка',
+          text: 'Каталог',
           is_active: true,
           is_visible: true
         }).onClick(() => {
-          this.router.push({ name: 'newpage' })
+          this.router.push({ name: 'catalogCategories' })
         });
       }
     },

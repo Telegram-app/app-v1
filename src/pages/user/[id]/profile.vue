@@ -146,7 +146,8 @@ export default defineComponent({
       
       span {
         font-size: 20px;
-        font-family: "SF Pro Text Regular", sans-serif;
+        font-family: "Helvetica Neue Cyr Roman", "Helvetica Neue", sans-serif;
+        font-weight: normal;
         line-height: 1;
       }
       
@@ -166,7 +167,8 @@ export default defineComponent({
         border: none;
         
         font-size: 20px;
-        font-family: "SF Pro Text Semibold", sans-serif;
+        font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+        font-weight: 400;
         line-height: 1;
         
         background: none;

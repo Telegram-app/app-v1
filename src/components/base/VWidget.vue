@@ -59,7 +59,8 @@ export default defineComponent({
   padding: 11px 0;
   
   font-size: 15px;
-  font-family: "SF Pro Text Semibold", sans-serif;
+  font-family: "Helvetica Neue Cyr Bold", "Helvetica Neue", sans-serif;
+  font-weight: 400;
   
   background: linear-gradient(270deg, rgba(105, 189, 254, 0.70) 0%, #4D98FD 100%);
   
