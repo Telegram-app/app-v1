@@ -4,7 +4,7 @@
       <a class="catalog__categories__section__button" @click="expandSection(idx, $event)">{{ section.title }}<span v-if="idx === 0" class="catalog__categories__section__icon" :class="{ 'catalog__categories__section__icon--expanded': expanded && idx === 0 }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
       
       <div class="catalog__categories__items">
-        <div class="catalog__categories__items__category" v-for="category in section.categories" :key="category.id" @click="pushCategory">
+        <div class="catalog__categories__items__category" v-for="category in section.categories" :key="category.id" @click="pushToCategory">
           <div class="catalog__categories__items__category__image__wrapper">
             <img class="catalog__categories__items__category__image" :src="'/images/catalog/categories/' + category.icon" alt="category-image">
           </div>
@@ -63,7 +63,7 @@ export default defineComponent({
   }),
   
   methods: {
-    pushCategory(e: any) {
+    pushToCategory(e: any) {
       let animatedBox = findElement('catalog__categories__items__category', e.target)
       androidClickEffect(e, animatedBox, 200)
       

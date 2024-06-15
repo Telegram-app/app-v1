@@ -34,10 +34,10 @@ export default defineComponent({
       {
         title: 'Секция категорий 1',
         categories: [
-          { id: 1, title: 'Категория-1', to: 'category-1', icon: 'store.svg' },
-          { id: 2, title: 'Категория-2', to: 'category-2', icon: 'store.svg' },
-          { id: 3, title: 'Категория-3', to: 'category-3', icon: 'store.svg' },
-          { id: 4, title: 'Категория-4', to: 'category-4', icon: 'store.svg' },
+          { id: 1, title: 'Категория-1', to: 'category-1', icon: 'bullet.gif' },
+          { id: 2, title: 'Категория-2', to: 'category-2', icon: 'phone.gif' },
+          { id: 3, title: 'Категория-3', to: 'category-3', icon: 'spider.gif' },
+          { id: 4, title: 'Категория-4', to: 'category-4', icon: 'fly.gif' },
           { id: 5, title: 'Категория-5', to: 'category-5', icon: 'store.svg' },
           { id: 6, title: 'Категория-6', to: 'category-6', icon: 'store.svg' },
           { id: 7, title: 'Категория-7', to: 'category-7', icon: 'store.svg' },
