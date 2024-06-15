@@ -162,9 +162,9 @@ export default defineComponent({
   },
   
   unmounted() {
-    document.removeEventListener("touchstart", e => this.swipeStart(e), false)
-    document.removeEventListener("touchmove", e => this.swipe(e), false)
-    document.removeEventListener("touchend", e => this.swipeEnd(e), false)
+    document.removeEventListener("touchstart", this.swipeStart)
+    document.removeEventListener("touchmove", this.swipe)
+    document.removeEventListener("touchend", this.swipeEnd)
   },
   
   methods: {
@@ -266,9 +266,9 @@ export default defineComponent({
     initScrollEvents() {
       // this.reCalc()
       
-      document.addEventListener("touchstart", e => this.swipeStart(e), false)
-      document.addEventListener("touchmove", e => this.swipe(e), false)
-      document.addEventListener("touchend", e => this.swipeEnd(e), false)
+      document.addEventListener("touchstart", this.swipeStart)
+      document.addEventListener("touchmove", this.swipe)
+      document.addEventListener("touchend", this.swipeEnd)
       
       // document.addEventListener("scroll", e => this.scrollToCard(e), false)
     },

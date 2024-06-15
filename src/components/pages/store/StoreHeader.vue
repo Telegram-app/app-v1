@@ -8,17 +8,17 @@
           <h1>{{ data.name }}</h1>
         </div>
         <div>
-          <span>Выполненные сделки: {{ data.deals.completed }}</span>
+          <span>выполненные сделки: {{ data.deals.completed }}</span>
         </div>
       </div>
     </div>
     
     <div class="store__header__description self-card" :class="{'store__header__description--open': showMoreDesc}">
-      <h6 class="store__header__description__title">Описание</h6>
+      <h6 class="store__header__description__title">описание</h6>
       <p class="store__header__description__text">
         {{ data.description }}
         <span class="store__header__description__show-more" v-if="!showMoreDesc">
-          <a @click="reviewShowMoreFunc()" v-if="data.description.length > 160">еще</a>
+          <a @click="reviewShowMoreFunc()" v-if="data.description.length > 160">ещё</a>
         </span>
       </p>
     </div>
@@ -201,9 +201,10 @@ export default defineComponent({
     position: relative;
     
     margin-top: 15px;
-    max-height: 110px;
+    max-height: 102px;
     margin-bottom: -10px;
-    border-bottom: 10px solid theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+    padding: 4px 12px;
+    border-bottom: 4px solid theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
 
     overflow: hidden;
     
@@ -211,8 +212,8 @@ export default defineComponent({
     
     &__title {
       font-size: 12px;
-      font-family: "Helvetica Neue Cyr Medium", "Helvetica Neue", sans-serif;
-      font-weight: 400;
+      font-family: "Helvetica Neue Cyr Roman", "Helvetica Neue", sans-serif;
+      font-weight: 200;
     }
     
     &__text {
@@ -230,8 +231,8 @@ export default defineComponent({
       
       a {
         position: absolute;
-        right: 17px;
-        bottom: 0;
+        right: 12px;
+        bottom: 4px;
         
         padding-left: 25px;
         

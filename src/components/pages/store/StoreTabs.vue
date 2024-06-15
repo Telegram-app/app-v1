@@ -108,7 +108,7 @@ export default defineComponent({
 
   margin: 30px -15px 0 -15px;
   padding-top: 10px;
-  border-bottom: 0.5px solid theme-var-tg(--tg-theme-link-color, $--tg-link-color);
+  border-bottom: 0.5px solid rgba(0,0,0, 0.2);
 
   background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
 
