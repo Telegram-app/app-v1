@@ -38,12 +38,17 @@ const androidClickEffect = function (event: any, el: HTMLElement, scale: number)
 const androidEndClickEffect = function () {
     let effect = document.querySelector<HTMLElement>('.android-click-effect')!
 
+    let flag = false
+
     animation.onfinish = function (e) {
+        flag = true
         fadeOut(effect)
     }
     setTimeout(() => {
-        if (effect.style.opacity === '1') {
+        if (!flag && animation.playState !== "running") {
             fadeOut(effect)
+        } else {
+            return
         }
     }, 50)
 }
