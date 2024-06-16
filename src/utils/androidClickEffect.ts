@@ -1,3 +1,5 @@
+let animation: Animation;
+
 const androidClickEffect = function (event: any, el: HTMLElement, scale: number) {
     let clickX = event.clientX - el.getBoundingClientRect().left,
         clickY = event.clientY - el.getBoundingClientRect().top,
@@ -11,7 +13,7 @@ const androidClickEffect = function (event: any, el: HTMLElement, scale: number)
         height: 2px
     `;
     el.append(effect);
-    let animation = effect.animate([
+    animation = effect.animate([
         {
             '-webkit-transform': `translate(-50%, -50%) scale(0)`,
             '-moz-transform': `translate(-50%, -50%) scale(0)`,
@@ -26,6 +28,10 @@ const androidClickEffect = function (event: any, el: HTMLElement, scale: number)
         duration: 450,
         fill: 'forwards'
     });
+};
+
+const androidEndClickEffect = function () {
+    let effect = document.querySelector<HTMLElement>('.android-click-effect')!
 
     animation.onfinish = function (e) {
         let opacity = 1
@@ -39,7 +45,7 @@ const androidClickEffect = function (event: any, el: HTMLElement, scale: number)
             }
         }, 25);
     }
-};
+}
 
 const findElement = function (needClass: string, currentEl: HTMLElement) {
     let node = currentEl;
@@ -54,4 +60,4 @@ const findElement = function (needClass: string, currentEl: HTMLElement) {
     return node;
 };
 
-export { androidClickEffect, findElement };
+export { androidClickEffect, androidEndClickEffect, findElement };

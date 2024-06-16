@@ -1,10 +1,10 @@
 <template>
   <div class="catalog__categories__sections">
     <div class="catalog__categories__section" :class="{ 'catalog__categories__section--expanded': expanded && idx === 0 || idx !== 0 }" v-for="(section, idx) in sections" :key="section.title">
-      <a class="catalog__categories__section__button" @touchend="expandSection(idx, $event)">{{ section.title }}<span v-if="idx === 0" class="catalog__categories__section__icon" :class="{ 'catalog__categories__section__icon--expanded': expanded && idx === 0 }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
+      <a class="catalog__categories__section__button" @click="expandSection(idx, $event)">{{ section.title }}<span v-if="idx === 0" class="catalog__categories__section__icon" :class="{ 'catalog__categories__section__icon--expanded': expanded && idx === 0 }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
       
       <div class="catalog__categories__items">
-        <div class="catalog__categories__items__category" v-for="category in section.categories" :key="category.id" @click="pushToCategory">
+        <div class="catalog__categories__items__category" v-for="category in section.categories" :key="category.id" @touchstart="startAnimation" @touchend="pushToCategory">
           <div class="catalog__categories__items__category__image__wrapper">
             <img class="catalog__categories__items__category__image" :src="'/images/catalog/categories/' + category.icon" alt="category-image">
           </div>
@@ -19,7 +19,7 @@
 
 import {defineComponent, PropType, ref} from 'vue';
 import {useRouter} from 'vue-router';
-import {androidClickEffect, findElement} from '@/utils/androidClickEffect.ts';
+import {androidClickEffect, androidEndClickEffect, findElement} from '@/utils/androidClickEffect.ts';
 
 interface Section {
   title: string;
@@ -63,10 +63,12 @@ export default defineComponent({
   }),
   
   methods: {
-    pushToCategory(e: any) {
+    startAnimation(e: any) {
       let animatedBox = findElement('catalog__categories__items__category', e.target)
       androidClickEffect(e, animatedBox, 200)
-      
+    },
+    pushToCategory(e: any) {
+      androidEndClickEffect()
       setTimeout(() => {
         this.router.push({ name: 'catalog' })
       }, 450)
