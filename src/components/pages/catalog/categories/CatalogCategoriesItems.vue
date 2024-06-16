@@ -4,7 +4,7 @@
       <a class="catalog__categories__section__button" @click="expandSection(idx, $event)">{{ section.title }}<span v-if="idx === 0" class="catalog__categories__section__icon" :class="{ 'catalog__categories__section__icon--expanded': expanded && idx === 0 }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
       
       <div class="catalog__categories__items">
-        <div class="catalog__categories__items__category" v-for="category in section.categories" :key="category.id" @touchstart="startAnimation" @touchend="pushToCategory">
+        <div class="catalog__categories__items__category" v-for="category in section.categories" :key="category.id" @touchstart="startAnimation" @touchend="pushToCategory" @touchmove="drag = true">
           <div class="catalog__categories__items__category__image__wrapper">
             <img class="catalog__categories__items__category__image" :src="'/images/catalog/categories/' + category.icon" alt="category-image">
           </div>
@@ -59,24 +59,29 @@ export default defineComponent({
   },
   
   data: () => ({
-    expanded: true
+    expanded: true,
+    drag: false
   }),
   
   methods: {
     startAnimation(e: any) {
+      this.drag = false
       let animatedBox = findElement('catalog__categories__items__category', e.target)
       androidClickEffect(e, animatedBox, 200)
     },
     pushToCategory(e: any) {
       androidEndClickEffect()
-      setTimeout(() => {
-        this.router.push({ name: 'catalog' })
-      }, 450)
+      if (!this.drag) {
+        setTimeout(() => {
+          this.router.push({ name: 'catalog' })
+        }, 450)
+      }
     },
     expandSection(idx: number, e: any) {
       if (idx === 0) {
         let animatedBox = findElement('catalog__categories__section__button', e.target)
         androidClickEffect(e, animatedBox, 400)
+        androidEndClickEffect()
         this.expanded = !this.expanded
       }
     }
@@ -92,10 +97,10 @@ export default defineComponent({
   &__sections {
     display: flex;
     flex-direction: column;
+    row-gap: 20px;
   }
   
   &__section {
-    margin-bottom: 20px;
     max-height: 23px;
     overflow: hidden;
     
@@ -112,8 +117,8 @@ export default defineComponent({
       
       display: flex;
       justify-content: space-between;
-      padding: 5px;
-      border-radius: 4px;
+      padding: 6px 5px 5px;
+      border-radius: 6px;
       
       font-size: 13px;
       font-family: "Helvetica Neue Cyr Roman", "Helvetica Neue", sans-serif;

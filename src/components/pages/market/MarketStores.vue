@@ -1,13 +1,13 @@
 <template>
   <div class="market__stores self-card">
-    <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="pushToStore($event, store.id)">
+    <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
       <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
       <span class="market__stores__store__name">{{ store.name }}</span>
     </div>
     
     <div class="divider"></div>
     
-    <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @click="router.push({ name: 'storeProducts', params: { id: store.id } })">
+    <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
       <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
       <span class="market__stores__store__name">{{ store.name }}</span>
     </div>
@@ -20,7 +20,7 @@ import {defineComponent, ref} from 'vue';
 import {useMarketStore} from '@/stores/market.ts';
 import {Store} from '@/models/store.model.ts';
 import {useRouter} from 'vue-router';
-import {androidClickEffect, findElement} from '@/utils/androidClickEffect.ts';
+import {androidClickEffect, androidEndClickEffect, findElement} from '@/utils/androidClickEffect.ts';
 
 const loadData = async () => {
   return new Promise<Store[]>((resolve) => {
@@ -41,14 +41,23 @@ export default defineComponent({
     return {router, stores};
   },
   
+  data: () => ({
+    drag: false
+  }),
+  
   methods: {
-    pushToStore(e: any, id: string | number) {
+    startAnimation(e: any) {
+      this.drag = false
       let animatedBox = findElement('market__stores__store', e.target)
       androidClickEffect(e, animatedBox, 200)
-      
-      setTimeout(() => {
-        this.router.push({ name: 'storeProducts',  params: { id }})
-      }, 450)
+    },
+    pushToStore(id: string | number) {
+      androidEndClickEffect()
+      if (!this.drag) {
+        setTimeout(() => {
+          this.router.push({ name: 'storeProducts',  params: { id }})
+        }, 450)
+      }
     }
   }
 });
