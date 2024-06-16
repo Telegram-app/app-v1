@@ -1,13 +1,13 @@
 <template>
   <div class="market__stores self-card">
-    <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
+    <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="pushToStore(store.id, $event)" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
       <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
       <span class="market__stores__store__name">{{ store.name }}</span>
     </div>
     
     <div class="divider"></div>
     
-    <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
+    <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @click="pushToStore(store.id, $event)" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
       <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
       <span class="market__stores__store__name">{{ store.name }}</span>
     </div>
@@ -55,7 +55,11 @@ export default defineComponent({
       let animatedBox = findElement('market__stores__store', e.target)
       androidClickEffect(e, animatedBox, 200)
     },
-    pushToStore(id: string | number) {
+    pushToStore(id: string | number, e?: Event) {
+      if (e?.type === 'click') {
+        this.router.push({ name: 'storeProducts',  params: { id }})
+        return
+      }
       androidEndClickEffect()
       if (!this.drag && !this.longTouch) {
         setTimeout(() => {

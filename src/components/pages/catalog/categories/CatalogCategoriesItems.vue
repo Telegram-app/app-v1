@@ -74,6 +74,10 @@ export default defineComponent({
       androidClickEffect(e, animatedBox, 200)
     },
     pushToCategory(e: any) {
+      if (e.type === 'click') {
+        this.router.push({ name: 'storeProducts',  params: { id }})
+        return
+      }
       androidEndClickEffect()
       if (!this.drag && !this.longTouch) {
         setTimeout(() => {
