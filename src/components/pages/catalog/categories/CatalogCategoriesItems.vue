@@ -101,7 +101,7 @@ export default defineComponent({
   }
   
   &__section {
-    max-height: 23px;
+    max-height: 25px;
     overflow: hidden;
     
     transition: max-height 0.5s;
@@ -117,7 +117,7 @@ export default defineComponent({
       
       display: flex;
       justify-content: space-between;
-      padding: 6px 5px 5px;
+      padding: 7px 5px 5px;
       border-radius: 6px;
       
       font-size: 13px;
