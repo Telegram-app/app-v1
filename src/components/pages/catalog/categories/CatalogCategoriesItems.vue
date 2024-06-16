@@ -160,8 +160,11 @@ export default defineComponent({
     }
     
     &:first-child {
-      .catalog__categories__section__button:hover {
-        background-color: rgba(0,0,0,0.1);
+      .catalog__categories__section__button {
+        cursor: pointer;
+        &:hover{
+          background-color: rgba(0,0,0,0.1);
+        }
       }
     }
   }
@@ -186,7 +189,10 @@ export default defineComponent({
       overflow: hidden;
       
       cursor: pointer;
+      
+      -webkit-touch-callout: none;
       -webkit-user-select: none;
+      -khtml-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
