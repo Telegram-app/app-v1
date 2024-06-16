@@ -75,7 +75,7 @@ export default defineComponent({
     },
     pushToCategory(e: any) {
       if (e.type === 'click') {
-        this.router.push({ name: 'storeProducts',  params: { id }})
+        this.router.push({ name: 'catalog' })
         return
       }
       androidEndClickEffect()
