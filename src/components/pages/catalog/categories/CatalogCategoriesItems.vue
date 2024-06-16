@@ -60,22 +60,28 @@ export default defineComponent({
   
   data: () => ({
     expanded: true,
-    drag: false
+    drag: false,
+    longTouch: false
   }),
   
   methods: {
     startAnimation(e: any) {
+      setTimeout(() => {
+        this.longTouch = true
+      }, 200)
       this.drag = false
       let animatedBox = findElement('catalog__categories__items__category', e.target)
       androidClickEffect(e, animatedBox, 200)
     },
     pushToCategory(e: any) {
       androidEndClickEffect()
-      if (!this.drag) {
+      if (!this.drag && !this.longTouch) {
         setTimeout(() => {
           this.router.push({ name: 'catalog' })
         }, 450)
       }
+      
+      this.longTouch = false
     },
     expandSection(idx: number, e: any) {
       if (idx === 0) {

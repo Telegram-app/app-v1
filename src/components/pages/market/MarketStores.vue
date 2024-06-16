@@ -42,22 +42,28 @@ export default defineComponent({
   },
   
   data: () => ({
-    drag: false
+    drag: false,
+    longTouch: false
   }),
   
   methods: {
     startAnimation(e: any) {
+      setTimeout(() => {
+        this.longTouch = true
+      }, 200)
       this.drag = false
       let animatedBox = findElement('market__stores__store', e.target)
       androidClickEffect(e, animatedBox, 200)
     },
     pushToStore(id: string | number) {
       androidEndClickEffect()
-      if (!this.drag) {
+      if (!this.drag && !this.longTouch) {
         setTimeout(() => {
           this.router.push({ name: 'storeProducts',  params: { id }})
         }, 450)
       }
+      
+      this.longTouch = false
     }
   }
 });
