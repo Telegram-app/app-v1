@@ -68,7 +68,7 @@ export default defineComponent({
     startAnimation(e: any) {
       setTimeout(() => {
         this.longTouch = true
-      }, 200)
+      }, 500)
       this.drag = false
       let animatedBox = findElement('catalog__categories__items__category', e.target)
       androidClickEffect(e, animatedBox, 200)
