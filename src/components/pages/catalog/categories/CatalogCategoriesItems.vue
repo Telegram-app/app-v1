@@ -1,10 +1,10 @@
 <template>
   <div class="catalog__categories__sections">
     <div class="catalog__categories__section" :class="{ 'catalog__categories__section--expanded': expanded && idx === 0 || idx !== 0 }" v-for="(section, idx) in sections" :key="section.title">
-      <a class="catalog__categories__section__button" @click="expandSection(idx, $event)">{{ section.title }}<span v-if="idx === 0" class="catalog__categories__section__icon" :class="{ 'catalog__categories__section__icon--expanded': expanded && idx === 0 }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
+      <a class="catalog__categories__section__button" @click="expandSection(idx, $event)" @touchstart="expandSection(idx, $event)">{{ section.title }}<span v-if="idx === 0" class="catalog__categories__section__icon" :class="{ 'catalog__categories__section__icon--expanded': expanded && idx === 0 }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
       
       <div class="catalog__categories__items">
-        <div class="catalog__categories__items__category" v-for="category in section.categories" :key="category.id" @touchstart="startAnimation" @touchend="pushToCategory" @touchmove="drag = true">
+        <div class="catalog__categories__items__category" v-for="category in section.categories" :key="category.id" @click="pushToCategory" @touchstart="startAnimation" @touchend="pushToCategory" @touchmove="drag = true">
           <div class="catalog__categories__items__category__image__wrapper">
             <img class="catalog__categories__items__category__image" :src="'/images/catalog/categories/' + category.icon" alt="category-image">
           </div>
@@ -87,7 +87,12 @@ export default defineComponent({
       
       this.longTouch = false
     },
+    
     expandSection(idx: number, e: any) {
+      if (e.type === 'click') {
+        this.expanded = !this.expanded
+        return
+      }
       if (idx === 0) {
         let animatedBox = findElement('catalog__categories__section__button', e.target)
         androidClickEffect(e, animatedBox, 400)
@@ -141,6 +146,10 @@ export default defineComponent({
       
       overflow: hidden;
       
+      &:hover {
+        background-color: rgba(0,0,0,0.1);
+      }
+      
       .catalog__categories__section__icon {
         svg {
           transform: rotate(90deg);
@@ -182,6 +191,10 @@ export default defineComponent({
       
       transition: 0.3s all;
       
+      &:hover {
+        background-color: rgba(0,0,0,0.1);
+      }
+      
       &__image {
         z-index: 2;
         
@@ -212,6 +225,12 @@ export default defineComponent({
         line-height: 1;
       }
     }
+  }
+}
+
+@media (hover: none) {
+  .catalog__categories__items__category:hover, .catalog__categories__section__button:hover {
+    background-color: inherit;
   }
 }
 

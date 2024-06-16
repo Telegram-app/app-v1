@@ -102,6 +102,10 @@ export default defineComponent({
     
     overflow: hidden;
     
+    &:hover {
+      background-color: rgba(0,0,0,0.1);
+    }
+    
     &__image {
       z-index: 2;
       
@@ -127,6 +131,12 @@ export default defineComponent({
     
     margin: 0 !important;
     width: calc(100% - 26px);
+  }
+}
+
+@media (hover: none) {
+  .market__stores__store:hover {
+    background-color: inherit;
   }
 }
 
