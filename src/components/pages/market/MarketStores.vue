@@ -53,9 +53,10 @@ export default defineComponent({
   
   methods: {
     startAnimation(e: any) {
+      this.touchTime = 0
       this.touchInterval = setInterval(() => {
         this.touchTime = this.touchTime + 10
-        if (this.touchTime >= 300) {
+        if (this.touchTime > 300) {
           clearInterval(this.touchInterval)
         }
       }, 10)
@@ -74,8 +75,6 @@ export default defineComponent({
           this.router.push({ name: 'storeProducts',  params: { id }})
         }, 450)
       }
-      
-      this.touchTime = 0
     }
   }
 });
