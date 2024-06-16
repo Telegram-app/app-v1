@@ -59,7 +59,7 @@ export default defineComponent({
         if (this.touchTime > 300) {
           clearInterval(this.touchInterval)
         }
-      }, 10)
+      }, 10, true)
       this.drag = false
       let animatedBox = findElement('market__stores__store', e.target)
       androidClickEffect(e, animatedBox, 200)
@@ -73,7 +73,7 @@ export default defineComponent({
       if (!this.drag && this.touchTime <= 300) {
         setTimeout(() => {
           this.router.push({ name: 'storeProducts',  params: { id }})
-        }, 450)
+        }, 450, true)
       }
     }
   }

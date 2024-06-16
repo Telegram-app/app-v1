@@ -77,7 +77,7 @@ export default defineComponent({
         if (this.touchTime > 300) {
           clearInterval(this.touchInterval)
         }
-      }, 10)
+      }, 10, true)
       this.drag = false
       let animatedBox = findElement('catalog__categories__items__category', e.target)
       androidClickEffect(e, animatedBox, 200)
@@ -91,7 +91,7 @@ export default defineComponent({
       if (!this.drag && this.touchTime <= 300) {
         setTimeout(() => {
           this.router.push({ name: 'catalog' })
-        }, 450)
+        }, 450, true)
       }
     },
     
