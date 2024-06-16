@@ -127,7 +127,7 @@ export default defineComponent({
       transition: max-height 1s ease-in-out;
     }
     
-    a {
+    &__button {
       position: relative;
       
       display: flex;
@@ -146,10 +146,6 @@ export default defineComponent({
       
       overflow: hidden;
       
-      &:hover {
-        background-color: rgba(0,0,0,0.1);
-      }
-      
       .catalog__categories__section__icon {
         svg {
           transform: rotate(90deg);
@@ -164,6 +160,12 @@ export default defineComponent({
             transition: all 0.15s ease-in;
           }
         }
+      }
+    }
+    
+    &:first-child {
+      .catalog__categories__section__button:hover {
+        background-color: rgba(0,0,0,0.1);
       }
     }
   }
@@ -229,8 +231,14 @@ export default defineComponent({
 }
 
 @media (hover: none) {
-  .catalog__categories__items__category:hover, .catalog__categories__section__button:hover {
+  .catalog__categories__items__category:hover {
     background-color: inherit;
+  }
+  
+  .catalog__categories__section:first-child {
+    .catalog__categories__section__button:hover {
+      background-color: inherit;
+    }
   }
 }
 
