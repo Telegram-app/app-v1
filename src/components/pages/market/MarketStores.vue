@@ -41,33 +41,41 @@ export default defineComponent({
     return {router, stores};
   },
   
+  unmounted() {
+    clearInterval(this.touchInterval)
+  },
+  
   data: () => ({
     drag: false,
-    longTouch: false
+    touchTime: 0,
+    touchInterval: 0
   }),
   
   methods: {
     startAnimation(e: any) {
-      setTimeout(() => {
-        this.longTouch = true
-      }, 300)
+      this.touchInterval = setInterval(() => {
+        this.touchTime = this.touchTime + 10
+        if (this.touchTime >= 300) {
+          clearInterval(this.touchInterval)
+        }
+      }, 10)
       this.drag = false
       let animatedBox = findElement('market__stores__store', e.target)
       androidClickEffect(e, animatedBox, 200)
+      androidEndClickEffect()
     },
     pushToStore(id: string | number, e?: Event) {
       if (e?.type === 'click') {
         this.router.push({ name: 'storeProducts',  params: { id }})
         return
       }
-      androidEndClickEffect()
-      if (!this.drag && !this.longTouch) {
+      if (!this.drag && this.touchTime <= 300) {
         setTimeout(() => {
           this.router.push({ name: 'storeProducts',  params: { id }})
         }, 450)
       }
       
-      this.longTouch = false
+      this.touchTime = 0
     }
   }
 });

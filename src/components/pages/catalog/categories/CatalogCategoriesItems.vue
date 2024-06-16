@@ -58,34 +58,42 @@ export default defineComponent({
     return {router, data};
   },
   
+  unmounted() {
+      clearInterval(this.touchInterval)
+  },
+  
   data: () => ({
     expanded: true,
     drag: false,
-    longTouch: false
+    touchTime: 0,
+    touchInterval: 0
   }),
   
   methods: {
     startAnimation(e: any) {
-      setTimeout(() => {
-        this.longTouch = true
-      }, 300)
+      this.touchInterval = setInterval(() => {
+        this.touchTime = this.touchTime + 10
+        if (this.touchTime >= 300) {
+          clearInterval(this.touchInterval)
+        }
+      }, 10)
       this.drag = false
       let animatedBox = findElement('catalog__categories__items__category', e.target)
       androidClickEffect(e, animatedBox, 200)
+      androidEndClickEffect()
     },
     pushToCategory(e: any) {
       if (e.type === 'click') {
         this.router.push({ name: 'catalog' })
         return
       }
-      androidEndClickEffect()
-      if (!this.drag && !this.longTouch) {
+      if (!this.drag && this.touchTime <= 300) {
         setTimeout(() => {
           this.router.push({ name: 'catalog' })
         }, 450)
       }
       
-      this.longTouch = false
+      this.touchTime = 0
     },
     
     expandSection(idx: number, e: any) {
