@@ -95,12 +95,15 @@ export default defineComponent({
     flex-basis: 23%;
     padding: 5px 0;
     border-radius: 4px;
+    overflow: hidden;
     
     cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     transition: 0.3s all;
-    
-    overflow: hidden;
     
     &:hover {
       background-color: rgba(0,0,0,0.1);
@@ -112,6 +115,7 @@ export default defineComponent({
       height: 57px;
       width: 57px;
       border-radius: 100%;
+      overflow: hidden;
       
       transition: 0.3s all;
     }

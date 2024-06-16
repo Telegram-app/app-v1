@@ -186,6 +186,10 @@ export default defineComponent({
       overflow: hidden;
       
       cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
       
       transition: 0.3s all;
       
@@ -199,6 +203,7 @@ export default defineComponent({
         height: 40px;
         width: 40px;
         border-radius: 100%;
+        overflow: hidden;
         
         transition: 0.3s all;
         
