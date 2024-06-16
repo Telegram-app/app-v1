@@ -130,6 +130,7 @@ export default defineComponent({
       justify-content: space-between;
       padding: 7px 5px 5px;
       border-radius: 6px;
+      overflow: hidden;
       
       font-size: 13px;
       font-family: "Helvetica Neue Cyr Roman", "Helvetica Neue", sans-serif;
@@ -140,7 +141,7 @@ export default defineComponent({
       
       transition: 0.3s all;
       
-      overflow: hidden;
+      cursor: default;
       
       .catalog__categories__section__icon {
         svg {

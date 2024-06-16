@@ -101,6 +101,15 @@ html, body {
   background: theme-var-tg(--tg-theme-secondary-bg-color, $--tg-secondary-bg-color);
 }
 
+body {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .v-enter-active,
 .v-leave-active {
   transition: all 0.5s ease;
