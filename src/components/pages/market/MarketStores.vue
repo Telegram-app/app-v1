@@ -1,13 +1,13 @@
 <template>
   <div class="market__stores self-card">
-    <div class="market__stores__store" v-for="store in stores.slice(0, 4)" :key="store.id" @click="pushToStore(store.id, $event)" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
+    <div class="market__stores__store unselectable" v-for="store in stores.slice(0, 4)" :key="store.id" @click="pushToStore(store.id, $event)" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
       <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
       <span class="market__stores__store__name">{{ store.name }}</span>
     </div>
     
     <div class="divider"></div>
     
-    <div class="market__stores__store" v-for="store in stores.slice(4, 24)" :key="store.id" @click="pushToStore(store.id, $event)" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
+    <div class="market__stores__store unselectable" v-for="store in stores.slice(4, 24)" :key="store.id" @click="pushToStore(store.id, $event)" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
       <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
       <span class="market__stores__store__name">{{ store.name }}</span>
     </div>
@@ -98,13 +98,6 @@ export default defineComponent({
     overflow: hidden;
     
     cursor: pointer;
-    
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
     
     transition: 0.3s all;
     

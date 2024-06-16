@@ -4,7 +4,7 @@
       <a class="catalog__categories__section__button" @click="expandSection(idx, $event)">{{ section.title }}<span v-if="idx === 0" class="catalog__categories__section__icon" :class="{ 'catalog__categories__section__icon--expanded': expanded && idx === 0 }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
       
       <div class="catalog__categories__items">
-        <div class="catalog__categories__items__category" v-for="category in section.categories" :key="category.id" @click="pushToCategory" @touchstart="startAnimation" @touchend="pushToCategory" @touchmove="drag = true">
+        <div class="catalog__categories__items__category unselectable" v-for="category in section.categories" :key="category.id" @click="pushToCategory" @touchstart="startAnimation" @touchend="pushToCategory" @touchmove="drag = true">
           <div class="catalog__categories__items__category__image__wrapper">
             <img class="catalog__categories__items__category__image" :src="'/images/catalog/categories/' + category.icon" alt="category-image">
           </div>
@@ -189,13 +189,6 @@ export default defineComponent({
       overflow: hidden;
       
       cursor: pointer;
-      
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
       
       transition: 0.3s all;
       
