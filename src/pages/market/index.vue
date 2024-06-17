@@ -136,6 +136,7 @@ export default defineComponent({
           is_active: true,
           is_visible: true
         }).onClick(() => {
+          window.Telegram.WebApp.MainButton.offClick()
           this.router.push({ name: 'catalogCategories' })
         });
       }
