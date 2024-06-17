@@ -34,6 +34,8 @@ export default defineComponent({
       window.Telegram.WebApp.MainButton.setParams({
         is_active: false,
         is_visible: false
+      }).onClick(() => {
+        return
       });
     }
   },

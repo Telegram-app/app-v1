@@ -199,6 +199,7 @@ export default defineComponent({
   },
   
   mounted() {
+    console.log(window.Telegram.WebApp.MainButton);
     if (window.Telegram.WebApp) {
       window.Telegram.WebApp.MainButton.setParams({
         text: 'BUY',
@@ -212,6 +213,7 @@ export default defineComponent({
         });
       });
     }
+    console.log(window.Telegram.WebApp.MainButton);
     
     this.getTonPrice().then(tonPrice => {
       this.tonPrice = tonPrice;
