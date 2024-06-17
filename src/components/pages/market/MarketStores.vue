@@ -45,6 +45,11 @@ export default defineComponent({
     clearInterval(this.touchInterval)
   },
   
+  mounted() {
+    console.log(this.touchTime);
+    console.log(this.touchInterval);
+  },
+  
   data: () => ({
     drag: false,
     touchTime: 0,
@@ -73,7 +78,7 @@ export default defineComponent({
       if (!this.drag && this.touchTime <= 300) {
         setTimeout(() => {
           this.router.push({ name: 'storeProducts',  params: { id }})
-        }, 450, true)
+        }, 500, true)
       }
     }
   }

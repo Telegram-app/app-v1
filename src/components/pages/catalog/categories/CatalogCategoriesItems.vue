@@ -91,7 +91,7 @@ export default defineComponent({
       if (!this.drag && this.touchTime <= 300) {
         setTimeout(() => {
           this.router.push({ name: 'catalog' })
-        }, 450, true)
+        }, 500, true)
       }
     },
     
