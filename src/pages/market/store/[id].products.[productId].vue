@@ -217,6 +217,14 @@ export default defineComponent({
       }
     },
     
+    showPayment() {
+      this.payment.show = true;
+      window.Telegram.WebApp.MainButton.setParams({
+        is_active: false,
+        is_visible: false
+      });
+    },
+    
     orderProduct() {
       this.userStore.orderProduct(Number(this.route.params.id), this.product.id, this.payment.selectedItem).then(newOrder => {
         if (newOrder.item.type === 1) {
@@ -240,14 +248,7 @@ export default defineComponent({
         text: 'BUY',
         is_active: true,
         is_visible: true
-      }).onClick((e: any) => {
-        console.log(e);
-        this.payment.show = true;
-        window.Telegram.WebApp.MainButton.setParams({
-          is_active: false,
-          is_visible: false
-        });
-      });
+      }).onClick(this.showPayment);
     }
   },
   
