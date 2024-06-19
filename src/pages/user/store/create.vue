@@ -128,7 +128,7 @@ export default defineComponent({
         is_active: true,
         is_visible: true
       }).onClick(() => {
-        console.log('WTF');
+        this.createStore()
       });
     },
     
