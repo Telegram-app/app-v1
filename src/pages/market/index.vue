@@ -78,7 +78,7 @@
 <script lang="ts">
 
 import {defineComponent} from 'vue';
-import {useRouter} from 'vue-router';
+import {useRouter, useRoute} from 'vue-router';
 
 import {useMarketStore} from '@/stores/market.ts';
 import {useTelegramStore} from '@/stores/telegram.ts';
@@ -94,10 +94,11 @@ export default defineComponent({
   
   setup() {
     const router = useRouter()
+    const route = useRoute()
     const tgStore = useTelegramStore()
     const marketStore = useMarketStore();
     
-    return {router, tgStore, marketStore};
+    return {router, route, tgStore, marketStore};
   },
   
   created() {
@@ -136,7 +137,9 @@ export default defineComponent({
           is_active: true,
           is_visible: true
         }).onClick(() => {
-          // this.router.push({ name: 'catalogCategories' })
+          if (this.route.name === 'market') {
+            this.router.push({ name: 'catalogCategories' })
+          }
         })
       }
     },
