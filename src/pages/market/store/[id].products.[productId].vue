@@ -199,6 +199,11 @@ export default defineComponent({
   },
   
   mounted() {
+    window.Telegram.WebApp.MainButton.setParams({
+      is_active: false,
+      is_visible: false
+    });
+    
     this.getTonPrice().then(tonPrice => {
       this.tonPrice = tonPrice;
     });
@@ -267,9 +272,18 @@ export default defineComponent({
             this.showMainButtonBuy()
           }
         } else {
+          // window.Telegram.WebApp.MainButton.setParams({
+          //   is_active: false,
+          //   is_visible: false
+          // });
+          
           window.Telegram.WebApp.MainButton.setParams({
-            is_active: false,
-            is_visible: false
+            text: 'BUY',
+            is_active: true,
+            is_visible: true
+          }).onClick(() => {
+            this.showPayment()
+            window.Telegram.WebApp.MainButton.offClick(window.Telegram.WebApp.MainButton.onClick)
           });
         }
       }
