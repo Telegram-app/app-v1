@@ -183,10 +183,10 @@ export default defineComponent({
         id: this.product.id,
         name: this.product.name,
         createdAt: this.product.createdAt
-      }
+      };
     },
     sellerAndDeals() {
-      let store = this.marketStore.findById(Number(this.route.params.id) as number)
+      let store = this.marketStore.findById(Number(this.route.params.id) as number);
       return {
         seller: store.seller,
         deals: store.deals
@@ -194,7 +194,7 @@ export default defineComponent({
     },
     
     notAWebApp() {
-      return window.Telegram.WebApp.platform === 'unknown'
+      return window.Telegram.WebApp.platform === 'unknown';
     }
   },
   
@@ -210,15 +210,15 @@ export default defineComponent({
   },
   
   methods: {
-    selectItem(item: {name: string; price: number}, type: 1 | 2) {
+    selectItem(item: { name: string; price: number }, type: 1 | 2) {
       if (this.payment.selectedItem.name === item.name) {
-        this.payment.selectedItem = {type: 1, name: '', price: 0}
-      } else  {
+        this.payment.selectedItem = {type: 1, name: '', price: 0};
+      } else {
         this.payment.selectedItem = {
           type: type,
           name: item.name,
           price: item.price
-        }
+        };
       }
     },
     
@@ -227,6 +227,8 @@ export default defineComponent({
       window.Telegram.WebApp.MainButton.setParams({
         is_active: false,
         is_visible: false
+      }).offClick().onClick(() => {
+        this.showPayment();
       });
     },
     
@@ -253,9 +255,6 @@ export default defineComponent({
         text: 'BUY',
         is_active: true,
         is_visible: true
-      }).onClick(() => {
-        this.showPayment()
-        window.Telegram.WebApp.MainButton.offClick(window.Telegram.WebApp.MainButton.onClick)
       });
     }
   },
@@ -272,7 +271,7 @@ export default defineComponent({
       handler(newValue) {
         if (newValue.name !== '') {
           if (window.Telegram.WebApp && this.payment.selectedItem.name.length) {
-            this.showMainButtonBuy()
+            this.showMainButtonBuy();
           }
         } else {
           window.Telegram.WebApp.MainButton.setParams({
@@ -285,7 +284,7 @@ export default defineComponent({
     'payment.show': {
       handler(newValue) {
         if (newValue === false && this.payment.selectedItem.name !== '') {
-          this.showMainButtonBuy()
+          this.showMainButtonBuy();
         }
       }
     }
