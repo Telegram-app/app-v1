@@ -136,7 +136,7 @@ export default defineComponent({
           is_active: true,
           is_visible: true
         }).onClick(() => {
-          this.router.push({ name: 'catalogCategories' })
+          // this.router.push({ name: 'catalogCategories' })
         })
       }
     },
