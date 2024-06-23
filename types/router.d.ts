@@ -57,6 +57,7 @@ declare module 'vue-router/auto-routes' {
     '/user/store/info/orders/completed': RouteRecordInfo<'/user/store/info/orders/completed', '/user/store/info/orders/completed', Record<never, never>, Record<never, never>>,
     '/user/store/info/orders/pending': RouteRecordInfo<'/user/store/info/orders/pending', '/user/store/info/orders/pending', Record<never, never>, Record<never, never>>,
     '/user/store/info/orders/process': RouteRecordInfo<'/user/store/info/orders/process', '/user/store/info/orders/process', Record<never, never>, Record<never, never>>,
+    'storeStatistics': RouteRecordInfo<'storeStatistics', '/user/store/info/statistics', Record<never, never>, Record<never, never>>,
     'subscription': RouteRecordInfo<'subscription', '/user/store/subscription', Record<never, never>, Record<never, never>>,
   }
 }

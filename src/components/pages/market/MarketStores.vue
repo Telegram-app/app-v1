@@ -46,8 +46,7 @@ export default defineComponent({
   },
   
   mounted() {
-    console.log(this.touchTime);
-    console.log(this.touchInterval);
+  
   },
   
   data: () => ({

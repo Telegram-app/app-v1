@@ -122,7 +122,7 @@ export default defineComponent({
         {icon: 'add', title: 'Add new items', metaTitle: undefined, meta: undefined, to: 'notFound'},
       ],
       [
-        {icon: 'statistics', title: 'Statistics', metaTitle: undefined, meta: undefined, to: 'notFound'},
+        {icon: 'statistics', title: 'Statistics', metaTitle: undefined, meta: undefined, to: 'info/statistics'},
         {icon: 'activity-log', title: 'Activity log', metaTitle: 'Actions in the last 24 hours', meta: 10, to: 'notFound'},
         {icon: 'settings', title: 'Settings', metaTitle: undefined, meta: undefined, to: 'notFound'},
       ]

@@ -4,10 +4,10 @@
       <img :src="'/images/market/stores/products/' + product.image" alt="image">
     </div>
     
-    <div class="product__card__info">
-      <span class="product__card__name">{{ product.name }} </span>
-      <span class="product__card__price">/ {{ minPrice }}</span>
-    </div>
+    <p class="product__card__info">
+      <span class="product__card__name">{{ product.name }}</span>
+      <span class="product__card__price"><span class="product__card__slash" v-if="slash">&nbsp;/&nbsp;</span>{{ minPrice }}</span>
+    </p>
     
     <div class="product__card__button">
       <VButton color="blue" @click="$emit('toProductPage', product.id)">Открыть</VButton>
@@ -17,10 +17,18 @@
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import {defineComponent, ref} from 'vue';
 
-import type { PropType } from 'vue'
-import { Product } from '@/models/store.model.ts';
+import type {PropType} from 'vue';
+import {Product} from '@/models/store.model.ts';
+
+const loadData = async () => {
+  return new Promise<Boolean>((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, 2000);
+  });
+};
 
 export default defineComponent({
   name: 'StoreProductCard',
@@ -30,34 +38,73 @@ export default defineComponent({
       type: Object as PropType<Product>,
       required: true
     },
-    storeName: String
+    storeName: {
+      type: String,
+      required: true
+    }
+  },
+  
+  async setup() {
+    const loadedData = ref(await loadData())
+    
+    return { loadedData }
   },
   
   data: () => ({
-  
+    slash: true
   }),
+  
+  mounted() {
+    this.adjustSlash();
+    window.addEventListener('resize', this.adjustSlash);
+  },
   
   computed: {
     minPrice() {
-      let arrPrices: number[] = []
+      let arrPrices: number[] = [];
       
       this.product?.types.forEach(type => {
         type.items.forEach(item => {
-          arrPrices.push(item.price)
-        })
-      })
+          arrPrices.push(item.price);
+        });
+      });
       
-      return `От ${Math.min(...arrPrices)}р`
-    }
+      return `От ${Math.min(...arrPrices)}р`;
+    },
   },
   
   methods: {
     toProductPage(id: number | string) {
-      this.$emit('toProductPage', id)
+      this.$emit('toProductPage', id);
+    },
+    adjustSlash() {
+      this.$nextTick(() => {
+        const nameElement = this.$el.querySelector('.product__card__name');
+        const priceElement = this.$el.querySelector('.product__card__price');
+        
+        const nameRect = nameElement.getBoundingClientRect();
+        const priceRect = priceElement.getBoundingClientRect();
+        
+        this.slash = (nameRect.bottom === priceRect.bottom);
+        
+        if (!this.slash) {
+          setTimeout(() => {
+            const nameElement = this.$el.querySelector('.product__card__name');
+            const priceElement = this.$el.querySelector('.product__card__price');
+            
+            const nameRect = nameElement.getBoundingClientRect();
+            const priceRect = priceElement.getBoundingClientRect();
+            
+            if (nameRect.bottom === priceRect.bottom) {
+              nameElement.style.marginRight = '10px';
+            }
+          }, 100)
+        }
+      });
     }
   }
   
-})
+});
 
 </script>
 
@@ -110,11 +157,11 @@ export default defineComponent({
   }
   
   &__name {
-  
+    display: inline-block;
   }
   
   &__price {
-    margin-left: 4px;
+    display: inline-block;
     
     text-overflow: ellipsis;
     

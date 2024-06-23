@@ -4,13 +4,13 @@
     
     </div>
     
-    <div class="store__header__skeleton__title__wrapper self-card">
+    <div class="store__header__skeleton__title__wrapper">
       <span></span>
       <span></span>
     </div>
     
     <div class="store__header__skeleton__description self-card">
-      <div v-for="i in 6"></div>
+      <div v-for="i in 5"></div>
     </div>
   </div>
 </template>
@@ -29,30 +29,31 @@ export default defineComponent({
 
 .store__header__skeleton {
   &__image {
-    height: 100px;
-    width: 100%;
-    border-radius: 10px;
+    margin: 0 auto;
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
     
     animation: 1.5s infinite pulse-bg;
   }
   
   &__title__wrapper {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    margin-top: 12px;
-    min-height: 42.5px;
+    margin-top: 8px;
     
     span {
       animation: 1.5s infinite pulse-bg;
       
       &:first-child {
-        height: 15px;
+        height: 20px;
         width: 40%;
       }
       &:last-child {
-        height: 10px;
-        width: 15%;
+        margin-top: 5px;
+        height: 14px;
+        width: 60%;
       }
     }
   }
@@ -61,8 +62,9 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 15px;
-    min-height: 128px;
+    margin-top: 10px;
+    min-height: 102px;
+    padding: 8px 12px;
     
     div {
       height: 12px;
@@ -70,6 +72,10 @@ export default defineComponent({
       
       animation: 1.5s infinite pulse-bg;
       
+      &:first-child {
+        height: 12px;
+        width: 20%;
+      }
       &:last-child {
         width: 40%;
       }

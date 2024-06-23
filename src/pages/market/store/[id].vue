@@ -1,13 +1,5 @@
 <template>
   <div class="store">
-    <!--    <Transition mode="out-in">-->
-    <!--      <Suspense>-->
-    <!--        <template #default>-->
-    <!--          <VWidget :widget="widget"/>-->
-    <!--        </template>-->
-    <!--      </Suspense>-->
-    <!--    </Transition>-->
-    <!--    -->
     <Transition mode="out-in">
       <Suspense>
         <template #default>
@@ -18,22 +10,24 @@
         </template>
       </Suspense>
     </Transition>
-    <!--    -->
-    <Transition mode="out-in">
-      <Suspense>
-        <template #default>
-          <store-tabs :links="links" @pushTo="pushTo"/>
-        </template>
-
-        <template #fallback>
-          <store-filters-skeleton/>
-        </template>
-      </Suspense>
-    </Transition>
-
-    <transition>
-      <RouterView></RouterView>
-    </transition>
+    
+    <div class="bg-color">
+      <Transition mode="out-in">
+        <Suspense>
+          <template #default>
+            <store-tabs :links="links" @pushTo="pushTo"/>
+          </template>
+          
+          <template #fallback>
+            <store-tabs-skeleton/>
+          </template>
+        </Suspense>
+      </Transition>
+      
+      <router-view v-slot="{ Component }">
+        <component :is="Component"/>
+      </router-view>
+    </div>
   </div>
 </template>
 
@@ -53,16 +47,16 @@ import {useFilter} from '@/stores/filters.ts';
 
 export default defineComponent({
   name: 'StorePage',
-
+  
   setup() {
     const router = useRouter();
     const route = useRoute();
     const marketStore = useMarketStore();
-    const filterStore = useFilter()
-
+    const filterStore = useFilter();
+    
     return {router, route, marketStore, filterStore};
   },
-
+  
   data: () => ({
     widget: {
       show: false,
@@ -77,7 +71,7 @@ export default defineComponent({
       {title: 'Отзывы', to: 'reviews'},
     ]
   }),
-
+  
   computed: {
     store() {
       return this.marketStore.findById(Number(this.route.params.id) as number);
@@ -89,38 +83,38 @@ export default defineComponent({
         deals: this.store.deals,
         name: this.store.name,
         description: this.store.description
-      }
+      };
     },
     storeProducts() {
       return {
         id: this.store.id,
         name: this.store.name
-      }
+      };
     }
   },
-
+  
   methods: {
     showWidget() {
       this.widget.show = this.pointToShowWidget <= window.scrollY;
     },
-
+    
     pushTo(to: string) {
       if (to === 'storeProducts') {
         this.router.push({name: to});
       } else {
-        console.log(to)
+        console.log(to);
       }
     }
   },
-
+  
   created() {
     window.addEventListener('scroll', this.showWidget);
   },
-
+  
   unmounted() {
     window.removeEventListener('scroll', this.showWidget);
   },
-
+  
   mounted() {
     if (window.Telegram.WebApp) {
       window.Telegram.WebApp.MainButton.setParams({
@@ -133,7 +127,7 @@ export default defineComponent({
       this.pointToShowWidget = hrefScroll.offsetTop - 45;
     }
   },
-
+  
   watch: {
     'route.query': {
       handler: function (query) {
@@ -145,11 +139,19 @@ export default defineComponent({
       immediate: true
     }
   }
-
+  
 });
 
 </script>
 
 <style scoped lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
 
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

@@ -3,7 +3,9 @@
     <AuctionLinks :links="links"/>
     
     <transition>
-      <RouterView/>
+      <router-view v-slot="{ Component }">
+      <component :is="Component" />
+</router-view>
     </transition>
   </div>
 </template>

@@ -1,7 +1,9 @@
 <template>
   <AppLayout>
     <transition>
-      <RouterView/>
+      <router-view v-slot="{ Component }">
+      <component :is="Component" />
+</router-view>
     </transition>
   </AppLayout>
 </template>

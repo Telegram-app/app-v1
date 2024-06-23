@@ -8,8 +8,10 @@ const androidClickEffect = function (event: any, el: HTMLElement, scale: number)
 
     let click = event.touches ? event.touches[0] : event
 
-    let clickX = click.clientX - el.getBoundingClientRect().left,
-        clickY = click.clientY - el.getBoundingClientRect().top,
+    let elRect = el.getBoundingClientRect()
+
+    let clickX = click.clientX - elRect.left,
+        clickY = click.clientY - elRect.top,
         effect = document.createElement('span');
 
     effect.className = 'android-click-effect';

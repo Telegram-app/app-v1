@@ -2,11 +2,11 @@
   <div class="tabs store__tabs">
     <ul>
       <RouterLink
-          v-for="(link, i) of links"
-          :key="link.title"
-          custom
-          :to="link.to">
-        <li @click.prevent="i !== selectedLink ? selectLink($event.target, i, link) : null" class="store__tabs__link"
+        v-for="(link, i) of links"
+        :key="link.title"
+        custom
+        :to="link.to">
+        <li @click.prevent="i !== selectedLink ? selectLink($event, i, link) : null" class="store__tabs__link"
             :class="{'store__tabs__link--active': i === selectedLink }">
           {{ link.title }}
         </li>
@@ -19,6 +19,7 @@
 <script lang="ts">
 
 import {defineComponent, PropType, ref} from 'vue';
+import {androidClickEffect, androidEndClickEffect, findElement} from '@/utils/androidClickEffect.ts';
 
 interface Link {
   title: string;
@@ -35,65 +36,67 @@ const loadHeader = async () => {
 
 export default defineComponent({
   name: 'StoreTabs',
-
+  
   props: {
     links: {
       type: Array as PropType<Link[]>,
       required: true
     }
   },
-
+  
   async setup() {
     const load = ref(await loadHeader());
-
+    
     return {load};
   },
-
+  
   mounted() {
-    this.selectLinkAnimation(document.querySelector('.store__tabs__link--active'))
+    this.changeLinksHeight(document.querySelectorAll('.store__tabs__link'))
+    this.selectLinkAnimation(document.querySelector('.store__tabs__link--active'));
   },
-
+  
   data: () => ({
     selectedLink: 0,
     linksDisabled: false
   }),
-
+  
   methods: {
-    selectLink(target: any, index: number, link: { title: string; to: string }) {
-      if (this.linksDisabled) return
-      this.linksDisabled = true
-
-      this.selectedLink = index
-
-      this.$emit('pushTo', link.to)
-
-      this.selectLinkAnimation(target)
+    changeLinksHeight(els: any) {
+      els.forEach((el: HTMLElement) => {
+        let rects = el.getBoundingClientRect();
+        el.style.height = rects.width + 'px'
+      })
     },
-
+    
+    selectLink(event: any, index: number, link: { title: string; to: string }) {
+      if (this.linksDisabled) return;
+      let animatedBox = findElement('store__tabs__link', event.target);
+      androidClickEffect(event, animatedBox, 100);
+      androidEndClickEffect();
+      
+      this.linksDisabled = true;
+      
+      this.selectedLink = index;
+      
+      this.$emit('pushTo', link.to);
+      
+      this.selectLinkAnimation(event.target);
+    },
+    
     selectLinkAnimation(newActiveLink: any) {
-      let lastActiveLink = document.querySelector('.store__tabs__link--active') as HTMLLIElement | null
-
-      const linksLine = document.querySelector('.store__tabs__line') as HTMLDivElement | null
-
+      let lastActiveLink = document.querySelector('.store__tabs__link--active') as HTMLLIElement | null;
+      
+      const linksLine = document.querySelector('.store__tabs__line') as HTMLDivElement | null;
+      
       if (lastActiveLink !== null && newActiveLink !== null && linksLine !== null) {
-        let lastActiveLinkRect = lastActiveLink.getBoundingClientRect()
-        let newActiveLinkRect = newActiveLink.getBoundingClientRect()
-        let linkLineRect = linksLine.getBoundingClientRect()
-
-        if (newActiveLinkRect.left >= lastActiveLinkRect.left) {
-          linksLine.style.width = (newActiveLinkRect.left - linkLineRect.left) + newActiveLinkRect.width + 'px'
-          linksLine.style.left = newActiveLinkRect.left + 'px'
-          linksLine.style.width = newActiveLinkRect.width + 'px'
-        } else {
-          linksLine.style.left = newActiveLinkRect.left + 'px'
-          linksLine.style.width = linkLineRect.left - newActiveLinkRect.left + linkLineRect.width + 'px'
-
-          linksLine.style.width = newActiveLinkRect.width + 'px'
-        }
-
+        let newActiveLinkRect = newActiveLink.getBoundingClientRect();
+        
+        linksLine.style.left = newActiveLinkRect.left + 17 + 'px';
+        linksLine.style.width = newActiveLinkRect.width - (17 * 2) + 'px';
+        
         setTimeout(() => {
-          this.linksDisabled = false
-        }, 300)
+          this.linksDisabled = false;
+        }, 300);
       }
     }
   }
@@ -105,43 +108,51 @@ export default defineComponent({
 
 .store__tabs {
   position: relative;
-
+  
   margin: 30px -15px 0 -15px;
-  padding-top: 10px;
-  border-bottom: 0.5px solid rgba(0,0,0, 0.2);
-
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  
   background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
-
+  
   ul {
     justify-content: center;
     align-items: start;
-    column-gap: 40px;
-    height: 30px;
+    column-gap: 15px;
+    height: 35px;
     border: unset;
   }
-
+  
   &__link {
     position: relative;
-
+    top: 50%;
+    transform: translateY(-50%);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 17px 9px;
+    border-radius: 100%;
+    overflow: hidden;
+    
     font-size: 13px;
-
+    
     cursor: pointer;
-
+    
     &--active {
       color: theme-var-tg(--tg-theme-link-color, $--tg-link-color);
     }
   }
-
+  
   &__line {
     position: absolute;
     bottom: 0;
     left: 0;
-
+    
     height: 4px;
     border-radius: 6px 6px 0 0;
-
+    
     background-color: theme-var-tg(--tg-theme-link-color, $--tg-link-color);
-
+    
     transition: all 0.2s;
   }
 }

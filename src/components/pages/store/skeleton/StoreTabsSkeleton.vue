@@ -3,16 +3,15 @@
     <div></div>
     <div></div>
     <div></div>
-    <div></div>
   </div>
 </template>
 
 <script lang="ts">
 
-import {defineComponent, ref} from 'vue';
+import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: 'StoreFiltersSkeleton',
+  name: 'StoreTabsSkeleton',
 })
 
 </script>
@@ -22,17 +21,22 @@ export default defineComponent({
 
 .store__filters__skeleton {
   display: flex;
-  column-gap: 10px;
-  width: calc(100% + 30px);
-  margin: 15px -15px 0;
+  justify-content: center;
+  align-items: center;
+  column-gap: 40px;
+  margin: 21px -15px 0;
+  height: 35px;
   padding: 0 15px;
+  
+  background: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);;
   
   overflow: hidden;
   
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  
   div {
-    flex: 0 0 27%;
-    height: 40px;
-    border-radius: 10px;
+    flex: 0 0 21%;
+    height: 15px;
     
     animation: 1.5s infinite pulse-bg;
   }
