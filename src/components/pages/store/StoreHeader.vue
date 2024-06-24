@@ -82,11 +82,15 @@ export default defineComponent({
 
       let text = document.querySelector<HTMLElement>('.store__header__description__text')!
       let descOpened = document.querySelector<HTMLElement>('.store__header__description')!
-
+      
+      console.log(text);
+      
       if (this.showMoreDesc) {
-        descOpened.style.maxHeight = text.clientHeight + 41 + 'px'
+        descOpened.style.maxHeight = text.scrollHeight + 41 + 'px'
+        text.style.maxHeight = text.scrollHeight - 2 + 'px'
       } else {
-        descOpened.style.maxHeight = '110px';
+        descOpened.style.maxHeight = '96px';
+        text.style.maxHeight = '70px'
       }
     },
   }
@@ -201,10 +205,8 @@ export default defineComponent({
     position: relative;
     
     margin-top: 15px;
-    max-height: 102px;
-    margin-bottom: -10px;
-    padding: 4px 12px;
-    border-bottom: 4px solid theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
+    max-height: 96px;
+    padding: 6px 12px 8px;
 
     overflow: hidden;
     
@@ -214,9 +216,13 @@ export default defineComponent({
       font-size: 12px;
       font-family: "Helvetica Neue Cyr Roman", "Helvetica Neue", sans-serif;
       font-weight: 200;
+      line-height: 1;
     }
     
     &__text {
+      max-height: 70px;
+      overflow: hidden;
+      
       font-size: 12px;
       font-family: "Helvetica Neue Cyr Roman", "Helvetica Neue", sans-serif;
       font-weight: normal;
@@ -232,7 +238,7 @@ export default defineComponent({
       a {
         position: absolute;
         right: 12px;
-        bottom: 4px;
+        bottom: 6px;
         
         padding-left: 25px;
         

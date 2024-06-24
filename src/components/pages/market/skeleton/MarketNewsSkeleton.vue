@@ -1,8 +1,8 @@
 <template>
   <div class="market__news__skeleton">
-    <div></div>
-    <div></div>
-    <div></div>
+    <div class="skeleton-gradient-animation"></div>
+    <div class="skeleton-gradient-animation"></div>
+    <div class="skeleton-gradient-animation"></div>
   </div>
 </template>
 
@@ -35,8 +35,6 @@ export default defineComponent({
     height: 100%;
     width: 120px;
     border-radius: 10px;
-    
-    animation: 1.5s infinite pulse-bg;
   }
 }
 

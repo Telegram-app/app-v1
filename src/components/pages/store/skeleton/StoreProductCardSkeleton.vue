@@ -1,13 +1,13 @@
 <template>
   <div class="product__card__skeleton card--bg">
-    <div class="product__card__skeleton__image"></div>
+    <div class="product__card__skeleton__image skeleton-gradient-animation"></div>
     
     <p class="product__card__skeleton__info">
-      <span></span>
-      <span></span>
+      <span class="skeleton-gradient-animation"></span>
+      <span class="skeleton-gradient-animation"></span>
     </p>
     
-    <div class="product__card__skeleton__button"></div>
+    <div class="product__card__skeleton__button skeleton-gradient-animation"></div>
   </div>
 </template>
 
@@ -34,8 +34,6 @@ export default defineComponent({
     width: 100%;
     border-radius: 8px;
     
-    animation: 1.5s infinite pulse-bg;
-    
     &:before {
       content: '';
       display: block;
@@ -55,8 +53,6 @@ export default defineComponent({
     span {
       height: 12px;
       width: 100%;
-      
-      animation: 1.5s infinite pulse-bg;
     }
   }
   
@@ -65,8 +61,6 @@ export default defineComponent({
     height: 30px;
     width: 100%;
     border-radius: 8px;
-    
-    animation: 1.5s infinite pulse-bg;
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
    <div class="categories__skeleton">
-    <div v-for="i in 5"></div>
+    <div v-for="i in 5" class="skeleton-gradient-animation"></div>
    </div>
 </template>
 
@@ -32,8 +32,6 @@ export default defineComponent({
     flex-direction: column;
     height: 90px;
     border-radius: 10px;
-    
-    animation: 1.5s infinite pulse-bg;
     
     &:first-child {
       flex: 1 0 auto;

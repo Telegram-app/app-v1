@@ -1,8 +1,8 @@
 <template>
   <div class="market__banners__skeleton">
-    <div></div>
-    <div></div>
-    <div></div>
+    <div class="skeleton-gradient-animation"></div>
+    <div class="skeleton-gradient-animation"></div>
+    <div class="skeleton-gradient-animation"></div>
   </div>
 </template>
 
@@ -38,8 +38,6 @@ export default defineComponent({
     border-radius: 10px;
     
     background-color: #ddd;
-    
-    animation: 1.5s infinite pulse-bg;
     
     &:nth-child(2) {
       flex: 1 0 auto;

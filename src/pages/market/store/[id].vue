@@ -145,13 +145,17 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+
+.store {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 30px);
+  
+  .bg-color {
+    flex: auto;
+    margin-top: 20px;
+    margin-bottom: -15px;
+  }
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 </style>

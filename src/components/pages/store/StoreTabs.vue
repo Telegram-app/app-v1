@@ -109,10 +109,8 @@ export default defineComponent({
 .store__tabs {
   position: relative;
   
-  margin: 30px -15px 0 -15px;
+  margin: 0 -15px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
-  
-  background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
   
   ul {
     justify-content: center;

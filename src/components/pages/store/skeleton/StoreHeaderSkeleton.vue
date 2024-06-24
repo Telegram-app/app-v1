@@ -1,16 +1,16 @@
 <template>
   <div class="store__header__skeleton">
-    <div class="store__header__skeleton__image">
+    <div class="store__header__skeleton__image skeleton-gradient-animation">
     
     </div>
     
     <div class="store__header__skeleton__title__wrapper">
-      <span></span>
-      <span></span>
+      <span class="skeleton-gradient-animation"></span>
+      <span class="skeleton-gradient-animation"></span>
     </div>
     
     <div class="store__header__skeleton__description self-card">
-      <div v-for="i in 5"></div>
+      <div v-for="i in 5" class="skeleton-gradient-animation"></div>
     </div>
   </div>
 </template>
@@ -33,8 +33,6 @@ export default defineComponent({
     height: 80px;
     width: 80px;
     border-radius: 100%;
-    
-    animation: 1.5s infinite pulse-bg;
   }
   
   &__title__wrapper {
@@ -44,14 +42,12 @@ export default defineComponent({
     margin-top: 8px;
     
     span {
-      animation: 1.5s infinite pulse-bg;
-      
       &:first-child {
         height: 20px;
         width: 40%;
       }
       &:last-child {
-        margin-top: 5px;
+        margin-top: 6px;
         height: 14px;
         width: 60%;
       }
@@ -63,14 +59,12 @@ export default defineComponent({
     flex-direction: column;
     justify-content: space-between;
     margin-top: 10px;
-    min-height: 102px;
+    min-height: 96px;
     padding: 8px 12px;
     
     div {
       height: 12px;
       width: 100%;
-      
-      animation: 1.5s infinite pulse-bg;
       
       &:first-child {
         height: 12px;

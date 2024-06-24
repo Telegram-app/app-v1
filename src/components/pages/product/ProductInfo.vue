@@ -12,12 +12,12 @@
     
     <div class="divider"></div>
     
-    <div class="product__store__info">
-      <div class="product__store__info__seller">
+    <div class="product__store-info">
+      <div class="product__store-info__seller">
         <span>Seller: </span>
         <span>{{ sellerAndDeals.seller }}</span>
       </div>
-      <div class="product__store__info__deals">
+      <div class="product__store-info__deals">
         <span>Deals: </span>
         <span>{{ sellerAndDeals.deals.completed }} · {{ Math.floor(sellerAndDeals.deals.completed / sellerAndDeals.deals.quantity * 100) }}%</span>
       </div>
@@ -161,7 +161,7 @@ export default defineComponent({
   }
 }
 
-.product__store__info {
+.product__store-info {
   margin-top: 15px;
   
   &__seller {
@@ -217,6 +217,7 @@ export default defineComponent({
       align-items: center;
       
       font-size: 12px;
+      line-height: 1;
       
       color: theme-var-tg(--tg-theme-hint-color, $--tg-hint-color);
       
@@ -230,7 +231,9 @@ export default defineComponent({
     
     &__value {
       width: 55%;
+      
       font-size: 12px;
+      line-height: 1;
     }
   }
   

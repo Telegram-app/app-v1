@@ -1,6 +1,6 @@
 <template>
   <div class="product__images__skeleton">
-    <div></div>
+    <div class="skeleton-gradient-animation"></div>
   </div>
 </template>
 
@@ -35,8 +35,6 @@ export default defineComponent({
     height: 300px;
     width: 300px;
     border-radius: 10px;
-    
-    animation: 1.5s infinite pulse-bg;
   }
 }
 

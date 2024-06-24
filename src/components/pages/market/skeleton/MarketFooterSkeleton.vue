@@ -3,7 +3,7 @@
     <div v-for="i in 2">
       <ul>
         <li v-for="item in i === 1 ? 3 : 2">
-          <span></span>
+          <span class="skeleton-gradient-animation"></span>
         </li>
       </ul>
     </div>
@@ -38,8 +38,7 @@ export default defineComponent({
       display: flex;
       height: 13px;
       width: 50%;
-      
-      animation: 1.5s infinite pulse-bg;
+      border-radius: 8px;
     }
   }
 }

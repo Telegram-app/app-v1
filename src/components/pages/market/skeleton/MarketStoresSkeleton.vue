@@ -1,15 +1,15 @@
 <template>
   <div class="market__stores__skeleton self-card">
     <div class="market__stores__skeleton__store" v-for="i in 4" :key="'stores-top-' + i">
-      <div class="market__stores__skeleton__store__image"></div>
-      <div class="market__stores__skeleton__store__name"></div>
+      <div class="market__stores__skeleton__store__image skeleton-gradient-animation"></div>
+      <div class="market__stores__skeleton__store__name skeleton-gradient-animation"></div>
     </div>
     
     <div class="divider"></div>
     
     <div class="market__stores__skeleton__store" v-for="i in 20" :key="'stores' + i">
-      <div class="market__stores__skeleton__store__image"></div>
-      <div class="market__stores__skeleton__store__name"></div>
+      <div class="market__stores__skeleton__store__image skeleton-gradient-animation"></div>
+      <div class="market__stores__skeleton__store__name skeleton-gradient-animation"></div>
     </div>
   </div>
 </template>
@@ -50,16 +50,13 @@ export default defineComponent({
       height: 57px;
       width: 57px;
       border-radius: 100%;
-      
-      animation: 1.5s infinite pulse-bg;
     }
     
     &__name {
       margin: 5px auto 0;
       height: 12px;
       width: 70px;
-      
-      animation: 1.5s infinite pulse-bg;
+      border-radius: 8px;
     }
   }
   

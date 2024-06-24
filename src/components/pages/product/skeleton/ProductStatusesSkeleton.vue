@@ -1,6 +1,6 @@
 <template>
   <div class="product__statuses__skeleton">
-    <div></div>
+    <div class="skeleton-gradient-animation"></div>
   </div>
 </template>
 
@@ -25,8 +25,6 @@ export default defineComponent({
     height: 23px;
     width: 100%;
     border-radius: 10px 10px 0 0;
-    
-    animation: 1.5s infinite pulse-bg;
   }
 }
 

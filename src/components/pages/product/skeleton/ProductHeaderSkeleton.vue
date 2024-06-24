@@ -1,19 +1,19 @@
 <template>
   <div class="product__header__skeleton">
-    <div class="product__header__skeleton__category">
+    <div class="product__header__skeleton__category skeleton-gradient-animation">
     
     </div>
     
     <div class="product__header__skeleton__wrapper">
       <div class="product__header__skeleton__info">
-        <div class="product__header__skeleton__title"></div>
+        <div class="product__header__skeleton__title skeleton-gradient-animation"></div>
         <div class="is-flex is-align-items-center mt-1">
-          <span class="product__header__skeleton__id"></span>
-          <span class="product__header__skeleton__dividing-dot"></span>
-          <span class="product__header__skeleton__createdAt"></span>
+          <span class="product__header__skeleton__id skeleton-gradient-animation"></span>
+          <span class="product__header__skeleton__dividing-dot skeleton-gradient-animation"></span>
+          <span class="product__header__skeleton__createdAt skeleton-gradient-animation"></span>
         </div>
       </div>
-      <div class="product__header__skeleton__share">
+      <div class="product__header__skeleton__share skeleton-gradient-animation">
       
       </div>
     </div>
@@ -54,8 +54,6 @@ export default defineComponent({
     height: 20px;
     width: 35%;
     border-radius: 10px;
-    
-    animation: 1.5s infinite pulse-bg;
   }
   
   &__wrapper {
@@ -76,15 +74,11 @@ export default defineComponent({
   &__title {
     height: 16px;
     width: 60%;
-    
-    animation: 1.5s infinite pulse-bg;
   }
   
   &__id {
     height: 12px;
     width: 20%;
-    
-    animation: 1.5s infinite pulse-bg;
   }
   
   &__dividing-dot {
@@ -92,15 +86,11 @@ export default defineComponent({
     width: 2px;
     margin: auto 6px;
     border-radius: 100%;
-    
-    animation: 1.5s infinite pulse-bg;
   }
   
   &__createdAt {
     height: 12px;
     width: 30%;
-    
-    animation: 1.5s infinite pulse-bg;
   }
   
   &__share {
@@ -110,8 +100,6 @@ export default defineComponent({
     width: 23px;
     height: 23px;
     border-radius: 100%;
-    
-    animation: 1.5s infinite pulse-bg;
   }
 }
 

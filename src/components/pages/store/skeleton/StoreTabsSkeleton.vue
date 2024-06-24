@@ -1,8 +1,8 @@
 <template>
   <div class="store__filters__skeleton">
-    <div></div>
-    <div></div>
-    <div></div>
+    <div class="skeleton-gradient-animation"></div>
+    <div class="skeleton-gradient-animation"></div>
+    <div class="skeleton-gradient-animation"></div>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   column-gap: 40px;
-  margin: 21px -15px 0;
+  margin: 0 -15px;
   height: 35px;
   padding: 0 15px;
   
@@ -37,8 +37,6 @@ export default defineComponent({
   div {
     flex: 0 0 21%;
     height: 15px;
-    
-    animation: 1.5s infinite pulse-bg;
   }
 }
 

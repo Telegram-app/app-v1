@@ -1,11 +1,11 @@
 <template>
   <div class="product__types__skeleton">
-    <div class="product__types__skeleton__tabs">
+    <div class="product__types__skeleton__tabs skeleton-gradient-animation">
     
     </div>
     
     <div class="product__types__skeleton__items">
-      <div v-for="i in 6" class="product__types__skeleton__items__item">
+      <div v-for="i in 6" class="product__types__skeleton__items__item skeleton-gradient-animation">
         <span class="product__types__skeleton__items__item__name"></span>
         <span class="product__types__skeleton__items__item__price"></span>
       </div>
@@ -34,8 +34,6 @@ export default defineComponent({
     width: 100%;
     padding: 2px;
     border-radius: 5px;
-    
-    animation: 1.5s infinite pulse-bg;
   }
   
   &__items {
@@ -53,8 +51,6 @@ export default defineComponent({
       max-width: 93px;
       padding: 8px 10px;
       border-radius: 10px;
-      
-      animation: 1.5s infinite pulse-bg;
     }
   }
 }

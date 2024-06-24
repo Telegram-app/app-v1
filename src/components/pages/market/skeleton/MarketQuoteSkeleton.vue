@@ -1,8 +1,8 @@
 <template>
   <div class="market__quote__skeleton">
-    <span></span>
+    <span class="skeleton-gradient-animation"></span>
     <div>
-      <div></div>
+      <div class="skeleton-gradient-animation"></div>
     </div>
   </div>
 </template>
@@ -26,8 +26,7 @@ export default defineComponent({
     display: inline-block;
     height: 12px;
     width: 35%;
-    
-    animation: 1.5s infinite pulse-bg;
+    border-radius: 8px;
   }
   
   & > div {
@@ -41,8 +40,7 @@ export default defineComponent({
     div {
       height: 12px;
       width: 70%;
-      
-      animation: 1.5s infinite pulse-bg;
+      border-radius: 8px;
     }
   }
 }
