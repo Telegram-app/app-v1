@@ -62,6 +62,7 @@ declare module 'vue' {
     ProductTypesSkeleton: typeof import('./../src/components/pages/product/skeleton/ProductTypesSkeleton.vue')['default']
     ProfileLinks: typeof import('./../src/components/profile/ProfileLinks.vue')['default']
     Review: typeof import('./../src/components/store/Review.vue')['default']
+    ReviewSkeleton: typeof import('./../src/components/store/skeleton/ReviewSkeleton.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     StoreCategories: typeof import('./../src/components/pages/store/categories/StoreCategories.vue')['default']

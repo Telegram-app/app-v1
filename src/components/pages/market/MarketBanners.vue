@@ -1,21 +1,25 @@
 <template>
   <div class="market__banners">
     <swiper
-      :slides-per-view="1.22"
-      :free-mode="true"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
+      :slides-per-view="'auto'"
       :loop="true"
       :centered-slides="true"
       :long-swipes="true"
-      :space-between="18"
       :speed="800"
+      :space-between="5"
       :modules="modules"
       class="market__banners__swiper"
+      ref='mySwiper'
     >
-      <template v-for="n of 5" :key="'group-images-' + n">
-        <swiper-slide class="market__banners__swiper__slide" v-for="(image, i) in data.images">
-          <img :src="'./images/market/' + image" alt="banner-1">
-        </swiper-slide>
-      </template>
+      <swiper-slide class="market__banners__swiper__slide" v-for="(image, i) in data.images" v-slot="{ isActive }">
+        <div class="market__banners__swiper__slide__image__wrapper" :class="{'skeleton-gradient-animation': !isActive}">
+          <transition mode="out-in">
+            <img v-if="isActive" :src="'./images/market/' + image" alt="banner-1">
+          </transition>
+        </div>
+      </swiper-slide>
     </swiper>
   </div>
 </template>
@@ -23,7 +27,7 @@
 <script lang="ts">
 
 import { defineComponent, ref } from "vue";
-import {Swiper, SwiperSlide} from 'swiper/vue';
+import {Swiper, SwiperSlide, useSwiper} from 'swiper/vue';
 import {Autoplay, FreeMode} from 'swiper/modules';
 
 interface Data {
@@ -35,7 +39,11 @@ const loadData = async () => {
     setTimeout(() => {
       resolve({
         images: [
-          'market-banner-1.svg', 'market-banner-2.svg', 'market-banner-3.svg'
+          'market-banner-1.svg', 'market-banner-2.svg', 'market-banner-3.svg',
+          'market-banner-1.svg', 'market-banner-2.svg', 'market-banner-3.svg',
+          // 'market-banner-1.svg', 'market-banner-2.svg', 'market-banner-3.svg',
+          // 'market-banner-1.svg', 'market-banner-2.svg', 'market-banner-3.svg',
+          // 'market-banner-1.svg', 'market-banner-2.svg', 'market-banner-3.svg',
         ]
       })
     }, 2000)
@@ -51,6 +59,20 @@ export default defineComponent({
     const data = ref(await loadData())
     
     return { data, modules: [Autoplay, FreeMode] };
+  },
+  
+  data: () => ({
+    activeIndex: 2
+  }),
+  
+  methods: {
+    onSwiper(swiper: any) {
+      this.activeIndex = swiper.activeIndex
+    },
+    
+    onSlideChange(swiper: any) {
+      this.activeIndex = swiper.activeIndex
+    }
   }
 })
 
@@ -61,22 +83,26 @@ export default defineComponent({
 .market__banners {
   position: relative;
   
-  height: 165px;
+  height: 110px;
   width: calc(100% + 30px);
-  margin: 0 -15px 0;
+  margin: -5px -15px 0;
   
   &__swiper {
     height: 100%;
     width: 100%;
     
     &__slide {
-      border-radius: 10px;
+      width: calc(100% - 30px);
+      
+      &__image__wrapper {
+        height: 100%;
+        border-radius: 10px;
+      }
       
       img {
-        border-radius: 10px;
-        
         height: 100%;
         width: 100%;
+        border-radius: 10px;
         
         object-fit: cover;
       }

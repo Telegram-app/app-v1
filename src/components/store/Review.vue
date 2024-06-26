@@ -1,5 +1,5 @@
 <template>
-  <div class="review" v-if="review">
+  <div class="review">
     <div class="review__header">
       <div class="review__avatar">
         <img :src="'/images/users/' + review.from.image" alt="avatar">
@@ -84,7 +84,10 @@ export default defineComponent({
   name: 'Review',
   
   props: {
-    review: Object as PropType<Review>
+    review: {
+      type: Object as PropType<Review>,
+      required: true
+    }
   },
   
   setup() {

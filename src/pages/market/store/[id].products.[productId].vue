@@ -68,19 +68,17 @@
       
       <div class="divider"></div>
       
-      <div class="product__reviews">
-        <div class="product__reviews__header">
-          <span class="caption">Reviews</span>
-          <div class="product__reviews__to-reviews" @click="router.push({ name: 'reviews', params: { id: route.params.id, productId: product.id } })">
-            <span>Show All</span>
-            <IconChevronRight h="10" w="6"/>
-          </div>
-        </div>
-        
-        <div class="product__reviews__wrapper">
-          <Review v-for="(review, index) in product.reviews?.slice(0, 2)" :key="'review-' + index" :review="review"/>
-        </div>
-      </div>
+      <Transition mode="out-in">
+        <Suspense>
+          <template #default>
+            <product-reviews :product="product" @pushToReviews="pushToReviews()"/>
+          </template>
+          
+          <template #fallback>
+            <product-reviews-skeleton/>
+          </template>
+        </Suspense>
+      </Transition>
     </div>
     
     <NotWebAppButton @click="payment.show = true" v-if="notAWebApp && payment.selectedItem.name.length">BUY</NotWebAppButton>
@@ -142,14 +140,12 @@
 
 <script lang="ts">
 
-import {defineComponent, isProxy, toRaw} from 'vue';
+import {defineComponent} from 'vue';
 import {useMarketStore} from '@/stores/market.ts';
-import {useUserStore, Order} from '@/stores/user.ts';
+import {useUserStore} from '@/stores/user.ts';
 import {useRouter, useRoute} from 'vue-router';
 
 import {Pagination} from 'swiper/modules';
-
-import dayjs from 'dayjs';
 
 export default defineComponent({
   name: 'ProductPage',
@@ -253,6 +249,10 @@ export default defineComponent({
         this.payment.show = true;
         return
       });
+    },
+    
+    pushToReviews() {
+      this.router.push({ name: 'reviews', params: { id: this.route.params.id, productId: this.product.id } })
     }
   },
   
@@ -306,44 +306,6 @@ export default defineComponent({
     border-radius: 0 0 10px 10px;
     
     background-color: theme-var-tg(--tg-theme-bg-color, $--tg-bg-color);
-  }
-  
-  &__reviews {
-    margin-top: 15px;
-    
-    &__header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    
-    &__to-reviews {
-      display: flex;
-      align-items: center;
-      
-      font-size: 12px;
-      
-      color: theme-var-tg(--tg-theme-button-color, $--tg-button-color);
-      
-      cursor: pointer;
-      
-      span {
-        margin-right: 5px;
-        
-        white-space: nowrap;
-      }
-      
-      svg {
-        margin-bottom: 1px;
-      }
-    }
-    
-    &__wrapper {
-      display: flex;
-      flex-direction: column;
-      row-gap: 15px;
-    }
   }
   
   &__payment {

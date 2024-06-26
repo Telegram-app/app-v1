@@ -53,8 +53,6 @@
       </Suspense>
     </Transition>
     
-    <div class="divider"></div>
-    
     <Transition mode="out-in">
       <Suspense>
         <template #default>

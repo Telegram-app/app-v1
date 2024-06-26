@@ -81,9 +81,9 @@ export default defineComponent({
 .market__news {
   position: relative;
   
-  height: 198px;
+  height: 120px;
   width: calc(100% + 30px);
-  margin: 15px -15px 0;
+  margin: 8px -15px 0;
   padding: 0 15px;
   
   &__swiper {
@@ -101,6 +101,7 @@ export default defineComponent({
         border-radius: 10px;
         
         height: 100%;
+        width: 100%;
         
         object-fit: cover;
       }

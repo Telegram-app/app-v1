@@ -1,13 +1,6 @@
 <template>
   <div class="market__stores self-card">
-    <div class="market__stores__store unselectable" v-for="store in stores.slice(0, 4)" :key="store.id" @click="pushToStore(store.id, $event)" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
-      <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
-      <span class="market__stores__store__name">{{ store.name }}</span>
-    </div>
-    
-    <div class="divider"></div>
-    
-    <div class="market__stores__store unselectable" v-for="store in stores.slice(4, 24)" :key="store.id" @click="pushToStore(store.id, $event)" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
+    <div class="market__stores__store unselectable" v-for="store in stores.slice(0, 24)" :key="store.id" @click="pushToStore(store.id, $event)" @touchstart="startAnimation" @touchend="pushToStore(store.id)" @touchmove="drag = true">
       <img class="market__stores__store__image" :src="'./images/market/stores/' + store.icon" alt="store-image">
       <span class="market__stores__store__name">{{ store.name }}</span>
     </div>
@@ -94,7 +87,7 @@ export default defineComponent({
   flex-wrap: wrap;
   justify-content: space-between;
   row-gap: 8px;
-  margin: 15px -5px 0 -5px;
+  margin-top: 10px;
   padding: 15px 13px;
   
   &__store {
