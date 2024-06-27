@@ -65,12 +65,27 @@ import {defineComponent, type PropType} from 'vue';
 import {ProductReview, ProductReviewResponse} from '@/models/store.model.ts';
 import {useRouter} from 'vue-router';
 
+interface Review {
+  from: {
+    id: string | number;
+    name: string;
+    image: string;
+    deals?: {
+      quantity: number;
+      completed: number;
+    }
+  };
+  rating?: number;
+  message: string;
+  response?: ProductReviewResponse;
+}
+
 export default defineComponent({
   name: 'Review',
   
   props: {
     review: {
-      type: Object as PropType<ProductReview>,
+      type: Object as PropType<Review>,
       required: true
     }
   },

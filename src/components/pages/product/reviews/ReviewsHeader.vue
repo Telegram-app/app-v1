@@ -29,7 +29,7 @@ export default defineComponent({
   
   props: {
     product: {
-      type: Object as PropType<{ name: string; id: string }>,
+      type: Object as PropType<{ name: string; id: string | number }>,
       required: true
     }
   },

@@ -40,8 +40,6 @@ declare module 'vue' {
     MarketFooterSkeleton: typeof import('./../src/components/pages/market/skeleton/MarketFooterSkeleton.vue')['default']
     MarketNews: typeof import('./../src/components/pages/market/MarketNews.vue')['default']
     MarketNewsSkeleton: typeof import('./../src/components/pages/market/skeleton/MarketNewsSkeleton.vue')['default']
-    MarketQuote: typeof import('./../src/components/pages/market/MarketQuote.vue')['default']
-    MarketQuoteSkeleton: typeof import('./../src/components/pages/market/skeleton/MarketQuoteSkeleton.vue')['default']
     MarketStores: typeof import('./../src/components/pages/market/MarketStores.vue')['default']
     MarketStoresSkeleton: typeof import('./../src/components/pages/market/skeleton/MarketStoresSkeleton.vue')['default']
     NotFoundLayout: typeof import('./../src/layouts/NotFoundLayout.vue')['default']
