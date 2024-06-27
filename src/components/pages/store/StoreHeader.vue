@@ -108,12 +108,12 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 -15px 58px;
+    margin: 0 -10px 58px;
     
     transition: 1s all, margin 0.2s;
     
     &--expand {
-      margin-top: -15px;
+      margin-top: -10px;
       margin-bottom: 0 !important;
     }
   }

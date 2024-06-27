@@ -154,7 +154,7 @@ export default defineComponent({
   .bg-color {
     flex: auto;
     margin-top: 20px;
-    margin-bottom: -15px;
+    margin-bottom: -10px;
   }
 }
 

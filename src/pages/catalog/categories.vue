@@ -105,7 +105,7 @@ export default defineComponent({
 .catalog__categories {
   background-color: theme-var-tg(--tg-bg-color, $--tg-bg-color);
   
-  margin: -15px;
+  margin: -10px;
   min-height: 100vh;
   padding: 15px 15px;
 }

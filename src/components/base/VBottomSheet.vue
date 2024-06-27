@@ -95,7 +95,7 @@ export default defineComponent({
   &__wrapper {
     position: relative;
     
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px 10px 0 0;
     border-top: 1px solid #ffffff;
     

@@ -69,6 +69,7 @@ export default defineComponent({
   span {
     height: 12px;
     width: 30%;
+    border-radius: 8px;
   }
   
   & > div {
@@ -81,6 +82,7 @@ export default defineComponent({
     div {
       height: 10px;
       width: 100%;
+      border-radius: 8px;
       
       &:last-child {
         width: 40%;
@@ -101,6 +103,7 @@ export default defineComponent({
     span {
       height: 12px;
       width: 40px;
+      border-radius: 8px;
       
       &:last-child {
         margin-left: 4px;
@@ -117,6 +120,7 @@ export default defineComponent({
   & > span {
     height: 12px;
     width: 30%;
+    border-radius: 8px;
   }
   
   div {
@@ -126,6 +130,7 @@ export default defineComponent({
     
     span {
       height: 10px;
+      border-radius: 8px;
       
       &:first-child {
         width: 15%;

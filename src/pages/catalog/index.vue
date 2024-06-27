@@ -367,7 +367,7 @@ html {
   position: relative;
   
   padding-top: 32px;
-  margin: -15px;
+  margin: -10px;
   height: 100vh;
   overflow-x: visible;
   overflow-y: scroll;
@@ -509,7 +509,7 @@ html {
   //  display: flex;
   //  flex-direction: column;
   //  //row-gap: 10px;
-  //  margin: 0 -15px -15px;
+  //  margin: 0 -10px -15px;
   //  margin-bottom: -85px;
   //
   //  transition: 0.7s all;

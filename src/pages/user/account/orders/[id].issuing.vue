@@ -192,7 +192,7 @@ export default defineComponent({
   &__product {
     &__images {
       &__swiper {
-        margin: -15px;
+        margin: -10px;
         
         &__slide {
           padding-bottom: 22px;

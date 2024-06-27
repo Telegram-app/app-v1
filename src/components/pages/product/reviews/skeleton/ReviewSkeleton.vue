@@ -66,6 +66,7 @@ export default defineComponent({
             margin-right: 5px;
             height: 10px;
             width: 40px;
+            border-radius: 8px;
           }
         }
         
@@ -81,6 +82,7 @@ export default defineComponent({
       & > div:last-child {
         height: 12px;
         width: 65px;
+        border-radius: 8px;
       }
     }
   }
@@ -95,6 +97,7 @@ export default defineComponent({
     div {
       height: 12px;
       width: 100%;
+      border-radius: 8px;
       
       &:last-child {
         width: 40%;

@@ -5,7 +5,7 @@
     </div>
     
     <div class="product__reviews__skeleton__wrapper">
-      <review-skeleton v-for="i of 3"/>
+      <review-skeleton v-for="i of 3" :key="'product-reviews-' + i"/>
     </div>
   </div>
 </template>
@@ -16,17 +16,6 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: 'ProductReviewsSkeleton',
-  
-  props: [],
-  
-  data: () => ({
-  
-  }),
-  
-  computed: {
-  
-  },
-  
 })
 
 </script>
@@ -45,6 +34,7 @@ export default defineComponent({
     span {
       height: 12px;
       width: 30%;
+      border-radius: 8px;
     }
   }
   

@@ -23,17 +23,17 @@ export default defineComponent({
   
   display: flex;
   justify-content: center;
-  column-gap: 15px;
-  height: 165px;
+  column-gap: 5px;
+  height: 110px;
   width: calc(100% + 30px);
-  margin: 0 -15px 0;
+  margin: -5px -15px 0;
   
   overflow: hidden;
   
   div {
     flex-grow: 1;
     flex-shrink: 1;
-    width: 305px;
+    width: 100%;
     height: 100%;
     border-radius: 10px;
     
@@ -41,6 +41,7 @@ export default defineComponent({
     
     &:nth-child(2) {
       flex: 1 0 auto;
+      width: calc(100% - 30px);
     }
   }
 }

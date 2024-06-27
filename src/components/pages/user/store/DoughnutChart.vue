@@ -126,7 +126,7 @@ export default defineComponent({
 
 .chart {
   display: flex;
-  margin: 0 -15px;
+  margin: 0 -10px;
   overflow: visible;
   
   &__doughnut {

@@ -59,7 +59,7 @@ export default defineComponent({
 
 .product__images {
   &__swiper {
-    margin: 0 -15px;
+    margin: 0 -10px;
     padding: 0 15px;
     
     &__pagination {

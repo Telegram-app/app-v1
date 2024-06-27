@@ -128,14 +128,6 @@ export default defineComponent({
       line-height: 1;
     }
   }
-  
-  .divider {
-    position: absolute;
-    top: 102.5px;
-    
-    margin: 0 !important;
-    width: calc(100% - 26px);
-  }
 }
 
 @media (hover: none) {

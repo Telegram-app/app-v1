@@ -32,18 +32,6 @@
     <Transition mode="out-in">
       <Suspense>
         <template #default>
-          <market-quote/>
-        </template>
-        
-        <template #fallback>
-          <market-quote-skeleton/>
-        </template>
-      </Suspense>
-    </Transition>
-    
-    <Transition mode="out-in">
-      <Suspense>
-        <template #default>
           <market-news/>
         </template>
         

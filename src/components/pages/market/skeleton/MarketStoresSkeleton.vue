@@ -1,13 +1,6 @@
 <template>
   <div class="market__stores__skeleton self-card">
-    <div class="market__stores__skeleton__store" v-for="i in 4" :key="'stores-top-' + i">
-      <div class="market__stores__skeleton__store__image skeleton-gradient-animation"></div>
-      <div class="market__stores__skeleton__store__name skeleton-gradient-animation"></div>
-    </div>
-    
-    <div class="divider"></div>
-    
-    <div class="market__stores__skeleton__store" v-for="i in 20" :key="'stores' + i">
+    <div class="market__stores__skeleton__store" v-for="i in 24" :key="'stores-top-' + i">
       <div class="market__stores__skeleton__store__image skeleton-gradient-animation"></div>
       <div class="market__stores__skeleton__store__name skeleton-gradient-animation"></div>
     </div>
@@ -32,8 +25,8 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  row-gap: 23px;
-  margin: 15px -5px 0 -5px;
+  row-gap: 8px;
+  margin-top: 10px;
   padding: 15px 13px;
   
   &__store {
@@ -43,6 +36,7 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     flex-basis: 23%;
+    padding: 5px 0;
     
     &__image {
       z-index: 2;
@@ -58,14 +52,6 @@ export default defineComponent({
       width: 70px;
       border-radius: 8px;
     }
-  }
-  
-  .divider {
-    position: absolute;
-    top: 100px;
-    
-    margin: 0 !important;
-    width: calc(100% - 26px);
   }
 }
 

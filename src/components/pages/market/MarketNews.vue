@@ -1,5 +1,9 @@
 <template>
   <div class="market__news">
+    <div class="market__news__title">
+      <span class="caption">Marcus Aurelius</span>
+    </div>
+    
     <swiper
       :slides-per-view="'auto'"
       :free-mode="true"
@@ -81,15 +85,19 @@ export default defineComponent({
 .market__news {
   position: relative;
   
-  height: 120px;
   width: calc(100% + 30px);
-  margin: 8px -15px 0;
-  padding: 0 15px;
+  margin: 10px -10px 0;
+  padding: 0 10px;
+  
+  &__title {
+    display: flex;
+    margin-bottom: 8px;
+  }
   
   &__swiper {
     position: relative;
     
-    height: 100%;
+    height: 120px;
     width: 100%;
     overflow: visible;
     

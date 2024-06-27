@@ -109,7 +109,7 @@ export default defineComponent({
 .store__tabs {
   position: relative;
   
-  margin: 0 -15px;
+  margin: 0 -10px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
   
   ul {

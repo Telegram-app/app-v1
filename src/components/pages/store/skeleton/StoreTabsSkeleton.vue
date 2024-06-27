@@ -24,7 +24,7 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   column-gap: 40px;
-  margin: 0 -15px;
+  margin: 0 -10px;
   height: 35px;
   padding: 0 15px;
   
@@ -37,6 +37,7 @@ export default defineComponent({
   div {
     flex: 0 0 21%;
     height: 15px;
+    border-radius: 8px;
   }
 }
 

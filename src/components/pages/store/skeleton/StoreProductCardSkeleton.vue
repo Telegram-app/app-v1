@@ -53,6 +53,7 @@ export default defineComponent({
     span {
       height: 12px;
       width: 100%;
+      border-radius: 8px;
     }
   }
   

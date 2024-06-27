@@ -74,11 +74,13 @@ export default defineComponent({
   &__title {
     height: 16px;
     width: 60%;
+    border-radius: 8px;
   }
   
   &__id {
     height: 12px;
     width: 20%;
+    border-radius: 8px;
   }
   
   &__dividing-dot {
@@ -91,6 +93,7 @@ export default defineComponent({
   &__createdAt {
     height: 12px;
     width: 30%;
+    border-radius: 8px;
   }
   
   &__share {

@@ -1,8 +1,12 @@
 <template>
   <div class="market__news__skeleton">
-    <div class="skeleton-gradient-animation"></div>
-    <div class="skeleton-gradient-animation"></div>
-    <div class="skeleton-gradient-animation"></div>
+    <span class="skeleton-gradient-animation"></span>
+    
+    <div>
+      <div class="skeleton-gradient-animation"></div>
+      <div class="skeleton-gradient-animation"></div>
+      <div class="skeleton-gradient-animation"></div>
+    </div>
   </div>
 </template>
 
@@ -20,21 +24,32 @@ export default defineComponent({
 
 .market__news__skeleton {
   position: relative;
-  
-  display: flex;
-  column-gap: 15px;
-  margin: 15px -15px 0;
-  height: 198px;
-  width: calc(100% + 30px);
-  padding: 0 15px;
+  margin: 10px -10px 0;
+  width: calc(100% + 20px);
+  padding: 0 10px;
   
   overflow: hidden;
   
-  div {
-    flex: 0 0 120px;
-    height: 100%;
+  span {
+    display: flex;
+    margin-bottom: 8px;
+    height: 12px;
+    width: 35%;
+    border-radius: 8px;
+  }
+  
+  & > div {
+    display: flex;
+    column-gap: 10px;
+    height: 120px;
     width: 120px;
-    border-radius: 10px;
+    
+    & > div {
+      flex: 0 0 120px;
+      height: 100%;
+      width: 120px;
+      border-radius: 10px;
+    }
   }
 }
 

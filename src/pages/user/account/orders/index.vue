@@ -60,7 +60,7 @@ export default defineComponent({
 <style scoped lang="scss">
 
 .account__orders {
-  margin: -15px;
+  margin: -10px;
   min-height: 100vh;
   padding: 15px;
   

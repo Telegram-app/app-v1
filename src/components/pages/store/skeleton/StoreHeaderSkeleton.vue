@@ -45,11 +45,13 @@ export default defineComponent({
       &:first-child {
         height: 20px;
         width: 40%;
+        border-radius: 8px;
       }
       &:last-child {
         margin-top: 6px;
         height: 14px;
         width: 60%;
+        border-radius: 8px;
       }
     }
   }
@@ -65,6 +67,7 @@ export default defineComponent({
     div {
       height: 12px;
       width: 100%;
+      border-radius: 8px;
       
       &:first-child {
         height: 12px;

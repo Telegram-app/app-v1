@@ -156,7 +156,7 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: -15px -15px 0;
+    margin: -10px -10px 0;
     padding: 11px 17px;
     
     background: linear-gradient(270deg, rgba(105, 189, 254, 0.76) 0%, #4D98FD 100%);
@@ -276,7 +276,7 @@ export default defineComponent({
   
   &__news {
     width: calc(100% + 30px);
-    margin: 15px -15px 0;
+    margin: 15px -10px 0;
     padding: 0 15px;
     
     &__swiper {
