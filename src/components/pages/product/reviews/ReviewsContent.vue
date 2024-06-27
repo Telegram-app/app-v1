@@ -38,7 +38,7 @@ export default defineComponent({
   
   props: {
     reviews: {
-      type: Object as PropType<ProductReview>
+      type: Array as PropType<ProductReview[]>
     }
   },
 })
