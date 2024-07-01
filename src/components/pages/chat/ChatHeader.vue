@@ -22,8 +22,7 @@ export default defineComponent({
   
   props: {
     chatId: {
-      type: String || Number,
-      required: true
+      type: String || Number
     }
   },
   
