@@ -13,14 +13,7 @@
 import {defineComponent} from 'vue';
 
 export default defineComponent({
-  name: 'CatalogPageLayout',
-  
-  props: [],
-  
-  data: () => ({}),
-  
-  computed: {},
-  
+  name: 'ChatPageLayout',
 });
 
 </script>

@@ -4,7 +4,7 @@ import {useMarketStore} from '@/stores/market.ts';
 import {Dayjs} from 'dayjs';
 
 export type UserState = {
-    tgData: any,
+    user: any,
     data: UserData,
     selfStore: SelfStore;
     orders: Order[];
@@ -48,7 +48,7 @@ const selfStoreLocal: SelfStore = JSON.parse(localStorage.getItem('selfStore') a
 
 export const useUserStore = defineStore('user', {
     state: () => ({
-        tgData: {},
+        user: {},
         data: userDataLocal || {
             id: 1,
             name: '',
@@ -74,6 +74,10 @@ export const useUserStore = defineStore('user', {
     },
 
     actions: {
+        setUser(user: any) {
+            this.user = user;
+        },
+
         orderProduct(storeId: number | string, productId: number | string, item: { type: 1 | 2; name: string; price: number }) {
             return new Promise<Order>(resolve => {
 

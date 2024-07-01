@@ -2,8 +2,8 @@
   <AppLayout>
     <transition>
       <router-view v-slot="{ Component }">
-      <component :is="Component" />
-</router-view>
+        <component :is="Component"/>
+      </router-view>
     </transition>
   </AppLayout>
 </template>
@@ -12,6 +12,7 @@
 
 import {defineComponent} from 'vue';
 import {useTelegramStore} from '@/stores/telegram';
+import {useUserStore} from '@/stores/user.ts';
 import {useRoute, useRouter} from 'vue-router';
 
 declare global {
@@ -26,9 +27,11 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     const router = useRouter();
+    const tg = window.Telegram.WebApp
     const tgStore = useTelegramStore();
+    const userStore = useUserStore()
     
-    return {router, route, tgStore};
+    return {router, route, tg, tgStore, userStore};
   },
   
   data: () => ({
@@ -36,35 +39,37 @@ export default defineComponent({
   }),
   
   mounted() {
-    window.Telegram.WebApp.expand();
+    this.tg.ready()
+    this.userStore.setUser(this.tg.initDataUnsafe.user);
+    this.tg.expand();
     
-    let self = this;
-    
-    this.tgStore.theme = window.Telegram.WebApp.colorScheme;
+    this.tgStore.theme = this.tg.colorScheme;
     if (this.tgStore.theme === 'light') {
-      window.Telegram.WebApp.setHeaderColor('#f1f1f1')
+      this.tg.setHeaderColor('#f1f1f1');
     }
     
-    window.Telegram.WebApp.onEvent('themeChanged', function (this: any) {
+    
+    let self = this;
+    this.tg.onEvent('themeChanged', function (this: any) {
       self.tgStore.theme = this.colorScheme;
       if (this.colorScheme === 'light') {
-        window.Telegram.WebApp.setHeaderColor('#f1f1f1')
+        self.tg.setHeaderColor('#f1f1f1');
       }
     });
     
-    window.Telegram.WebApp.SettingsButton.show().onClick(() => {
-      this.router.push({ name: 'settings' })
-    })
+    this.tg.SettingsButton.show().onClick(() => {
+      this.router.push({name: 'settings'});
+    });
   },
   
   watch: {
     'route.path': {
       handler(newPath) {
-        if (window.Telegram.WebApp) {
+        if (this.tg) {
           if (newPath !== '/' && newPath !== '/market') {
             // let arrPaths = newPath.split('/').slice(0, -1).join('/')
             setTimeout(() => {
-              window.Telegram.WebApp.BackButton.show().onClick(() => {
+              this.tg.BackButton.show().onClick(() => {
                 if (this.routerFlag) return;
                 
                 this.router.back();
@@ -76,13 +81,13 @@ export default defineComponent({
               });
             });
           } else {
-            window.Telegram.WebApp.BackButton.hide();
+            this.tg.BackButton.hide();
           }
           
           if (newPath !== '/catalog') {
-            window.Telegram.WebApp.setHeaderColor('#ffffff')
+            this.tg.setHeaderColor('#ffffff');
           } else {
-            window.Telegram.WebApp.setHeaderColor('#f1f1f1')
+            this.tg.setHeaderColor('#f1f1f1');
           }
         }
       }, immediate: true

@@ -121,6 +121,8 @@ export default defineComponent({
         is_visible: false
       });
     }
+    
+    console.log(this.userStore.user);
   },
   
   computed: {

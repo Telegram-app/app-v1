@@ -28,6 +28,8 @@ declare module 'vue-router/auto-routes' {
     'catalog': RouteRecordInfo<'catalog', '/catalog', Record<never, never>, Record<never, never>>,
     'catalogCategories': RouteRecordInfo<'catalogCategories', '/catalog/categories', Record<never, never>, Record<never, never>>,
     'catalogCategoryCities': RouteRecordInfo<'catalogCategoryCities', '/catalog/categories/:category/cities', { category: ParamValue<true> }, { category: ParamValue<false> }>,
+    '/chat': RouteRecordInfo<'/chat', '/chat', Record<never, never>, Record<never, never>>,
+    'chat': RouteRecordInfo<'chat', '/chat/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/market': RouteRecordInfo<'/market', '/market', Record<never, never>, Record<never, never>>,
     'market': RouteRecordInfo<'market', '/market', Record<never, never>, Record<never, never>>,
     '/market/store': RouteRecordInfo<'/market/store', '/market/store', Record<never, never>, Record<never, never>>,

@@ -5,12 +5,14 @@
     <div class="divider"></div>
     
     <div class="market__footer__items__wrapper">
-      <div v-for="( position, posIdx ) in data.footerItems">
+      <div v-for="i in 2">
         <ul class="market__footer__items">
-          <li class="market__footer__item" v-for="(item, itemIdx) in position">
-            <a class="market__footer__item__title" @click="expandItem($event, posIdx, itemIdx)">{{ item.title }} <span class="market__footer__item__icon" :class="{ 'market__footer__item__icon--expanded': item.expanded }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
+          <li
+            class="market__footer__item"
+            v-for="(item, itemIdx) in i === 1 ? footerItems.slice(0, Math.ceil(footerItems.length / 2)) : footerItems.slice(Math.ceil(footerItems.length / 2), footerItems.length)">
+            <a class="market__footer__item__title" @click="expandItem($event, i === 1 ? itemIdx : itemIdx + Math.ceil(footerItems.length / 2))">{{ item.title }} <span class="market__footer__item__icon" :class="{ 'market__footer__item__icon--expanded': item.expanded }"><IconChevronRight h="10" w="10" color="grey"/></span></a>
             <ul class="market__footer__links" :class="{ 'market__footer__links--expanded': item.expanded }" v-if="item.links[0]">
-              <li v-for="link in item.links" :key="link.title" class="market__footer__link" @click="linkTo($event, link.to)" @touchstart="startAnimation" @touchend="linkTo($event, link.to)">
+              <li v-for="link in item.links" :key="link.title" class="market__footer__link" @click="linkTo($event, link.to, link.params)" @touchstart="startAnimation" @touchend="linkTo($event, link.to, link.params)">
                 <span class="market__footer__link__title">{{ link.title }}</span>
               </li>
             </ul>
@@ -23,77 +25,20 @@
 
 <script lang="ts">
 
-import {defineComponent, ref} from 'vue';
+import {defineComponent, PropType, ref} from 'vue';
 import {androidClickEffect, androidEndClickEffect, findElement} from '@/utils/androidClickEffect.ts';
 import {useRouter} from 'vue-router';
 
-interface Data {
-  footerItems: {
-    title: string;
-    links: { title: string; to: any; }[];
-    expanded: boolean;
-  }[][]
+interface FooterItem {
+  title: string;
+  links: { title: string; to: any; params?: { id: number } }[];
+  expanded: boolean;
 }
 
 const loadData = async () => {
-  return new Promise<Data>((resolve) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({
-        footerItems: [
-          [
-            {
-              title: 'Title',
-              links: [
-                {title: 'Profile', to: 'account'},
-                {title: 'Contact us', to: 'market'},
-                {title: 'eBay Returns', to: 'market'},
-                {title: 'eBay Money Back', to: 'market'},
-              ],
-              expanded: true
-            },
-            {
-              title: 'Title 1',
-              links: [
-                {title: 'Profile', to: 'account'},
-                {title: 'Contact us', to: 'market'},
-                {title: 'eBay Returns', to: 'market'},
-                {title: 'eBay Money Back', to: 'market'},
-              ],
-              expanded: true
-            },
-            {
-              title: 'Title 2',
-              links: [
-                {title: 'Announcements', to: 'market'},
-                {title: 'eBay Community', to: 'market'},
-                {title: 'eBay for Business', to: 'market'},
-              ],
-              expanded: true
-            },
-          ],
-          [
-            {
-              title: 'Title 3',
-              links: [
-                {title: 'Seller center', to: 'market'},
-                {title: 'Contact us', to: 'market'},
-                {title: 'eBay Returns', to: 'market'},
-                {title: 'eBay Money Back', to: 'market'},
-              ],
-              expanded: true
-            },
-            {
-              title: 'Title 4',
-              links: [
-                {title: 'Announcements', to: 'market'},
-                {title: 'eBay Community', to: 'market'},
-                {title: 'eBay for Business', to: 'market'},
-              ],
-              expanded: true
-            }
-          ]
-        ]
-      });
+      resolve(true);
     }, 2000);
   });
 };
@@ -103,24 +48,74 @@ export default defineComponent({
   
   async setup() {
     const router = useRouter()
-    const data = ref(await loadData());
+    const loadedData = ref(await loadData());
     
-    return {router, data};
+    return {router, loadedData};
   },
   
   data: () => ({
+    footerItems: [
+      {
+        title: 'Title',
+        links: [
+          {title: 'Profile', to: 'account'},
+          {title: 'Contact us', to: 'market'},
+          {title: 'eBay Returns', to: 'market'},
+          {title: 'eBay Money Back', to: 'market'},
+        ],
+        expanded: true
+      },
+      {
+        title: 'Category',
+        links: [
+          {title: 'Chat 1', to: 'chat', params: { id: 1 }},
+          {title: 'Chat 2', to: 'chat', params: { id: 2 }},
+          {title: 'Chat 3', to: 'chat', params: { id: 3 }},
+          {title: 'Chat 4', to: 'chat', params: { id: 4 }},
+        ],
+        expanded: true
+      },
+      {
+        title: 'Title 2',
+        links: [
+          {title: 'Announcements', to: 'market'},
+          {title: 'eBay Community', to: 'market'},
+          {title: 'eBay for Business', to: 'market'},
+        ],
+        expanded: true
+      },
+      {
+        title: 'Title 3',
+        links: [
+          {title: 'Seller center', to: 'market'},
+          {title: 'Contact us', to: 'market'},
+          {title: 'eBay Returns', to: 'market'},
+          {title: 'eBay Money Back', to: 'market'},
+        ],
+        expanded: true
+      },
+      {
+        title: 'Title 4',
+        links: [
+          {title: 'Announcements', to: 'market'},
+          {title: 'eBay Community', to: 'market'},
+          {title: 'eBay for Business', to: 'market'},
+        ],
+        expanded: true
+      }
+    ] as FooterItem[],
     drag: false,
     touchTime: 0,
     touchInterval: 0
   }),
   
   methods: {
-    expandItem(e: any, posIdx: number, itemIdx: number) {
+    expandItem(e: any, itemIdx: number) {
       let animatedBox = findElement('market__footer__item__title', e.target)
       androidClickEffect(e, animatedBox, 400)
       androidEndClickEffect()
       
-      this.data.footerItems[posIdx][itemIdx].expanded = !this.data.footerItems[posIdx][itemIdx].expanded
+      this.footerItems[itemIdx].expanded = !this.footerItems[itemIdx].expanded
     },
     
     async expandAllItems(e: any) {
@@ -128,15 +123,12 @@ export default defineComponent({
       androidClickEffect(e, animatedBox, 400)
       androidEndClickEffect()
       
-      let mass = this.data.footerItems[0].concat(this.data.footerItems[1])
-      let someoneExpand = mass.some(item => {
-        return item.expanded === true
+      let someoneExpand = this.footerItems.some(item => {
+        return item.expanded
       })
       
-      this.data.footerItems.forEach(pos => {
-        pos.forEach(item => {
-          item.expanded = !someoneExpand
-        })
+      this.footerItems.forEach(item => {
+        item.expanded = !someoneExpand
       })
     },
     
@@ -153,14 +145,15 @@ export default defineComponent({
       androidClickEffect(e, animatedBox, 200)
       androidEndClickEffect()
     },
-    linkTo(e: any, routeName: string) {
+    
+    linkTo(e: any, routeName: string, params?: { id: number }) {
       if (e.type === 'click') {
-        this.router.push({ name: routeName })
+        this.router.push({ name: routeName, params })
         return
       }
       if (!this.drag && this.touchTime <= 300) {
         setTimeout(() => {
-          this.router.push({ name: routeName })
+          this.router.push({ name: routeName, params })
         }, 500, true)
       }
     },
@@ -197,11 +190,14 @@ export default defineComponent({
     column-gap: 15px;
     
     & > div {
+      display: flex;
+      flex-direction: column;
       flex: 1;
     }
   }
   
   &__item {
+    width: 100%;
     padding: 10px 0;
     border-bottom: 1px solid #e2e2e2;
     
