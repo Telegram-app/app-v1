@@ -7,7 +7,7 @@
     
     <div class="account__main self-card">
       <div class="account__main__avatar">
-        <img v-if="user.avatar" :src="'/images/users/' + user.avatar" alt="avatar">
+        <img v-if="tgUser?.photo_url || user.avatar" :src="tgUser?.photo_url || '/images/users/' + user.avatar" alt="avatar">
         <div class="account__main__avatar__create" v-else>
           <label>
             <IconCamera h="26" w="29" color="white"/>
@@ -17,13 +17,13 @@
       </div>
       
       <div class="account__main__name">
-        <span v-if="user.name">{{ user.name }}</span>
+        <span v-if="tgUser?.username || user.username">{{ tgUser?.username || user.username }}</span>
         <button class="account__main__name__create" @click="inputCreateNameShow()" v-else-if="!showInputCreateName">Create a name</button>
         <input v-else type="text" @keyup.enter="saveName">
       </div>
       
       <div class="account__main__address">
-        <span>0QB84Y-BrKSiac2ifKz8L1c-MeHYZwBq-9cFs2ESwXyx_Xmd</span>
+        <span>{{ shortenAddress('0QB84Y-BrKSiac2ifKz8L1c-MeHYZwBq-9cFs2ESwXyx_Xmd') }}</span>
       </div>
       
       <div class="account__main__info">
@@ -121,13 +121,14 @@ export default defineComponent({
         is_visible: false
       });
     }
-    
-    console.log(this.userStore.user);
   },
   
   computed: {
+    tgUser() {
+      return this.userStore.tgUser
+    },
     user() {
-      return this.userStore.data
+      return this.userStore.user
     },
     
     selfStore() {
@@ -169,6 +170,10 @@ export default defineComponent({
       this.userStore.saveName((e.target as HTMLInputElement).value)
       this.showInputCreateName = false
       this.alertStore.showAlert('success', 'Name changed successfully')
+    },
+    
+    shortenAddress(address: string) {
+      return address.slice(0, 8) + '...' + address.slice(-8)
     }
   },
   

@@ -6,7 +6,7 @@
       </div>
       
       <div class="profile__main__name">
-        <span>{{ user.name || user.id }}</span>
+        <span>{{ user.username || user.id }}</span>
       </div>
       
       <div class="profile__main__info">

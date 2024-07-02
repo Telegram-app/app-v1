@@ -1,20 +1,16 @@
 import {defineStore} from 'pinia';
 import {faker} from '@faker-js/faker';
-import {useMarketStore} from '@/stores/market.ts';
 import {Dayjs} from 'dayjs';
 
+import { TgUserData, UserData } from '@/models/user.model.ts';
+import UserService from '@/services/user.service.ts';
+
 export type UserState = {
-    user: any,
-    data: UserData,
+    tgUser?: TgUserData;
+    user: UserData;
     selfStore: SelfStore;
     orders: Order[];
 };
-
-export type UserData = {
-    id: number;
-    name: string;
-    avatar: string;
-}
 
 export type Order = {
     id: number | string;
@@ -48,12 +44,8 @@ const selfStoreLocal: SelfStore = JSON.parse(localStorage.getItem('selfStore') a
 
 export const useUserStore = defineStore('user', {
     state: () => ({
-        user: {},
-        data: userDataLocal || {
-            id: 1,
-            name: '',
-            avatar: ''
-        },
+        tgUser: {},
+        user: userDataLocal || {},
         selfStore: selfStoreLocal || {
             subscription: {
                 has: false
@@ -64,18 +56,20 @@ export const useUserStore = defineStore('user', {
     } as UserState),
 
     getters: {
-        getOrderById<Order>() {
+        getOrderById() {
             return (id: number | string) => this.orders.find(o => o.id === id);
         },
 
-        getUserById<UserData>() {
-            return (id: number) => this.data
+        getUserById() {
+            return (id: number) => this.user
         }
     },
 
     actions: {
-        setUser(user: any) {
-            this.user = user;
+        async setUser(user: any) {
+            await UserService.initUser(user).then((res) => {
+                console.log(res);
+            })
         },
 
         orderProduct(storeId: number | string, productId: number | string, item: { type: 1 | 2; name: string; price: number }) {
@@ -115,15 +109,15 @@ export const useUserStore = defineStore('user', {
         },
 
         saveAvatar(avatar: string) {
-            this.data.avatar = avatar;
+            this.user.avatar = avatar;
 
-            localStorage.setItem('userData', JSON.stringify(this.data));
+            localStorage.setItem('userData', JSON.stringify(this.user));
         },
 
         saveName(name: string) {
-            this.data.name = name;
+            this.user.username = name;
 
-            localStorage.setItem('userData', JSON.stringify(this.data));
+            localStorage.setItem('userData', JSON.stringify(this.user));
         }
     }
 
