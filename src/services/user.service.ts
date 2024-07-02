@@ -13,8 +13,8 @@ class UserService {
         })
     }
 
-    getUserData() {
-        return axios.get(API_URL + 'getUserData')
+    getUserData(tgId: number) {
+        return axios.get(API_URL + tgId + '/getUserData')
     }
 }
 
