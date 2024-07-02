@@ -68,7 +68,13 @@ export const useUserStore = defineStore('user', {
     actions: {
         async setUser(user: any) {
             await UserService.initUser(user).then((res) => {
-                console.log(res);
+                if (res.status === 200) {
+                    console.log('user exists (next)');
+                    this.tgUser = res.data
+                } else if (res.status === 201) {
+                    console.log('created new user (next)');
+                    this.tgUser = res.data
+                }
             })
         },
 
